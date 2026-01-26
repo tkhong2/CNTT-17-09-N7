@@ -35,15 +35,11 @@
 
 ## 1.1. Clone project.
 ```
-git clone https://gitlab.com/anhlta/odoo-fitdnu.git
+git clone https://github.com/tkhong2/CNTT-17-09-N7.git
 ```
 ```
-cd odoo-fitdnu
+cd CNTT-17-09-N7
 ```
-```
-git checkout cntt15_02
-```
-
 
 ## 1.2. cài đặt các thư viện cần thiết
 
