@@ -4,8 +4,14 @@
     </a>
 </h2>
 <h2 align="center">
-    PLATFORM ERP
+    PLATFORM ERP: HỆ THỐNG QUẢN LÝ KHÁCH HÀNG + CÔNG VIỆC
 </h2>
+<h3 align="center">
+    Trần Khắc Hồng, Hà Tuấn Huy, Vũ Hồng Sơn
+</h3>
+
+
+
 <div align="center">
     <p align="center">
         <img src="docs/logo/aiotlab_logo.png" alt="AIoTLab Logo" width="170"/>
