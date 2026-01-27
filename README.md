@@ -50,7 +50,6 @@ Hệ thống Quản lý Khách hàng + Công việc là một phân hệ ERP đ�
 # 3. Giao diện
 
 
-![image](https://github.com/user-attachments/assets/70c6d5bb-5648-4ecf-9312-8f9524c01c08)
 
 
 # 4. Cài đặt công cụ, môi trường và các thư viện cần thiết
