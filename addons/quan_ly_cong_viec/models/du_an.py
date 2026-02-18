@@ -5,6 +5,7 @@ from odoo.exceptions import ValidationError
 
 class DuAn(models.Model):
     _name = "du_an"
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "Dự án"
     _rec_name = "ten_du_an"
     _order = "ngay_bat_dau desc, ten_du_an"
@@ -70,3 +71,21 @@ class DuAn(models.Model):
         for record in self:
             if record.ngay_ket_thuc and record.ngay_bat_dau > record.ngay_ket_thuc:
                 raise ValidationError(_("Ngày bắt đầu không thể sau ngày kết thúc!"))
+
+    @api.model
+    def _cron_sync_project_status(self):
+        projects = self.search([('trang_thai', 'not in', ['huy_bo'])])
+        for project in projects:
+            tasks = project.cong_viec_ids.filtered(lambda task: task.trang_thai != 'huy_bo')
+            if not tasks:
+                continue
+
+            if all(task.trang_thai == 'hoan_thanh' for task in tasks):
+                if project.trang_thai != 'hoan_thanh':
+                    project.write({'trang_thai': 'hoan_thanh'})
+                continue
+
+            if project.trang_thai in ['chuan_bi', 'hoan_thanh']:
+                has_started_tasks = any(task.trang_thai in ['dang_thuc_hien', 'tam_dung', 'moi'] for task in tasks)
+                if has_started_tasks:
+                    project.write({'trang_thai': 'dang_thuc_hien'})

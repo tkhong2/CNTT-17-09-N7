@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="param_contract_expiry_alert_days" model="ir.config_parameter">
+        <field name="key">quan_ly_nhan_su.contract_expiry_alert_days</field>
+        <field name="value">30</field>
+    </record>
+
+    <record id="param_attendance_anomaly_lookback_days" model="ir.config_parameter">
+        <field name="key">quan_ly_nhan_su.attendance_anomaly_lookback_days</field>
+        <field name="value">1</field>
+    </record>
+</odoo>

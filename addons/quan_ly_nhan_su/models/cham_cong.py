@@ -5,6 +5,7 @@ from odoo.exceptions import ValidationError
 
 class ChamCong(models.Model):
     _name = "cham_cong"
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "Quản lý chấm công"
     _rec_name = "display_name"
     _order = "ngay_cham_cong desc, nhan_vien_id"
@@ -72,3 +73,68 @@ class ChamCong(models.Model):
         ('nhan_vien_ngay_unique', 'unique(nhan_vien_id, ngay_cham_cong)', 
          'Mỗi nhân viên chỉ có một bản ghi chấm công cho mỗi ngày!'),
     ]
+
+    def _find_user_from_employee(self, employee):
+        if not employee or not employee.email:
+            return False
+        return self.env['res.users'].sudo().search([
+            '|', ('login', '=', employee.email), ('email', '=', employee.email)
+        ], limit=1)
+
+    @api.model
+    def _get_int_param(self, key, default):
+        value = self.env['ir.config_parameter'].sudo().get_param(key, default=str(default))
+        try:
+            return int(value)
+        except (TypeError, ValueError):
+            return default
+
+    @api.model
+    def _cron_attendance_anomaly_alerts(self):
+        lookback_days = max(self._get_int_param('quan_ly_nhan_su.attendance_anomaly_lookback_days', 1), 1)
+        yesterday = fields.Date.add(fields.Date.today(), days=-lookback_days)
+        anomaly_records = self.search([
+            ('ngay_cham_cong', '=', yesterday),
+            ('trang_thai', '=', 'di_lam'),
+            ('thoi_gian_vao', '!=', False),
+            ('thoi_gian_ra', '=', False),
+        ])
+        if not anomaly_records:
+            return
+
+        todo_type = self.env.ref('mail.mail_activity_data_todo', raise_if_not_found=False)
+        model_id = self.env['ir.model']._get_id('cham_cong')
+        fallback_user = self.env.ref('base.user_admin', raise_if_not_found=False) or self.env.user
+
+        for attendance in anomaly_records:
+            owner_user = self._find_user_from_employee(attendance.nhan_vien_id.quan_ly_id)
+            if not owner_user:
+                owner_user = fallback_user
+
+            summary = _("Bất thường chấm công: %s") % attendance.nhan_vien_id.ho_va_ten
+            existed = self.env['mail.activity'].sudo().search_count([
+                ('res_model_id', '=', model_id),
+                ('res_id', '=', attendance.id),
+                ('user_id', '=', owner_user.id),
+                ('summary', '=', summary),
+            ])
+            if existed:
+                continue
+
+            values = {
+                'res_model_id': model_id,
+                'res_id': attendance.id,
+                'user_id': owner_user.id,
+                'summary': summary,
+                'date_deadline': fields.Date.today(),
+                'note': _(
+                    "Nhân viên %(employee)s có dữ liệu chấm công ngày %(date)s "
+                    "với giờ vào nhưng chưa có giờ ra. Vui lòng kiểm tra và cập nhật."
+                ) % {
+                    'employee': attendance.nhan_vien_id.ho_va_ten,
+                    'date': attendance.ngay_cham_cong,
+                },
+            }
+            if todo_type:
+                values['activity_type_id'] = todo_type.id
+            self.env['mail.activity'].sudo().create(values)

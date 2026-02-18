@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_khach_hang_tuong_tac_tree" model="ir.ui.view">
+        <field name="name">khach_hang_tuong_tac.tree</field>
+        <field name="model">khach_hang_tuong_tac</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="ngay_lien_he"/>
+                <field name="khach_hang_id"/>
+                <field name="tieu_de"/>
+                <field name="loai_tuong_tac"/>
+                <field name="nhan_vien_id"/>
+                <field name="ket_qua"/>
+                <field name="hen_lien_he_tiep"/>
+                <field name="trang_thai"/>
+                <field name="qua_han"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_khach_hang_tuong_tac_form" model="ir.ui.view">
+        <field name="name">khach_hang_tuong_tac.form</field>
+        <field name="model">khach_hang_tuong_tac</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_mark_done" type="object" string="Đánh dấu hoàn thành" class="oe_highlight" attrs="{'invisible': [('trang_thai','!=','planned')]}"/>
+                    <button name="action_mark_cancel" type="object" string="Hủy theo dõi" attrs="{'invisible': [('trang_thai','!=','planned')]}"/>
+                    <field name="trang_thai" widget="statusbar" options="{'clickable':'1'}" statusbar_visible="planned,done,cancel"/>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="khach_hang_id"/>
+                            <field name="tieu_de"/>
+                            <field name="loai_tuong_tac"/>
+                            <field name="nhan_vien_id"/>
+                        </group>
+                        <group>
+                            <field name="ngay_lien_he"/>
+                            <field name="ket_qua"/>
+                            <field name="hen_lien_he_tiep"/>
+                            <field name="qua_han" readonly="1"/>
+                        </group>
+                    </group>
+                    <group>
+                        <field name="noi_dung"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_khach_hang_tuong_tac_search" model="ir.ui.view">
+        <field name="name">khach_hang_tuong_tac.search</field>
+        <field name="model">khach_hang_tuong_tac</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="khach_hang_id"/>
+                <field name="tieu_de"/>
+                <field name="nhan_vien_id"/>
+                <field name="ket_qua"/>
+                <filter string="Đang theo dõi" name="planned" domain="[('trang_thai','=','planned')]"/>
+                <filter string="Quá hạn" name="overdue" domain="[('trang_thai','=','planned'),('hen_lien_he_tiep','&lt;',context_today())]"/>
+                <filter string="Hôm nay" name="today" domain="[('ngay_lien_he', '&gt;=', context_today()), ('ngay_lien_he', '&lt;', (context_today() + relativedelta(days=1)))]"/>
+                <filter string="7 ngày gần đây" name="last_7_days" domain="[('ngay_lien_he', '&gt;=', (context_today() - relativedelta(days=7)))]"/>
+                <filter string="Đã chốt hợp đồng" name="won" domain="[('ket_qua','=','chot_hop_dong')]"/>
+                <filter string="Cần xử lý ngay" name="need_now" domain="[('trang_thai','=','planned'),('hen_lien_he_tiep','&lt;',context_today())]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Khách hàng" name="group_khach_hang" context="{'group_by':'khach_hang_id'}"/>
+                    <filter string="Nhân viên" name="group_nhan_vien" context="{'group_by':'nhan_vien_id'}"/>
+                    <filter string="Loại tương tác" name="group_loai" context="{'group_by':'loai_tuong_tac'}"/>
+                    <filter string="Kết quả" name="group_ket_qua" context="{'group_by':'ket_qua'}"/>
+                    <filter string="Tháng" name="group_month" context="{'group_by':'ngay_lien_he:month'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_khach_hang_tuong_tac" model="ir.actions.act_window">
+        <field name="name">Tương tác khách hàng</field>
+        <field name="res_model">khach_hang_tuong_tac</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_khach_hang_tuong_tac_search"/>
+    </record>
+
+    <record id="server_action_tuong_tac_bulk_done" model="ir.actions.server">
+        <field name="name">Đánh dấu hoàn thành (hàng loạt)</field>
+        <field name="model_id" ref="model_khach_hang_tuong_tac"/>
+        <field name="binding_model_id" ref="model_khach_hang_tuong_tac"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">records.action_bulk_mark_done()</field>
+        <field name="groups_id" eval="[(4, ref('quan_ly_khach_hang.group_khach_hang_manager'))]"/>
+    </record>
+
+    <record id="server_action_tuong_tac_bulk_postpone" model="ir.actions.server">
+        <field name="name">Dời follow-up +2 ngày (hàng loạt)</field>
+        <field name="model_id" ref="model_khach_hang_tuong_tac"/>
+        <field name="binding_model_id" ref="model_khach_hang_tuong_tac"/>
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">records.action_bulk_postpone_2_days()</field>
+        <field name="groups_id" eval="[(4, ref('quan_ly_khach_hang.group_khach_hang_manager'))]"/>
+    </record>
+
+    <menuitem id="menu_khach_hang_tuong_tac" name="Tương tác" parent="menu_quan_ly_khach_hang_root" action="action_khach_hang_tuong_tac" sequence="2" groups="quan_ly_khach_hang.group_khach_hang_sales,quan_ly_khach_hang.group_khach_hang_manager"/>
+
+    <record id="action_khach_hang_tuong_tac_overdue" model="ir.actions.act_window">
+        <field name="name">Tương tác quá hạn</field>
+        <field name="res_model">khach_hang_tuong_tac</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('trang_thai','=','planned'),('hen_lien_he_tiep','&lt;',context_today())]</field>
+        <field name="search_view_id" ref="view_khach_hang_tuong_tac_search"/>
+    </record>
+
+    <menuitem id="menu_khach_hang_tuong_tac_overdue" name="Follow-up quá hạn" parent="menu_quan_ly_khach_hang_root" action="action_khach_hang_tuong_tac_overdue" sequence="3" groups="quan_ly_khach_hang.group_khach_hang_sales,quan_ly_khach_hang.group_khach_hang_manager"/>
+</odoo>

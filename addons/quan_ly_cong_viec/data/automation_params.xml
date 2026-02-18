@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="param_task_stale_days" model="ir.config_parameter">
+        <field name="key">quan_ly_cong_viec.task_stale_days</field>
+        <field name="value">3</field>
+    </record>
+</odoo>

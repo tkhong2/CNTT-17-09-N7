@@ -163,29 +163,24 @@
         </field>
     </record>
 
-    <!-- Calendar View -->
-    <record id="view_cong_viec_calendar" model="ir.ui.view">
-        <field name="name">cong_viec.calendar</field>
-        <field name="model">cong_viec</field>
-        <field name="arch" type="xml">
-            <calendar string="Công việc" date_start="ngay_bat_dau" date_stop="ngay_ket_thuc" color="do_uu_tien" mode="month">
-                <field name="ten_cong_viec"/>
-                <field name="du_an_id"/>
-                <field name="nguoi_phu_trach_id"/>
-            </calendar>
-        </field>
-    </record>
-
     <!-- Action -->
     <record id="action_cong_viec" model="ir.actions.act_window">
         <field name="name">Công việc</field>
         <field name="res_model">cong_viec</field>
-        <field name="view_mode">kanban,tree,form,calendar</field>
+        <field name="view_mode">kanban,tree,form</field>
         <field name="search_view_id" ref="view_cong_viec_search"/>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 Tạo công việc mới
             </p>
         </field>
+    </record>
+
+    <record id="action_cong_viec_need_attention" model="ir.actions.act_window">
+        <field name="name">Công việc cần xử lý</field>
+        <field name="res_model">cong_viec</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">['&amp;', ('trang_thai', 'not in', ['hoan_thanh', 'huy_bo']), '|', ('do_uu_tien', '=', 'rat_cao'), '&amp;', ('ngay_ket_thuc', '!=', False), ('ngay_ket_thuc', '&lt;', context_today())]</field>
+        <field name="search_view_id" ref="view_cong_viec_search"/>
     </record>
 </odoo>

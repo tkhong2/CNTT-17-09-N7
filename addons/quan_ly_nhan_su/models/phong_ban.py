@@ -5,6 +5,7 @@ from odoo.exceptions import ValidationError
 
 class PhongBan(models.Model):
     _name = "phong_ban"
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "Quản lý phòng ban"
     _rec_name = "ten_phong_ban"
 

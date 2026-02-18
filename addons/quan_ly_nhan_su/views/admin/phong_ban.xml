@@ -1,23 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <!-- Form View -->
-    <record id="view_chuc_vu_form" model="ir.ui.view">
-        <field name="name">chuc.vu.form</field>
-        <field name="model">chuc_vu</field>
+    <record id="view_phong_ban_form" model="ir.ui.view">
+        <field name="name">phong.ban.form</field>
+        <field name="model">phong_ban</field>
         <field name="arch" type="xml">
             <form>
                 <sheet>
                     <div class="oe_title">
                         <h1>
-                            <field name="ma_chuc_vu" placeholder="Mã chức vụ"/>
+                            <field name="ma_phong_ban" placeholder="Mã phòng ban"/>
                         </h1>
                         <h2>
-                            <field name="ten_chuc_vu" placeholder="Tên chức vụ"/>
+                            <field name="ten_phong_ban" placeholder="Tên phòng ban"/>
                         </h2>
                     </div>
                     <group>
                         <group>
-                            <field name="muc_luong_co_ban"/>
+                            <field name="truong_phong_id"/>
+                            <field name="so_luong_nhan_vien"/>
                         </group>
                         <group>
                             <field name="mo_ta"/>
@@ -29,7 +30,7 @@
                                 <tree>
                                     <field name="ma_nhan_vien"/>
                                     <field name="ho_va_ten"/>
-                                    <field name="phong_ban_id"/>
+                                    <field name="chuc_vu_id"/>
                                     <field name="ngay_vao_lam"/>
                                     <field name="dien_thoai"/>
                                     <field name="email"/>
@@ -44,39 +45,42 @@
     </record>
     
     <!-- Tree View -->
-    <record id="view_chuc_vu_tree" model="ir.ui.view">
-        <field name="name">chuc.vu.tree</field>
-        <field name="model">chuc_vu</field>
+    <record id="view_phong_ban_tree" model="ir.ui.view">
+        <field name="name">phong.ban.tree</field>
+        <field name="model">phong_ban</field>
         <field name="arch" type="xml">
             <tree>
-                <field name="ma_chuc_vu"/>
-                <field name="ten_chuc_vu"/>
-                <field name="muc_luong_co_ban"/>
+                <field name="ma_phong_ban"/>
+                <field name="ten_phong_ban"/>
+                <field name="truong_phong_id"/>
+                <field name="so_luong_nhan_vien"/>
             </tree>
         </field>
     </record>
     
     <!-- Search View -->
-    <record id="view_chuc_vu_search" model="ir.ui.view">
-        <field name="name">chuc.vu.search</field>
-        <field name="model">chuc_vu</field>
+    <record id="view_phong_ban_search" model="ir.ui.view">
+        <field name="name">phong.ban.search</field>
+        <field name="model">phong_ban</field>
         <field name="arch" type="xml">
             <search>
-                <field name="ma_chuc_vu"/>
-                <field name="ten_chuc_vu"/>
+                <field name="ma_phong_ban"/>
+                <field name="ten_phong_ban"/>
+                <field name="truong_phong_id"/>
             </search>
         </field>
     </record>
     
     <!-- Action -->
-    <record id="action_chuc_vu" model="ir.actions.act_window">
-        <field name="name">Chức vụ</field>
-        <field name="res_model">chuc_vu</field>
+    <record id="action_phong_ban" model="ir.actions.act_window">
+        <field name="name">Phòng ban</field>
+        <field name="res_model">phong_ban</field>
         <field name="view_mode">tree,form</field>
-        <field name="search_view_id" ref="view_chuc_vu_search"/>
+        <field name="groups_id" eval="[(4, ref('base.group_system'))]"/>
+        <field name="search_view_id" ref="view_phong_ban_search"/>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
-                Tạo chức vụ mới
+                Tạo phòng ban mới
             </p>
         </field>
     </record>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="ir_cron_cong_viec_automation" model="ir.cron">
+        <field name="name">[Công việc] Tự động xử lý quá hạn và nhắc tiến độ</field>
+        <field name="model_id" ref="model_cong_viec"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_task_automation()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="active">True</field>
+    </record>
+
+    <record id="ir_cron_du_an_sync_status" model="ir.cron">
+        <field name="name">[Công việc] Đồng bộ trạng thái dự án theo công việc</field>
+        <field name="model_id" ref="model_du_an"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_sync_project_status()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="active">True</field>
+    </record>
+</odoo>

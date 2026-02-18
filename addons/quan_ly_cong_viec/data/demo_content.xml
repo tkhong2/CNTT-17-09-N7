@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="du_an_demo_automation" model="du_an">
+        <field name="ma_du_an">DA-DEMO-001</field>
+        <field name="ten_du_an">Dự án Demo Tự động hóa</field>
+        <field name="mo_ta">Dữ liệu demo để kiểm tra automation công việc.</field>
+        <field name="ngay_bat_dau">2026-02-01</field>
+        <field name="ngay_ket_thuc">2026-03-31</field>
+        <field name="nguoi_quan_ly_id" ref="quan_ly_nhan_su.nhan_vien_demo_manager"/>
+        <field name="trang_thai">dang_thuc_hien</field>
+    </record>
+
+    <record id="cong_viec_demo_overdue" model="cong_viec">
+        <field name="ma_cong_viec">CV-DEMO-OVERDUE</field>
+        <field name="ten_cong_viec">Công việc demo quá hạn</field>
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_demo_automation"/>
+        <field name="nguoi_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_demo_staff"/>
+        <field name="ngay_bat_dau">2026-02-01</field>
+        <field name="ngay_ket_thuc">2026-02-10</field>
+        <field name="do_uu_tien">trung_binh</field>
+        <field name="trang_thai">moi</field>
+        <field name="ke_hoach_gio">24</field>
+    </record>
+
+    <record id="cong_viec_demo_stale" model="cong_viec">
+        <field name="ma_cong_viec">CV-DEMO-STALE</field>
+        <field name="ten_cong_viec">Công việc demo chậm cập nhật tiến độ</field>
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_demo_automation"/>
+        <field name="nguoi_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_demo_staff"/>
+        <field name="ngay_bat_dau">2026-02-12</field>
+        <field name="ngay_ket_thuc">2026-02-28</field>
+        <field name="do_uu_tien">cao</field>
+        <field name="trang_thai">dang_thuc_hien</field>
+        <field name="ke_hoach_gio">30</field>
+    </record>
+
+    <record id="bao_cao_tien_do_demo_start" model="bao_cao_tien_do">
+        <field name="cong_viec_id" ref="quan_ly_cong_viec.cong_viec_demo_overdue"/>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_demo_staff"/>
+        <field name="ngay_bao_cao">2026-02-09</field>
+        <field name="noi_dung">Đã bắt đầu xử lý backlog, hoàn thành các đầu mục chính.</field>
+        <field name="tien_do">40</field>
+        <field name="so_gio">6</field>
+    </record>
+
+    <record id="bao_cao_tien_do_demo_done" model="bao_cao_tien_do">
+        <field name="cong_viec_id" ref="quan_ly_cong_viec.cong_viec_demo_stale"/>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_demo_staff"/>
+        <field name="ngay_bao_cao">2026-02-18</field>
+        <field name="noi_dung">Đã hoàn thành toàn bộ đầu việc và bàn giao.</field>
+        <field name="tien_do">100</field>
+        <field name="so_gio">10</field>
+    </record>
+</odoo>

@@ -25,22 +25,22 @@
     'version': '0.1',
 
     # any module necessary for this one to work correctly
-    'depends': ['base'],
+    'depends': ['base', 'mail'],
 
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'views/nhan_vien.xml',
-        'views/phong_ban.xml',
-        'views/chuc_vu.xml',
-        'views/hop_dong.xml',
-        'views/danh_gia.xml',
-        'views/dao_tao.xml',
-        'views/cham_cong.xml',
-        'views/menu.xml',
+        'data/automation_params.xml',
+        'data/automation_cron.xml',
+        'data/demo_content.xml',
+        'views/ops/nhan_vien.xml',
+        'views/admin/phong_ban.xml',
+        'views/admin/chuc_vu.xml',
+        'views/ops/hop_dong.xml',
+        'views/admin/danh_gia.xml',
+        'views/admin/dao_tao.xml',
+        'views/ops/cham_cong.xml',
+        'views/ops/menu.xml',
     ],
-    # only loaded in demonstration mode
-    'demo': [
-        'demo/demo.xml',
-    ],
+    'license': 'LGPL-3',
 }

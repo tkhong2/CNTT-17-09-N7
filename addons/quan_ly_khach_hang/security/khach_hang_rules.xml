@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+        <record id="rule_khach_hang_sales_own" model="ir.rule">
+            <field name="name">Khách hàng Sales - dữ liệu phụ trách</field>
+            <field name="model_id" ref="model_khach_hang"/>
+            <field name="groups" eval="[(4, ref('quan_ly_khach_hang.group_khach_hang_sales'))]"/>
+            <field name="domain_force">['|', ('nhan_vien_phu_trach_id', '=', False), ('nhan_vien_phu_trach_id.user_id', '=', user.id)]</field>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <record id="rule_khach_hang_manager_all" model="ir.rule">
+            <field name="name">Khách hàng Manager - toàn bộ dữ liệu</field>
+            <field name="model_id" ref="model_khach_hang"/>
+            <field name="groups" eval="[(4, ref('quan_ly_khach_hang.group_khach_hang_manager'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <record id="rule_du_an_sales_scoped" model="ir.rule">
+            <field name="name">Dự án Sales - dữ liệu liên quan</field>
+            <field name="model_id" ref="quan_ly_cong_viec.model_du_an"/>
+            <field name="groups" eval="[(4, ref('quan_ly_khach_hang.group_khach_hang_sales'))]"/>
+            <field name="domain_force">['|', ('nguoi_quan_ly_id.user_id', '=', user.id), ('khach_hang_id.nhan_vien_phu_trach_id.user_id', '=', user.id)]</field>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <record id="rule_du_an_manager_all" model="ir.rule">
+            <field name="name">Dự án Manager - toàn bộ dữ liệu</field>
+            <field name="model_id" ref="quan_ly_cong_viec.model_du_an"/>
+            <field name="groups" eval="[(4, ref('quan_ly_khach_hang.group_khach_hang_manager'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <record id="rule_cong_viec_sales_scoped" model="ir.rule">
+            <field name="name">Công việc Sales - dữ liệu liên quan</field>
+            <field name="model_id" ref="quan_ly_cong_viec.model_cong_viec"/>
+            <field name="groups" eval="[(4, ref('quan_ly_khach_hang.group_khach_hang_sales'))]"/>
+            <field name="domain_force">['|', ('nguoi_phu_trach_id.user_id', '=', user.id), ('du_an_id.khach_hang_id.nhan_vien_phu_trach_id.user_id', '=', user.id)]</field>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <record id="rule_cong_viec_manager_all" model="ir.rule">
+            <field name="name">Công việc Manager - toàn bộ dữ liệu</field>
+            <field name="model_id" ref="quan_ly_cong_viec.model_cong_viec"/>
+            <field name="groups" eval="[(4, ref('quan_ly_khach_hang.group_khach_hang_manager'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <record id="rule_tuong_tac_sales_scoped" model="ir.rule">
+            <field name="name">Tương tác Sales - dữ liệu liên quan</field>
+            <field name="model_id" ref="model_khach_hang_tuong_tac"/>
+            <field name="groups" eval="[(4, ref('quan_ly_khach_hang.group_khach_hang_sales'))]"/>
+            <field name="domain_force">['|', ('nhan_vien_id.user_id', '=', user.id), ('khach_hang_id.nhan_vien_phu_trach_id.user_id', '=', user.id)]</field>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <record id="rule_tuong_tac_manager_all" model="ir.rule">
+            <field name="name">Tương tác Manager - toàn bộ dữ liệu</field>
+            <field name="model_id" ref="model_khach_hang_tuong_tac"/>
+            <field name="groups" eval="[(4, ref('quan_ly_khach_hang.group_khach_hang_manager'))]"/>
+            <field name="domain_force">[(1, '=', 1)]</field>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+    </data>
+</odoo>

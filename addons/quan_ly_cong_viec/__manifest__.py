@@ -21,23 +21,23 @@
     'version': '0.1',
 
     # Quan trọng: Phải phụ thuộc vào module quan_ly_nhan_su
-    'depends': ['base', 'quan_ly_nhan_su'],
+    'depends': ['base', 'mail', 'quan_ly_nhan_su'],
 
     # always loaded
     'data': [
         'security/ir.model.access.csv',
-        'views/du_an.xml',
-        'views/cong_viec.xml',
-        'views/nguoi_tham_gia.xml',
-        'views/bao_cao_tien_do.xml',
-        'views/phan_bo_nguon_luc.xml',
-        'views/menu.xml',
-    ],
-    # only loaded in demonstration mode
-    'demo': [
-        'demo/demo.xml',
+        'data/automation_params.xml',
+        'data/automation_cron.xml',
+        'data/demo_content.xml',
+        'views/ops/du_an.xml',
+        'views/ops/cong_viec.xml',
+        'views/admin/nguoi_tham_gia.xml',
+        'views/ops/bao_cao_tien_do.xml',
+        'views/admin/phan_bo_nguon_luc.xml',
+        'views/ops/menu.xml',
     ],
     'application': True,
     'installable': True,
     'auto_install': False,
+    'license': 'LGPL-3',
 }

@@ -7,6 +7,7 @@ import datetime
 
 class NhanVien(models.Model):
     _name = "nhan_vien"
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "Quản lý thông tin nhân viên"
     _rec_name = "ma_nhan_vien"
 

@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_khach_hang_form" model="ir.ui.view">
+        <field name="name">khach_hang.form</field>
+        <field name="model">khach_hang</field>
+        <field name="arch" type="xml">
+            <form>
+                <header>
+                    <button name="action_tao_du_an_nhanh" type="object" string="Tạo dự án nhanh" class="oe_highlight"/>
+                    <button name="action_merge_duplicate_khach_hang" type="object" string="Gộp khách hàng trùng" groups="quan_ly_khach_hang.group_khach_hang_manager"/>
+                    <field name="trang_thai_hop_tac" widget="statusbar" options="{'clickable': '1'}" statusbar_visible="tiem_nang,dang_hop_tac,tam_ngung,ngung_hop_tac"/>
+                </header>
+                <sheet>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object" name="action_xem_ban_ghi_trung" class="oe_stat_button text-danger" icon="fa-clone" groups="quan_ly_khach_hang.group_khach_hang_manager" attrs="{'invisible': [('so_ban_ghi_trung', '=', 0)]}">
+                            <field name="so_ban_ghi_trung" string="Bản ghi trùng" widget="statinfo"/>
+                        </button>
+                        <button type="object" name="action_xem_ban_ghi_trung" class="oe_stat_button" icon="fa-clone" groups="quan_ly_khach_hang.group_khach_hang_manager" attrs="{'invisible': [('so_ban_ghi_trung', '&gt;', 0)]}">
+                            <field name="so_ban_ghi_trung" string="Bản ghi trùng" widget="statinfo"/>
+                        </button>
+                        <button type="object" name="action_xem_du_an" class="oe_stat_button" icon="fa-folder-open">
+                            <field name="so_du_an" string="Dự án" widget="statinfo"/>
+                        </button>
+                        <button type="object" name="action_xem_cong_viec" class="oe_stat_button" icon="fa-tasks">
+                            <field name="so_du_an_dang_thuc_hien" string="Đang chạy" widget="statinfo"/>
+                        </button>
+                        <button type="object" name="action_xem_tuong_tac" class="oe_stat_button" icon="fa-comments">
+                            <field name="so_lan_tuong_tac" string="Tương tác" widget="statinfo"/>
+                        </button>
+                        <button type="object" name="action_xem_tuong_tac_qua_han" class="oe_stat_button text-danger" icon="fa-exclamation-circle" groups="quan_ly_khach_hang.group_khach_hang_manager" attrs="{'invisible': [('so_tuong_tac_qua_han', '=', 0)]}">
+                            <field name="so_tuong_tac_qua_han" string="Quá hạn" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <h1><field name="ma_khach_hang"/></h1>
+                        <h2><field name="ten_khach_hang"/></h2>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="nguoi_lien_he"/>
+                            <field name="dien_thoai"/>
+                            <field name="email"/>
+                        </group>
+                        <group>
+                            <field name="nhan_vien_phu_trach_id"/>
+                            <field name="tong_ngan_sach"/>
+                            <field name="lan_tuong_tac_cuoi"/>
+                            <field name="so_tuong_tac_qua_han"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Thông tin khách hàng">
+                            <field name="dia_chi"/>
+                            <field name="mo_ta"/>
+                        </page>
+                        <page string="Dự án liên quan">
+                            <field name="du_an_ids">
+                                <tree>
+                                    <field name="ma_du_an"/>
+                                    <field name="ten_du_an"/>
+                                    <field name="nguoi_quan_ly_id"/>
+                                    <field name="ngay_bat_dau"/>
+                                    <field name="ngay_ket_thuc"/>
+                                    <field name="trang_thai"/>
+                                    <field name="ti_le_hoan_thanh" widget="progressbar"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Công việc liên quan">
+                            <field name="cong_viec_ids" readonly="1">
+                                <tree>
+                                    <field name="ma_cong_viec"/>
+                                    <field name="ten_cong_viec"/>
+                                    <field name="du_an_id"/>
+                                    <field name="nguoi_phu_trach_id"/>
+                                    <field name="trang_thai"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Lịch sử tương tác">
+                            <field name="tuong_tac_ids">
+                                <tree>
+                                    <field name="ngay_lien_he"/>
+                                    <field name="tieu_de"/>
+                                    <field name="loai_tuong_tac"/>
+                                    <field name="nhan_vien_id"/>
+                                    <field name="ket_qua"/>
+                                    <field name="hen_lien_he_tiep"/>
+                                    <field name="trang_thai"/>
+                                    <field name="qua_han"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="view_khach_hang_tree" model="ir.ui.view">
+        <field name="name">khach_hang.tree</field>
+        <field name="model">khach_hang</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="ma_khach_hang"/>
+                <field name="ten_khach_hang"/>
+                <field name="nhan_vien_phu_trach_id"/>
+                <field name="so_du_an"/>
+                <field name="so_du_an_dang_thuc_hien"/>
+                <field name="so_lan_tuong_tac"/>
+                <field name="so_tuong_tac_qua_han"/>
+                <field name="tong_ngan_sach"/>
+                <field name="trang_thai_hop_tac"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_khach_hang_search" model="ir.ui.view">
+        <field name="name">khach_hang.search</field>
+        <field name="model">khach_hang</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="ma_khach_hang"/>
+                <field name="ten_khach_hang"/>
+                <field name="nhan_vien_phu_trach_id"/>
+                <field name="email"/>
+                <field name="dien_thoai"/>
+                <filter string="Đang hợp tác" name="dang_hop_tac" domain="[('trang_thai_hop_tac', '=', 'dang_hop_tac')]"/>
+                <filter string="Tiềm năng" name="tiem_nang" domain="[('trang_thai_hop_tac', '=', 'tiem_nang')]"/>
+                <filter string="Mới 7 ngày" name="new_7_days" domain="[('create_date', '&gt;=', (context_today() - relativedelta(days=7)))]"/>
+                <filter string="Có dự án đang chạy" name="active_project" domain="[('so_du_an_dang_thuc_hien', '&gt;', 0)]"/>
+                <filter string="Chưa phân công" name="unassigned" domain="[('nhan_vien_phu_trach_id', '=', False)]"/>
+                <filter string="Im lặng &gt;14 ngày" name="silent_14" domain="['|', ('lan_tuong_tac_cuoi_index', '=', False), ('lan_tuong_tac_cuoi_index', '&lt;', (context_today() - relativedelta(days=14)))]"/>
+                <filter string="Cần xử lý" name="need_attention" domain="['|', '|', ('nhan_vien_phu_trach_id', '=', False), '&amp;', ('tuong_tac_ids.trang_thai', '=', 'planned'), ('tuong_tac_ids.hen_lien_he_tiep', '&lt;', context_today()), ('lan_tuong_tac_cuoi_index', '=', False)]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Phụ trách" name="group_by_owner" context="{'group_by': 'nhan_vien_phu_trach_id'}"/>
+                    <filter string="Trạng thái" name="group_by_status" context="{'group_by': 'trang_thai_hop_tac'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+    <record id="action_khach_hang" model="ir.actions.act_window">
+        <field name="name">Khách hàng</field>
+        <field name="res_model">khach_hang</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_khach_hang_search"/>
+    </record>
+
+    <record id="action_khach_hang_new_7_days" model="ir.actions.act_window">
+        <field name="name">Khách hàng mới 7 ngày</field>
+        <field name="res_model">khach_hang</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('create_date', '&gt;=', (context_today() - relativedelta(days=7)))]</field>
+        <field name="search_view_id" ref="view_khach_hang_search"/>
+    </record>
+
+    <record id="action_khach_hang_unassigned" model="ir.actions.act_window">
+        <field name="name">Khách hàng chưa phân công</field>
+        <field name="res_model">khach_hang</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('nhan_vien_phu_trach_id', '=', False)]</field>
+        <field name="search_view_id" ref="view_khach_hang_search"/>
+    </record>
+
+    <record id="action_khach_hang_silent_14_days" model="ir.actions.act_window">
+        <field name="name">Khách hàng im lặng &gt;14 ngày</field>
+        <field name="res_model">khach_hang</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">['|', ('lan_tuong_tac_cuoi_index', '=', False), ('lan_tuong_tac_cuoi_index', '&lt;', (context_today() - relativedelta(days=14)))]</field>
+        <field name="search_view_id" ref="view_khach_hang_search"/>
+    </record>
+
+    <menuitem id="menu_quan_ly_khach_hang_root" name="Quản lý khách hàng" sequence="1" groups="quan_ly_khach_hang.group_khach_hang_sales,quan_ly_khach_hang.group_khach_hang_manager"/>
+    <menuitem id="menu_khach_hang" name="Khách hàng" parent="menu_quan_ly_khach_hang_root" action="action_khach_hang" sequence="1" groups="quan_ly_khach_hang.group_khach_hang_sales,quan_ly_khach_hang.group_khach_hang_manager"/>
+    <menuitem id="menu_khach_hang_unassigned" name="Chưa phân công" parent="menu_quan_ly_khach_hang_root" action="action_khach_hang_unassigned" sequence="2" groups="quan_ly_khach_hang.group_khach_hang_manager"/>
+    <menuitem id="menu_khach_hang_silent_14_days" name="Im lặng &gt;14 ngày" parent="menu_quan_ly_khach_hang_root" action="action_khach_hang_silent_14_days" sequence="3" groups="quan_ly_khach_hang.group_khach_hang_manager"/>
+    <menuitem id="menu_khach_hang_new_7_days" name="Khách hàng mới 7 ngày" parent="menu_quan_ly_khach_hang_root" action="action_khach_hang_new_7_days" sequence="4" groups="quan_ly_khach_hang.group_khach_hang_sales,quan_ly_khach_hang.group_khach_hang_manager"/>
+</odoo>

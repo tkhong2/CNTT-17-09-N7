@@ -4,6 +4,7 @@ from odoo import models, fields, api, _
 
 class DanhGia(models.Model):
     _name = "danh_gia"
+    _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = "Đánh giá nhân viên"
     _rec_name = "display_name"
     

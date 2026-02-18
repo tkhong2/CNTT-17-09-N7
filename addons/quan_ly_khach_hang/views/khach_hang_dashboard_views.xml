@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_khach_hang_dashboard_form" model="ir.ui.view">
+        <field name="name">khach_hang_dashboard.form</field>
+        <field name="model">khach_hang_dashboard</field>
+        <field name="arch" type="xml">
+            <form create="0" delete="0" edit="0">
+                <sheet>
+                    <div class="oe_title">
+                        <h1><field name="ten_bang" readonly="1"/></h1>
+                    </div>
+                    <div class="oe_button_box" name="button_box">
+                        <button type="object" name="action_chay_nhanh_theo_mau" class="oe_stat_button" icon="fa-bolt" string="Chạy nhanh theo mẫu" groups="quan_ly_khach_hang.group_khach_hang_manager"/>
+                        <button type="object" name="action_tu_dong_phan_cong" class="oe_stat_button text-danger" icon="fa-random" string="Tự động phân công" groups="quan_ly_khach_hang.group_khach_hang_manager"/>
+                        <button type="object" name="action_gui_bao_cao_ngay" class="oe_stat_button" icon="fa-envelope" string="Gửi báo cáo ngày" groups="quan_ly_khach_hang.group_khach_hang_manager"/>
+                        <button type="object" name="action_gui_canh_bao_backlog" class="oe_stat_button" icon="fa-bell" string="Cảnh báo backlog" groups="quan_ly_khach_hang.group_khach_hang_manager"/>
+                        <button type="object" name="action_xem_de_xuat_gop" class="oe_stat_button text-danger" icon="fa-object-group" groups="quan_ly_khach_hang.group_khach_hang_manager">
+                            <field name="de_xuat_gop_cho_duyet" string="Đề xuất gộp" widget="statinfo"/>
+                        </button>
+                        <button type="object" name="action_xem_khach_hang_chua_phan_cong" class="oe_stat_button text-danger" icon="fa-user-times" groups="quan_ly_khach_hang.group_khach_hang_manager">
+                            <field name="khach_hang_chua_phan_cong" string="Chưa phân công" widget="statinfo"/>
+                        </button>
+                        <button type="object" name="action_xem_khach_hang_im_lang" class="oe_stat_button" icon="fa-clock-o" groups="quan_ly_khach_hang.group_khach_hang_manager">
+                            <field name="khach_hang_im_lang_14_ngay" string="Im lặng &gt;14 ngày" widget="statinfo"/>
+                        </button>
+                        <button type="object" name="action_xem_khach_hang_trung_lien_he" class="oe_stat_button text-danger" icon="fa-clone" groups="quan_ly_khach_hang.group_khach_hang_manager">
+                            <field name="khach_hang_trung_lien_he" string="Trùng liên hệ" widget="statinfo"/>
+                        </button>
+                        <button type="object" name="action_xem_khach_hang_moi" class="oe_stat_button" icon="fa-user-plus">
+                            <field name="khach_hang_moi_7_ngay" string="Mới 7 ngày" widget="statinfo"/>
+                        </button>
+                        <button type="object" name="action_xem_khach_hang_dang_hop_tac" class="oe_stat_button" icon="fa-handshake-o">
+                            <field name="khach_hang_dang_hop_tac" string="Đang hợp tác" widget="statinfo"/>
+                        </button>
+                        <button type="object" name="action_xem_tuong_tac_chot" class="oe_stat_button" icon="fa-check-square-o">
+                            <field name="tuong_tac_chot_hop_dong" string="Tương tác chốt" widget="statinfo"/>
+                        </button>
+                        <button type="object" name="action_xem_followup_qua_han" class="oe_stat_button" icon="fa-exclamation-triangle">
+                            <field name="followup_qua_han" string="Follow-up quá hạn" widget="statinfo"/>
+                        </button>
+                    </div>
+                    <group>
+                        <group string="Tổng quan khách hàng">
+                            <field name="tong_khach_hang"/>
+                            <field name="khach_hang_moi_7_ngay"/>
+                            <field name="khach_hang_dang_hop_tac"/>
+                            <field name="khach_hang_chua_phan_cong"/>
+                            <field name="khach_hang_im_lang_14_ngay"/>
+                            <field name="khach_hang_trung_lien_he"/>
+                            <field name="de_xuat_gop_cho_duyet"/>
+                        </group>
+                        <group string="Hiệu quả chăm sóc">
+                            <field name="tong_tuong_tac"/>
+                            <field name="tuong_tac_chot_hop_dong"/>
+                            <field name="followup_qua_han"/>
+                            <field name="ty_le_chot" widget="percentage"/>
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_khach_hang_dashboard" model="ir.actions.act_window">
+        <field name="name">Dashboard KPI</field>
+        <field name="res_model">khach_hang_dashboard</field>
+        <field name="view_mode">form</field>
+        <field name="res_id" ref="quan_ly_khach_hang.khach_hang_dashboard_main"/>
+    </record>
+
+    <menuitem id="menu_khach_hang_dashboard" name="Dashboard KPI" parent="menu_quan_ly_khach_hang_root" action="action_khach_hang_dashboard" sequence="0" groups="quan_ly_khach_hang.group_khach_hang_sales,quan_ly_khach_hang.group_khach_hang_manager"/>
+</odoo>

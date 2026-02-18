@@ -21,11 +21,11 @@
             action="action_cong_viec"
         />
         <menuitem 
-            name="Người tham gia" 
-            id="menu_nguoi_tham_gia" 
+            name="Công việc cần xử lý" 
+            id="menu_cong_viec_need_attention" 
             parent="menu_quan_ly_cong_viec_root" 
             sequence="3"
-            action="action_nguoi_tham_gia"
+            action="action_cong_viec_need_attention"
         />
         <menuitem 
             name="Báo cáo tiến độ" 
@@ -34,12 +34,28 @@
             sequence="4"
             action="action_bao_cao_tien_do"
         />
-        <menuitem 
-            name="Phân bổ nguồn lực" 
-            id="menu_phan_bo_nguon_luc" 
-            parent="menu_quan_ly_cong_viec_root" 
-            sequence="5"
+
+        <menuitem
+            name="Cấu hình (Admin)"
+            id="menu_cv_admin_config"
+            parent="menu_quan_ly_cong_viec_root"
+            sequence="90"
+            groups="base.group_system"/>
+
+        <menuitem
+            name="Người tham gia"
+            id="menu_cv_admin_nguoi_tham_gia"
+            parent="menu_cv_admin_config"
+            sequence="1"
+            action="action_nguoi_tham_gia"
+            groups="base.group_system"/>
+
+        <menuitem
+            name="Phân bổ nguồn lực"
+            id="menu_cv_admin_phan_bo_nguon_luc"
+            parent="menu_cv_admin_config"
+            sequence="2"
             action="action_phan_bo_nguon_luc"
-        />
+            groups="base.group_system"/>
     </data>
 </odoo>

@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="phong_ban_demo_ops" model="phong_ban">
+        <field name="ma_phong_ban">PB-DEMO-OPS</field>
+        <field name="ten_phong_ban">Phòng Vận hành Demo</field>
+    </record>
+
+    <record id="chuc_vu_demo_manager" model="chuc_vu">
+        <field name="ma_chuc_vu">CV-DEMO-MGR</field>
+        <field name="ten_chuc_vu">Trưởng nhóm Demo</field>
+        <field name="muc_luong_co_ban">30000000</field>
+    </record>
+
+    <record id="chuc_vu_demo_exec" model="chuc_vu">
+        <field name="ma_chuc_vu">CV-DEMO-EXEC</field>
+        <field name="ten_chuc_vu">Chuyên viên Demo</field>
+        <field name="muc_luong_co_ban">18000000</field>
+    </record>
+
+    <record id="nhan_vien_demo_manager" model="nhan_vien">
+        <field name="ma_nhan_vien">NV-DEMO-001</field>
+        <field name="ho_va_ten">Nguyễn Quản Lý</field>
+        <field name="ngay_sinh">1990-01-10</field>
+        <field name="email">manager.demo@example.com</field>
+        <field name="dien_thoai">0901000001</field>
+        <field name="phong_ban_id" ref="quan_ly_nhan_su.phong_ban_demo_ops"/>
+        <field name="chuc_vu_id" ref="quan_ly_nhan_su.chuc_vu_demo_manager"/>
+        <field name="ngay_vao_lam">2020-05-01</field>
+        <field name="trang_thai">active</field>
+    </record>
+
+    <record id="nhan_vien_demo_staff" model="nhan_vien">
+        <field name="ma_nhan_vien">NV-DEMO-002</field>
+        <field name="ho_va_ten">Trần Nhân Viên</field>
+        <field name="ngay_sinh">1995-06-21</field>
+        <field name="email">staff.demo@example.com</field>
+        <field name="dien_thoai">0901000002</field>
+        <field name="phong_ban_id" ref="quan_ly_nhan_su.phong_ban_demo_ops"/>
+        <field name="chuc_vu_id" ref="quan_ly_nhan_su.chuc_vu_demo_exec"/>
+        <field name="quan_ly_id" ref="quan_ly_nhan_su.nhan_vien_demo_manager"/>
+        <field name="ngay_vao_lam">2023-03-01</field>
+        <field name="trang_thai">active</field>
+    </record>
+
+    <record id="hop_dong_demo_staff_active" model="hop_dong">
+        <field name="ma_hop_dong">HD-DEMO-001</field>
+        <field name="ten_hop_dong">Hợp đồng Demo NV 002</field>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_demo_staff"/>
+        <field name="loai_hop_dong">xac_dinh_thoi_han</field>
+        <field name="ngay_bat_dau">2025-03-01</field>
+        <field name="ngay_ket_thuc">2026-03-05</field>
+        <field name="luong_co_ban">18000000</field>
+        <field name="trang_thai">active</field>
+    </record>
+
+    <record id="cham_cong_demo_anomaly" model="cham_cong">
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_demo_staff"/>
+        <field name="ngay_cham_cong">2026-02-17</field>
+        <field name="thoi_gian_vao">2026-02-17 08:05:00</field>
+        <field name="trang_thai">di_lam</field>
+        <field name="ghi_chu">Bản ghi demo cho cảnh báo chấm công bất thường.</field>
+    </record>
+</odoo>

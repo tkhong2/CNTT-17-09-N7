@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Menu gốc -->
+        <menuitem
+            id="menu_root"
+            name="Quản lý nhân sự"
+            sequence="0"/>
+        <menuitem 
+            name="Nhân viên" 
+            id="menu_nhan_vien" 
+            parent="menu_root" 
+            sequence="1"
+            action="action_nhan_vien"
+            
+        />
+        <menuitem 
+            name="Hợp đồng" 
+            id="menu_hop_dong" 
+            parent="menu_root" 
+            sequence="2"
+            action="action_hop_dong"
+        />
+        <menuitem 
+            name="Hợp đồng sắp hết hạn" 
+            id="menu_hop_dong_expiring" 
+            parent="menu_root" 
+            sequence="3"
+            action="action_hop_dong_expiring"
+        />
+        <menuitem 
+            name="Chấm công" 
+            id="menu_cham_cong" 
+            parent="menu_root" 
+            sequence="4"
+            action="action_cham_cong"
+        />
+        <menuitem 
+            name="Chấm công bất thường" 
+            id="menu_cham_cong_anomaly" 
+            parent="menu_root" 
+            sequence="5"
+            action="action_cham_cong_anomaly"
+        />
+
+        <menuitem
+            name="Cấu hình (Admin)"
+            id="menu_hr_admin_config"
+            parent="menu_root"
+            sequence="90"
+            groups="base.group_system"/>
+
+        <menuitem
+            name="Chức vụ"
+            id="menu_hr_admin_chuc_vu"
+            parent="menu_hr_admin_config"
+            sequence="1"
+            action="action_chuc_vu"
+            groups="base.group_system"/>
+
+        <menuitem
+            name="Phòng ban"
+            id="menu_hr_admin_phong_ban"
+            parent="menu_hr_admin_config"
+            sequence="2"
+            action="action_phong_ban"
+            groups="base.group_system"/>
+
+        <menuitem
+            name="Đánh giá"
+            id="menu_hr_admin_danh_gia"
+            parent="menu_hr_admin_config"
+            sequence="3"
+            action="action_danh_gia"
+            groups="base.group_system"/>
+
+        <menuitem
+            name="Đào tạo"
+            id="menu_hr_admin_dao_tao"
+            parent="menu_hr_admin_config"
+            sequence="4"
+            action="action_dao_tao"
+            groups="base.group_system"/>
+    </data>
+</odoo>

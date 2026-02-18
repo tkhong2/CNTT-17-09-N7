@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="ir_cron_hop_dong_update_status" model="ir.cron">
+        <field name="name">[Nhân sự] Tự động cập nhật trạng thái hợp đồng</field>
+        <field name="model_id" ref="model_hop_dong"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_update_contract_status()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="active">True</field>
+    </record>
+
+    <record id="ir_cron_hop_dong_expiry_alert" model="ir.cron">
+        <field name="name">[Nhân sự] Cảnh báo hợp đồng sắp hết hạn</field>
+        <field name="model_id" ref="model_hop_dong"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_contract_expiry_alerts()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="active">True</field>
+    </record>
+
+    <record id="ir_cron_attendance_anomaly_alert" model="ir.cron">
+        <field name="name">[Nhân sự] Cảnh báo chấm công bất thường</field>
+        <field name="model_id" ref="model_cham_cong"/>
+        <field name="state">code</field>
+        <field name="code">model._cron_attendance_anomaly_alerts()</field>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="active">True</field>
+    </record>
+</odoo>

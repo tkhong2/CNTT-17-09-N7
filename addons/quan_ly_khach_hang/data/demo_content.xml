@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="khach_hang_demo_main" model="khach_hang">
+        <field name="ma_khach_hang">KH-DEMO-001</field>
+        <field name="ten_khach_hang">Công ty Sao Mai Demo</field>
+        <field name="nguoi_lien_he">Lê Văn A</field>
+        <field name="email">contact.saomai.demo@example.com</field>
+        <field name="dien_thoai">0909888777</field>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_demo_staff"/>
+        <field name="trang_thai_hop_tac">dang_hop_tac</field>
+    </record>
+
+    <record id="khach_hang_demo_duplicate" model="khach_hang">
+        <field name="ma_khach_hang">KH-DEMO-002</field>
+        <field name="ten_khach_hang">Công ty Sao Mai Demo CN2</field>
+        <field name="nguoi_lien_he">Lê Văn B</field>
+        <field name="email">contact.saomai.cn2.demo@example.com</field>
+        <field name="dien_thoai">0909888778</field>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_demo_staff"/>
+        <field name="trang_thai_hop_tac">tiem_nang</field>
+    </record>
+
+    <record id="khach_hang_demo_unassigned" model="khach_hang">
+        <field name="ma_khach_hang">KH-DEMO-003</field>
+        <field name="ten_khach_hang">Khách hàng chưa phân công Demo</field>
+        <field name="email">unassigned.demo@example.com</field>
+        <field name="dien_thoai">0911222333</field>
+        <field name="trang_thai_hop_tac">tiem_nang</field>
+    </record>
+
+    <record id="tuong_tac_demo_overdue" model="khach_hang_tuong_tac">
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_demo_main"/>
+        <field name="tieu_de">Follow-up demo quá hạn</field>
+        <field name="loai_tuong_tac">call</field>
+        <field name="ngay_lien_he">2026-02-14 09:00:00</field>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_demo_staff"/>
+        <field name="ket_qua">hen_lai</field>
+        <field name="hen_lien_he_tiep">2026-02-16 09:00:00</field>
+        <field name="trang_thai">planned</field>
+        <field name="noi_dung">Dữ liệu demo phục vụ cảnh báo follow-up quá hạn.</field>
+    </record>
+</odoo>
