@@ -51,6 +51,30 @@
         </field>
     </record>
 
+    <!-- ===================== GRAPH VIEW ===================== -->
+    <record id="view_tuong_tac_graph" model="ir.ui.view">
+        <field name="name">khach_hang_tuong_tac.graph</field>
+        <field name="model">khach_hang_tuong_tac</field>
+        <field name="arch" type="xml">
+            <graph string="Tương tác theo loại" type="bar">
+                <field name="loai_tuong_tac" type="row"/>
+                <field name="ket_qua" type="col"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- ===================== PIVOT VIEW ===================== -->
+    <record id="view_tuong_tac_pivot" model="ir.ui.view">
+        <field name="name">khach_hang_tuong_tac.pivot</field>
+        <field name="model">khach_hang_tuong_tac</field>
+        <field name="arch" type="xml">
+            <pivot string="Phân tích tương tác">
+                <field name="nhan_vien_id" type="row"/>
+                <field name="loai_tuong_tac" type="col"/>
+            </pivot>
+        </field>
+    </record>
+
     <record id="view_khach_hang_tuong_tac_search" model="ir.ui.view">
         <field name="name">khach_hang_tuong_tac.search</field>
         <field name="model">khach_hang_tuong_tac</field>
@@ -77,10 +101,11 @@
         </field>
     </record>
 
+    <!-- action: thêm graph,pivot vào view_mode -->
     <record id="action_khach_hang_tuong_tac" model="ir.actions.act_window">
         <field name="name">Tương tác khách hàng</field>
         <field name="res_model">khach_hang_tuong_tac</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,graph,pivot</field>
         <field name="search_view_id" ref="view_khach_hang_tuong_tac_search"/>
     </record>
 
@@ -104,7 +129,7 @@
         <field name="groups_id" eval="[(4, ref('quan_ly_khach_hang.group_khach_hang_manager'))]"/>
     </record>
 
-    <menuitem id="menu_khach_hang_tuong_tac" name="Tương tác" parent="menu_quan_ly_khach_hang_root" action="action_khach_hang_tuong_tac" sequence="2" groups="quan_ly_khach_hang.group_khach_hang_sales,quan_ly_khach_hang.group_khach_hang_manager"/>
+    <menuitem id="menu_khach_hang_tuong_tac" name="Tương tác" parent="menu_quan_ly_khach_hang_root" action="action_khach_hang_tuong_tac" sequence="2"/>
 
     <record id="action_khach_hang_tuong_tac_overdue" model="ir.actions.act_window">
         <field name="name">Tương tác quá hạn</field>
@@ -114,5 +139,5 @@
         <field name="search_view_id" ref="view_khach_hang_tuong_tac_search"/>
     </record>
 
-    <menuitem id="menu_khach_hang_tuong_tac_overdue" name="Follow-up quá hạn" parent="menu_quan_ly_khach_hang_root" action="action_khach_hang_tuong_tac_overdue" sequence="3" groups="quan_ly_khach_hang.group_khach_hang_sales,quan_ly_khach_hang.group_khach_hang_manager"/>
+    <menuitem id="menu_khach_hang_tuong_tac_overdue" name="Follow-up quá hạn" parent="menu_quan_ly_khach_hang_root" action="action_khach_hang_tuong_tac_overdue" sequence="3"/>
 </odoo>

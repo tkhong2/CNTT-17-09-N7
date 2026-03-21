@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_khach_hang_form" model="ir.ui.view">
+    <data>
+        <record id="view_khach_hang_form" model="ir.ui.view">
         <field name="name">khach_hang.form</field>
         <field name="model">khach_hang</field>
         <field name="arch" type="xml">
@@ -22,7 +23,10 @@
                             <field name="so_du_an" string="Dự án" widget="statinfo"/>
                         </button>
                         <button type="object" name="action_xem_cong_viec" class="oe_stat_button" icon="fa-tasks">
-                            <field name="so_du_an_dang_thuc_hien" string="Đang chạy" widget="statinfo"/>
+                            <field name="so_cong_viec" string="Công việc" widget="statinfo"/>
+                        </button>
+                        <button type="object" name="action_xem_cong_viec" class="oe_stat_button" icon="fa-tasks">
+                            <field name="so_cong_viec_dang_thuc_hien" string="Đang thực hiện" widget="statinfo"/>
                         </button>
                         <button type="object" name="action_xem_tuong_tac" class="oe_stat_button" icon="fa-comments">
                             <field name="so_lan_tuong_tac" string="Tương tác" widget="statinfo"/>
@@ -43,9 +47,8 @@
                         </group>
                         <group>
                             <field name="nhan_vien_phu_trach_id"/>
+                            <field name="rank"/>
                             <field name="tong_ngan_sach"/>
-                            <field name="lan_tuong_tac_cuoi"/>
-                            <field name="so_tuong_tac_qua_han"/>
                         </group>
                     </group>
                     <notebook>
@@ -91,6 +94,27 @@
                                 </tree>
                             </field>
                         </page>
+                        <page string="Liên hệ phụ/Chi nhánh">
+                            <field name="parent_khach_hang_id" attrs="{'invisible': [('id', '=', False)]}"/>
+                            <field name="subsidiary_khach_hang_ids">
+                                <tree>
+                                    <field name="ma_khach_hang"/>
+                                    <field name="ten_khach_hang"/>
+                                    <field name="nguoi_lien_he"/>
+                                    <field name="dien_thoai"/>
+                                    <field name="email"/>
+                                    <field name="trang_thai_hop_tac"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="ten_khach_hang"/>
+                                        <field name="nguoi_lien_he"/>
+                                        <field name="dien_thoai"/>
+                                        <field name="email"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
                     </notebook>
                 </sheet>
             </form>
@@ -101,17 +125,41 @@
         <field name="name">khach_hang.tree</field>
         <field name="model">khach_hang</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree decoration-warning="rank=='vang'" decoration-info="rank=='bac'" decoration-muted="rank=='dong'">
                 <field name="ma_khach_hang"/>
                 <field name="ten_khach_hang"/>
+                <field name="rank"/>
                 <field name="nhan_vien_phu_trach_id"/>
                 <field name="so_du_an"/>
-                <field name="so_du_an_dang_thuc_hien"/>
+                <field name="so_cong_viec"/>
                 <field name="so_lan_tuong_tac"/>
-                <field name="so_tuong_tac_qua_han"/>
                 <field name="tong_ngan_sach"/>
                 <field name="trang_thai_hop_tac"/>
             </tree>
+        </field>
+    </record>
+
+    <!-- ===================== GRAPH VIEW ===================== -->
+    <record id="view_khach_hang_graph" model="ir.ui.view">
+        <field name="name">khach_hang.graph</field>
+        <field name="model">khach_hang</field>
+        <field name="arch" type="xml">
+            <graph string="Khách hàng theo trạng thái" type="pie">
+                <field name="trang_thai_hop_tac" type="row"/>
+            </graph>
+        </field>
+    </record>
+
+    <!-- ===================== PIVOT VIEW ===================== -->
+    <record id="view_khach_hang_pivot" model="ir.ui.view">
+        <field name="name">khach_hang.pivot</field>
+        <field name="model">khach_hang</field>
+        <field name="arch" type="xml">
+            <pivot string="Phân tích khách hàng">
+                <field name="nhan_vien_phu_trach_id" type="row"/>
+                <field name="rank" type="col"/>
+                <field name="tong_ngan_sach" type="measure"/>
+            </pivot>
         </field>
     </record>
 
@@ -127,30 +175,33 @@
                 <field name="dien_thoai"/>
                 <filter string="Đang hợp tác" name="dang_hop_tac" domain="[('trang_thai_hop_tac', '=', 'dang_hop_tac')]"/>
                 <filter string="Tiềm năng" name="tiem_nang" domain="[('trang_thai_hop_tac', '=', 'tiem_nang')]"/>
-                <filter string="Mới 7 ngày" name="new_7_days" domain="[('create_date', '&gt;=', (context_today() - relativedelta(days=7)))]"/>
-                <filter string="Có dự án đang chạy" name="active_project" domain="[('so_du_an_dang_thuc_hien', '&gt;', 0)]"/>
-                <filter string="Chưa phân công" name="unassigned" domain="[('nhan_vien_phu_trach_id', '=', False)]"/>
-                <filter string="Im lặng &gt;14 ngày" name="silent_14" domain="['|', ('lan_tuong_tac_cuoi_index', '=', False), ('lan_tuong_tac_cuoi_index', '&lt;', (context_today() - relativedelta(days=14)))]"/>
-                <filter string="Cần xử lý" name="need_attention" domain="['|', '|', ('nhan_vien_phu_trach_id', '=', False), '&amp;', ('tuong_tac_ids.trang_thai', '=', 'planned'), ('tuong_tac_ids.hen_lien_he_tiep', '&lt;', context_today()), ('lan_tuong_tac_cuoi_index', '=', False)]"/>
-                <group expand="0" string="Group By">
-                    <filter string="Phụ trách" name="group_by_owner" context="{'group_by': 'nhan_vien_phu_trach_id'}"/>
-                    <filter string="Trạng thái" name="group_by_status" context="{'group_by': 'trang_thai_hop_tac'}"/>
+                <filter string="Mới 7 ngày" name="new_7_days"
+                        domain="[('create_date', '&gt;=', (context_today() - relativedelta(days=7)))]"/>
+                <filter string="Chưa phân công" name="unassigned"
+                        domain="[('nhan_vien_phu_trach_id', '=', False)]"/>
+                <group expand="0" string="Nhóm theo">
+                    <filter string="Nhân viên phụ trách" name="group_owner" context="{'group_by': 'nhan_vien_phu_trach_id'}"/>
+                    <filter string="Phân hạng" name="group_rank" context="{'group_by': 'rank'}"/>
+                    <filter string="Trạng thái" name="group_trang_thai" context="{'group_by': 'trang_thai_hop_tac'}"/>
+                    <filter string="Nguồn" name="group_source" context="{'group_by': 'nguon'}"/>
+                    <filter string="Ngày tạo" name="group_create_date" context="{'group_by': 'create_date'}"/>
                 </group>
             </search>
         </field>
     </record>
 
+    <!-- action_khach_hang: thêm graph,pivot vào view_mode -->
     <record id="action_khach_hang" model="ir.actions.act_window">
         <field name="name">Khách hàng</field>
         <field name="res_model">khach_hang</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,graph,pivot</field>
         <field name="search_view_id" ref="view_khach_hang_search"/>
     </record>
 
     <record id="action_khach_hang_new_7_days" model="ir.actions.act_window">
         <field name="name">Khách hàng mới 7 ngày</field>
         <field name="res_model">khach_hang</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,graph,pivot</field>
         <field name="domain">[('create_date', '&gt;=', (context_today() - relativedelta(days=7)))]</field>
         <field name="search_view_id" ref="view_khach_hang_search"/>
     </record>
@@ -171,9 +222,10 @@
         <field name="search_view_id" ref="view_khach_hang_search"/>
     </record>
 
-    <menuitem id="menu_quan_ly_khach_hang_root" name="Quản lý khách hàng" sequence="1" groups="quan_ly_khach_hang.group_khach_hang_sales,quan_ly_khach_hang.group_khach_hang_manager"/>
-    <menuitem id="menu_khach_hang" name="Khách hàng" parent="menu_quan_ly_khach_hang_root" action="action_khach_hang" sequence="1" groups="quan_ly_khach_hang.group_khach_hang_sales,quan_ly_khach_hang.group_khach_hang_manager"/>
-    <menuitem id="menu_khach_hang_unassigned" name="Chưa phân công" parent="menu_quan_ly_khach_hang_root" action="action_khach_hang_unassigned" sequence="2" groups="quan_ly_khach_hang.group_khach_hang_manager"/>
-    <menuitem id="menu_khach_hang_silent_14_days" name="Im lặng &gt;14 ngày" parent="menu_quan_ly_khach_hang_root" action="action_khach_hang_silent_14_days" sequence="3" groups="quan_ly_khach_hang.group_khach_hang_manager"/>
-    <menuitem id="menu_khach_hang_new_7_days" name="Khách hàng mới 7 ngày" parent="menu_quan_ly_khach_hang_root" action="action_khach_hang_new_7_days" sequence="4" groups="quan_ly_khach_hang.group_khach_hang_sales,quan_ly_khach_hang.group_khach_hang_manager"/>
+    <menuitem id="menu_quan_ly_khach_hang_root" name="Quản lý khách hàng" sequence="0"/>
+    <menuitem id="menu_khach_hang" name="Khách hàng" parent="menu_quan_ly_khach_hang_root" action="action_khach_hang" sequence="1"/>
+    <menuitem id="menu_khach_hang_unassigned" name="Chưa phân công" parent="menu_quan_ly_khach_hang_root" action="action_khach_hang_unassigned" sequence="2"/>
+    <menuitem id="menu_khach_hang_silent_14_days" name="Im lặng &gt;14 ngày" parent="menu_quan_ly_khach_hang_root" action="action_khach_hang_silent_14_days" sequence="3"/>
+    <menuitem id="menu_khach_hang_new_7_days" name="Khách hàng mới 7 ngày" parent="menu_quan_ly_khach_hang_root" action="action_khach_hang_new_7_days" sequence="4"/>
+    </data>
 </odoo>

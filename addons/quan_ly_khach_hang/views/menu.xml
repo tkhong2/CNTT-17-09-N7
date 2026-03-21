@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_quan_ly_khach_hang_root"
+            name="Quản lý khách hàng"
+            sequence="2"/>
+
+        <menuitem id="menu_khach_hang"
+            parent="menu_quan_ly_khach_hang_root"
+            name="Khách hàng"
+            sequence="10"
+            action="action_khach_hang"/>
+
+        <menuitem id="menu_khach_hang_tuong_tac"
+            parent="menu_quan_ly_khach_hang_root"
+            name="Tương tác"
+            sequence="20"
+            action="action_khach_hang_tuong_tac"/>
+
+        <menuitem id="menu_khach_hang_dashboard"
+            parent="menu_quan_ly_khach_hang_root"
+            name="Dashboard"
+            sequence="30"
+            action="action_khach_hang_dashboard"/>
+
+        <menuitem id="menu_khach_hang_tools"
+            parent="menu_quan_ly_khach_hang_root"
+            name="Công cụ"
+            sequence="40"/>
+
+        <menuitem id="menu_khach_hang_merge"
+            parent="menu_khach_hang_tools"
+            name="Gộp khách hàng"
+            sequence="10"
+            action="action_khach_hang_merge_suggestion"/>
+    </data>
+</odoo>

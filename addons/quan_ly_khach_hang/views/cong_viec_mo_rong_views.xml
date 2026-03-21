@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_cong_viec_form_inherit_khach_hang" model="ir.ui.view">
+        <field name="name">cong_viec.form.inherit.khach_hang</field>
+        <field name="model">cong_viec</field>
+        <field name="inherit_id" ref="quan_ly_cong_viec.view_cong_viec_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='du_an_id']" position="after">
+                <!-- Giai đoạn 1 - Bước 1: Thêm khách hàng liên kết -->
+                <field name="khach_hang_id"/>
+                <!-- Giai đoạn 2 - Gợi ý 2: Thêm người liên hệ từ liên hệ phụ -->
+                <field name="contact_person_id" attrs="{'invisible': [('khach_hang_id', '=', False)]}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_cong_viec_tree_inherit_khach_hang" model="ir.ui.view">
+        <field name="name">cong_viec.tree.inherit.khach_hang</field>
+        <field name="model">cong_viec</field>
+        <field name="inherit_id" ref="quan_ly_cong_viec.view_cong_viec_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='du_an_id']" position="after">
+                <field name="khach_hang_id"/>
+                <field name="contact_person_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
