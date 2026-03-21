@@ -21,20 +21,26 @@
                     <group>
                         <group>
                             <field name="du_an_id"/>
+                            <field name="partner_id"/>
+                            <field name="contact_person_id" domain="[('parent_id', '=', partner_id)]"/>
                             <field name="nguoi_phu_trach_id"/>
+                            <field name="user_ids" widget="many2many_tags" options="{'no_create': True}"/>
                             <field name="do_uu_tien"/>
                             <field name="ke_hoach_gio"/>
+                            <field name="cong_viec_phu_thuoc_ids" widget="many2many_tags"/>
                         </group>
                         <group>
                             <field name="ngay_bat_dau"/>
                             <field name="ngay_ket_thuc"/>
                             <field name="thuc_te_gio"/>
                             <field name="tien_do" widget="progressbar"/>
+                            <field name="bi_chan" readonly="1"/>
                         </group>
                     </group>
                     <notebook>
                         <page string="Mô tả">
                             <field name="mo_ta"/>
+                            <field name="ly_do_bi_chan" readonly="1" attrs="{'invisible': [('bi_chan', '=', False)]}"/>
                         </page>
                         <page string="Người tham gia">
                             <field name="nguoi_tham_gia_ids">
@@ -85,11 +91,13 @@
                 <field name="ma_cong_viec"/>
                 <field name="ten_cong_viec"/>
                 <field name="du_an_id"/>
+                <field name="partner_id"/>
                 <field name="nguoi_phu_trach_id"/>
                 <field name="ngay_bat_dau"/>
                 <field name="ngay_ket_thuc"/>
                 <field name="do_uu_tien"/>
                 <field name="tien_do" widget="progressbar"/>
+                <field name="bi_chan"/>
                 <field name="trang_thai"/>
             </tree>
         </field>
@@ -104,11 +112,13 @@
                 <field name="ma_cong_viec"/>
                 <field name="ten_cong_viec"/>
                 <field name="du_an_id"/>
+                <field name="partner_id"/>
                 <field name="nguoi_phu_trach_id"/>
                 <filter string="Mới" name="moi" domain="[('trang_thai', '=', 'moi')]"/>
                 <filter string="Đang thực hiện" name="dang_thuc_hien" domain="[('trang_thai', '=', 'dang_thuc_hien')]"/>
                 <filter string="Hoàn thành" name="hoan_thanh" domain="[('trang_thai', '=', 'hoan_thanh')]"/>
                 <filter string="Ưu tiên cao" name="uu_tien_cao" domain="[('do_uu_tien', 'in', ['cao', 'rat_cao'])]"/>
+                <filter string="Đang bị chặn" name="blocked_tasks" domain="[('bi_chan', '=', True)]"/>
                 <group expand="0" string="Group By">
                     <filter string="Dự án" name="group_by_du_an" context="{'group_by': 'du_an_id'}"/>
                     <filter string="Người phụ trách" name="group_by_nguoi_phu_trach" context="{'group_by': 'nguoi_phu_trach_id'}"/>

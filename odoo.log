@@ -1,0 +1,124 @@
+nohup: ignoring input
+2026-03-21 08:07:58,001 64703 INFO ? odoo: Odoo version 15.0 
+2026-03-21 08:07:58,001 64703 INFO ? odoo: Using configuration file at /home/memo/CNTT-17-09-N7/odoo.conf 
+2026-03-21 08:07:58,001 64703 INFO ? odoo: addons paths: ['/home/memo/CNTT-17-09-N7/odoo/addons', '/home/memo/.local/share/Odoo/addons/15.0', '/home/memo/CNTT-17-09-N7/addons'] 
+2026-03-21 08:07:58,001 64703 INFO ? odoo: database: odoo@localhost:5432 
+2026-03-21 08:07:58,084 64703 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at /usr/bin/wkhtmltopdf 
+Exception in thread odoo.service.httpd:
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.10/threading.py", line 953, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/memo/CNTT-17-09-N7/odoo/service/server.py", line 483, in http_thread
+    self.httpd = ThreadedWSGIServerReloadable(self.interface, self.port, app)
+  File "/home/memo/CNTT-17-09-N7/odoo/service/server.py", line 149, in __init__
+    super(ThreadedWSGIServerReloadable, self).__init__(host, port, app,
+  File "/home/memo/.local/lib/python3.10/site-packages/werkzeug/serving.py", line 688, in __init__
+    super().__init__(server_address, handler)  # type: ignore
+  File "/usr/lib/python3.10/socketserver.py", line 452, in __init__
+    self.server_bind()
+  File "/home/memo/CNTT-17-09-N7/odoo/service/server.py", line 165, in server_bind
+    super(ThreadedWSGIServerReloadable, self).server_bind()
+  File "/usr/lib/python3.10/http/server.py", line 137, in server_bind
+    socketserver.TCPServer.server_bind(self)
+  File "/usr/lib/python3.10/socketserver.py", line 466, in server_bind
+    self.socket.bind(self.server_address)
+OSError: [Errno 98] Address already in use
+2026-03-21 08:07:58,260 64703 INFO odoo odoo.modules.loading: loading 1 modules... 
+2026-03-21 08:07:58,266 64703 INFO odoo odoo.modules.loading: 1 modules loaded in 0.01s, 0 queries (+0 extra) 
+2026-03-21 08:07:58,275 64703 INFO odoo odoo.modules.loading: loading 25 modules... 
+2026-03-21 08:07:58,423 64703 INFO odoo odoo.modules.loading: 25 modules loaded in 0.15s, 0 queries (+0 extra) 
+2026-03-21 08:07:58,475 64703 WARNING odoo odoo.fields: Field tinh_luong_chi_tiet.luong_co_ban: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:07:58,475 64703 WARNING odoo odoo.fields: Field tinh_luong_chi_tiet.phu_cap: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:07:58,475 64703 WARNING odoo odoo.fields: Field tinh_luong_chi_tiet.tien_thuong: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:07:58,476 64703 WARNING odoo odoo.fields: Field tinh_luong_chi_tiet.bao_hiem_xa_hoi: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:07:58,476 64703 WARNING odoo odoo.fields: Field tinh_luong_chi_tiet.bao_hiem_y_te: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:07:58,476 64703 WARNING odoo odoo.fields: Field tinh_luong_chi_tiet.bao_hiem_that_nghiep: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:07:58,476 64703 WARNING odoo odoo.fields: Field tinh_luong_chi_tiet.ung_luong: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:07:58,476 64703 WARNING odoo odoo.fields: Field tinh_luong_chi_tiet.khoan_khac: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:07:58,476 64703 WARNING odoo odoo.fields: Field tinh_luong_chi_tiet.thue_thu_nhap: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:07:58,476 64703 WARNING odoo odoo.fields: Field onboarding_task.da_hoan_thanh: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:07:58,477 64703 WARNING odoo odoo.fields: Field bao_gia.tong_tien: unknown parameter 'widget', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:07:58,478 64703 WARNING odoo odoo.fields: Field don_hang.tong_tien: unknown parameter 'widget', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:07:58,478 64703 WARNING odoo odoo.fields: Field hop_dong_khach_hang.gia_tri_hop_dong: unknown parameter 'widget', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:07:58,501 64703 INFO odoo odoo.modules.loading: Modules loaded. 
+2026-03-21 08:07:58,504 64703 INFO odoo odoo.modules.registry: Registry loaded in 0.261s 
+2026-03-21 08:27:15,419 64703 INFO odoo odoo.modules.registry: Reloading the model registry after database signaling. 
+2026-03-21 08:27:15,432 64703 INFO odoo odoo.modules.loading: loading 1 modules... 
+2026-03-21 08:27:15,438 64703 INFO odoo odoo.modules.loading: 1 modules loaded in 0.01s, 0 queries (+0 extra) 
+2026-03-21 08:27:15,447 64703 INFO odoo odoo.modules.loading: loading 25 modules... 
+2026-03-21 08:27:15,458 64703 INFO odoo odoo.modules.loading: 25 modules loaded in 0.01s, 0 queries (+0 extra) 
+2026-03-21 08:27:15,498 64703 WARNING odoo odoo.fields: Field tinh_luong_chi_tiet.luong_co_ban: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:27:15,498 64703 WARNING odoo odoo.fields: Field tinh_luong_chi_tiet.phu_cap: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:27:15,498 64703 WARNING odoo odoo.fields: Field tinh_luong_chi_tiet.tien_thuong: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:27:15,498 64703 WARNING odoo odoo.fields: Field tinh_luong_chi_tiet.bao_hiem_xa_hoi: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:27:15,498 64703 WARNING odoo odoo.fields: Field tinh_luong_chi_tiet.bao_hiem_y_te: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:27:15,498 64703 WARNING odoo odoo.fields: Field tinh_luong_chi_tiet.bao_hiem_that_nghiep: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:27:15,498 64703 WARNING odoo odoo.fields: Field tinh_luong_chi_tiet.ung_luong: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:27:15,498 64703 WARNING odoo odoo.fields: Field tinh_luong_chi_tiet.khoan_khac: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:27:15,498 64703 WARNING odoo odoo.fields: Field tinh_luong_chi_tiet.thue_thu_nhap: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:27:15,499 64703 WARNING odoo odoo.fields: Field onboarding_task.da_hoan_thanh: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:27:15,501 64703 WARNING odoo odoo.fields: Field bao_gia.tong_tien: unknown parameter 'widget', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:27:15,501 64703 WARNING odoo odoo.fields: Field don_hang.tong_tien: unknown parameter 'widget', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:27:15,501 64703 WARNING odoo odoo.fields: Field hop_dong_khach_hang.gia_tri_hop_dong: unknown parameter 'widget', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:27:15,523 64703 INFO odoo odoo.modules.loading: Modules loaded. 
+2026-03-21 08:27:15,526 64703 INFO odoo odoo.modules.registry: Registry loaded in 0.106s 
+2026-03-21 08:27:15,527 64703 INFO odoo odoo.addons.base.models.ir_cron: Starting job `Khách hàng - tự động phân công khách chưa phụ trách`. 
+2026-03-21 08:27:15,534 64703 INFO odoo odoo.addons.base.models.ir_cron: Job `Khách hàng - tự động phân công khách chưa phụ trách` done. 
+2026-03-21 08:27:15,546 64703 INFO odoo odoo.addons.base.models.ir_cron: Starting job `Khách hàng - escalation follow-up quá hạn nặng`. 
+2026-03-21 08:27:15,557 64703 INFO odoo odoo.addons.base.models.ir_cron: Job `Khách hàng - escalation follow-up quá hạn nặng` done. 
+2026-03-21 08:27:15,564 64703 INFO odoo odoo.addons.base.models.ir_cron: Starting job `Khách hàng - tạo nhắc follow-up quá hạn`. 
+2026-03-21 08:27:15,571 64703 INFO odoo odoo.addons.base.models.ir_cron: Job `Khách hàng - tạo nhắc follow-up quá hạn` done. 
+2026-03-21 08:32:38,493 64703 INFO odoo odoo.service.server: Initiating server reload 
+2026-03-21 08:32:38,495 64703 INFO odoo odoo.sql_db: ConnectionPool(used=0/count=0/max=64): Closed 6 connections  
+2026-03-21 08:32:39,094 64703 INFO ? odoo: Odoo version 15.0 
+2026-03-21 08:32:39,095 64703 INFO ? odoo: Using configuration file at /home/memo/CNTT-17-09-N7/odoo.conf 
+2026-03-21 08:32:39,095 64703 INFO ? odoo: addons paths: ['/home/memo/CNTT-17-09-N7/odoo/addons', '/home/memo/.local/share/Odoo/addons/15.0', '/home/memo/CNTT-17-09-N7/addons'] 
+2026-03-21 08:32:39,095 64703 INFO ? odoo: database: odoo@localhost:5432 
+2026-03-21 08:32:39,191 64703 INFO ? odoo.addons.base.models.ir_actions_report: Will use the Wkhtmltopdf binary at /usr/bin/wkhtmltopdf 
+Exception in thread odoo.service.httpd:
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/threading.py", line 1016, in _bootstrap_inner
+    self.run()
+  File "/usr/lib/python3.10/threading.py", line 953, in run
+    self._target(*self._args, **self._kwargs)
+  File "/home/memo/CNTT-17-09-N7/odoo/service/server.py", line 483, in http_thread
+    self.httpd = ThreadedWSGIServerReloadable(self.interface, self.port, app)
+  File "/home/memo/CNTT-17-09-N7/odoo/service/server.py", line 149, in __init__
+    super(ThreadedWSGIServerReloadable, self).__init__(host, port, app,
+  File "/home/memo/.local/lib/python3.10/site-packages/werkzeug/serving.py", line 688, in __init__
+    super().__init__(server_address, handler)  # type: ignore
+  File "/usr/lib/python3.10/socketserver.py", line 452, in __init__
+    self.server_bind()
+  File "/home/memo/CNTT-17-09-N7/odoo/service/server.py", line 165, in server_bind
+    super(ThreadedWSGIServerReloadable, self).server_bind()
+  File "/usr/lib/python3.10/http/server.py", line 137, in server_bind
+    socketserver.TCPServer.server_bind(self)
+  File "/usr/lib/python3.10/socketserver.py", line 466, in server_bind
+    self.socket.bind(self.server_address)
+OSError: [Errno 98] Address already in use
+2026-03-21 08:32:39,370 64703 INFO odoo odoo.modules.loading: loading 1 modules... 
+2026-03-21 08:32:39,376 64703 INFO odoo odoo.modules.loading: 1 modules loaded in 0.01s, 0 queries (+0 extra) 
+2026-03-21 08:32:39,387 64703 INFO odoo odoo.modules.loading: loading 25 modules... 
+2026-03-21 08:32:39,539 64703 INFO odoo odoo.modules.loading: 25 modules loaded in 0.15s, 0 queries (+0 extra) 
+2026-03-21 08:32:39,585 64703 WARNING odoo odoo.fields: Field tinh_luong_chi_tiet.luong_co_ban: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:32:39,585 64703 WARNING odoo odoo.fields: Field tinh_luong_chi_tiet.phu_cap: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:32:39,585 64703 WARNING odoo odoo.fields: Field tinh_luong_chi_tiet.tien_thuong: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:32:39,585 64703 WARNING odoo odoo.fields: Field tinh_luong_chi_tiet.bao_hiem_xa_hoi: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:32:39,585 64703 WARNING odoo odoo.fields: Field tinh_luong_chi_tiet.bao_hiem_y_te: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:32:39,585 64703 WARNING odoo odoo.fields: Field tinh_luong_chi_tiet.bao_hiem_that_nghiep: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:32:39,585 64703 WARNING odoo odoo.fields: Field tinh_luong_chi_tiet.ung_luong: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:32:39,586 64703 WARNING odoo odoo.fields: Field tinh_luong_chi_tiet.khoan_khac: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:32:39,586 64703 WARNING odoo odoo.fields: Field tinh_luong_chi_tiet.thue_thu_nhap: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:32:39,586 64703 WARNING odoo odoo.fields: Field onboarding_task.da_hoan_thanh: unknown parameter 'tracking', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:32:39,588 64703 WARNING odoo odoo.fields: Field bao_gia.tong_tien: unknown parameter 'widget', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:32:39,589 64703 WARNING odoo odoo.fields: Field don_hang.tong_tien: unknown parameter 'widget', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:32:39,589 64703 WARNING odoo odoo.fields: Field hop_dong_khach_hang.gia_tri_hop_dong: unknown parameter 'widget', if this is an actual parameter you may want to override the method _valid_field_parameter on the relevant model in order to allow it 
+2026-03-21 08:32:39,612 64703 INFO odoo odoo.modules.loading: Modules loaded. 
+2026-03-21 08:32:39,616 64703 INFO odoo odoo.modules.registry: Registry loaded in 0.259s 
+2026-03-21 09:12:15,079 64703 INFO odoo odoo.addons.base.models.ir_cron: Starting job `Khách hàng - tạo nhắc follow-up quá hạn`. 
+2026-03-21 09:12:15,099 64703 INFO odoo odoo.addons.base.models.ir_cron: Job `Khách hàng - tạo nhắc follow-up quá hạn` done. 
+2026-03-21 09:20:58,450 64703 INFO odoo odoo.service.server: Initiating shutdown 
+2026-03-21 09:20:58,451 64703 INFO odoo odoo.service.server: Hit CTRL-C again or send a second signal to force the shutdown. 
+2026-03-21 09:20:58,457 64703 INFO odoo odoo.sql_db: ConnectionPool(used=0/count=0/max=64): Closed 5 connections  

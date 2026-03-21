@@ -1,0 +1,368 @@
+/* Global modern backend theme for custom ERP modules */
+
+:root {
+    --erp-primary: #0f766e;
+    --erp-primary-2: #14b8a6;
+    --erp-ink: #1f2937;
+    --erp-muted: #6b7280;
+    --erp-surface: #ffffff;
+    --erp-surface-soft: #f4f8fc;
+    --erp-line: #d9e3ee;
+    --erp-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
+    --erp-shadow-soft: 0 6px 18px rgba(15, 23, 42, 0.06);
+    --erp-radius-lg: 16px;
+    --erp-radius-md: 12px;
+    --erp-radius-sm: 10px;
+}
+
+.o_action_manager {
+    background: radial-gradient(circle at 12% -8%, #ddeffc 0%, #eff6fb 34%, #f7fafd 64%, #fbfcfd 100%);
+}
+
+.o_control_panel {
+    background: transparent;
+    border-bottom: none;
+    margin-bottom: 6px;
+}
+
+.o_control_panel .breadcrumb {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid var(--erp-line);
+    border-radius: 999px;
+    padding: 6px 14px;
+    box-shadow: var(--erp-shadow-soft);
+}
+
+.o_cp_buttons .btn,
+.o_form_view .btn {
+    border-radius: var(--erp-radius-sm);
+}
+
+.o_cp_buttons .btn-primary,
+.o_form_button_save,
+.o_form_button_create,
+.btn-primary {
+    background: linear-gradient(90deg, var(--erp-primary) 0%, var(--erp-primary-2) 100%);
+    border-color: transparent;
+}
+
+.o_cp_buttons .btn-primary:hover,
+.o_form_button_save:hover,
+.o_form_button_create:hover,
+.btn-primary:hover {
+    filter: brightness(0.96);
+}
+
+.o_form_view .o_form_sheet_bg {
+    background: transparent;
+    padding: 20px;
+}
+
+.o_form_view .o_form_sheet {
+    border: 1px solid var(--erp-line);
+    border-radius: var(--erp-radius-lg);
+    box-shadow: var(--erp-shadow);
+}
+
+.o_form_view .oe_title h1,
+.o_form_view .oe_title h2 {
+    color: #0b3f4a;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+}
+
+.o_form_view .o_group {
+    gap: 10px;
+}
+
+.o_form_view .o_input,
+.o_form_view .o_field_widget .o_input,
+.o_form_view textarea,
+.o_searchview,
+.select2-container .select2-choice {
+    border: 1px solid var(--erp-line);
+    border-radius: var(--erp-radius-sm);
+}
+
+.o_form_view .o_input:focus,
+.o_form_view .o_field_widget .o_input:focus,
+.o_form_view textarea:focus,
+.o_searchview.o_searchview_focused {
+    border-color: var(--erp-primary-2);
+    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.18);
+}
+
+.erp-employee-form .erp-employee-hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 260px;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 10px;
+}
+
+.erp-employee-form .erp-employee-avatar-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 220px;
+    border: 1px solid #dce8f4;
+    border-radius: 14px;
+    background: linear-gradient(180deg, #f8fcff 0%, #eef7ff 100%);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.erp-employee-form .erp-employee-avatar .o_field_image,
+.erp-employee-form .erp-employee-avatar img {
+    width: 200px !important;
+    height: 200px !important;
+    max-width: none !important;
+    border-radius: 16px;
+    border: 1px solid var(--erp-line);
+    object-fit: cover;
+}
+
+.erp-employee-form .erp-employee-avatar {
+    float: none !important;
+    max-width: none !important;
+    margin: 0 !important;
+}
+
+@media (max-width: 992px) {
+    .erp-employee-form .erp-employee-hero {
+        grid-template-columns: 1fr;
+    }
+
+    .erp-employee-form .erp-employee-avatar-wrap {
+        min-height: 180px;
+    }
+
+    .erp-employee-form .erp-employee-avatar .o_field_image,
+    .erp-employee-form .erp-employee-avatar img {
+        width: 170px !important;
+        height: 170px !important;
+    }
+}
+
+.erp-employee-form .erp-employee-overview > .o_group {
+    border: 1px solid #e6edf5;
+    border-radius: 10px;
+    background: #fbfdff;
+    padding: 8px 10px;
+}
+
+.o_form_view .o_statusbar_status {
+    border-radius: 999px;
+    border: 1px solid var(--erp-line);
+    color: var(--erp-muted);
+    background: #fff;
+}
+
+.o_form_view .o_statusbar_status.o_arrow_button_current {
+    border-color: transparent;
+    color: #fff;
+    background: linear-gradient(90deg, var(--erp-primary) 0%, var(--erp-primary-2) 100%);
+}
+
+.o_list_view {
+    border: 1px solid var(--erp-line);
+    border-radius: var(--erp-radius-md);
+    overflow: hidden;
+    box-shadow: var(--erp-shadow-soft);
+    background: var(--erp-surface);
+}
+
+.o_list_view thead {
+    background: #ecf6fb;
+}
+
+.o_list_view thead th {
+    border-bottom: 1px solid var(--erp-line);
+    color: #104351;
+    font-weight: 700;
+}
+
+.o_list_view tbody tr:nth-child(even) {
+    background: #fbfdff;
+}
+
+.o_list_view tbody tr:hover {
+    background: #eefaf8;
+}
+
+.o_kanban_view {
+    background: transparent;
+}
+
+.o_kanban_view .oe_kanban_card,
+.o_kanban_view .o_kanban_record {
+    border: 1px solid var(--erp-line);
+    border-radius: var(--erp-radius-md);
+    box-shadow: var(--erp-shadow-soft);
+    transition: transform 0.14s ease, box-shadow 0.14s ease;
+}
+
+.o_kanban_view .oe_kanban_card:hover,
+.o_kanban_view .o_kanban_record:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.1);
+}
+
+.o_kanban_view .badge,
+.o_kanban_view .badge-info,
+.o_kanban_view .badge-success,
+.o_kanban_view .badge-warning {
+    border-radius: 999px;
+    padding: 4px 10px;
+}
+
+.o_kanban_view .badge,
+.o_kanban_view .badge-info {
+    background: #e7fffb;
+    color: #0b635d;
+    border: 1px solid #bff0e8;
+}
+
+/* Dashboard layout */
+.erp-dashboard-page {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.erp-dashboard-title {
+    margin-bottom: 2px;
+}
+
+.erp-dashboard-title h1 {
+    margin: 0;
+    font-size: 24px;
+    color: #0a3f4f;
+    font-weight: 700;
+}
+
+.erp-kpi-grid {
+    display: grid;
+    gap: 12px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.erp-kpi-grid.erp-kpi-grid-3 {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.erp-kpi-grid.erp-kpi-grid-6 {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+}
+
+.erp-kpi-card {
+    background: #fff;
+    border: 1px solid var(--erp-line);
+    border-radius: 10px;
+    box-shadow: var(--erp-shadow-soft);
+    min-height: 82px;
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.erp-kpi-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.35px;
+    color: #5c6f80;
+    margin-bottom: 3px;
+    font-weight: 700;
+}
+
+.erp-kpi-value .o_field_widget,
+.erp-kpi-value .o_field_integer,
+.erp-kpi-value .o_field_float {
+    font-size: 26px;
+    line-height: 1.15;
+    font-weight: 700;
+    color: #0f4a59;
+}
+
+.erp-panel-grid {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.erp-panel {
+    background: #fff;
+    border: 1px solid var(--erp-line);
+    border-radius: 10px;
+    box-shadow: var(--erp-shadow-soft);
+    overflow: hidden;
+}
+
+.erp-panel-header {
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.2px;
+    padding: 8px 12px;
+}
+
+.erp-panel-header.blue { background: #4f83a1; }
+.erp-panel-header.teal { background: #1aa3b3; }
+.erp-panel-header.green { background: #20a44c; }
+.erp-panel-header.orange { background: #f29e0b; }
+
+.erp-panel-body {
+    padding: 12px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+}
+
+.erp-panel-body.one-col {
+    grid-template-columns: 1fr;
+}
+
+.erp-metric {
+    border: 1px solid #e6edf5;
+    border-radius: 8px;
+    padding: 10px;
+    background: #fbfdff;
+}
+
+.erp-metric-label {
+    color: #6a7786;
+    font-size: 12px;
+    margin-bottom: 2px;
+    font-weight: 600;
+}
+
+.erp-metric-value .o_field_widget,
+.erp-metric-value .o_field_float,
+.erp-metric-value .o_field_integer {
+    color: #14566a;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.erp-action-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+@media (max-width: 1200px) {
+    .erp-kpi-grid,
+    .erp-kpi-grid.erp-kpi-grid-6 {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 900px) {
+    .erp-kpi-grid,
+    .erp-kpi-grid.erp-kpi-grid-3,
+    .erp-kpi-grid.erp-kpi-grid-6,
+    .erp-panel-grid {
+        grid-template-columns: 1fr;
+    }
+}

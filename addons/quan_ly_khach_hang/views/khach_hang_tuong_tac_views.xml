@@ -24,9 +24,9 @@
         <field name="arch" type="xml">
             <form>
                 <header>
+                    <field name="trang_thai" widget="statusbar" options="{'clickable':'1'}" statusbar_visible="planned,done,cancel"/>
                     <button name="action_mark_done" type="object" string="Đánh dấu hoàn thành" class="oe_highlight" attrs="{'invisible': [('trang_thai','!=','planned')]}"/>
                     <button name="action_mark_cancel" type="object" string="Hủy theo dõi" attrs="{'invisible': [('trang_thai','!=','planned')]}"/>
-                    <field name="trang_thai" widget="statusbar" options="{'clickable':'1'}" statusbar_visible="planned,done,cancel"/>
                 </header>
                 <sheet>
                     <group>

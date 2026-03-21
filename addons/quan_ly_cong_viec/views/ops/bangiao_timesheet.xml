@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Actions -->
+        <record id="action_bangiao_timesheet" model="ir.actions.act_window">
+            <field name="name">Timesheet</field>
+            <field name="res_model">bangiao_timesheet</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <record id="action_du_an_rui_ro" model="ir.actions.act_window">
+            <field name="name">Rủi Ro Dự Án</field>
+            <field name="res_model">du_an_rui_ro</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <record id="action_du_an_issue" model="ir.actions.act_window">
+            <field name="name">Issue Dự Án</field>
+            <field name="res_model">du_an_issue</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+
+        <!-- BangiaoTimesheet Views -->
+        <record id="view_bangiao_timesheet_tree" model="ir.ui.view">
+            <field name="name">bangiao_timesheet.tree</field>
+            <field name="model">bangiao_timesheet</field>
+            <field name="arch" type="xml">
+                <tree string="Timesheet">
+                    <field name="nhan_vien_id"/>
+                    <field name="du_an_id"/>
+                    <field name="cong_viec_id"/>
+                    <field name="ngay_lam"/>
+                    <field name="tong_gio"/>
+                    <field name="loai_cong_viec"/>
+                    <field name="trang_thai"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="view_bangiao_timesheet_form" model="ir.ui.view">
+            <field name="name">bangiao_timesheet.form</field>
+            <field name="model">bangiao_timesheet</field>
+            <field name="arch" type="xml">
+                <form string="Bản Giao Timesheet">
+                    <header>
+                        <button name="action_submit" string="Nộp" type="object" class="btn-primary"/>
+                        <button name="action_approve" string="Duyệt" type="object"/>
+                        <button name="action_reject" string="Từ Chối" type="object"/>
+                        <field name="trang_thai" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="nhan_vien_id"/>
+                                <field name="du_an_id"/>
+                                <field name="ngay_lam"/>
+                            </group>
+                            <group>
+                                <field name="cong_viec_id"/>
+                                <field name="gio_bat_dau"/>
+                                <field name="gio_ket_thuc"/>
+                            </group>
+                        </group>
+                        
+                        <group>
+                            <group>
+                                <field name="gio_bat_dau"/>
+                                <field name="gio_ket_thuc"/>
+                                <field name="tong_gio"/>
+                            </group>
+                            <group>
+                                <field name="loai_cong_viec"/>
+                                <field name="luong_nhan" widget="monetary"/>
+                            </group>
+                        </group>
+                        
+                        <notebook>
+                            <page string="Mô Tả Công Việc">
+                                <field name="mo_ta" colspan="2"/>
+                                <field name="tien_do_phan_tram"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <!-- DuAnRuiRo Views (Risk) -->
+        <record id="view_du_an_rui_ro_tree" model="ir.ui.view">
+            <field name="name">du_an_rui_ro.tree</field>
+            <field name="model">du_an_rui_ro</field>
+            <field name="arch" type="xml">
+                <tree string="Rủi Ro Dự Án">
+                    <field name="ten_rui_ro"/>
+                    <field name="du_an_id"/>
+                    <field name="kha_nang_xay_ra"/>
+                    <field name="muc_anh_huong"/>
+                    <field name="diem_rui_ro" widget="float"/>
+                    <field name="trang_thai"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="view_du_an_rui_ro_form" model="ir.ui.view">
+            <field name="name">du_an_rui_ro.form</field>
+            <field name="model">du_an_rui_ro</field>
+            <field name="arch" type="xml">
+                <form string="Rủi Ro Dự Án">
+                    <header>
+                        <button name="action_monitoring" string="Theo Dõi" type="object"/>
+                        <button name="action_active" string="Kích Hoạt" type="object"/>
+                        <button name="action_resolve" string="Giải Quyết" type="object"/>
+                        <field name="trang_thai" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_resolve" type="object" class="oe_stat_button" icon="fa-check">
+                                <span>Giải quyết</span>
+                            </button>
+                        </div>
+                        
+                        <group>
+                            <group>
+                                <field name="ten_rui_ro"/>
+                                <field name="du_an_id"/>
+                                <field name="nguoi_phu_trach_id"/>
+                            </group>
+                            <group>
+                                <field name="ngay_deadline"/>
+                                <field name="diem_rui_ro" widget="float"/>
+                            </group>
+                        </group>
+                        
+                        <group string="Đánh Giá Rủi Ro">
+                            <group>
+                                <field name="kha_nang_xay_ra"/>
+                                <field name="muc_anh_huong"/>
+                            </group>
+                        </group>
+                        
+                        <notebook>
+                            <page string="Mô Tả">
+                                <field name="mo_ta" colspan="2"/>
+                            </page>
+                            <page string="Giải Pháp">
+                                <field name="phuong_an" colspan="2"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <!-- DuAnIssue Views -->
+        <record id="view_du_an_issue_kanban" model="ir.ui.view">
+            <field name="name">du_an_issue.kanban</field>
+            <field name="model">du_an_issue</field>
+            <field name="arch" type="xml">
+                <kanban string="Issue" default_group_by="trang_thai">
+                    <field name="trang_thai"/>
+                    <field name="tieu_de"/>
+                    <field name="mo_ta"/>
+                    <field name="do_uu_tien"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_card">
+                                <div class="oe_kanban_card_header">
+                                    <span class="oe_kanban_card_header_title">
+                                        <strong><t t-esc="record.tieu_de and record.tieu_de.value or ''"/></strong>
+                                    </span>
+                                </div>
+                                <div class="oe_kanban_card_body">
+                                    <p><t t-esc="record.mo_ta and record.mo_ta.value or ''"/></p>
+                                    <p><span class="badge badge-info"><t t-esc="record.do_uu_tien and record.do_uu_tien.value or ''"/></span></p>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        
+        <record id="view_du_an_issue_tree" model="ir.ui.view">
+            <field name="name">du_an_issue.tree</field>
+            <field name="model">du_an_issue</field>
+            <field name="arch" type="xml">
+                <tree string="Issue">
+                    <field name="du_an_id"/>
+                    <field name="tieu_de"/>
+                    <field name="loai_issue"/>
+                    <field name="do_uu_tien"/>
+                    <field name="trang_thai"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="view_du_an_issue_form" model="ir.ui.view">
+            <field name="name">du_an_issue.form</field>
+            <field name="model">du_an_issue</field>
+            <field name="arch" type="xml">
+                <form string="Issue">
+                    <header>
+                        <button name="action_start_resolution" string="Bắt Đầu Xử Lý" type="object" class="btn-primary"/>
+                        <button name="action_resolve" string="Giải Quyết" type="object"/>
+                        <button name="action_close" string="Đóng" type="object"/>
+                        <field name="trang_thai" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        
+                        <group>
+                            <group>
+                                <field name="du_an_id"/>
+                                <field name="loai_issue"/>
+                                <field name="do_uu_tien"/>
+                            </group>
+                            <group>
+                                <field name="nguoi_xu_ly_id"/>
+                                <field name="rui_ro_id"/>
+                            </group>
+                        </group>
+                        
+                        <group string="Chi Tiết">
+                            <field name="tieu_de" colspan="2"/>
+                            <field name="mo_ta" colspan="2"/>
+                        </group>
+                        
+                        <group string="Công Việc Bị Ảnh Hưởng">
+                            <field name="cong_viec_bi_ảnh_huong_ids" nolabel="1" colspan="2"/>
+                        </group>
+                        
+                        <notebook>
+                            <page string="Thời Gian">
+                                <group>
+                                    <field name="ngay_phat_sinh"/>
+                                    <field name="ngay_deadline"/>
+                                    <field name="ngay_ket_thuc"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

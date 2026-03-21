@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- HRM Actions -->
+        <record id="action_nhan_vien" model="ir.actions.act_window">
+            <field name="name">Nhân viên</field>
+            <field name="res_model">nhan_vien</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_hop_dong" model="ir.actions.act_window">
+            <field name="name">Hợp đồng</field>
+            <field name="res_model">hop_dong</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_hop_dong_expiring" model="ir.actions.act_window">
+            <field name="name">Hợp đồng sắp hết hạn</field>
+            <field name="res_model">hop_dong</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('ngay_het_han', '&lt;', context_today().__add__(relativedelta(days=30)))]</field>
+        </record>
+
+        <record id="action_cham_cong" model="ir.actions.act_window">
+            <field name="name">Chấm công</field>
+            <field name="res_model">cham_cong</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_cham_cong_anomaly" model="ir.actions.act_window">
+            <field name="name">Chấm công bất thường</field>
+            <field name="res_model">cham_cong</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('is_anomaly', '=', True)]</field>
+        </record>
+
+        <record id="action_chuc_vu" model="ir.actions.act_window">
+            <field name="name">Chức vụ</field>
+            <field name="res_model">chuc_vu</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_phong_ban" model="ir.actions.act_window">
+            <field name="name">Phòng ban</field>
+            <field name="res_model">phong_ban</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_danh_gia" model="ir.actions.act_window">
+            <field name="name">Đánh giá</field>
+            <field name="res_model">danh_gia</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <record id="action_dao_tao" model="ir.actions.act_window">
+            <field name="name">Đào tạo</field>
+            <field name="res_model">dao_tao</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+    </data>
+</odoo>

@@ -28,8 +28,9 @@ class KhachHangMergeSuggestion(models.Model):
 
     def action_apply(self):
         for record in self:
+            # Server-side validation - check state
             if record.state != 'draft':
-                continue
+                raise ValidationError(_('Chỉ có thể áp dụng đề xuất ở trạng thái "Chờ xử lý".'))
             if not record.primary_khach_hang_id.active or not record.duplicate_khach_hang_id.active:
                 raise ValidationError(_('Một trong hai khách hàng không còn hoạt động, không thể áp dụng đề xuất.'))
             if record.primary_khach_hang_id == record.duplicate_khach_hang_id:
@@ -40,4 +41,9 @@ class KhachHangMergeSuggestion(models.Model):
                 record.state = 'applied'
 
     def action_reject(self):
-        self.filtered(lambda rec: rec.state == 'draft').write({'state': 'rejected'})
+        # Server-side validation - check state trước khi xử lý
+        for record in self:
+            if record.state != 'draft':
+                raise ValidationError(_('Chỉ có thể bỏ qua đề xuất ở trạng thái "Chờ xử lý".'))
+        
+        self.write({'state': 'rejected'})

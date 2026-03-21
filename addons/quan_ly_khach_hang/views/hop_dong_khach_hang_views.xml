@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Actions -->
+        <record id="action_hop_dong_khach_hang" model="ir.actions.act_window">
+            <field name="name">Hợp Đồng Khách Hàng</field>
+            <field name="res_model">hop_dong_khach_hang</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Customer Contract (Hợp Đồng Khách Hàng) Views -->
+        <record id="view_hop_dong_khach_hang_tree" model="ir.ui.view">
+            <field name="name">hop_dong_khach_hang.tree</field>
+            <field name="model">hop_dong_khach_hang</field>
+            <field name="arch" type="xml">
+                <tree string="Hợp Đồng Khách Hàng">
+                    <field name="ma_hop_dong"/>
+                    <field name="khach_hang_id"/>
+                    <field name="tieu_de"/>
+                    <field name="ngay_bat_dau"/>
+                    <field name="ngay_ket_thuc"/>
+                    <field name="gia_tri_hop_dong" sum="Tổng"/>
+                    <field name="trang_thai"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="view_hop_dong_khach_hang_form" model="ir.ui.view">
+            <field name="name">hop_dong_khach_hang.form</field>
+            <field name="model">hop_dong_khach_hang</field>
+            <field name="arch" type="xml">
+                <form string="Hợp Đồng Khách Hàng">
+                    <header>
+                        <button name="action_ready_signature" string="Sẵn Sàng Ký Kết" type="object" class="btn-primary"/>
+                        <button name="action_sign" string="Xác Nhận Ký Kết" type="object"/>
+                        <button name="action_start_execution" string="Bắt Đầu Thực Hiện" type="object"/>
+                        <button name="action_complete" string="Hoàn Thành" type="object" class="btn-success"/>
+                        <button name="action_extend" string="Gia Hạn" type="object"/>
+                        <button name="action_terminate" string="Kết Thúc Sớm" type="object"/>
+                        <field name="trang_thai" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button name="action_view_renewal_alert" type="object" class="oe_stat_button" icon="fa-bell" attrs="{'invisible': [('nhac_nho_gia_han', '=', False)]}">
+                                <field name="nhac_nho_gia_han" widget="boolean"/>
+                            </button>
+                        </div>
+                        
+                        <div class="oe_title">
+                            <h1>
+                                <field name="ma_hop_dong" readonly="1"/>
+                                <field name="tieu_de" class="oe_inline" placeholder="Tiêu đề hợp đồng..."/>
+                            </h1>
+                        </div>
+                        
+                        <group>
+                            <group>
+                                <field name="khach_hang_id"/>
+                                <field name="don_hang_id" readonly="1"/>
+                                <field name="nhan_vien_phu_trach_id"/>
+                            </group>
+                            <group>
+                                <field name="ngay_ky_ket"/>
+                                <field name="ngay_ky_ket_thuc_te"/>
+                                <field name="thoi_gian_gia_han"/>
+                            </group>
+                        </group>
+                        
+                        <group string="Thời Gian">
+                            <group>
+                                <field name="ngay_bat_dau"/>
+                                <field name="ngay_ket_thuc"/>
+                            </group>
+                        </group>
+                        
+                        <group string="Tài Chính">
+                            <group>
+                                <field name="gia_tri_hop_dong" widget="monetary"/>
+                                <field name="tien_coc_thanh_toan" widget="monetary"/>
+                            </group>
+                            <group>
+                                <field name="tien_con_lai" readonly="1" widget="monetary"/>
+                                <field name="phuong_thuc_thanh_toan"/>
+                            </group>
+                        </group>
+                        
+                        <notebook>
+                            <page string="Mô Tả Công Việc">
+                                <field name="mo_ta_cong_viec" colspan="2"/>
+                            </page>
+                            
+                            <page string="Điều Khoản Và Điều Kiện">
+                                <field name="dieu_khoan" colspan="2"/>
+                            </page>
+                            
+                            <page string="Ghi Chú">
+                                <field name="ghi_chu" colspan="2"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_ids" widget="mail_thread"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_hop_dong_khach_hang_search" model="ir.ui.view">
+            <field name="name">hop_dong_khach_hang.search</field>
+            <field name="model">hop_dong_khach_hang</field>
+            <field name="arch" type="xml">
+                <search string="Hợp Đồng Khách Hàng">
+                    <field name="ma_hop_dong"/>
+                    <field name="khach_hang_id"/>
+                    <field name="tieu_de"/>
+                    <separator/>
+                    <filter string="Nháp" name="draft" domain="[('trang_thai', '=', 'draft')]"/>
+                    <filter string="Chờ Ký" name="pending" domain="[('trang_thai', '=', 'pending_signature')]"/>
+                    <filter string="Đã Ký" name="signed" domain="[('trang_thai', '=', 'signed')]"/>
+                    <filter string="Đang Thực Hiện" name="executing" domain="[('trang_thai', '=', 'executing')]"/>
+                    <filter string="Cần Gia Hạn" name="renewal" domain="[('nhac_nho_gia_han', '=', True)]"/>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_nhan_vien_form_inherit_cong_viec" model="ir.ui.view">
+        <field name="name">nhan_vien.form.inherit.cong_viec</field>
+        <field name="model">nhan_vien</field>
+        <field name="inherit_id" ref="quan_ly_nhan_su.view_nhan_vien_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="inside">
+                <div class="oe_button_box" name="button_box_cong_viec">
+                    <button type="object" name="action_xem_cong_viec_thuc_hien" class="oe_stat_button" icon="fa-tasks">
+                        <field name="so_cong_viec_thuc_hien" string="Cong viec" widget="statinfo"/>
+                    </button>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

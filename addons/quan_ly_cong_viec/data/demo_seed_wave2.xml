@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="du_an_wave2_01" model="du_an">
+        <field name="ma_du_an">DA-W2-001</field>
+        <field name="ten_du_an">Du an Data Reliability Program</field>
+        <field name="mo_ta">Wave 2 data for PM models.</field>
+        <field name="muc_tieu">Nang do on dinh va su dung du lieu trong toan cong ty.</field>
+        <field name="ngay_bat_dau">2036-03-01</field>
+        <field name="ngay_ket_thuc">2036-08-31</field>
+        <field name="nguoi_quan_ly_id" ref="quan_ly_nhan_su.nhan_vien_wave2_01"/>
+        <field name="trang_thai">dang_thuc_hien</field>
+        <field name="ngan_sach">680000000</field>
+    </record>
+
+    <record id="cong_viec_wave2_01" model="cong_viec">
+        <field name="ma_cong_viec">CV-W2-001</field>
+        <field name="ten_cong_viec">Khao sat chat luong du lieu dau vao</field>
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_wave2_01"/>
+        <field name="nguoi_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_wave2_02"/>
+        <field name="ngay_bat_dau">2036-03-01</field>
+        <field name="ngay_ket_thuc">2036-03-20</field>
+        <field name="do_uu_tien">cao</field>
+        <field name="trang_thai">dang_thuc_hien</field>
+        <field name="ke_hoach_gio">72</field>
+    </record>
+
+    <record id="cong_viec_wave2_02" model="cong_viec">
+        <field name="ma_cong_viec">CV-W2-002</field>
+        <field name="ten_cong_viec">Xay dung quy trinh canh bao du lieu loi</field>
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_wave2_01"/>
+        <field name="nguoi_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_massive_02"/>
+        <field name="ngay_bat_dau">2036-03-21</field>
+        <field name="ngay_ket_thuc">2036-04-15</field>
+        <field name="do_uu_tien">rat_cao</field>
+        <field name="trang_thai">moi</field>
+        <field name="ke_hoach_gio">85</field>
+        <field name="cong_viec_phu_thuoc_ids" eval="[(6, 0, [ref('quan_ly_cong_viec.cong_viec_wave2_01')])]"/>
+    </record>
+
+    <record id="nguoi_tham_gia_wave2_01" model="nguoi_tham_gia">
+        <field name="cong_viec_id" ref="quan_ly_cong_viec.cong_viec_wave2_01"/>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_wave2_02"/>
+        <field name="vai_tro">phu_trach</field>
+        <field name="ngay_bat_dau">2036-03-01</field>
+        <field name="ngay_ket_thuc">2036-03-20</field>
+        <field name="so_gio_du_kien">72</field>
+    </record>
+
+    <record id="nguoi_tham_gia_wave2_02" model="nguoi_tham_gia">
+        <field name="cong_viec_id" ref="quan_ly_cong_viec.cong_viec_wave2_02"/>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_massive_02"/>
+        <field name="vai_tro">phu_trach</field>
+        <field name="ngay_bat_dau">2036-03-21</field>
+        <field name="ngay_ket_thuc">2036-04-15</field>
+        <field name="so_gio_du_kien">85</field>
+    </record>
+
+    <record id="bao_cao_tien_do_wave2_01" model="bao_cao_tien_do">
+        <field name="cong_viec_id" ref="quan_ly_cong_viec.cong_viec_wave2_01"/>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_wave2_02"/>
+        <field name="ngay_bao_cao">2036-03-10</field>
+        <field name="noi_dung">Da tong hop 70 phan tram he thong du lieu can clean.</field>
+        <field name="tien_do">55</field>
+        <field name="so_gio">19</field>
+    </record>
+
+    <record id="phan_bo_nguon_luc_wave2_01" model="phan_bo_nguon_luc">
+        <field name="ten_nguon_luc">Goi cong cu quality monitoring</field>
+        <field name="loai_nguon_luc">tai_chinh</field>
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_wave2_01"/>
+        <field name="so_luong">1</field>
+        <field name="don_vi">goi</field>
+        <field name="don_gia">120000000</field>
+        <field name="ngay_phan_bo">2036-03-03</field>
+        <field name="trang_thai">da_phan_bo</field>
+    </record>
+
+    <record id="timesheet_wave2_01" model="bangiao_timesheet">
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_wave2_02"/>
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_wave2_01"/>
+        <field name="cong_viec_id" ref="quan_ly_cong_viec.cong_viec_wave2_01"/>
+        <field name="ngay_lam">2036-03-09</field>
+        <field name="gio_bat_dau">8.0</field>
+        <field name="gio_ket_thuc">17.0</field>
+        <field name="loai_cong_viec">thuong</field>
+        <field name="tien_do_phan_tram">52</field>
+        <field name="trang_thai">approved</field>
+    </record>
+
+    <record id="du_an_rui_ro_wave2_01" model="du_an_rui_ro">
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_wave2_01"/>
+        <field name="ten_rui_ro">Thieu du lieu master key</field>
+        <field name="mo_ta">Du lieu nguon tu cac he thong chua dong nhat key mapping.</field>
+        <field name="kha_nang_xay_ra">cao</field>
+        <field name="muc_anh_huong">nang</field>
+        <field name="phuong_an">Xay dung bo quy tac mapping va bo sung validation.</field>
+        <field name="nguoi_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_wave2_01"/>
+        <field name="ngay_deadline">2036-03-28</field>
+        <field name="trang_thai">monitoring</field>
+    </record>
+
+    <record id="du_an_issue_wave2_01" model="du_an_issue">
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_wave2_01"/>
+        <field name="tieu_de">Do tre dong bo du lieu tu he thong kho</field>
+        <field name="mo_ta">Nguon kho truyen du lieu cham lam sai lech so lieu dashboard.</field>
+        <field name="loai_issue">technical</field>
+        <field name="do_uu_tien">cao</field>
+        <field name="cong_viec_bi_ảnh_huong_ids" eval="[(6, 0, [ref('quan_ly_cong_viec.cong_viec_wave2_02')])]"/>
+        <field name="nguoi_phat_sinh_id" ref="quan_ly_nhan_su.nhan_vien_wave2_02"/>
+        <field name="nguoi_xu_ly_id" ref="quan_ly_nhan_su.nhan_vien_wave2_01"/>
+        <field name="ngay_phat_sinh">2036-03-16</field>
+        <field name="ngay_deadline">2036-03-22</field>
+        <field name="trang_thai">in_progress</field>
+        <field name="giai_phap">Tang tan suat sync va bo sung queue retry.</field>
+        <field name="rui_ro_id" ref="quan_ly_cong_viec.du_an_rui_ro_wave2_01"/>
+    </record>
+
+    <record id="cong_viec_dashboard_wave2" model="cong_viec_dashboard">
+        <field name="ten_bang">Dashboard KPI Cong viec - Wave 2</field>
+    </record>
+</odoo>

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Lead -->
+        
+        <!-- Lead Tree View -->
+        <record id="lead_tree" model="ir.ui.view">
+            <field name="name">lead.tree</field>
+            <field name="model">lead</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="ma_lead"/>
+                    <field name="ten_lead"/>
+                    <field name="so_dien_thoai"/>
+                    <field name="email"/>
+                    <field name="nhan_vien_phu_trach_id"/>
+                    <field name="diem_danh_gia" widget="float"/>
+                    <field name="trang_thai"/>
+                </tree>
+            </field>
+        </record>
+        
+        <!-- Lead Form View -->
+        <record id="lead_form" model="ir.ui.view">
+            <field name="name">lead.form</field>
+            <field name="model">lead</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_contact" string="Đánh dấu Đang tiếp cận" type="object"/>
+                        <button name="action_mark_interested" string="Khách quan tâm" type="object"/>
+                        <button name="action_mark_qualified" string="Sẵn sàng chuyển đổi" type="object"/>
+                        <button name="action_convert_to_customer" string="Chuyển thành khách hàng" type="object" class="oe_highlight"/>
+                        <button name="action_mark_unqualified" string="Chưa sẵn sàng" type="object"/>
+                        <button name="action_mark_dead" string="Vô kiến cự" type="object"/>
+                        <field name="trang_thai" widget="statusbar" options="{'clickable': False}"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="ma_lead" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="ten_lead"/>
+                                <field name="nguoi_lien_he"/>
+                                <field name="so_dien_thoai"/>
+                                <field name="email"/>
+                            </group>
+                            <group>
+                                <field name="nhan_vien_phu_trach_id"/>
+                                <field name="do_uu_tien"/>
+                                <field name="diem_danh_gia" readonly="1"/>
+                                <field name="nguon_lead"/>
+                            </group>
+                        </group>
+                        <group>
+                            <field name="dia_chi"/>
+                            <field name="mo_ta"/>
+                        </group>
+                        <group string="Phân loại">
+                            <group>
+                                <field name="loai_khach_hang"/>
+                                <field name="nganh_cong_nghiep"/>
+                                <field name="quy_mo"/>
+                            </group>
+                            <group>
+                                <field name="ngan_sach_uoc_tinh"/>
+                                <field name="tiem_nang_doanh_thu" readonly="1"/>
+                            </group>
+                        </group>
+                        <group string="Tương tác">
+                            <group>
+                                <field name="ngay_lien_he_cuoi" readonly="1"/>
+                                <field name="so_lan_lien_he" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="ngay_theo_doi_tiep"/>
+                                <field name="khach_hang_id" invisible="1"/>
+                            </group>
+                        </group>
+                        <separator string="Hoạt động"/>
+                        <field name="hoat_dong_ids">
+                            <tree>
+                                <field name="loai_hoat_dong"/>
+                                <field name="ngay_gio"/>
+                                <field name="nguoi_thuc_hien_id"/>
+                                <field name="noi_dung"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <!-- Lead Kanban View -->
+        <record id="lead_kanban" model="ir.ui.view">
+            <field name="name">lead.kanban</field>
+            <field name="model">lead</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="trang_thai">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="oe_kanban_details">
+                                    <strong><field name="ten_lead"/></strong>
+                                    <p><field name="so_dien_thoai"/></p>
+                                    <p><field name="nhan_vien_phu_trach_id"/></p>
+                                    <small>Điểm: <field name="diem_danh_gia"/></small>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        
+        <!-- Lead Action -->
+        <record id="lead_action" model="ir.actions.act_window">
+            <field name="name">Lead bán hàng</field>
+            <field name="res_model">lead</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+    </data>
+</odoo>

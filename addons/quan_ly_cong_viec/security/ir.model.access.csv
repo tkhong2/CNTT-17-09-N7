@@ -4,3 +4,8 @@ access_cong_viec,cong_viec access,model_cong_viec,base.group_user,1,1,1,1
 access_nguoi_tham_gia,nguoi_tham_gia access,model_nguoi_tham_gia,base.group_user,1,1,1,1
 access_bao_cao_tien_do,bao_cao_tien_do access,model_bao_cao_tien_do,base.group_user,1,1,1,1
 access_phan_bo_nguon_luc,phan_bo_nguon_luc access,model_phan_bo_nguon_luc,base.group_user,1,1,1,1
+access_bangiao_timesheet,bangiao_timesheet access,model_bangiao_timesheet,base.group_user,1,1,1,1
+access_du_an_rui_ro,du_an_rui_ro access,model_du_an_rui_ro,base.group_user,1,1,1,1
+access_du_an_issue,du_an_issue access,model_du_an_issue,base.group_user,1,1,1,1
+access_cong_viec_dashboard,cong_viec_dashboard access,model_cong_viec_dashboard,base.group_user,1,0,0,0
+

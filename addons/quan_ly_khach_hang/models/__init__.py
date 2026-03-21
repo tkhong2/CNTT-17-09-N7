@@ -1,4 +1,5 @@
 from . import khach_hang
+from . import res_partner_inherit
 from . import khach_hang_assign_owner_wizard
 from . import khach_hang_merge_suggestion
 from . import khach_hang_transfer_template
@@ -9,3 +10,8 @@ from . import khach_hang_dashboard
 from . import du_an_inherit
 from . import cong_viec_inherit
 from . import nhan_vien_inherit
+from . import lead
+from . import crm_lead_inherit
+from . import co_hoi_ban_hang
+from . import bao_gia
+from . import hop_dong_khach_hang

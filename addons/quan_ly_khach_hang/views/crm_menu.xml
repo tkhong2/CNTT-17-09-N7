@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Menu cho Sales Pipeline -->
+        <menuitem 
+            id="menu_crm_sales_pipeline" 
+            name="Pipeline Bán Hàng" 
+            parent="menu_ops_khach_hang"
+            sequence="10"/>
+
+        <menuitem 
+            id="menu_bao_gia" 
+            name="Báo Giá" 
+            parent="menu_crm_sales_pipeline" 
+            sequence="1"
+            action="action_bao_gia"
+            groups="quan_ly_khach_hang.group_khach_hang_sales,quan_ly_khach_hang.group_khach_hang_manager"/>
+
+        <menuitem 
+            id="menu_don_hang" 
+            name="Đơn Hàng" 
+            parent="menu_crm_sales_pipeline" 
+            sequence="2"
+            action="action_don_hang"
+            groups="quan_ly_khach_hang.group_khach_hang_sales,quan_ly_khach_hang.group_khach_hang_manager"/>
+
+        <!-- Menu cho Support & Contract -->
+        <menuitem 
+            id="menu_crm_support" 
+            name="Hỗ Trợ &amp; Hợp Đồng" 
+            parent="menu_ops_khach_hang"
+            sequence="20"/>
+
+        <menuitem 
+            id="menu_hop_dong_khach_hang" 
+            name="Hợp Đồng Khách Hàng" 
+            parent="menu_crm_support" 
+            sequence="1"
+            action="action_hop_dong_khach_hang"
+            groups="quan_ly_khach_hang.group_khach_hang_sales,quan_ly_khach_hang.group_khach_hang_manager"/>
+
+        <menuitem 
+            id="menu_yeu_cau_ho_tro" 
+            name="Yêu Cầu Hỗ Trợ" 
+            parent="menu_crm_support" 
+            sequence="2"
+            action="action_yeu_cau_ho_tro"
+            groups="quan_ly_khach_hang.group_khach_hang_sales,quan_ly_khach_hang.group_khach_hang_manager"/>
+
+        <!-- Menu cho Sales Activity -->
+        <menuitem 
+            id="menu_hoat_dong_sales" 
+            name="Hoạt Động Sales" 
+            parent="menu_ops_khach_hang" 
+            sequence="30"
+            action="action_hoat_dong_sales"
+            groups="quan_ly_khach_hang.group_khach_hang_sales,quan_ly_khach_hang.group_khach_hang_manager"/>
+    </data>
+</odoo>

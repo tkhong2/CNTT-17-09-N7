@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="du_an_massive_01" model="du_an">
+        <field name="ma_du_an">DA-MASS-001</field>
+        <field name="ten_du_an">Du an Chuyen doi Van hanh 360</field>
+        <field name="mo_ta">Bo du lieu demo PM so luong lon cho test dashboard.</field>
+        <field name="muc_tieu">Chuan hoa quy trinh van hanh va cham soc khach hang.</field>
+        <field name="ngay_bat_dau">2035-02-01</field>
+        <field name="ngay_ket_thuc">2035-08-31</field>
+        <field name="nguoi_quan_ly_id" ref="quan_ly_nhan_su.nhan_vien_massive_01"/>
+        <field name="trang_thai">dang_thuc_hien</field>
+        <field name="ngan_sach">950000000</field>
+    </record>
+
+    <record id="du_an_massive_02" model="du_an">
+        <field name="ma_du_an">DA-MASS-002</field>
+        <field name="ten_du_an">Du an CRM Retention Campaign</field>
+        <field name="mo_ta">To chuc chien dich gia tang giu chan khach hang.</field>
+        <field name="muc_tieu">Tang ty le gia han hop dong va upsell.</field>
+        <field name="ngay_bat_dau">2035-03-01</field>
+        <field name="ngay_ket_thuc">2035-09-30</field>
+        <field name="nguoi_quan_ly_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_manager"/>
+        <field name="trang_thai">chuan_bi</field>
+        <field name="ngan_sach">780000000</field>
+    </record>
+
+    <record id="cong_viec_massive_01" model="cong_viec">
+        <field name="ma_cong_viec">CV-MASS-001</field>
+        <field name="ten_cong_viec">Phan tich hien trang quy trinh</field>
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_massive_01"/>
+        <field name="nguoi_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_massive_02"/>
+        <field name="ngay_bat_dau">2035-02-01</field>
+        <field name="ngay_ket_thuc">2035-02-20</field>
+        <field name="do_uu_tien">cao</field>
+        <field name="trang_thai">hoan_thanh</field>
+        <field name="ke_hoach_gio">70</field>
+    </record>
+
+    <record id="cong_viec_massive_02" model="cong_viec">
+        <field name="ma_cong_viec">CV-MASS-002</field>
+        <field name="ten_cong_viec">Thiet ke KPI van hanh moi</field>
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_massive_01"/>
+        <field name="nguoi_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_massive_06"/>
+        <field name="ngay_bat_dau">2035-02-21</field>
+        <field name="ngay_ket_thuc">2035-03-10</field>
+        <field name="do_uu_tien">cao</field>
+        <field name="trang_thai">dang_thuc_hien</field>
+        <field name="ke_hoach_gio">64</field>
+        <field name="cong_viec_phu_thuoc_ids" eval="[(6, 0, [ref('quan_ly_cong_viec.cong_viec_massive_01')])]"/>
+    </record>
+
+    <record id="cong_viec_massive_03" model="cong_viec">
+        <field name="ma_cong_viec">CV-MASS-003</field>
+        <field name="ten_cong_viec">Xay dung dashboard canh bao</field>
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_massive_01"/>
+        <field name="nguoi_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_massive_03"/>
+        <field name="ngay_bat_dau">2035-03-11</field>
+        <field name="ngay_ket_thuc">2035-04-05</field>
+        <field name="do_uu_tien">rat_cao</field>
+        <field name="trang_thai">moi</field>
+        <field name="ke_hoach_gio">80</field>
+        <field name="cong_viec_phu_thuoc_ids" eval="[(6, 0, [ref('quan_ly_cong_viec.cong_viec_massive_02')])]"/>
+    </record>
+
+    <record id="cong_viec_massive_04" model="cong_viec">
+        <field name="ma_cong_viec">CV-MASS-004</field>
+        <field name="ten_cong_viec">Dao tao team su dung dashboard</field>
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_massive_01"/>
+        <field name="nguoi_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_massive_04"/>
+        <field name="ngay_bat_dau">2035-04-06</field>
+        <field name="ngay_ket_thuc">2035-04-20</field>
+        <field name="do_uu_tien">trung_binh</field>
+        <field name="trang_thai">moi</field>
+        <field name="ke_hoach_gio">36</field>
+        <field name="cong_viec_phu_thuoc_ids" eval="[(6, 0, [ref('quan_ly_cong_viec.cong_viec_massive_03')])]"/>
+    </record>
+
+    <record id="cong_viec_massive_05" model="cong_viec">
+        <field name="ma_cong_viec">CV-MASS-005</field>
+        <field name="ten_cong_viec">Xac dinh tap khach hang nguy co roi bo</field>
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_massive_02"/>
+        <field name="nguoi_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_sales"/>
+        <field name="ngay_bat_dau">2035-03-01</field>
+        <field name="ngay_ket_thuc">2035-03-18</field>
+        <field name="do_uu_tien">cao</field>
+        <field name="trang_thai">dang_thuc_hien</field>
+        <field name="ke_hoach_gio">58</field>
+    </record>
+
+    <record id="cong_viec_massive_06" model="cong_viec">
+        <field name="ma_cong_viec">CV-MASS-006</field>
+        <field name="ten_cong_viec">Thiet ke chuong trinh uu dai gia han</field>
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_massive_02"/>
+        <field name="nguoi_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_massive_05"/>
+        <field name="ngay_bat_dau">2035-03-19</field>
+        <field name="ngay_ket_thuc">2035-04-10</field>
+        <field name="do_uu_tien">cao</field>
+        <field name="trang_thai">moi</field>
+        <field name="ke_hoach_gio">62</field>
+        <field name="cong_viec_phu_thuoc_ids" eval="[(6, 0, [ref('quan_ly_cong_viec.cong_viec_massive_05')])]"/>
+    </record>
+
+    <record id="cong_viec_massive_07" model="cong_viec">
+        <field name="ma_cong_viec">CV-MASS-007</field>
+        <field name="ten_cong_viec">Chay thu chien dich retention</field>
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_massive_02"/>
+        <field name="nguoi_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_massive_03"/>
+        <field name="ngay_bat_dau">2035-04-11</field>
+        <field name="ngay_ket_thuc">2035-05-05</field>
+        <field name="do_uu_tien">rat_cao</field>
+        <field name="trang_thai">moi</field>
+        <field name="ke_hoach_gio">75</field>
+        <field name="cong_viec_phu_thuoc_ids" eval="[(6, 0, [ref('quan_ly_cong_viec.cong_viec_massive_06')])]"/>
+    </record>
+
+    <record id="cong_viec_massive_08" model="cong_viec">
+        <field name="ma_cong_viec">CV-MASS-008</field>
+        <field name="ten_cong_viec">Tong ket KPI sau chien dich</field>
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_massive_02"/>
+        <field name="nguoi_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_massive_06"/>
+        <field name="ngay_bat_dau">2035-05-06</field>
+        <field name="ngay_ket_thuc">2035-05-25</field>
+        <field name="do_uu_tien">trung_binh</field>
+        <field name="trang_thai">moi</field>
+        <field name="ke_hoach_gio">42</field>
+        <field name="cong_viec_phu_thuoc_ids" eval="[(6, 0, [ref('quan_ly_cong_viec.cong_viec_massive_07')])]"/>
+    </record>
+
+    <record id="nguoi_tham_gia_massive_01" model="nguoi_tham_gia">
+        <field name="cong_viec_id" ref="quan_ly_cong_viec.cong_viec_massive_02"/>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_massive_02"/>
+        <field name="vai_tro">phu_trach</field>
+        <field name="ngay_bat_dau">2035-02-21</field>
+        <field name="ngay_ket_thuc">2035-03-10</field>
+        <field name="so_gio_du_kien">64</field>
+    </record>
+
+    <record id="nguoi_tham_gia_massive_02" model="nguoi_tham_gia">
+        <field name="cong_viec_id" ref="quan_ly_cong_viec.cong_viec_massive_02"/>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_massive_06"/>
+        <field name="vai_tro">ho_tro</field>
+        <field name="ngay_bat_dau">2035-02-22</field>
+        <field name="ngay_ket_thuc">2035-03-08</field>
+        <field name="so_gio_du_kien">22</field>
+    </record>
+
+    <record id="nguoi_tham_gia_massive_03" model="nguoi_tham_gia">
+        <field name="cong_viec_id" ref="quan_ly_cong_viec.cong_viec_massive_03"/>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_massive_03"/>
+        <field name="vai_tro">phu_trach</field>
+        <field name="ngay_bat_dau">2035-03-11</field>
+        <field name="ngay_ket_thuc">2035-04-05</field>
+        <field name="so_gio_du_kien">80</field>
+    </record>
+
+    <record id="nguoi_tham_gia_massive_04" model="nguoi_tham_gia">
+        <field name="cong_viec_id" ref="quan_ly_cong_viec.cong_viec_massive_05"/>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_massive_05"/>
+        <field name="vai_tro">phu_trach</field>
+        <field name="ngay_bat_dau">2035-03-01</field>
+        <field name="ngay_ket_thuc">2035-03-18</field>
+        <field name="so_gio_du_kien">58</field>
+    </record>
+
+    <record id="nguoi_tham_gia_massive_05" model="nguoi_tham_gia">
+        <field name="cong_viec_id" ref="quan_ly_cong_viec.cong_viec_massive_06"/>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_sales"/>
+        <field name="vai_tro">ho_tro</field>
+        <field name="ngay_bat_dau">2035-03-21</field>
+        <field name="ngay_ket_thuc">2035-04-10</field>
+        <field name="so_gio_du_kien">18</field>
+    </record>
+
+    <record id="nguoi_tham_gia_massive_06" model="nguoi_tham_gia">
+        <field name="cong_viec_id" ref="quan_ly_cong_viec.cong_viec_massive_07"/>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_massive_04"/>
+        <field name="vai_tro">ho_tro</field>
+        <field name="ngay_bat_dau">2035-04-11</field>
+        <field name="ngay_ket_thuc">2035-05-05</field>
+        <field name="so_gio_du_kien">26</field>
+    </record>
+
+    <record id="bao_cao_tien_do_massive_01" model="bao_cao_tien_do">
+        <field name="cong_viec_id" ref="quan_ly_cong_viec.cong_viec_massive_02"/>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_massive_02"/>
+        <field name="ngay_bao_cao">2035-03-01</field>
+        <field name="noi_dung">Hoan thanh bo KPI chuot va dashboard thu nghiem.</field>
+        <field name="tien_do">62</field>
+        <field name="so_gio">20</field>
+    </record>
+
+    <record id="bao_cao_tien_do_massive_02" model="bao_cao_tien_do">
+        <field name="cong_viec_id" ref="quan_ly_cong_viec.cong_viec_massive_03"/>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_massive_03"/>
+        <field name="ngay_bao_cao">2035-03-25</field>
+        <field name="noi_dung">Da xong khung dashboard canh bao chinh.</field>
+        <field name="tien_do">45</field>
+        <field name="so_gio">16</field>
+    </record>
+
+    <record id="bao_cao_tien_do_massive_03" model="bao_cao_tien_do">
+        <field name="cong_viec_id" ref="quan_ly_cong_viec.cong_viec_massive_05"/>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_massive_05"/>
+        <field name="ngay_bao_cao">2035-03-15</field>
+        <field name="noi_dung">Da phan loai 120 tai khoan khach hang co nguy co roi bo.</field>
+        <field name="tien_do">80</field>
+        <field name="so_gio">22</field>
+    </record>
+
+    <record id="bao_cao_tien_do_massive_04" model="bao_cao_tien_do">
+        <field name="cong_viec_id" ref="quan_ly_cong_viec.cong_viec_massive_07"/>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_massive_04"/>
+        <field name="ngay_bao_cao">2035-04-30</field>
+        <field name="noi_dung">Chay thu chien dich retention tren 3 nhom nganh hang.</field>
+        <field name="tien_do">52</field>
+        <field name="so_gio">14</field>
+    </record>
+
+    <record id="phan_bo_nguon_luc_massive_01" model="phan_bo_nguon_luc">
+        <field name="ten_nguon_luc">Ngan sach goi dashboard</field>
+        <field name="loai_nguon_luc">tai_chinh</field>
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_massive_01"/>
+        <field name="so_luong">1</field>
+        <field name="don_vi">goi</field>
+        <field name="don_gia">280000000</field>
+        <field name="ngay_phan_bo">2035-02-05</field>
+        <field name="trang_thai">da_phan_bo</field>
+    </record>
+
+    <record id="phan_bo_nguon_luc_massive_02" model="phan_bo_nguon_luc">
+        <field name="ten_nguon_luc">May chu BI</field>
+        <field name="loai_nguon_luc">thiet_bi</field>
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_massive_01"/>
+        <field name="cong_viec_id" ref="quan_ly_cong_viec.cong_viec_massive_03"/>
+        <field name="so_luong">3</field>
+        <field name="don_vi">server</field>
+        <field name="don_gia">39000000</field>
+        <field name="ngay_phan_bo">2035-03-12</field>
+        <field name="trang_thai">dang_su_dung</field>
+    </record>
+
+    <record id="phan_bo_nguon_luc_massive_03" model="phan_bo_nguon_luc">
+        <field name="ten_nguon_luc">Ngan sach retention</field>
+        <field name="loai_nguon_luc">tai_chinh</field>
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_massive_02"/>
+        <field name="so_luong">1</field>
+        <field name="don_vi">goi</field>
+        <field name="don_gia">220000000</field>
+        <field name="ngay_phan_bo">2035-03-03</field>
+        <field name="trang_thai">da_phan_bo</field>
+    </record>
+
+    <record id="timesheet_massive_01" model="bangiao_timesheet">
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_massive_02"/>
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_massive_01"/>
+        <field name="cong_viec_id" ref="quan_ly_cong_viec.cong_viec_massive_02"/>
+        <field name="ngay_lam">2035-02-26</field>
+        <field name="gio_bat_dau">8.0</field>
+        <field name="gio_ket_thuc">17.0</field>
+        <field name="loai_cong_viec">thuong</field>
+        <field name="tien_do_phan_tram">60</field>
+        <field name="trang_thai">approved</field>
+    </record>
+
+    <record id="timesheet_massive_02" model="bangiao_timesheet">
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_massive_06"/>
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_massive_01"/>
+        <field name="cong_viec_id" ref="quan_ly_cong_viec.cong_viec_massive_02"/>
+        <field name="ngay_lam">2035-02-27</field>
+        <field name="gio_bat_dau">18.0</field>
+        <field name="gio_ket_thuc">21.0</field>
+        <field name="loai_cong_viec">tăng_ca</field>
+        <field name="tien_do_phan_tram">65</field>
+        <field name="trang_thai">approved</field>
+    </record>
+
+    <record id="timesheet_massive_03" model="bangiao_timesheet">
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_massive_03"/>
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_massive_01"/>
+        <field name="cong_viec_id" ref="quan_ly_cong_viec.cong_viec_massive_03"/>
+        <field name="ngay_lam">2035-03-20</field>
+        <field name="gio_bat_dau">8.0</field>
+        <field name="gio_ket_thuc">16.5</field>
+        <field name="loai_cong_viec">thuong</field>
+        <field name="tien_do_phan_tram">42</field>
+        <field name="trang_thai">approved</field>
+    </record>
+
+    <record id="timesheet_massive_04" model="bangiao_timesheet">
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_massive_05"/>
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_massive_02"/>
+        <field name="cong_viec_id" ref="quan_ly_cong_viec.cong_viec_massive_05"/>
+        <field name="ngay_lam">2035-03-14</field>
+        <field name="gio_bat_dau">8.5</field>
+        <field name="gio_ket_thuc">17.5</field>
+        <field name="loai_cong_viec">thuong</field>
+        <field name="tien_do_phan_tram">78</field>
+        <field name="trang_thai">approved</field>
+    </record>
+
+    <record id="timesheet_massive_05" model="bangiao_timesheet">
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_massive_04"/>
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_massive_02"/>
+        <field name="cong_viec_id" ref="quan_ly_cong_viec.cong_viec_massive_07"/>
+        <field name="ngay_lam">2035-04-26</field>
+        <field name="gio_bat_dau">18.0</field>
+        <field name="gio_ket_thuc">22.0</field>
+        <field name="loai_cong_viec">tăng_ca</field>
+        <field name="tien_do_phan_tram">50</field>
+        <field name="trang_thai">approved</field>
+    </record>
+
+    <record id="timesheet_massive_06" model="bangiao_timesheet">
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_massive_06"/>
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_massive_02"/>
+        <field name="cong_viec_id" ref="quan_ly_cong_viec.cong_viec_massive_08"/>
+        <field name="ngay_lam">2035-05-12</field>
+        <field name="gio_bat_dau">8.0</field>
+        <field name="gio_ket_thuc">16.0</field>
+        <field name="loai_cong_viec">thuong</field>
+        <field name="tien_do_phan_tram">35</field>
+        <field name="trang_thai">submitted</field>
+    </record>
+</odoo>

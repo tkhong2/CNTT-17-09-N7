@@ -17,6 +17,7 @@ class KhachHang(models.Model):
     active = fields.Boolean(string='Đang hoạt động', default=True)
     ten_khach_hang = fields.Char(string='Tên khách hàng', required=True, tracking=True)
     nguoi_lien_he = fields.Char(string='Người liên hệ')
+    partner_id = fields.Many2one('res.partner', string='Liên hệ hệ thống', tracking=True)
     email = fields.Char(string='Email')
     dien_thoai = fields.Char(string='Điện thoại')
     email_normalized = fields.Char(string='Email chuẩn hóa', compute='_compute_contact_normalized', store=True, index=True)
@@ -37,6 +38,7 @@ class KhachHang(models.Model):
     cong_viec_ids = fields.Many2many('cong_viec', compute='_compute_cong_viec_ids', string='Công việc', store=False)
 
     so_du_an = fields.Integer(string='Số dự án', compute='_compute_thong_ke', store=True)
+    so_cong_viec_cham_soc = fields.Integer(string='Số công việc chăm sóc', compute='_compute_so_cong_viec_cham_soc', store=False)
     so_du_an_dang_thuc_hien = fields.Integer(string='Dự án đang thực hiện', compute='_compute_thong_ke', store=True)
     tong_ngan_sach = fields.Float(string='Tổng ngân sách (VND)', compute='_compute_thong_ke', store=True)
     so_lan_tuong_tac = fields.Integer(string='Số lần tương tác', compute='_compute_thong_ke_tuong_tac', store=False)
@@ -66,6 +68,44 @@ class KhachHang(models.Model):
         raw = (phone or '').strip()
         return ''.join(ch for ch in raw if ch.isdigit())
 
+    @api.model
+    def _find_partner_by_contact(self, email=False, phone=False):
+        Partner = self.env['res.partner'].sudo()
+        email_norm = self._normalize_email(email)
+        phone_norm = self._normalize_phone(phone)
+
+        if email_norm:
+            email_candidates = Partner.search([('email', '!=', False)], limit=200)
+            matched = email_candidates.filtered(lambda p: self._normalize_email(p.email) == email_norm)[:1]
+            if matched:
+                return matched
+
+        if phone_norm:
+            phone_candidates = Partner.search(['|', ('phone', '!=', False), ('mobile', '!=', False)], limit=500)
+            matched = phone_candidates.filtered(
+                lambda p: self._normalize_phone(p.phone) == phone_norm or self._normalize_phone(p.mobile) == phone_norm
+            )[:1]
+            if matched:
+                return matched
+        return False
+
+    @api.model
+    def _find_or_create_partner_from_vals(self, vals):
+        partner = self._find_partner_by_contact(vals.get('email'), vals.get('dien_thoai'))
+        if partner:
+            return partner
+
+        name = vals.get('ten_khach_hang') or vals.get('nguoi_lien_he')
+        if not name:
+            return False
+
+        return self.env['res.partner'].sudo().create({
+            'name': name,
+            'email': vals.get('email'),
+            'phone': vals.get('dien_thoai'),
+            'type': 'contact',
+        })
+
     @api.constrains('email', 'dien_thoai', 'active')
     def _check_duplicate_contact(self):
         for record in self:
@@ -91,6 +131,10 @@ class KhachHang(models.Model):
         for vals in vals_list:
             if vals.get('ma_khach_hang', _('New')) == _('New'):
                 vals['ma_khach_hang'] = self.env['ir.sequence'].next_by_code('khach_hang.sequence') or _('New')
+            if not vals.get('partner_id'):
+                partner = self._find_or_create_partner_from_vals(vals)
+                if partner:
+                    vals['partner_id'] = partner.id
         records = super().create(vals_list)
         return records
 
@@ -105,6 +149,18 @@ class KhachHang(models.Model):
     def _compute_cong_viec_ids(self):
         for record in self:
             record.cong_viec_ids = record.du_an_ids.mapped('cong_viec_ids')
+
+    def _get_cong_viec_cham_soc_domain(self):
+        self.ensure_one()
+        domain = [('du_an_id.khach_hang_id', '=', self.id)]
+        if self.partner_id:
+            domain = ['|', ('du_an_id.khach_hang_id', '=', self.id), ('partner_id', '=', self.partner_id.id)]
+        return domain
+
+    def _compute_so_cong_viec_cham_soc(self):
+        CongViec = self.env['cong_viec']
+        for record in self:
+            record.so_cong_viec_cham_soc = CongViec.search_count(record._get_cong_viec_cham_soc_domain())
 
     @api.depends('tuong_tac_ids', 'tuong_tac_ids.trang_thai', 'tuong_tac_ids.hen_lien_he_tiep')
     def _compute_thong_ke_tuong_tac(self):
@@ -196,7 +252,10 @@ class KhachHang(models.Model):
             'type': 'ir.actions.act_window',
             'res_model': 'cong_viec',
             'view_mode': 'kanban,tree,form,calendar',
-            'domain': [('du_an_id.khach_hang_id', '=', self.id)],
+            'domain': self._get_cong_viec_cham_soc_domain(),
+            'context': {
+                'default_partner_id': self.partner_id.id,
+            },
         }
 
     def action_xem_tuong_tac(self):

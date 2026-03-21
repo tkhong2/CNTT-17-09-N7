@@ -8,5 +8,53 @@
             <field name="padding">5</field>
             <field name="company_id" eval="False"/>
         </record>
+        
+        <record id="seq_lead" model="ir.sequence">
+            <field name="name">Mã lead</field>
+            <field name="code">lead</field>
+            <field name="prefix">LEAD</field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        
+        <record id="seq_co_hoi_ban_hang" model="ir.sequence">
+            <field name="name">Mã cơ hội bán hàng</field>
+            <field name="code">co_hoi_ban_hang</field>
+            <field name="prefix">OPP</field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        
+        <record id="seq_bao_gia" model="ir.sequence">
+            <field name="name">Mã báo giá</field>
+            <field name="code">bao_gia</field>
+            <field name="prefix">BG</field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        
+        <record id="seq_don_hang" model="ir.sequence">
+            <field name="name">Mã đơn hàng</field>
+            <field name="code">don_hang</field>
+            <field name="prefix">DH</field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        
+        <record id="seq_hop_dong_khach_hang" model="ir.sequence">
+            <field name="name">Mã hợp đồng khách hàng</field>
+            <field name="code">hop_dong_khach_hang</field>
+            <field name="prefix">HDKH</field>
+            <field name="padding">5</field>
+            <field name="company_id" eval="False"/>
+        </record>
+        
+        <record id="seq_yeu_cau_ho_tro" model="ir.sequence">
+            <field name="name">Mã yêu cầu hỗ trợ</field>
+            <field name="code">yeu_cau_ho_tro</field>
+            <field name="prefix">HT</field>
+            <field name="padding">6</field>
+            <field name="company_id" eval="False"/>
+        </record>
     </data>
 </odoo>

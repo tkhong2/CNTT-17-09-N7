@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="phong_ban_wave2_data" model="phong_ban">
+        <field name="ma_phong_ban">PB-W2-DATA</field>
+        <field name="ten_phong_ban">Phong Data Operations</field>
+    </record>
+
+    <record id="chuc_vu_wave2_lead" model="chuc_vu">
+        <field name="ma_chuc_vu">CV-W2-LEAD</field>
+        <field name="ten_chuc_vu">Data Operations Lead</field>
+        <field name="muc_luong_co_ban">26000000</field>
+    </record>
+
+    <record id="chuc_vu_wave2_exec" model="chuc_vu">
+        <field name="ma_chuc_vu">CV-W2-EXEC</field>
+        <field name="ten_chuc_vu">Data Operations Executive</field>
+        <field name="muc_luong_co_ban">18500000</field>
+    </record>
+
+    <record id="nhan_vien_wave2_01" model="nhan_vien">
+        <field name="ma_nhan_vien">NV-W2-001</field>
+        <field name="ho_va_ten">Nguyen Minh Khoa</field>
+        <field name="ngay_sinh">1993-10-03</field>
+        <field name="email">nguyen.minhkhoa.w2@example.com</field>
+        <field name="dien_thoai">0919222001</field>
+        <field name="phong_ban_id" ref="quan_ly_nhan_su.phong_ban_wave2_data"/>
+        <field name="chuc_vu_id" ref="quan_ly_nhan_su.chuc_vu_wave2_lead"/>
+        <field name="ngay_vao_lam">2034-09-01</field>
+        <field name="trang_thai">active</field>
+    </record>
+
+    <record id="nhan_vien_wave2_02" model="nhan_vien">
+        <field name="ma_nhan_vien">NV-W2-002</field>
+        <field name="ho_va_ten">Pham Bao Ngoc</field>
+        <field name="ngay_sinh">1998-01-29</field>
+        <field name="email">pham.baongoc.w2@example.com</field>
+        <field name="dien_thoai">0919222002</field>
+        <field name="phong_ban_id" ref="quan_ly_nhan_su.phong_ban_wave2_data"/>
+        <field name="chuc_vu_id" ref="quan_ly_nhan_su.chuc_vu_wave2_exec"/>
+        <field name="quan_ly_id" ref="quan_ly_nhan_su.nhan_vien_wave2_01"/>
+        <field name="ngay_vao_lam">2035-02-12</field>
+        <field name="trang_thai">active</field>
+    </record>
+
+    <record id="hop_dong_wave2_01" model="hop_dong">
+        <field name="ma_hop_dong">HD-W2-001</field>
+        <field name="ten_hop_dong">Hop dong Data Operations Lead</field>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_wave2_01"/>
+        <field name="loai_hop_dong">khong_xac_dinh_thoi_han</field>
+        <field name="ngay_bat_dau">2034-09-01</field>
+        <field name="luong_co_ban">26000000</field>
+        <field name="phu_cap">3200000</field>
+        <field name="trang_thai">active</field>
+    </record>
+
+    <record id="hop_dong_wave2_02" model="hop_dong">
+        <field name="ma_hop_dong">HD-W2-002</field>
+        <field name="ten_hop_dong">Hop dong Data Operations Executive</field>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_wave2_02"/>
+        <field name="loai_hop_dong">xac_dinh_thoi_han</field>
+        <field name="ngay_bat_dau">2035-02-12</field>
+        <field name="ngay_ket_thuc">2040-02-11</field>
+        <field name="luong_co_ban">18500000</field>
+        <field name="phu_cap">1800000</field>
+        <field name="trang_thai">active</field>
+    </record>
+
+    <record id="cham_cong_wave2_01" model="cham_cong">
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_wave2_01"/>
+        <field name="ngay_cham_cong">2036-03-03</field>
+        <field name="thoi_gian_vao">2036-03-03 08:00:00</field>
+        <field name="thoi_gian_ra">2036-03-03 17:10:00</field>
+        <field name="trang_thai">di_lam</field>
+    </record>
+
+    <record id="cham_cong_wave2_02" model="cham_cong">
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_wave2_02"/>
+        <field name="ngay_cham_cong">2036-03-03</field>
+        <field name="trang_thai">cong_tac</field>
+    </record>
+
+    <record id="nghi_phep_wave2_01" model="nghi_phep">
+        <field name="ma_nghi_phep">NP-W2-001</field>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_wave2_02"/>
+        <field name="loai_nghi_phep">phep_nam</field>
+        <field name="ngay_bat_dau">2036-03-18</field>
+        <field name="ngay_ket_thuc">2036-03-19</field>
+        <field name="ly_do">Nghi phep gia dinh.</field>
+        <field name="trang_thai">cho_duyet</field>
+    </record>
+
+    <record id="danh_gia_wave2_01" model="danh_gia">
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_wave2_02"/>
+        <field name="nguoi_danh_gia_id" ref="quan_ly_nhan_su.nhan_vien_wave2_01"/>
+        <field name="loai_danh_gia">dinh_ky</field>
+        <field name="thoi_gian">2036-03-30</field>
+        <field name="ky_nang_chuyen_mon">4</field>
+        <field name="tinh_than_lam_viec">4</field>
+        <field name="kha_nang_giao_tiep">4</field>
+        <field name="kha_nang_lam_viec_nhom">5</field>
+        <field name="ket_luan">dat</field>
+    </record>
+
+    <record id="dao_tao_wave2_01" model="dao_tao">
+        <field name="ten_khoa_hoc">Khoa Data Governance Fundamentals</field>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_wave2_02"/>
+        <field name="loai_dao_tao">noi_bo</field>
+        <field name="don_vi_dao_tao">Internal Academy</field>
+        <field name="ngay_bat_dau">2036-02-10</field>
+        <field name="ngay_ket_thuc">2036-02-12</field>
+        <field name="so_gio">18</field>
+        <field name="chi_phi">1400000</field>
+        <field name="ket_qua">dat</field>
+    </record>
+
+    <record id="vi_tri_tuyen_dung_wave2_01" model="vi_tri_tuyen_dung">
+        <field name="ten_vi_tri">Data Quality Specialist</field>
+        <field name="phong_ban_id" ref="quan_ly_nhan_su.phong_ban_wave2_data"/>
+        <field name="cap_do">senior</field>
+        <field name="so_luong_tuyen">1</field>
+        <field name="luong_du_kien">21000000</field>
+        <field name="trang_thai">open</field>
+        <field name="ngay_bat_dau">2036-03-01</field>
+    </record>
+
+    <record id="ung_vien_wave2_01" model="ung_vien">
+        <field name="ho_ten">Tran Huu Son</field>
+        <field name="email">tran.huuson.w2@example.com</field>
+        <field name="so_dien_thoai">0919444011</field>
+        <field name="vi_tri_id" ref="quan_ly_nhan_su.vi_tri_tuyen_dung_wave2_01"/>
+        <field name="nguon">website</field>
+        <field name="trang_thai">screening</field>
+        <field name="ngay_nop_don">2036-03-02</field>
+        <field name="diem_cv">8.1</field>
+    </record>
+
+    <record id="phong_van_wave2_01" model="phong_van">
+        <field name="ung_vien_id" ref="quan_ly_nhan_su.ung_vien_wave2_01"/>
+        <field name="ngay_phong_van">2036-03-06 09:00:00</field>
+        <field name="dia_diem">Phong C-02</field>
+        <field name="loai_phong_van">technical</field>
+        <field name="trang_thai">scheduled</field>
+    </record>
+
+    <record id="onboarding_wave2_01" model="onboarding_offboarding">
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_wave2_02"/>
+        <field name="loai">onboarding</field>
+        <field name="trang_thai">in_progress</field>
+        <field name="ngay_start">2036-03-01</field>
+        <field name="ngay_ket_thuc_du_kinh">2036-03-15</field>
+    </record>
+
+    <record id="onboarding_task_wave2_01" model="onboarding_task">
+        <field name="checklist_id" ref="quan_ly_nhan_su.onboarding_wave2_01"/>
+        <field name="thu_tu">1</field>
+        <field name="tieu_de">Cap quyen truy cap kho du lieu</field>
+        <field name="phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_wave2_01"/>
+        <field name="da_hoan_thanh">1</field>
+        <field name="ngay_hoan_thanh">2036-03-02</field>
+    </record>
+
+    <record id="tinh_luong_wave2_01" model="tinh_luong">
+        <field name="thang_nam">2036-03</field>
+        <field name="trang_thai">nhap</field>
+        <field name="ngan_hang">TCB</field>
+        <field name="ghi_chu">Wave 2 payroll batch.</field>
+    </record>
+
+    <record id="tinh_luong_ct_wave2_01" model="tinh_luong_chi_tiet">
+        <field name="tinh_luong_id" ref="quan_ly_nhan_su.tinh_luong_wave2_01"/>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_wave2_01"/>
+        <field name="luong_co_ban">26000000</field>
+        <field name="phu_cap">3200000</field>
+        <field name="tien_thuong">1200000</field>
+    </record>
+
+    <record id="tinh_luong_ct_wave2_02" model="tinh_luong_chi_tiet">
+        <field name="tinh_luong_id" ref="quan_ly_nhan_su.tinh_luong_wave2_01"/>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_wave2_02"/>
+        <field name="luong_co_ban">18500000</field>
+        <field name="phu_cap">1800000</field>
+        <field name="tien_thuong">800000</field>
+    </record>
+
+    <record id="tinh_luong_khoan_tam_wave2_01" model="tinh_luong_khoan_tam">
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_wave2_02"/>
+        <field name="so_tien">1800000</field>
+        <field name="ngay_cho_vay">2036-03-08</field>
+        <field name="trang_thai">dang_cho</field>
+    </record>
+
+    <record id="nhan_su_dashboard_wave2" model="nhan_su_dashboard">
+        <field name="ten_bang">Dashboard KPI Nhan su - Wave 2</field>
+    </record>
+</odoo>

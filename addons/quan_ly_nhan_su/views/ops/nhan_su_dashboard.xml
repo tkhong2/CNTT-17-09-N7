@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="nhan_su_dashboard_main" model="nhan_su_dashboard">
+            <field name="ten_bang">Dashboard KPI Nhân sự</field>
+        </record>
+
+        <record id="view_nhan_su_dashboard_form" model="ir.ui.view">
+            <field name="name">nhan_su_dashboard.form</field>
+            <field name="model">nhan_su_dashboard</field>
+            <field name="arch" type="xml">
+                <form create="0" edit="0" delete="0">
+                    <sheet>
+                        <div class="erp-dashboard-page">
+                            <div class="erp-dashboard-title">
+                                <h1><field name="ten_bang" readonly="1" nolabel="1"/></h1>
+                            </div>
+
+                            <div class="erp-kpi-grid">
+                                <div class="erp-kpi-card">
+                                    <div class="erp-kpi-label">Tổng số nhân viên</div>
+                                    <div class="erp-kpi-value"><field name="tong_nhan_vien_active" readonly="1" nolabel="1"/></div>
+                                </div>
+                                <div class="erp-kpi-card">
+                                    <div class="erp-kpi-label">Bảng lương đã duyệt</div>
+                                    <div class="erp-kpi-value"><field name="tong_bang_luong_da_duyet" readonly="1" nolabel="1"/></div>
+                                </div>
+                                <div class="erp-kpi-card">
+                                    <div class="erp-kpi-label">Lương tháng hiện tại</div>
+                                    <div class="erp-kpi-value"><field name="luong_thang_hien_tai" readonly="1" nolabel="1"/></div>
+                                </div>
+                                <div class="erp-kpi-card">
+                                    <div class="erp-kpi-label">Tỷ lệ biến động</div>
+                                    <div class="erp-kpi-value"><field name="payroll_variance_rate" readonly="1" nolabel="1" widget="percentage"/></div>
+                                </div>
+                            </div>
+
+                            <div class="erp-panel-grid">
+                                <div class="erp-panel">
+                                    <div class="erp-panel-header blue">Thống kê lương</div>
+                                    <div class="erp-panel-body">
+                                        <div class="erp-metric">
+                                            <div class="erp-metric-label">Lương tháng hiện tại</div>
+                                            <div class="erp-metric-value"><field name="luong_thang_hien_tai" readonly="1" nolabel="1"/></div>
+                                        </div>
+                                        <div class="erp-metric">
+                                            <div class="erp-metric-label">Lương tháng trước</div>
+                                            <div class="erp-metric-value"><field name="luong_thang_truoc" readonly="1" nolabel="1"/></div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="erp-panel">
+                                    <div class="erp-panel-header teal">Biến động payroll</div>
+                                    <div class="erp-panel-body">
+                                        <div class="erp-metric">
+                                            <div class="erp-metric-label">Chênh lệch lương</div>
+                                            <div class="erp-metric-value"><field name="payroll_variance" readonly="1" nolabel="1"/></div>
+                                        </div>
+                                        <div class="erp-metric">
+                                            <div class="erp-metric-label">Tỷ lệ thay đổi</div>
+                                            <div class="erp-metric-value"><field name="payroll_variance_rate" readonly="1" nolabel="1" widget="percentage"/></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="erp-action-row">
+                                <button type="object" name="action_xem_bang_luong_da_duyet" class="btn btn-primary" icon="fa-money" string="Xem bảng lương đã duyệt"/>
+                            </div>
+                        </div>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_nhan_su_dashboard" model="ir.actions.act_window">
+            <field name="name">Dashboard KPI</field>
+            <field name="res_model">nhan_su_dashboard</field>
+            <field name="view_mode">form</field>
+            <field name="res_id" ref="nhan_su_dashboard_main"/>
+        </record>
+
+        <menuitem id="menu_nhan_su_dashboard" name="Dashboard KPI" parent="menu_root" action="action_nhan_su_dashboard" sequence="0"/>
+    </data>
+</odoo>

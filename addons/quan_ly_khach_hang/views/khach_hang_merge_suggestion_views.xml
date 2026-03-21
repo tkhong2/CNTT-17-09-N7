@@ -10,8 +10,6 @@
                 <field name="reason"/>
                 <field name="match_value"/>
                 <field name="state"/>
-                <button name="action_apply" type="object" string="Áp dụng" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
-                <button name="action_reject" type="object" string="Bỏ qua" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
             </tree>
         </field>
     </record>
@@ -22,8 +20,8 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <button name="action_apply" type="object" string="Áp dụng" class="oe_highlight" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
-                    <button name="action_reject" type="object" string="Bỏ qua" attrs="{'invisible': [('state', '!=', 'draft')]}"/>
+                    <button name="action_apply" type="object" string="Áp dụng" class="oe_highlight"/>
+                    <button name="action_reject" type="object" string="Bỏ qua"/>
                     <field name="state" widget="statusbar" statusbar_visible="draft,applied,rejected"/>
                 </header>
                 <sheet>

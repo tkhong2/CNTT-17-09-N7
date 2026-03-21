@@ -44,6 +44,20 @@
         />
 
         <menuitem
+            name="Phòng ban"
+            id="menu_phong_ban"
+            parent="menu_root"
+            sequence="6"
+            action="action_phong_ban"
+        />
+
+        <menuitem
+            name="Hoạt động khác"
+            id="menu_ops_nhan_su"
+            parent="menu_root"
+            sequence="10"/>
+
+        <menuitem
             name="Cấu hình (Admin)"
             id="menu_hr_admin_config"
             parent="menu_root"

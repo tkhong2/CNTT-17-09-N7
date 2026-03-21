@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="khach_hang_massive_01" model="khach_hang">
+        <field name="ma_khach_hang">KH-MASS-001</field>
+        <field name="ten_khach_hang">Cong ty Nam Son Logistics</field>
+        <field name="nguoi_lien_he">Vo Thanh Son</field>
+        <field name="email">contact@namsonlog.example.com</field>
+        <field name="dien_thoai">0944001001</field>
+        <field name="dia_chi">Hai Phong</field>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_massive_05"/>
+        <field name="trang_thai_hop_tac">dang_hop_tac</field>
+    </record>
+
+    <record id="khach_hang_massive_02" model="khach_hang">
+        <field name="ma_khach_hang">KH-MASS-002</field>
+        <field name="ten_khach_hang">Cong ty Bac Ha Retail</field>
+        <field name="nguoi_lien_he">Dang Minh Ha</field>
+        <field name="email">hello@bacharetail.example.com</field>
+        <field name="dien_thoai">0944001002</field>
+        <field name="dia_chi">Ha Noi</field>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_sales"/>
+        <field name="trang_thai_hop_tac">tiem_nang</field>
+    </record>
+
+    <record id="khach_hang_massive_03" model="khach_hang">
+        <field name="ma_khach_hang">KH-MASS-003</field>
+        <field name="ten_khach_hang">Cong ty Hoang Kim Foods</field>
+        <field name="nguoi_lien_he">Pham Thanh Vinh</field>
+        <field name="email">vinh@hoangkimfoods.example.com</field>
+        <field name="dien_thoai">0944001003</field>
+        <field name="dia_chi">Can Tho</field>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_massive_05"/>
+        <field name="trang_thai_hop_tac">dang_hop_tac</field>
+    </record>
+
+    <record id="khach_hang_massive_04" model="khach_hang">
+        <field name="ma_khach_hang">KH-MASS-004</field>
+        <field name="ten_khach_hang">Cong ty BluePeak Services</field>
+        <field name="nguoi_lien_he">Le Gia Bao</field>
+        <field name="email">sales@bluepeak.example.com</field>
+        <field name="dien_thoai">0944001004</field>
+        <field name="dia_chi">TP HCM</field>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_sales"/>
+        <field name="trang_thai_hop_tac">tiem_nang</field>
+    </record>
+
+    <record id="khach_hang_massive_05" model="khach_hang">
+        <field name="ma_khach_hang">KH-MASS-005</field>
+        <field name="ten_khach_hang">Cong ty VietFarm Chain</field>
+        <field name="nguoi_lien_he">Bui Quynh Anh</field>
+        <field name="email">bqanh@vietfarm.example.com</field>
+        <field name="dien_thoai">0944001005</field>
+        <field name="dia_chi">Da Nang</field>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_massive_03"/>
+        <field name="trang_thai_hop_tac">dang_hop_tac</field>
+    </record>
+
+    <record id="khach_hang_massive_06" model="khach_hang">
+        <field name="ma_khach_hang">KH-MASS-006</field>
+        <field name="ten_khach_hang">Cong ty Sunlight Education</field>
+        <field name="nguoi_lien_he">Nguyen Hai Yen</field>
+        <field name="email">contact@sunlightedu.example.com</field>
+        <field name="dien_thoai">0944001006</field>
+        <field name="dia_chi">Nha Trang</field>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_massive_04"/>
+        <field name="trang_thai_hop_tac">ngung_hop_tac</field>
+    </record>
+
+    <record id="tuong_tac_massive_01" model="khach_hang_tuong_tac">
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_massive_01"/>
+        <field name="tieu_de">Demo giai phap kho van va van tai</field>
+        <field name="loai_tuong_tac">meeting</field>
+        <field name="ngay_lien_he">2035-03-05 09:00:00</field>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_massive_05"/>
+        <field name="ket_qua">quan_tam</field>
+        <field name="trang_thai">done</field>
+    </record>
+
+    <record id="tuong_tac_massive_02" model="khach_hang_tuong_tac">
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_massive_02"/>
+        <field name="tieu_de">Followup bao gia POS va CRM</field>
+        <field name="loai_tuong_tac">call</field>
+        <field name="ngay_lien_he">2035-03-07 10:00:00</field>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_sales"/>
+        <field name="ket_qua">hen_lai</field>
+        <field name="hen_lien_he_tiep">2035-03-10 10:00:00</field>
+        <field name="trang_thai">planned</field>
+    </record>
+
+    <record id="tuong_tac_massive_03" model="khach_hang_tuong_tac">
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_massive_03"/>
+        <field name="tieu_de">Nhan feedback sau goi trien khai phase 1</field>
+        <field name="loai_tuong_tac">email</field>
+        <field name="ngay_lien_he">2035-03-08 14:00:00</field>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_massive_05"/>
+        <field name="ket_qua">chot_hop_dong</field>
+        <field name="trang_thai">done</field>
+    </record>
+
+    <record id="tuong_tac_massive_04" model="khach_hang_tuong_tac">
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_massive_04"/>
+        <field name="tieu_de">Gui profile nang luc va bang gia</field>
+        <field name="loai_tuong_tac">email</field>
+        <field name="ngay_lien_he">2035-03-09 11:30:00</field>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_sales"/>
+        <field name="ket_qua">quan_tam</field>
+        <field name="trang_thai">done</field>
+    </record>
+
+    <record id="lead_massive_01" model="lead">
+        <field name="ma_lead">LD-MASS-001</field>
+        <field name="ten_lead">Nam Son Warehousing</field>
+        <field name="nguoi_lien_he">Vo Thanh Son</field>
+        <field name="email">vson@namsonlog.example.com</field>
+        <field name="so_dien_thoai">0944002001</field>
+        <field name="nguon_lead">website</field>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_massive_05"/>
+        <field name="trang_thai">san_sang</field>
+        <field name="ngan_sach_uoc_tinh">650000000</field>
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_massive_01"/>
+    </record>
+
+    <record id="lead_massive_02" model="lead">
+        <field name="ma_lead">LD-MASS-002</field>
+        <field name="ten_lead">Bac Ha Omni Retail</field>
+        <field name="nguoi_lien_he">Dang Minh Ha</field>
+        <field name="email">dmha@bacharetail.example.com</field>
+        <field name="so_dien_thoai">0944002002</field>
+        <field name="nguon_lead">referral</field>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_sales"/>
+        <field name="trang_thai">moi</field>
+        <field name="ngan_sach_uoc_tinh">480000000</field>
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_massive_02"/>
+    </record>
+
+    <record id="lead_massive_03" model="lead">
+        <field name="ma_lead">LD-MASS-003</field>
+        <field name="ten_lead">Hoang Kim SCM</field>
+        <field name="nguoi_lien_he">Pham Thanh Vinh</field>
+        <field name="email">ptvinh@hoangkimfoods.example.com</field>
+        <field name="so_dien_thoai">0944002003</field>
+        <field name="nguon_lead">social_media</field>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_massive_05"/>
+        <field name="trang_thai">san_sang</field>
+        <field name="ngan_sach_uoc_tinh">920000000</field>
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_massive_03"/>
+    </record>
+
+    <record id="lead_massive_04" model="lead">
+        <field name="ma_lead">LD-MASS-004</field>
+        <field name="ten_lead">BluePeak CS Platform</field>
+        <field name="nguoi_lien_he">Le Gia Bao</field>
+        <field name="email">lgbao@bluepeak.example.com</field>
+        <field name="so_dien_thoai">0944002004</field>
+        <field name="nguon_lead">other</field>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_sales"/>
+        <field name="trang_thai">moi</field>
+        <field name="ngan_sach_uoc_tinh">560000000</field>
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_massive_04"/>
+    </record>
+
+    <record id="lead_massive_05" model="lead">
+        <field name="ma_lead">LD-MASS-005</field>
+        <field name="ten_lead">VietFarm Smart Chain</field>
+        <field name="nguoi_lien_he">Bui Quynh Anh</field>
+        <field name="email">qa@vietfarm.example.com</field>
+        <field name="so_dien_thoai">0944002005</field>
+        <field name="nguon_lead">social_media</field>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_massive_03"/>
+        <field name="trang_thai">san_sang</field>
+        <field name="ngan_sach_uoc_tinh">700000000</field>
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_massive_05"/>
+    </record>
+
+    <record id="lead_hoat_dong_massive_01" model="lead_hoat_dong">
+        <field name="lead_id" ref="quan_ly_khach_hang.lead_massive_01"/>
+        <field name="loai_hoat_dong">cuoc_hop</field>
+        <field name="ngay_gio">2035-03-12 09:30:00</field>
+        <field name="nguoi_thuc_hien_id" ref="quan_ly_nhan_su.nhan_vien_massive_05"/>
+        <field name="tieu_de">Hop scope module kho van</field>
+    </record>
+
+    <record id="lead_hoat_dong_massive_02" model="lead_hoat_dong">
+        <field name="lead_id" ref="quan_ly_khach_hang.lead_massive_03"/>
+        <field name="loai_hoat_dong">goi</field>
+        <field name="ngay_gio">2035-03-14 15:00:00</field>
+        <field name="nguoi_thuc_hien_id" ref="quan_ly_nhan_su.nhan_vien_massive_05"/>
+        <field name="tieu_de">Xac nhan nhu cau bao tri he thong</field>
+    </record>
+
+    <record id="lead_hoat_dong_massive_03" model="lead_hoat_dong">
+        <field name="lead_id" ref="quan_ly_khach_hang.lead_massive_05"/>
+        <field name="loai_hoat_dong">email</field>
+        <field name="ngay_gio">2035-03-16 11:00:00</field>
+        <field name="nguoi_thuc_hien_id" ref="quan_ly_nhan_su.nhan_vien_massive_03"/>
+        <field name="tieu_de">Gui bo tai lieu de xuat chi tiet</field>
+    </record>
+
+    <record id="co_hoi_massive_01" model="co_hoi_ban_hang">
+        <field name="ma_co_hoi">CH-MASS-001</field>
+        <field name="ten_co_hoi">Nam Son Logistics ERP Wave 1</field>
+        <field name="lead_id" ref="quan_ly_khach_hang.lead_massive_01"/>
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_massive_01"/>
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_massive_01"/>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_massive_05"/>
+        <field name="gia_tri_co_hoi">760000000</field>
+        <field name="xac_suat_thang">68</field>
+        <field name="han_chot">2035-04-20</field>
+        <field name="giai_doan">de_xuat</field>
+    </record>
+
+    <record id="co_hoi_massive_02" model="co_hoi_ban_hang">
+        <field name="ma_co_hoi">CH-MASS-002</field>
+        <field name="ten_co_hoi">Hoang Kim Supply Chain Suite</field>
+        <field name="lead_id" ref="quan_ly_khach_hang.lead_massive_03"/>
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_massive_03"/>
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_massive_02"/>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_massive_05"/>
+        <field name="gia_tri_co_hoi">980000000</field>
+        <field name="xac_suat_thang">72</field>
+        <field name="han_chot">2035-05-02</field>
+        <field name="giai_doan">thuong_luong</field>
+    </record>
+
+    <record id="co_hoi_massive_03" model="co_hoi_ban_hang">
+        <field name="ma_co_hoi">CH-MASS-003</field>
+        <field name="ten_co_hoi">BluePeak CS Automation</field>
+        <field name="lead_id" ref="quan_ly_khach_hang.lead_massive_04"/>
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_massive_04"/>
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_allbiz_rollout"/>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_sales"/>
+        <field name="gia_tri_co_hoi">540000000</field>
+        <field name="xac_suat_thang">55</field>
+        <field name="han_chot">2035-04-28</field>
+        <field name="giai_doan">kham_pha</field>
+    </record>
+
+    <record id="co_hoi_massive_04" model="co_hoi_ban_hang">
+        <field name="ma_co_hoi">CH-MASS-004</field>
+        <field name="ten_co_hoi">VietFarm Retail Expansion</field>
+        <field name="lead_id" ref="quan_ly_khach_hang.lead_massive_05"/>
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_massive_05"/>
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_massive_02"/>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_massive_03"/>
+        <field name="gia_tri_co_hoi">690000000</field>
+        <field name="xac_suat_thang">64</field>
+        <field name="han_chot">2035-05-10</field>
+        <field name="giai_doan">de_xuat</field>
+    </record>
+
+    <record id="co_hoi_hoat_dong_massive_01" model="co_hoi_hoat_dong">
+        <field name="co_hoi_id" ref="quan_ly_khach_hang.co_hoi_massive_01"/>
+        <field name="loai">meeting</field>
+        <field name="ngay_gio">2035-03-18 14:00:00</field>
+        <field name="nguoi_thuc_hien_id" ref="quan_ly_nhan_su.nhan_vien_massive_05"/>
+        <field name="mo_ta">Trinh bay de xuat tai nha may trung tam.</field>
+    </record>
+
+    <record id="co_hoi_hoat_dong_massive_02" model="co_hoi_hoat_dong">
+        <field name="co_hoi_id" ref="quan_ly_khach_hang.co_hoi_massive_02"/>
+        <field name="loai">goi</field>
+        <field name="ngay_gio">2035-03-25 16:00:00</field>
+        <field name="nguoi_thuc_hien_id" ref="quan_ly_nhan_su.nhan_vien_massive_05"/>
+        <field name="mo_ta">Dam phan dieu khoan bao hanh va SLA.</field>
+    </record>
+
+    <record id="co_hoi_hoat_dong_massive_03" model="co_hoi_hoat_dong">
+        <field name="co_hoi_id" ref="quan_ly_khach_hang.co_hoi_massive_04"/>
+        <field name="loai">email</field>
+        <field name="ngay_gio">2035-03-29 11:00:00</field>
+        <field name="nguoi_thuc_hien_id" ref="quan_ly_nhan_su.nhan_vien_massive_03"/>
+        <field name="mo_ta">Gui bang so sanh 3 goi giai phap.</field>
+    </record>
+
+    <record id="bao_gia_massive_01" model="bao_gia">
+        <field name="ma_bao_gia">BG-MASS-001</field>
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_massive_01"/>
+        <field name="co_hoi_id" ref="quan_ly_khach_hang.co_hoi_massive_01"/>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_massive_05"/>
+        <field name="ngay_hieu_luc">2035-03-20</field>
+        <field name="ngay_het_hieu_luc">2035-04-20</field>
+        <field name="chiet_khau_phan_tram">4</field>
+        <field name="thue_vat">10</field>
+        <field name="hinh_thuc_thanh_toan">chuyen_khoan</field>
+        <field name="trang_thai">accepted</field>
+    </record>
+
+    <record id="bao_gia_massive_02" model="bao_gia">
+        <field name="ma_bao_gia">BG-MASS-002</field>
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_massive_03"/>
+        <field name="co_hoi_id" ref="quan_ly_khach_hang.co_hoi_massive_02"/>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_massive_05"/>
+        <field name="ngay_hieu_luc">2035-03-27</field>
+        <field name="ngay_het_hieu_luc">2035-04-27</field>
+        <field name="chiet_khau_phan_tram">6</field>
+        <field name="thue_vat">10</field>
+        <field name="hinh_thuc_thanh_toan">chuyen_khoan</field>
+        <field name="trang_thai">sent</field>
+    </record>
+
+    <record id="bao_gia_massive_03" model="bao_gia">
+        <field name="ma_bao_gia">BG-MASS-003</field>
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_massive_05"/>
+        <field name="co_hoi_id" ref="quan_ly_khach_hang.co_hoi_massive_04"/>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_massive_03"/>
+        <field name="ngay_hieu_luc">2035-03-30</field>
+        <field name="ngay_het_hieu_luc">2035-04-30</field>
+        <field name="chiet_khau_phan_tram">3</field>
+        <field name="thue_vat">10</field>
+        <field name="hinh_thuc_thanh_toan">tra_gop</field>
+        <field name="trang_thai">draft</field>
+    </record>
+
+    <record id="bao_gia_chi_tiet_massive_01" model="bao_gia_chi_tiet">
+        <field name="bao_gia_id" ref="quan_ly_khach_hang.bao_gia_massive_01"/>
+        <field name="san_pham">ERP Logistics Core</field>
+        <field name="don_vi_tinh">Goi</field>
+        <field name="so_luong">1</field>
+        <field name="gia_ban">420000000</field>
+    </record>
+
+    <record id="bao_gia_chi_tiet_massive_02" model="bao_gia_chi_tiet">
+        <field name="bao_gia_id" ref="quan_ly_khach_hang.bao_gia_massive_01"/>
+        <field name="san_pham">Dich vu trien khai kho van</field>
+        <field name="don_vi_tinh">Goi</field>
+        <field name="so_luong">1</field>
+        <field name="gia_ban">340000000</field>
+    </record>
+
+    <record id="bao_gia_chi_tiet_massive_03" model="bao_gia_chi_tiet">
+        <field name="bao_gia_id" ref="quan_ly_khach_hang.bao_gia_massive_02"/>
+        <field name="san_pham">Supply Chain Suite</field>
+        <field name="don_vi_tinh">Goi</field>
+        <field name="so_luong">1</field>
+        <field name="gia_ban">560000000</field>
+    </record>
+
+    <record id="bao_gia_chi_tiet_massive_04" model="bao_gia_chi_tiet">
+        <field name="bao_gia_id" ref="quan_ly_khach_hang.bao_gia_massive_02"/>
+        <field name="san_pham">Bao tri 12 thang</field>
+        <field name="don_vi_tinh">Nam</field>
+        <field name="so_luong">1</field>
+        <field name="gia_ban">180000000</field>
+    </record>
+
+    <record id="bao_gia_chi_tiet_massive_05" model="bao_gia_chi_tiet">
+        <field name="bao_gia_id" ref="quan_ly_khach_hang.bao_gia_massive_03"/>
+        <field name="san_pham">Retail Omnichannel</field>
+        <field name="don_vi_tinh">Goi</field>
+        <field name="so_luong">1</field>
+        <field name="gia_ban">510000000</field>
+    </record>
+
+    <record id="bao_gia_chi_tiet_massive_06" model="bao_gia_chi_tiet">
+        <field name="bao_gia_id" ref="quan_ly_khach_hang.bao_gia_massive_03"/>
+        <field name="san_pham">Goi dao tao 3 dot</field>
+        <field name="don_vi_tinh">Goi</field>
+        <field name="so_luong">1</field>
+        <field name="gia_ban">150000000</field>
+    </record>
+
+    <record id="don_hang_massive_01" model="don_hang">
+        <field name="ma_don_hang">DH-MASS-001</field>
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_massive_01"/>
+        <field name="bao_gia_id" ref="quan_ly_khach_hang.bao_gia_massive_01"/>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_massive_05"/>
+        <field name="ngay_dat">2035-03-24</field>
+        <field name="ngay_giao_du_kinh">2035-05-30</field>
+        <field name="hinh_thuc_thanh_toan">chuyen_khoan</field>
+        <field name="so_tien_coc">220000000</field>
+        <field name="trang_thai">confirmed</field>
+    </record>
+
+    <record id="don_hang_massive_02" model="don_hang">
+        <field name="ma_don_hang">DH-MASS-002</field>
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_massive_03"/>
+        <field name="bao_gia_id" ref="quan_ly_khach_hang.bao_gia_massive_02"/>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_massive_05"/>
+        <field name="ngay_dat">2035-04-02</field>
+        <field name="ngay_giao_du_kinh">2035-06-15</field>
+        <field name="hinh_thuc_thanh_toan">chuyen_khoan</field>
+        <field name="so_tien_coc">300000000</field>
+        <field name="trang_thai">draft</field>
+    </record>
+
+    <record id="don_hang_chi_tiet_massive_01" model="don_hang_chi_tiet">
+        <field name="don_hang_id" ref="quan_ly_khach_hang.don_hang_massive_01"/>
+        <field name="san_pham">ERP Logistics Core</field>
+        <field name="don_vi_tinh">Goi</field>
+        <field name="so_luong">1</field>
+        <field name="gia_ban">420000000</field>
+    </record>
+
+    <record id="don_hang_chi_tiet_massive_02" model="don_hang_chi_tiet">
+        <field name="don_hang_id" ref="quan_ly_khach_hang.don_hang_massive_01"/>
+        <field name="san_pham">Dich vu trien khai kho van</field>
+        <field name="don_vi_tinh">Goi</field>
+        <field name="so_luong">1</field>
+        <field name="gia_ban">340000000</field>
+    </record>
+
+    <record id="don_hang_chi_tiet_massive_03" model="don_hang_chi_tiet">
+        <field name="don_hang_id" ref="quan_ly_khach_hang.don_hang_massive_02"/>
+        <field name="san_pham">Supply Chain Suite</field>
+        <field name="don_vi_tinh">Goi</field>
+        <field name="so_luong">1</field>
+        <field name="gia_ban">560000000</field>
+    </record>
+
+    <record id="don_hang_chi_tiet_massive_04" model="don_hang_chi_tiet">
+        <field name="don_hang_id" ref="quan_ly_khach_hang.don_hang_massive_02"/>
+        <field name="san_pham">Bao tri 12 thang</field>
+        <field name="don_vi_tinh">Nam</field>
+        <field name="so_luong">1</field>
+        <field name="gia_ban">180000000</field>
+    </record>
+
+    <record id="hop_dong_khach_hang_massive_01" model="hop_dong_khach_hang">
+        <field name="ma_hop_dong">HDKH-MASS-001</field>
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_massive_01"/>
+        <field name="don_hang_id" ref="quan_ly_khach_hang.don_hang_massive_01"/>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_massive_05"/>
+        <field name="tieu_de">Hop dong trien khai logistics wave 1</field>
+        <field name="ngay_ky_ket">2035-03-27</field>
+        <field name="ngay_bat_dau">2035-04-01</field>
+        <field name="ngay_ket_thuc">2036-03-31</field>
+        <field name="gia_tri_hop_dong">760000000</field>
+        <field name="tien_coc_thanh_toan">220000000</field>
+        <field name="phuong_thuc_thanh_toan">hang_quy</field>
+        <field name="trang_thai">executing</field>
+    </record>
+
+    <record id="hop_dong_khach_hang_massive_02" model="hop_dong_khach_hang">
+        <field name="ma_hop_dong">HDKH-MASS-002</field>
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_massive_03"/>
+        <field name="don_hang_id" ref="quan_ly_khach_hang.don_hang_massive_02"/>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_massive_05"/>
+        <field name="tieu_de">Hop dong supply chain suite</field>
+        <field name="ngay_ky_ket">2035-04-04</field>
+        <field name="ngay_bat_dau">2035-04-15</field>
+        <field name="ngay_ket_thuc">2036-04-14</field>
+        <field name="gia_tri_hop_dong">740000000</field>
+        <field name="tien_coc_thanh_toan">300000000</field>
+        <field name="phuong_thuc_thanh_toan">hang_quy</field>
+        <field name="trang_thai">draft</field>
+    </record>
+
+    <record id="yeu_cau_ho_tro_massive_01" model="yeu_cau_ho_tro">
+        <field name="ma_yeu_cau">YC-MASS-001</field>
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_massive_01"/>
+        <field name="hop_dong_id" ref="quan_ly_khach_hang.hop_dong_khach_hang_massive_01"/>
+        <field name="nguoi_dal_yeu_cau">Vo Thanh Son</field>
+        <field name="dien_thoai_lien_he">0944001001</field>
+        <field name="email_lien_he">vson@namsonlog.example.com</field>
+        <field name="loai_yeu_cau">ho_tro_ky_thuat</field>
+        <field name="tieu_de">Can tu van to uu phan bo xe giao hang</field>
+        <field name="mo_ta_chi_tiet">Can huong dan cai dat bo loc theo khu vuc.</field>
+        <field name="uu_tien">trung_binh</field>
+        <field name="sla_gio">24</field>
+        <field name="ngay_tao_datetime">2035-04-08 09:30:00</field>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_massive_03"/>
+        <field name="trang_thai">assigned</field>
+    </record>
+
+    <record id="yeu_cau_ho_tro_massive_02" model="yeu_cau_ho_tro">
+        <field name="ma_yeu_cau">YC-MASS-002</field>
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_massive_03"/>
+        <field name="hop_dong_id" ref="quan_ly_khach_hang.hop_dong_khach_hang_massive_02"/>
+        <field name="nguoi_dal_yeu_cau">Pham Thanh Vinh</field>
+        <field name="dien_thoai_lien_he">0944001003</field>
+        <field name="email_lien_he">ptvinh@hoangkimfoods.example.com</field>
+        <field name="loai_yeu_cau">yeu_cau_thay_doi</field>
+        <field name="tieu_de">Yeu cau bo sung pham vi module truy xuat</field>
+        <field name="mo_ta_chi_tiet">Can mo rong report theo lo san xuat.</field>
+        <field name="uu_tien">cao</field>
+        <field name="sla_gio">12</field>
+        <field name="ngay_tao_datetime">2035-04-09 11:00:00</field>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_massive_04"/>
+        <field name="trang_thai">in_progress</field>
+    </record>
+
+    <record id="yeu_cau_ho_tro_massive_03" model="yeu_cau_ho_tro">
+        <field name="ma_yeu_cau">YC-MASS-003</field>
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_massive_04"/>
+        <field name="nguoi_dal_yeu_cau">Le Gia Bao</field>
+        <field name="dien_thoai_lien_he">0944001004</field>
+        <field name="email_lien_he">lgbao@bluepeak.example.com</field>
+        <field name="loai_yeu_cau">tu_van_san_pham</field>
+        <field name="tieu_de">Can tai lieu so sanh 2 goi CRM</field>
+        <field name="mo_ta_chi_tiet">De team quyet dinh phuong an dau tu.</field>
+        <field name="uu_tien">thap</field>
+        <field name="sla_gio">48</field>
+        <field name="ngay_tao_datetime">2035-04-10 13:20:00</field>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_sales"/>
+        <field name="trang_thai">new</field>
+    </record>
+
+    <record id="yeu_cau_ho_tro_massive_04" model="yeu_cau_ho_tro">
+        <field name="ma_yeu_cau">YC-MASS-004</field>
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_massive_05"/>
+        <field name="nguoi_dal_yeu_cau">Bui Quynh Anh</field>
+        <field name="dien_thoai_lien_he">0944001005</field>
+        <field name="email_lien_he">qa@vietfarm.example.com</field>
+        <field name="loai_yeu_cau">bao_cao_loi</field>
+        <field name="tieu_de">Bao hanh report doanh thu theo chuoi</field>
+        <field name="mo_ta_chi_tiet">Bao cao bi tre khi loc du lieu 12 thang.</field>
+        <field name="uu_tien">cao</field>
+        <field name="sla_gio">8</field>
+        <field name="ngay_tao_datetime">2035-04-11 08:45:00</field>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_massive_03"/>
+        <field name="trang_thai">resolved</field>
+    </record>
+
+    <record id="hoat_dong_sales_massive_01" model="hoat_dong_sales">
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_massive_01"/>
+        <field name="co_hoi_id" ref="quan_ly_khach_hang.co_hoi_massive_01"/>
+        <field name="bao_gia_id" ref="quan_ly_khach_hang.bao_gia_massive_01"/>
+        <field name="don_hang_id" ref="quan_ly_khach_hang.don_hang_massive_01"/>
+        <field name="nhan_vien_thuc_hien_id" ref="quan_ly_nhan_su.nhan_vien_massive_05"/>
+        <field name="tieu_de">Hop thong nhat lich trien khai wave 1</field>
+        <field name="loai_hoat_dong">gap_truc_tiep</field>
+        <field name="ngay_tao">2035-04-01</field>
+    </record>
+
+    <record id="hoat_dong_sales_massive_02" model="hoat_dong_sales">
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_massive_03"/>
+        <field name="co_hoi_id" ref="quan_ly_khach_hang.co_hoi_massive_02"/>
+        <field name="bao_gia_id" ref="quan_ly_khach_hang.bao_gia_massive_02"/>
+        <field name="don_hang_id" ref="quan_ly_khach_hang.don_hang_massive_02"/>
+        <field name="nhan_vien_thuc_hien_id" ref="quan_ly_nhan_su.nhan_vien_massive_05"/>
+        <field name="tieu_de">Dam phan phuong an thanh toan chia dot</field>
+        <field name="loai_hoat_dong">goi_dien</field>
+        <field name="ngay_tao">2035-04-03</field>
+    </record>
+
+    <record id="hoat_dong_sales_massive_03" model="hoat_dong_sales">
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_massive_04"/>
+        <field name="co_hoi_id" ref="quan_ly_khach_hang.co_hoi_massive_03"/>
+        <field name="nhan_vien_thuc_hien_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_sales"/>
+        <field name="tieu_de">Theo doi phan hoi de xuat CRM</field>
+        <field name="loai_hoat_dong">email</field>
+        <field name="ngay_tao">2035-04-04</field>
+    </record>
+
+    <record id="hoat_dong_sales_massive_04" model="hoat_dong_sales">
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_massive_05"/>
+        <field name="co_hoi_id" ref="quan_ly_khach_hang.co_hoi_massive_04"/>
+        <field name="bao_gia_id" ref="quan_ly_khach_hang.bao_gia_massive_03"/>
+        <field name="nhan_vien_thuc_hien_id" ref="quan_ly_nhan_su.nhan_vien_massive_03"/>
+        <field name="tieu_de">Review tai lieu mo rong he thong</field>
+        <field name="loai_hoat_dong">hop_truc_tuyen</field>
+        <field name="ngay_tao">2035-04-05</field>
+    </record>
+</odoo>

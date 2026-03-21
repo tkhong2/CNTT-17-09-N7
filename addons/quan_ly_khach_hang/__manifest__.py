@@ -1,17 +1,20 @@
 {
 	'name': 'quan_ly_khach_hang',
-	'summary': 'Quản lý khách hàng liên thông nhân sự và công việc',
+	'summary': 'Quản lý khách hàng, lead, cơ hội bán hàng liên thông nhân sự và công việc',
 	'description': """
 		Mô đun quản lý khách hàng:
 		- Quản lý hồ sơ khách hàng
+		- Quản lý lead bán hàng
+		- Quản lý cơ hội bán hàng (sales pipeline)
 		- Liên kết tự động với dự án/công việc
 		- Liên thông nhân sự phụ trách
+		- Lịch sử tương tác khách hàng
 	""",
 	'author': 'My Company',
 	'website': 'http://www.yourcompany.com',
 	'category': 'Sales',
-	'version': '15.0.1.0.0',
-	'depends': ['base', 'mail', 'quan_ly_nhan_su', 'quan_ly_cong_viec'],
+	'version': '15.0.2.0.0',
+	'depends': ['base', 'mail', 'crm', 'quan_ly_nhan_su', 'quan_ly_cong_viec'],
 	'data': [
 		'security/khach_hang_groups.xml',
 		'security/khach_hang_rules.xml',
@@ -24,8 +27,13 @@
 		'data/auto_heal_cron_data.xml',
 		'data/transfer_template_data.xml',
 		'data/demo_content.xml',
-		'views/khach_hang_dashboard_views.xml',
+		'data/demo_seed_all_biz.xml',
+		'data/demo_seed_massive.xml',
+		'data/demo_seed_wave2.xml',
 		'views/khach_hang_views.xml',
+		'views/res_partner_mix_views.xml',
+		'views/res_partner_rank_tree_mix.xml',
+		'views/khach_hang_dashboard_views.xml',
 		'views/khach_hang_merge_suggestion_views.xml',
 		'views/khach_hang_assign_owner_wizard_views.xml',
 		'views/khach_hang_transfer_template_views.xml',
@@ -35,6 +43,16 @@
 		'views/du_an_inherit_views.xml',
 		'views/cong_viec_inherit_views.xml',
 		'views/nhan_vien_inherit_views.xml',
+		'views/lead_views.xml',
+		'views/crm_lead_mix_views.xml',
+		'views/crm_lead_search_mix_views.xml',
+		'views/co_hoi_ban_hang_views.xml',
+		'views/bao_gia_views.xml',
+		'views/don_hang_views.xml',
+		'views/hop_dong_khach_hang_views.xml',
+		'views/yeu_cau_ho_tro_views.xml',
+		'views/hoat_dong_sales_views.xml',
+		'views/crm_menu.xml',
 	],
 	'installable': True,
 	'application': True,

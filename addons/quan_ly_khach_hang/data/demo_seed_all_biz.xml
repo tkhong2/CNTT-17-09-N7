@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="khach_hang_allbiz_primary" model="khach_hang">
+        <field name="ma_khach_hang">KH-ALLBIZ-001</field>
+        <field name="ten_khach_hang">Cong ty Co phan Green Delta</field>
+        <field name="nguoi_lien_he">Le Hai Dang</field>
+        <field name="email">contact@greendelta.example.com</field>
+        <field name="dien_thoai">0933111222</field>
+        <field name="dia_chi">Ha Noi</field>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_sales"/>
+        <field name="trang_thai_hop_tac">dang_hop_tac</field>
+    </record>
+
+    <record id="khach_hang_allbiz_secondary" model="khach_hang">
+        <field name="ma_khach_hang">KH-ALLBIZ-002</field>
+        <field name="ten_khach_hang">Cong ty TNHH Oceanic Foods</field>
+        <field name="nguoi_lien_he">Tran Ngoc Mai</field>
+        <field name="email">ops@oceanicfoods.example.com</field>
+        <field name="dien_thoai">0933222333</field>
+        <field name="dia_chi">Da Nang</field>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_sales"/>
+        <field name="trang_thai_hop_tac">tiem_nang</field>
+    </record>
+
+    <record id="tuong_tac_allbiz_01" model="khach_hang_tuong_tac">
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_allbiz_primary"/>
+        <field name="tieu_de">Kickoff nhu cau ERP va ke hoach trien khai</field>
+        <field name="loai_tuong_tac">meeting</field>
+        <field name="ngay_lien_he">2035-01-08 09:00:00</field>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_sales"/>
+        <field name="ket_qua">quan_tam</field>
+        <field name="trang_thai">done</field>
+    </record>
+
+    <record id="tuong_tac_allbiz_02" model="khach_hang_tuong_tac">
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_allbiz_secondary"/>
+        <field name="tieu_de">Follow-up bao gia giai doan 1</field>
+        <field name="loai_tuong_tac">call</field>
+        <field name="ngay_lien_he">2035-01-12 10:30:00</field>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_sales"/>
+        <field name="ket_qua">hen_lai</field>
+        <field name="hen_lien_he_tiep">2035-01-15 10:30:00</field>
+        <field name="trang_thai">planned</field>
+    </record>
+
+    <record id="lead_allbiz_01" model="lead">
+        <field name="ma_lead">LD-ALLBIZ-001</field>
+        <field name="ten_lead">Green Delta Manufacturing</field>
+        <field name="nguoi_lien_he">Le Hai Dang</field>
+        <field name="email">ceo@greendelta.example.com</field>
+        <field name="so_dien_thoai">0933111222</field>
+        <field name="nguon_lead">referral</field>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_sales"/>
+        <field name="trang_thai">san_sang</field>
+        <field name="ngan_sach_uoc_tinh">980000000</field>
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_allbiz_primary"/>
+    </record>
+
+    <record id="lead_hoat_dong_allbiz_01" model="lead_hoat_dong">
+        <field name="lead_id" ref="quan_ly_khach_hang.lead_allbiz_01"/>
+        <field name="loai_hoat_dong">cuoc_hop</field>
+        <field name="ngay_gio">2035-01-10 14:00:00</field>
+        <field name="nguoi_thuc_hien_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_sales"/>
+        <field name="tieu_de">Hop xac nhan pham vi du an</field>
+        <field name="ket_qua">Khach hang dong y chuyen sang giai doan de xuat.</field>
+    </record>
+
+    <record id="co_hoi_allbiz_01" model="co_hoi_ban_hang">
+        <field name="ma_co_hoi">CH-ALLBIZ-001</field>
+        <field name="ten_co_hoi">Goi ERP toan dien 2025-2026</field>
+        <field name="lead_id" ref="quan_ly_khach_hang.lead_allbiz_01"/>
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_allbiz_primary"/>
+        <field name="du_an_id" ref="quan_ly_cong_viec.du_an_allbiz_rollout"/>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_sales"/>
+        <field name="gia_tri_co_hoi">1200000000</field>
+        <field name="xac_suat_thang">75</field>
+        <field name="han_chot">2035-02-20</field>
+        <field name="giai_doan">de_xuat</field>
+    </record>
+
+    <record id="co_hoi_hoat_dong_allbiz_01" model="co_hoi_hoat_dong">
+        <field name="co_hoi_id" ref="quan_ly_khach_hang.co_hoi_allbiz_01"/>
+        <field name="loai">meeting</field>
+        <field name="ngay_gio">2035-01-18 15:00:00</field>
+        <field name="nguoi_thuc_hien_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_sales"/>
+        <field name="mo_ta">Trinh bay de xuat ky thuat va lo trinh UAT.</field>
+    </record>
+
+    <record id="bao_gia_allbiz_01" model="bao_gia">
+        <field name="ma_bao_gia">BG-ALLBIZ-001</field>
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_allbiz_primary"/>
+        <field name="co_hoi_id" ref="quan_ly_khach_hang.co_hoi_allbiz_01"/>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_sales"/>
+        <field name="ngay_hieu_luc">2035-01-20</field>
+        <field name="ngay_het_hieu_luc">2035-02-20</field>
+        <field name="chiet_khau_phan_tram">5</field>
+        <field name="thue_vat">10</field>
+        <field name="hinh_thuc_thanh_toan">chuyen_khoan</field>
+        <field name="trang_thai">accepted</field>
+    </record>
+
+    <record id="bao_gia_chi_tiet_allbiz_01" model="bao_gia_chi_tiet">
+        <field name="bao_gia_id" ref="quan_ly_khach_hang.bao_gia_allbiz_01"/>
+        <field name="san_pham">Ban quyen ERP Core</field>
+        <field name="don_vi_tinh">Goi</field>
+        <field name="so_luong">1</field>
+        <field name="gia_ban">750000000</field>
+    </record>
+
+    <record id="bao_gia_chi_tiet_allbiz_02" model="bao_gia_chi_tiet">
+        <field name="bao_gia_id" ref="quan_ly_khach_hang.bao_gia_allbiz_01"/>
+        <field name="san_pham">Dich vu trien khai va dao tao</field>
+        <field name="don_vi_tinh">Goi</field>
+        <field name="so_luong">1</field>
+        <field name="gia_ban">450000000</field>
+    </record>
+
+    <record id="don_hang_allbiz_01" model="don_hang">
+        <field name="ma_don_hang">DH-ALLBIZ-001</field>
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_allbiz_primary"/>
+        <field name="bao_gia_id" ref="quan_ly_khach_hang.bao_gia_allbiz_01"/>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_sales"/>
+        <field name="ngay_dat">2035-01-22</field>
+        <field name="ngay_giao_du_kinh">2035-03-30</field>
+        <field name="hinh_thuc_thanh_toan">chuyen_khoan</field>
+        <field name="so_tien_coc">300000000</field>
+        <field name="trang_thai">confirmed</field>
+    </record>
+
+    <record id="don_hang_chi_tiet_allbiz_01" model="don_hang_chi_tiet">
+        <field name="don_hang_id" ref="quan_ly_khach_hang.don_hang_allbiz_01"/>
+        <field name="san_pham">Ban quyen ERP Core</field>
+        <field name="don_vi_tinh">Goi</field>
+        <field name="so_luong">1</field>
+        <field name="gia_ban">750000000</field>
+    </record>
+
+    <record id="don_hang_chi_tiet_allbiz_02" model="don_hang_chi_tiet">
+        <field name="don_hang_id" ref="quan_ly_khach_hang.don_hang_allbiz_01"/>
+        <field name="san_pham">Dich vu trien khai va dao tao</field>
+        <field name="don_vi_tinh">Goi</field>
+        <field name="so_luong">1</field>
+        <field name="gia_ban">450000000</field>
+    </record>
+
+    <record id="hop_dong_khach_hang_allbiz_01" model="hop_dong_khach_hang">
+        <field name="ma_hop_dong">HDKH-ALLBIZ-001</field>
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_allbiz_primary"/>
+        <field name="don_hang_id" ref="quan_ly_khach_hang.don_hang_allbiz_01"/>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_sales"/>
+        <field name="tieu_de">Hop dong trien khai ERP Green Delta</field>
+        <field name="ngay_ky_ket">2035-01-25</field>
+        <field name="ngay_bat_dau">2035-02-01</field>
+        <field name="ngay_ket_thuc">2035-12-31</field>
+        <field name="gia_tri_hop_dong">1200000000</field>
+        <field name="tien_coc_thanh_toan">300000000</field>
+        <field name="phuong_thuc_thanh_toan">hang_quy</field>
+        <field name="trang_thai">executing</field>
+    </record>
+
+    <record id="yeu_cau_ho_tro_allbiz_01" model="yeu_cau_ho_tro">
+        <field name="ma_yeu_cau">YC-ALLBIZ-001</field>
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_allbiz_primary"/>
+        <field name="hop_dong_id" ref="quan_ly_khach_hang.hop_dong_khach_hang_allbiz_01"/>
+        <field name="nguoi_dal_yeu_cau">Le Hai Dang</field>
+        <field name="dien_thoai_lien_he">0933111222</field>
+        <field name="email_lien_he">ceo@greendelta.example.com</field>
+        <field name="loai_yeu_cau">ho_tro_ky_thuat</field>
+        <field name="tieu_de">Loi phan quyen nguoi dung kho mua hang</field>
+        <field name="mo_ta_chi_tiet"><![CDATA[Khong the truy cap man hinh kho mua hang tren role ke toan.]]></field>
+        <field name="uu_tien">cao</field>
+        <field name="sla_gio">24</field>
+        <field name="ngay_tao_datetime">2035-01-26 09:00:00</field>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_specialist"/>
+        <field name="trang_thai">in_progress</field>
+    </record>
+
+    <record id="yeu_cau_ho_tro_allbiz_02" model="yeu_cau_ho_tro">
+        <field name="ma_yeu_cau">YC-ALLBIZ-002</field>
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_allbiz_secondary"/>
+        <field name="nguoi_dal_yeu_cau">Tran Ngoc Mai</field>
+        <field name="dien_thoai_lien_he">0933222333</field>
+        <field name="email_lien_he">ops@oceanicfoods.example.com</field>
+        <field name="loai_yeu_cau">tu_van_san_pham</field>
+        <field name="tieu_de">Yeu cau tu van mo rong module CRM</field>
+        <field name="mo_ta_chi_tiet"><![CDATA[Can de xuat phuong an mo rong quy trinh SLA cho call center.]]></field>
+        <field name="uu_tien">trung_binh</field>
+        <field name="sla_gio">48</field>
+        <field name="ngay_tao_datetime">2035-01-27 10:00:00</field>
+        <field name="nhan_vien_phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_sales"/>
+        <field name="trang_thai">assigned</field>
+    </record>
+
+    <record id="hoat_dong_sales_allbiz_01" model="hoat_dong_sales">
+        <field name="khach_hang_id" ref="quan_ly_khach_hang.khach_hang_allbiz_primary"/>
+        <field name="co_hoi_id" ref="quan_ly_khach_hang.co_hoi_allbiz_01"/>
+        <field name="bao_gia_id" ref="quan_ly_khach_hang.bao_gia_allbiz_01"/>
+        <field name="don_hang_id" ref="quan_ly_khach_hang.don_hang_allbiz_01"/>
+        <field name="nhan_vien_thuc_hien_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_sales"/>
+        <field name="tieu_de">Hop dong bo sung va lich dao tao key user</field>
+        <field name="loai_hoat_dong">hop_truc_tuyen</field>
+        <field name="ngay_tao">2035-01-28</field>
+    </record>
+</odoo>

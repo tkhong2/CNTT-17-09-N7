@@ -23,6 +23,9 @@ class KhachHangDashboard(models.Model):
     tuong_tac_chot_hop_dong = fields.Integer(string='Tương tác chốt hợp đồng', compute='_compute_kpis')
     followup_qua_han = fields.Integer(string='Follow-up quá hạn', compute='_compute_kpis')
     ty_le_chot = fields.Float(string='Tỷ lệ chốt (%)', compute='_compute_kpis')
+    tong_ticket_ho_tro = fields.Integer(string='Tổng ticket hỗ trợ mở', compute='_compute_kpis')
+    ticket_qua_han_sla = fields.Integer(string='Ticket quá hạn SLA', compute='_compute_kpis')
+    sla_breach_rate = fields.Float(string='SLA breach rate (%)', compute='_compute_kpis')
 
     @api.model
     def _get_duplicate_customer_ids(self):
@@ -51,6 +54,7 @@ class KhachHangDashboard(models.Model):
     def _compute_kpis(self):
         KhachHang = self.env['khach_hang']
         TuongTac = self.env['khach_hang_tuong_tac']
+        Ticket = self.env['yeu_cau_ho_tro']
 
         now = fields.Datetime.now()
         seven_days_ago = now - timedelta(days=7)
@@ -80,9 +84,17 @@ class KhachHangDashboard(models.Model):
             ])
 
             if record.tong_tuong_tac:
-                record.ty_le_chot = (record.tuong_tac_chot_hop_dong / record.tong_tuong_tac) * 100.0
+                record.ty_le_chot = (record.tuong_tac_chot_hop_dong / record.tong_tuong_tac)
             else:
                 record.ty_le_chot = 0.0
+
+            open_ticket_domain = [('trang_thai', 'not in', ['resolved', 'closed'])]
+            record.tong_ticket_ho_tro = Ticket.search_count(open_ticket_domain)
+            record.ticket_qua_han_sla = Ticket.search_count(open_ticket_domain + [('qua_han_sla', '=', True)])
+            record.sla_breach_rate = (
+                (record.ticket_qua_han_sla / record.tong_ticket_ho_tro)
+                if record.tong_ticket_ho_tro else 0.0
+            )
 
     def action_xem_khach_hang_chua_phan_cong(self):
         self.ensure_one()
@@ -158,6 +170,19 @@ class KhachHangDashboard(models.Model):
                 ('trang_thai', '=', 'planned'),
                 ('hen_lien_he_tiep', '!=', False),
                 ('hen_lien_he_tiep', '<', fields.Datetime.now()),
+            ],
+        }
+
+    def action_xem_ticket_qua_han_sla(self):
+        self.ensure_one()
+        return {
+            'name': 'Ticket quá hạn SLA',
+            'type': 'ir.actions.act_window',
+            'res_model': 'yeu_cau_ho_tro',
+            'view_mode': 'kanban,tree,form',
+            'domain': [
+                ('trang_thai', 'not in', ['resolved', 'closed']),
+                ('qua_han_sla', '=', True),
             ],
         }
 
