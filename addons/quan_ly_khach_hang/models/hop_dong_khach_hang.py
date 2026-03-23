@@ -14,7 +14,7 @@ class HopDongKhachHang(models.Model):
 
     ma_hop_dong = fields.Char(string="Mã hợp đồng", required=True, index=True, default=lambda self: _('New'))
     khach_hang_id = fields.Many2one('khach_hang', string="Khách hàng", required=True, tracking=True, ondelete='cascade')
-    don_hang_id = fields.Many2one('don_hang', string="Đơn hàng gốc", readonly=True)
+    # don_hang_id removed
     
     nhan_vien_phu_trach_id = fields.Many2one('nhan_vien', string="Sales phụ trách", required=True, tracking=True)
     
@@ -143,6 +143,70 @@ class HopDongKhachHang(models.Model):
             if vals.get('ma_hop_dong', _('New')) == _('New'):
                 vals['ma_hop_dong'] = self.env['ir.sequence'].next_by_code('hop_dong_khach_hang') or _('New')
         return super().create(vals_list)
+
+
+    @api.model
+    def _cron_tao_task_nhac_nho_het_han(self):
+        """Cron: Tạo Task nhắc nhở cho nhân viên khi hợp đồng sắp hết hạn (<=30 ngày)."""
+        from datetime import timedelta as td
+        today    = fields.Date.today()
+        deadline = today + td(days=30)
+
+        sap_het_han = self.search([
+            ('trang_thai', 'in', ['signed', 'executing', 'extended']),
+            ('ngay_ket_thuc', '>=', today),
+            ('ngay_ket_thuc', '<=', deadline),
+            ('nhac_nho_gia_han', '=', True),
+        ])
+
+        DuAn     = self.env['du_an']
+        CongViec = self.env['cong_viec']
+
+        for hd in sap_het_han:
+            kh = hd.khach_hang_id
+            nv = hd.nhan_vien_phu_trach_id
+
+            # Kiểm tra đã có task nhắc nhở chưa
+            existing = CongViec.search([
+                ('ten_cong_viec', 'ilike', f'[Gia hạn HĐ] {hd.ma_hop_dong}'),
+                ('trang_thai', 'not in', ['hoan_thanh', 'huy_bo']),
+            ], limit=1)
+            if existing:
+                continue
+
+            du_an = DuAn.search([
+                ('khach_hang_id', '=', kh.id),
+                ('trang_thai', 'not in', ['hoan_thanh', 'huy_bo']),
+            ], limit=1)
+            if not du_an:
+                du_an = DuAn.create({
+                    'ma_du_an':        self.env['ir.sequence'].next_by_code('du_an') or 'DA-NEW',
+                    'ten_du_an':       f'Chăm sóc KH: {kh.ten_khach_hang}',
+                    'ngay_bat_dau':    today,
+                    'trang_thai':      'dang_thuc_hien',
+                    'khach_hang_id':   kh.id,
+                    'nguoi_quan_ly_id': nv.id if nv else False,
+                })
+
+            days_left = (hd.ngay_ket_thuc - today).days
+            CongViec.create({
+                'ma_cong_viec':       self.env['ir.sequence'].next_by_code('cong_viec') or 'CV-NEW',
+                'ten_cong_viec':      f'[Gia hạn HĐ] {hd.ma_hop_dong} — {kh.ten_khach_hang} (còn {days_left} ngày)',
+                'mo_ta':              f'Hợp đồng <b>{hd.ma_hop_dong}</b> — {hd.tieu_de}<br/>'
+                                      f'Khách hàng: {kh.ten_khach_hang}<br/>'
+                                      f'Ngày kết thúc: {hd.ngay_ket_thuc}<br/>'
+                                      f'Còn <b>{days_left} ngày</b>. Liên hệ khách hàng để gia hạn hoặc đóng hợp đồng.',
+                'du_an_id':           du_an.id,
+                'nguoi_phu_trach_id': nv.id if nv else False,
+                'ngay_bat_dau':       today,
+                'ngay_ket_thuc':      hd.ngay_ket_thuc,
+                'trang_thai':         'cho_xu_ly',
+                'do_uu_tien':         'cao',
+            })
+
+            hd.message_post(body=_(
+                '⚠️ <b>Task nhắc nhở gia hạn tự động tạo</b> — còn %d ngày đến hạn hợp đồng.'
+            ) % days_left)
 
 
 class YeuCauHoTro(models.Model):
@@ -333,7 +397,7 @@ class HoatDongSales(models.Model):
     khach_hang_id = fields.Many2one('khach_hang', string="Khách hàng", required=True, tracking=True, ondelete='cascade')
     co_hoi_id = fields.Many2one('co_hoi_ban_hang', string="Cơ hội bán hàng", tracking=True)
     bao_gia_id = fields.Many2one('bao_gia', string="Báo giá", tracking=True)
-    don_hang_id = fields.Many2one('don_hang', string="Đơn hàng", tracking=True)
+    # don_hang_id removed
     
     nhan_vien_thuc_hien_id = fields.Many2one('nhan_vien', string="Nhân viên thực hiện", default=lambda self: self.env.user.nhan_vien_id, tracking=True)
     

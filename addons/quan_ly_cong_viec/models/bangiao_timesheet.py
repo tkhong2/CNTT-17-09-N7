@@ -46,7 +46,7 @@ class BangiaoTimesheet(models.Model):
     ghi_chu = fields.Text(string="Ghi chú")
     
     # Tính lương
-    luong_nhan = fields.Float(string="Lương nhận", compute="_compute_luong_nhan", store=True, help="Dùng cho tính lương")
+    luong_nhan = fields.Float(string="Lương nhận", compute="_compute_luong_nhan", store=False, help="Dùng cho tính lương")
     
     @api.depends('nhan_vien_id', 'ngay_lam', 'cong_viec_id')
     def _compute_display_name(self):
@@ -59,41 +59,46 @@ class BangiaoTimesheet(models.Model):
     @api.depends('gio_bat_dau', 'gio_ket_thuc')
     def _compute_tong_gio(self):
         for record in self:
-            if record.gio_bat_dau and record.gio_ket_thuc:
+            if record.gio_bat_dau > 0 and record.gio_ket_thuc > record.gio_bat_dau:
                 record.tong_gio = record.gio_ket_thuc - record.gio_bat_dau
             else:
                 record.tong_gio = 0
     
-    @api.depends('tong_gio', 'loai_cong_viec')
+    @api.depends('tong_gio', 'loai_cong_viec', 'nhan_vien_id')
     def _compute_luong_nhan(self):
         """Tính lương dựa trên giờ làm (dùng cho tinh_luong)"""
+        today = fields.Date.today()
         for record in self:
-            # Lấy lương từ hợp đồng
-            hop_dong = record.nhan_vien_id.hop_dong_ids.filtered(lambda x: x.trang_thai == 'active')
-            if hop_dong:
-                luong_co_ban = hop_dong[0].luong_co_ban
-                # Tính lương theo giờ (22 ngày làm việc/tháng, 8 giờ/ngày = 176 giờ/tháng)
+            luong_co_ban = 0.0
+            if record.nhan_vien_id:
+                hop_dong = self.env['hop_dong'].search([
+                    ('nhan_vien_id', '=', record.nhan_vien_id.id),
+                    ('trang_thai', '=', 'active'),
+                    ('luong_co_ban', '>', 0),
+                ], limit=1, order='ngay_bat_dau desc')
+                if hop_dong:
+                    luong_co_ban = hop_dong.luong_co_ban
+            if luong_co_ban:
                 luong_gio = luong_co_ban / 176.0
-                
                 if record.loai_cong_viec == 'tăng_ca':
-                    # Tăng ca: 150% lương giờ
                     record.luong_nhan = record.tong_gio * luong_gio * 1.5
                 elif record.loai_cong_viec == 'lao_dung':
-                    # Lao động thêm: 200% lương giờ
                     record.luong_nhan = record.tong_gio * luong_gio * 2.0
                 else:
                     record.luong_nhan = record.tong_gio * luong_gio
             else:
-                record.luong_nhan = 0
+                record.luong_nhan = 0.0
     
     @api.constrains('gio_bat_dau', 'gio_ket_thuc')
     def _check_time(self):
         for record in self:
-            if record.gio_bat_dau and record.gio_ket_thuc:
+            # Dùng > 0 để kiểm tra đã nhập thực sự (float 0.0 được coi là False)
+            if record.gio_bat_dau > 0 and record.gio_ket_thuc > 0:
                 if record.gio_bat_dau >= record.gio_ket_thuc:
-                    raise ValidationError(_("Giờ bắt đầu không thể lớn hơn giờ kết thúc!"))
-                if record.tong_gio > 12:
-                    raise ValidationError(_("Không được làm việc quá 12 giờ/ngày!"))
+                    raise ValidationError(_("Giờ bắt đầu không thể lớn hơn hoặc bằng giờ kết thúc!"))
+                tong = record.gio_ket_thuc - record.gio_bat_dau
+                if tong > 12:
+                    raise ValidationError(_("Không được làm việc quá 12 giờ/ngày! (%.1f giờ)" % tong))
     
     def action_submit(self):
         """Nộp timesheet"""
@@ -121,4 +126,3 @@ class BangiaoTimesheet(models.Model):
             if record.trang_thai != 'submitted':
                 raise ValidationError(_("Chỉ timesheet đã nộp mới được từ chối!"))
         self.trang_thai = 'rejected'
-

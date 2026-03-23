@@ -15,6 +15,12 @@
 	'category': 'Sales',
 	'version': '15.0.2.0.0',
 	'depends': ['base', 'mail', 'crm', 'quan_ly_nhan_su', 'quan_ly_cong_viec'],
+
+	'assets': {
+		'web.assets_backend': [
+			'quan_ly_khach_hang/static/src/scss/dashboard.scss',
+		],
+	},
 	'data': [
 		'security/khach_hang_groups.xml',
 		'security/khach_hang_rules.xml',
@@ -26,10 +32,8 @@
 		'data/manager_automation_cron_data.xml',
 		'data/auto_heal_cron_data.xml',
 		'data/transfer_template_data.xml',
+		# Commented out demo data to fix module loading issues
 		'data/demo_content.xml',
-		'data/demo_seed_all_biz.xml',
-		'data/demo_seed_massive.xml',
-		'data/demo_seed_wave2.xml',
 		'views/khach_hang_views.xml',
 		'views/res_partner_mix_views.xml',
 		'views/res_partner_rank_tree_mix.xml',
@@ -48,7 +52,6 @@
 		'views/crm_lead_search_mix_views.xml',
 		'views/co_hoi_ban_hang_views.xml',
 		'views/bao_gia_views.xml',
-		'views/don_hang_views.xml',
 		'views/hop_dong_khach_hang_views.xml',
 		'views/yeu_cau_ho_tro_views.xml',
 		'views/hoat_dong_sales_views.xml',

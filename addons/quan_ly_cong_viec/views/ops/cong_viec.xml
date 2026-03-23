@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <field name="trang_thai" widget="statusbar" options="{'clickable': '1'}" statusbar_visible="moi,dang_thuc_hien,tam_dung,hoan_thanh,huy_bo"/>
+                    <field name="trang_thai" widget="statusbar" options="{'clickable': '1'}" statusbar_visible="moi,cho_xu_ly,dang_thuc_hien,hoan_thanh"/>
                 </header>
                 <sheet>
                     <div class="oe_title">
@@ -22,7 +22,7 @@
                         <group>
                             <field name="du_an_id"/>
                             <field name="partner_id"/>
-                            <field name="contact_person_id" domain="[('parent_id', '=', partner_id)]"/>
+                            <field name="contact_person_id" string="Người liên hệ trực tiếp" domain="[('parent_id', '=', partner_id)]" help="Chỉ hiển thị người thuộc công ty khách đã chọn"/>
                             <field name="nguoi_phu_trach_id"/>
                             <field name="user_ids" widget="many2many_tags" options="{'no_create': True}"/>
                             <field name="do_uu_tien"/>
@@ -119,7 +119,7 @@
                 <filter string="Hoàn thành" name="hoan_thanh" domain="[('trang_thai', '=', 'hoan_thanh')]"/>
                 <filter string="Ưu tiên cao" name="uu_tien_cao" domain="[('do_uu_tien', 'in', ['cao', 'rat_cao'])]"/>
                 <filter string="Đang bị chặn" name="blocked_tasks" domain="[('bi_chan', '=', True)]"/>
-                <group expand="0" string="Group By">
+                <group expand="0" string="Nhóm theo">
                     <filter string="Dự án" name="group_by_du_an" context="{'group_by': 'du_an_id'}"/>
                     <filter string="Người phụ trách" name="group_by_nguoi_phu_trach" context="{'group_by': 'nguoi_phu_trach_id'}"/>
                     <filter string="Trạng thái" name="group_by_trang_thai" context="{'group_by': 'trang_thai'}"/>

@@ -10,7 +10,7 @@
             <field name="arch" type="xml">
                 <tree>
                     <field name="ma_bang_luong"/>
-                    <field name="thang_nam"/>
+                    <field name="thang_nam" placeholder="VD: 2026-03 hoặc 03/2026"/>
                     <field name="ngay_bat_dau"/>
                     <field name="ngay_ket_thuc"/>
                     <field name="so_nhan_vien"/>

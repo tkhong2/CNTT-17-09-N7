@@ -19,3 +19,4 @@ access_nhan_su_dashboard,nhan_su_dashboard.nhan_su_dashboard,model_nhan_su_dashb
 access_hr_family,hr.family,model_hr_family,base.group_user,1,1,1,1
 access_hr_work_history,hr.work.history,model_hr_work_history,base.group_user,1,1,1,1
 
+access_telegram_config,telegram.config,model_telegram_config,base.group_user,1,1,1,1

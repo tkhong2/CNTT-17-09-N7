@@ -36,5 +36,18 @@
             <field name="numbercall">-1</field>
             <field name="active">True</field>
         </record>
+
+        <record id="ir_cron_hop_dong_sap_het_han_task" model="ir.cron">
+            <field name="name">Hợp đồng KH - tạo Task nhắc nhở sắp hết hạn</field>
+            <field name="model_id" ref="model_hop_dong_khach_hang"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_tao_task_nhac_nho_het_han()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="active">True</field>
+        </record>
     </data>
 </odoo>
+

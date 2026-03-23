@@ -56,7 +56,6 @@
                         <group>
                             <group>
                                 <field name="khach_hang_id"/>
-                                <field name="don_hang_id" readonly="1"/>
                                 <field name="nhan_vien_phu_trach_id"/>
                             </group>
                             <group>

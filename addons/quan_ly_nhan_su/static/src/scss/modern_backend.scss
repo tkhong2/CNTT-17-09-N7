@@ -1,368 +1,474 @@
-/* Global modern backend theme for custom ERP modules */
+/* ============================================================
+   ERP SYSTEM — Màu chủ đạo Teal (#00A09D) — Odoo 15 Style
+   ============================================================ */
 
 :root {
-    --erp-primary: #0f766e;
-    --erp-primary-2: #14b8a6;
-    --erp-ink: #1f2937;
-    --erp-muted: #6b7280;
-    --erp-surface: #ffffff;
-    --erp-surface-soft: #f4f8fc;
-    --erp-line: #d9e3ee;
-    --erp-shadow: 0 10px 28px rgba(15, 23, 42, 0.08);
-    --erp-shadow-soft: 0 6px 18px rgba(15, 23, 42, 0.06);
-    --erp-radius-lg: 16px;
-    --erp-radius-md: 12px;
-    --erp-radius-sm: 10px;
+    --erp-primary:      #00A09D;
+    --erp-primary-dark: #007B78;
+    --erp-primary-lite: #E0F5F5;
+    --erp-primary-mid:  rgba(0,160,157,0.15);
+    --erp-accent1:      #00A09D;   /* teal  */
+    --erp-accent2:      #28A745;   /* green */
+    --erp-accent3:      #F0A500;   /* amber */
+    --erp-accent4:      #DC3545;   /* red   */
+    --erp-ink:          #1C2B33;
+    --erp-muted:        #6B7A85;
+    --erp-surface:      #FFFFFF;
+    --erp-bg:           #F4F7F9;
+    --erp-line:         #DDE5EA;
+    --erp-shadow:       0 2px 16px rgba(0,160,157,.10);
+    --erp-shadow-md:    0 6px 28px rgba(0,160,157,.14);
+    --erp-radius:       12px;
+    --erp-radius-sm:    8px;
 }
 
-.o_action_manager {
-    background: radial-gradient(circle at 12% -8%, #ddeffc 0%, #eff6fb 34%, #f7fafd 64%, #fbfcfd 100%);
-}
+/* ── Nền trang ── */
+.o_action_manager { background: #F4F7F9; }
 
 .o_control_panel {
     background: transparent;
     border-bottom: none;
-    margin-bottom: 6px;
+    margin-bottom: 4px;
 }
 
 .o_control_panel .breadcrumb {
-    background: rgba(255, 255, 255, 0.9);
-    border: 1px solid var(--erp-line);
-    border-radius: 999px;
-    padding: 6px 14px;
-    box-shadow: var(--erp-shadow-soft);
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    font-weight: 600;
+    color: var(--erp-primary-dark);
 }
 
-.o_cp_buttons .btn,
-.o_form_view .btn {
-    border-radius: var(--erp-radius-sm);
-}
-
-.o_cp_buttons .btn-primary,
-.o_form_button_save,
-.o_form_button_create,
-.btn-primary {
-    background: linear-gradient(90deg, var(--erp-primary) 0%, var(--erp-primary-2) 100%);
-    border-color: transparent;
-}
-
-.o_cp_buttons .btn-primary:hover,
-.o_form_button_save:hover,
-.o_form_button_create:hover,
-.btn-primary:hover {
-    filter: brightness(0.96);
-}
-
+/* ── Form sheet ── */
 .o_form_view .o_form_sheet_bg {
     background: transparent;
-    padding: 20px;
+    padding: 16px 20px;
 }
-
 .o_form_view .o_form_sheet {
     border: 1px solid var(--erp-line);
-    border-radius: var(--erp-radius-lg);
+    border-radius: var(--erp-radius);
     box-shadow: var(--erp-shadow);
+    background: #fff;
+    max-width: none !important;
+    width: 100% !important;
 }
 
-.o_form_view .oe_title h1,
-.o_form_view .oe_title h2 {
-    color: #0b3f4a;
-    font-weight: 700;
-    letter-spacing: 0.2px;
+/* ── Buttons — ĐỒNG NHẤT màu teal ── */
+.btn-primary,
+.o_form_button_save,
+.o_cp_buttons .btn-primary {
+    background: var(--erp-primary) !important;
+    border-color: var(--erp-primary) !important;
+    border-radius: var(--erp-radius-sm) !important;
+    font-weight: 600 !important;
+    color: #fff !important;
+}
+.btn-primary:hover,
+.o_form_button_save:hover,
+.o_cp_buttons .btn-primary:hover {
+    background: var(--erp-primary-dark) !important;
+    border-color: var(--erp-primary-dark) !important;
 }
 
-.o_form_view .o_group {
-    gap: 10px;
+/* Nút secondary */
+.btn-secondary {
+    background: #fff !important;
+    border: 1px solid var(--erp-primary) !important;
+    color: var(--erp-primary) !important;
+    border-radius: var(--erp-radius-sm) !important;
+    font-weight: 600 !important;
+}
+.btn-secondary:hover {
+    background: var(--erp-primary-lite) !important;
 }
 
+/* ── Inputs ── */
 .o_form_view .o_input,
-.o_form_view .o_field_widget .o_input,
-.o_form_view textarea,
-.o_searchview,
-.select2-container .select2-choice {
+.o_form_view textarea {
     border: 1px solid var(--erp-line);
     border-radius: var(--erp-radius-sm);
+    transition: border-color .15s, box-shadow .15s;
 }
-
 .o_form_view .o_input:focus,
-.o_form_view .o_field_widget .o_input:focus,
-.o_form_view textarea:focus,
-.o_searchview.o_searchview_focused {
-    border-color: var(--erp-primary-2);
-    box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.18);
+.o_form_view textarea:focus {
+    border-color: var(--erp-primary);
+    box-shadow: 0 0 0 3px rgba(0,160,157,.14);
+    outline: none;
 }
 
-.erp-employee-form .erp-employee-hero {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) 260px;
-    align-items: center;
-    gap: 18px;
-    margin-bottom: 10px;
+/* ── Status bar ── */
+.o_statusbar_status { border-radius: 999px; font-weight: 600; }
+.o_statusbar_status.o_arrow_button_current {
+    background: var(--erp-primary) !important;
+    border-color: transparent !important;
+    color: #fff !important;
 }
 
-.erp-employee-form .erp-employee-avatar-wrap {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 220px;
-    border: 1px solid #dce8f4;
-    border-radius: 14px;
-    background: linear-gradient(180deg, #f8fcff 0%, #eef7ff 100%);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
-}
-
-.erp-employee-form .erp-employee-avatar .o_field_image,
-.erp-employee-form .erp-employee-avatar img {
-    width: 200px !important;
-    height: 200px !important;
-    max-width: none !important;
-    border-radius: 16px;
-    border: 1px solid var(--erp-line);
-    object-fit: cover;
-}
-
-.erp-employee-form .erp-employee-avatar {
-    float: none !important;
-    max-width: none !important;
-    margin: 0 !important;
-}
-
-@media (max-width: 992px) {
-    .erp-employee-form .erp-employee-hero {
-        grid-template-columns: 1fr;
-    }
-
-    .erp-employee-form .erp-employee-avatar-wrap {
-        min-height: 180px;
-    }
-
-    .erp-employee-form .erp-employee-avatar .o_field_image,
-    .erp-employee-form .erp-employee-avatar img {
-        width: 170px !important;
-        height: 170px !important;
-    }
-}
-
-.erp-employee-form .erp-employee-overview > .o_group {
-    border: 1px solid #e6edf5;
-    border-radius: 10px;
-    background: #fbfdff;
-    padding: 8px 10px;
-}
-
-.o_form_view .o_statusbar_status {
-    border-radius: 999px;
-    border: 1px solid var(--erp-line);
-    color: var(--erp-muted);
-    background: #fff;
-}
-
-.o_form_view .o_statusbar_status.o_arrow_button_current {
-    border-color: transparent;
-    color: #fff;
-    background: linear-gradient(90deg, var(--erp-primary) 0%, var(--erp-primary-2) 100%);
-}
-
+/* ── List view ── */
 .o_list_view {
     border: 1px solid var(--erp-line);
-    border-radius: var(--erp-radius-md);
+    border-radius: var(--erp-radius-sm);
     overflow: hidden;
-    box-shadow: var(--erp-shadow-soft);
-    background: var(--erp-surface);
+    box-shadow: var(--erp-shadow);
 }
-
-.o_list_view thead {
-    background: #ecf6fb;
-}
-
+.o_list_view thead { background: #E8F5F5; }
 .o_list_view thead th {
-    border-bottom: 1px solid var(--erp-line);
-    color: #104351;
+    color: var(--erp-primary-dark);
     font-weight: 700;
+    border-bottom: 2px solid var(--erp-line);
 }
+.o_list_view tbody tr:hover { background: #F0FAFA; }
 
-.o_list_view tbody tr:nth-child(even) {
-    background: #fbfdff;
-}
-
-.o_list_view tbody tr:hover {
-    background: #eefaf8;
-}
-
-.o_kanban_view {
-    background: transparent;
-}
-
-.o_kanban_view .oe_kanban_card,
+/* ── Kanban ── */
+.o_kanban_view { background: transparent; }
 .o_kanban_view .o_kanban_record {
     border: 1px solid var(--erp-line);
-    border-radius: var(--erp-radius-md);
-    box-shadow: var(--erp-shadow-soft);
-    transition: transform 0.14s ease, box-shadow 0.14s ease;
+    border-radius: var(--erp-radius-sm);
+    box-shadow: var(--erp-shadow);
+    transition: transform .14s, box-shadow .14s;
 }
-
-.o_kanban_view .oe_kanban_card:hover,
 .o_kanban_view .o_kanban_record:hover {
     transform: translateY(-2px);
-    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.1);
+    box-shadow: var(--erp-shadow-md);
 }
 
-.o_kanban_view .badge,
-.o_kanban_view .badge-info,
-.o_kanban_view .badge-success,
-.o_kanban_view .badge-warning {
-    border-radius: 999px;
-    padding: 4px 10px;
-}
+/* ============================================================
+   DASHBOARD LAYOUT — dùng chung 3 modules
+   ============================================================ */
 
-.o_kanban_view .badge,
-.o_kanban_view .badge-info {
-    background: #e7fffb;
-    color: #0b635d;
-    border: 1px solid #bff0e8;
-}
-
-/* Dashboard layout */
 .erp-dashboard-page {
     display: flex;
     flex-direction: column;
+    gap: 20px;
+    padding: 2px 0 8px;
+}
+
+/* Header */
+.erp-dash-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--erp-primary-lite);
+}
+
+.erp-dash-header-left h1 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--erp-primary-dark);
+    letter-spacing: -.2px;
+}
+
+.erp-dash-header-left p {
+    margin: 3px 0 0;
+    font-size: 13px;
+    color: var(--erp-muted);
+}
+
+/* ── KPI CARDS ── */
+.erp-kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 14px;
 }
-
-.erp-dashboard-title {
-    margin-bottom: 2px;
-}
-
-.erp-dashboard-title h1 {
-    margin: 0;
-    font-size: 24px;
-    color: #0a3f4f;
-    font-weight: 700;
-}
-
-.erp-kpi-grid {
-    display: grid;
-    gap: 12px;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-}
-
-.erp-kpi-grid.erp-kpi-grid-3 {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-
-.erp-kpi-grid.erp-kpi-grid-6 {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-}
+.erp-kpi-row-6 { grid-template-columns: repeat(6, 1fr); }
+.erp-kpi-row-3 { grid-template-columns: repeat(3, 1fr); }
 
 .erp-kpi-card {
     background: #fff;
     border: 1px solid var(--erp-line);
-    border-radius: 10px;
-    box-shadow: var(--erp-shadow-soft);
-    min-height: 82px;
-    padding: 10px 14px;
+    border-radius: var(--erp-radius);
+    box-shadow: var(--erp-shadow);
+    padding: 18px 16px;
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    text-align: center;
+    gap: 5px;
+    position: relative;
+    overflow: hidden;
+    transition: transform .15s, box-shadow .15s;
 }
+.erp-kpi-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--erp-shadow-md);
+}
+.erp-kpi-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    border-radius: 12px 0 0 12px;
+}
+
+/* Màu accent bar — teal chủ đạo */
+.erp-kpi-c1::before { background: var(--erp-accent1); }
+.erp-kpi-c2::before { background: var(--erp-accent2); }
+.erp-kpi-c3::before { background: var(--erp-accent3); }
+.erp-kpi-c4::before { background: var(--erp-accent4); }
+
+.erp-kpi-icon {
+    font-size: 20px;
+    line-height: 1;
+    margin-bottom: 2px;
+    margin-top: 2px;
+}
+.erp-kpi-c1 .erp-kpi-icon { color: var(--erp-accent1); }
+.erp-kpi-c2 .erp-kpi-icon { color: var(--erp-accent2); }
+.erp-kpi-c3 .erp-kpi-icon { color: var(--erp-accent3); }
+.erp-kpi-c4 .erp-kpi-icon { color: var(--erp-accent4); }
 
 .erp-kpi-label {
-    font-size: 11px;
+    font-size: 10.5px;
+    font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.35px;
-    color: #5c6f80;
-    margin-bottom: 3px;
-    font-weight: 700;
+    letter-spacing: .5px;
+    color: var(--erp-muted);
 }
 
-.erp-kpi-value .o_field_widget,
-.erp-kpi-value .o_field_integer,
-.erp-kpi-value .o_field_float {
-    font-size: 26px;
-    line-height: 1.15;
-    font-weight: 700;
-    color: #0f4a59;
+.erp-kpi-val .o_field_widget,
+.erp-kpi-val .o_field_integer,
+.erp-kpi-val .o_field_float {
+    font-size: 28px !important;
+    font-weight: 800 !important;
+    color: var(--erp-ink) !important;
 }
 
-.erp-panel-grid {
+.erp-kpi-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 2px 9px;
+    margin-top: 4px;
+    width: fit-content;
+}
+.erp-kpi-c1 .erp-kpi-tag { background: var(--erp-primary-lite); color: var(--erp-primary-dark); }
+.erp-kpi-c2 .erp-kpi-tag { background: #E8F8EE; color: #1A7A3B; }
+.erp-kpi-c3 .erp-kpi-tag { background: #FEF5E0; color: #8A5C00; }
+.erp-kpi-c4 .erp-kpi-tag { background: #FDECEA; color: #A42020; }
+
+/* ── CHARTS ── */
+.erp-chart-row {
     display: grid;
+    grid-template-columns: 1fr 400px;
     gap: 14px;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
 }
-
-.erp-panel {
+.erp-chart-box {
     background: #fff;
     border: 1px solid var(--erp-line);
-    border-radius: 10px;
-    box-shadow: var(--erp-shadow-soft);
+    border-radius: var(--erp-radius);
+    box-shadow: var(--erp-shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.erp-chart-head {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--erp-line);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #FAFCFC;
+}
+.erp-chart-head-icon {
+    width: 28px; height: 28px;
+    background: var(--erp-primary-lite);
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--erp-primary);
+    font-size: 13px;
+}
+.erp-chart-head-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--erp-ink);
+}
+.erp-chart-body {
+    padding: 14px;
+    flex: 1;
+    min-height: 240px;
+    position: relative;
+}
+.erp-chart-body canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* ── STAT PANELS ── */
+.erp-stat-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+.erp-stat-box {
+    background: #fff;
+    border: 1px solid var(--erp-line);
+    border-radius: var(--erp-radius);
+    box-shadow: var(--erp-shadow);
     overflow: hidden;
 }
-
-.erp-panel-header {
+.erp-stat-head {
+    padding: 10px 14px;
+    background: var(--erp-primary);
     color: #fff;
-    font-size: 12px;
+    font-size: 12.5px;
     font-weight: 700;
-    letter-spacing: 0.2px;
-    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 7px;
 }
-
-.erp-panel-header.blue { background: #4f83a1; }
-.erp-panel-header.teal { background: #1aa3b3; }
-.erp-panel-header.green { background: #20a44c; }
-.erp-panel-header.orange { background: #f29e0b; }
-
-.erp-panel-body {
-    padding: 12px;
+.erp-stat-body {
     display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 10px;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
 }
-
-.erp-panel-body.one-col {
-    grid-template-columns: 1fr;
+.erp-stat-item {
+    padding: 12px 14px;
+    border-right: 1px solid var(--erp-line);
+    border-bottom: 1px solid var(--erp-line);
 }
+.erp-stat-item:nth-child(2n) { border-right: none; }
+.erp-stat-item:nth-last-child(-n+2) { border-bottom: none; }
 
-.erp-metric {
-    border: 1px solid #e6edf5;
-    border-radius: 8px;
-    padding: 10px;
-    background: #fbfdff;
-}
-
-.erp-metric-label {
-    color: #6a7786;
-    font-size: 12px;
-    margin-bottom: 2px;
+.erp-stat-item-label {
+    font-size: 11px;
+    color: var(--erp-muted);
     font-weight: 600;
+    margin-bottom: 3px;
 }
-
-.erp-metric-value .o_field_widget,
-.erp-metric-value .o_field_float,
-.erp-metric-value .o_field_integer {
-    color: #14566a;
-    font-size: 18px;
-    font-weight: 700;
+.erp-stat-item-val .o_field_widget,
+.erp-stat-item-val .o_field_float,
+.erp-stat-item-val .o_field_integer {
+    font-size: 19px !important;
+    font-weight: 800 !important;
+    color: var(--erp-primary-dark) !important;
 }
 
 .erp-action-row {
     display: flex;
+    gap: 10px;
     flex-wrap: wrap;
-    gap: 8px;
 }
 
-@media (max-width: 1200px) {
-    .erp-kpi-grid,
-    .erp-kpi-grid.erp-kpi-grid-6 {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
+/* ── Employee form ── */
+.erp-employee-form .erp-employee-hero {
+    display: grid;
+    grid-template-columns: 1fr 240px;
+    gap: 16px;
+    align-items: start;
+}
+.erp-employee-form .erp-employee-avatar-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    border: 1px solid var(--erp-line);
+    border-radius: var(--erp-radius-sm);
+    background: var(--erp-primary-lite);
+}
+.erp-employee-form .erp-employee-avatar .o_field_image img {
+    width: 180px !important; height: 180px !important;
+    border-radius: 10px; object-fit: cover;
 }
 
-@media (max-width: 900px) {
-    .erp-kpi-grid,
-    .erp-kpi-grid.erp-kpi-grid-3,
-    .erp-kpi-grid.erp-kpi-grid-6,
-    .erp-panel-grid {
-        grid-template-columns: 1fr;
-    }
+/* ── Module upgrade/install buttons — đồng nhất màu teal ── */
+/* Nút "Cài đặt" */
+.o_module_install .btn,
+.o_apps .o_module_to_install .btn-primary,
+.o_module_install_button {
+    background: var(--erp-primary) !important;
+    border-color: var(--erp-primary) !important;
+    color: #fff !important;
+    border-radius: var(--erp-radius-sm) !important;
+    font-weight: 600 !important;
+}
+.o_module_install .btn:hover,
+.o_apps .o_module_to_install .btn-primary:hover {
+    background: var(--erp-primary-dark) !important;
+    border-color: var(--erp-primary-dark) !important;
+}
+
+/* Nút "Nâng cấp" — đang bị màu warning/vàng */
+.o_module_to_upgrade .btn,
+.o_apps .o_module_to_upgrade .btn,
+.o_module_upgrade_button,
+.o_apps .btn.btn-warning,
+.o_apps .o_kanban_record .btn-warning {
+    background: var(--erp-primary) !important;
+    border-color: var(--erp-primary) !important;
+    color: #fff !important;
+    border-radius: var(--erp-radius-sm) !important;
+    font-weight: 600 !important;
+}
+.o_module_to_upgrade .btn:hover,
+.o_apps .o_module_to_upgrade .btn:hover,
+.o_apps .btn.btn-warning:hover {
+    background: var(--erp-primary-dark) !important;
+    border-color: var(--erp-primary-dark) !important;
+}
+
+/* Catch-all: mọi btn-warning trong Apps view */
+.o_apps_menu ~ * .btn-warning,
+body .o_action[data-action*="base_setup"] .btn-warning,
+.o_home_menu ~ * .btn-warning {
+    background: var(--erp-primary) !important;
+    border-color: var(--erp-primary) !important;
+    color: #fff !important;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1300px) {
+    .erp-kpi-row      { grid-template-columns: repeat(2, 1fr); }
+    .erp-kpi-row-6    { grid-template-columns: repeat(3, 1fr); }
+    .erp-chart-row    { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+    .erp-kpi-row, .erp-kpi-row-3, .erp-kpi-row-6,
+    .erp-stat-row { grid-template-columns: 1fr; }
+    .erp-dash-header { flex-direction: column; align-items: flex-start; }
+}
+
+/* ── Module Apps: đồng nhất nút Cài đặt / Nâng cấp / Cập nhật ── */
+/* Odoo 15 render nút trong .o_kanban_record .o_app_install_btn */
+.o_app_install_btn,
+.o_app_install_btn.btn-primary,
+.o_app_install_btn.btn-warning,
+.o_app_install_btn.btn-info,
+.o_app_install_btn.btn-secondary {
+    background: var(--erp-primary) !important;
+    border-color: var(--erp-primary) !important;
+    color: #fff !important;
+    border-radius: var(--erp-radius-sm) !important;
+    font-weight: 600 !important;
+    font-size: 12px !important;
+}
+.o_app_install_btn:hover {
+    background: var(--erp-primary-dark) !important;
+    border-color: var(--erp-primary-dark) !important;
+}
+
+/* Catch-all cho mọi btn-warning và btn-info trong trang Apps */
+.o_apps .btn-warning,
+.o_apps .btn-info,
+.o_apps .btn-primary,
+.o_action[data-action-id] .btn-warning,
+.o_action[data-action-id] .btn-info {
+    background: var(--erp-primary) !important;
+    border-color: var(--erp-primary) !important;
+    color: #fff !important;
+}
+
+/* Global override — btn-warning ở bất kỳ đâu trong backend */
+.o_web_client .btn-warning {
+    background: var(--erp-primary) !important;
+    border-color: var(--erp-primary) !important;
+    color: #fff !important;
+}
+.o_web_client .btn-warning:hover {
+    background: var(--erp-primary-dark) !important;
+    border-color: var(--erp-primary-dark) !important;
 }

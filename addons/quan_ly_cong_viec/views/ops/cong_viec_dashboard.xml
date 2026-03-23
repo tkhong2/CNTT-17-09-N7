@@ -1,77 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <data>
-        <record id="cong_viec_dashboard_main" model="cong_viec_dashboard">
-            <field name="ten_bang">Dashboard KPI Công việc</field>
-        </record>
+  <data>
+    <record id="cong_viec_dashboard_main" model="cong_viec_dashboard">
+      <field name="ten_bang">Dashboard KPI Công việc</field>
+    </record>
 
-        <record id="view_cong_viec_dashboard_form" model="ir.ui.view">
-            <field name="name">cong_viec_dashboard.form</field>
-            <field name="model">cong_viec_dashboard</field>
-            <field name="arch" type="xml">
-                <form create="0" edit="0" delete="0">
-                    <sheet>
-                        <div class="erp-dashboard-page">
-                            <div class="erp-dashboard-title">
-                                <h1><field name="ten_bang" readonly="1" nolabel="1"/></h1>
-                            </div>
+    <record id="view_cong_viec_dashboard_form" model="ir.ui.view">
+      <field name="name">cong_viec_dashboard.form</field>
+      <field name="model">cong_viec_dashboard</field>
+      <field name="arch" type="xml">
+        <form create="0" edit="0" delete="0">
+          <sheet>
+            <div class="erp-dashboard-page">
 
-                            <div class="erp-kpi-grid erp-kpi-grid-3">
-                                <div class="erp-kpi-card">
-                                    <div class="erp-kpi-label">Công việc đang mở</div>
-                                    <div class="erp-kpi-value"><field name="tong_cong_viec_active" readonly="1" nolabel="1"/></div>
-                                </div>
-                                <div class="erp-kpi-card">
-                                    <div class="erp-kpi-label">Công việc bị chặn</div>
-                                    <div class="erp-kpi-value"><field name="tong_cong_viec_bi_chan" readonly="1" nolabel="1"/></div>
-                                </div>
-                                <div class="erp-kpi-card">
-                                    <div class="erp-kpi-label">Tỷ lệ blocked</div>
-                                    <div class="erp-kpi-value"><field name="blocked_task_ratio" readonly="1" nolabel="1" widget="percentage"/></div>
-                                </div>
-                            </div>
+              <!-- HEADER -->
+              <div class="erp-dash-header">
+                <div class="erp-dash-header-left">
+                  <h1><field name="ten_bang" readonly="1" nolabel="1"/></h1>
+                  <p>Tổng quan tiến độ công việc &amp; dự án</p>
+                </div>
+                <div class="erp-action-row">
+                  <button type="object" name="action_xem_cong_viec_qua_han"
+                    class="oe_highlight" string="Xem công việc quá hạn"/>
+                </div>
+              </div>
 
-                            <div class="erp-panel-grid">
-                                <div class="erp-panel">
-                                    <div class="erp-panel-header green">Task Health</div>
-                                    <div class="erp-panel-body">
-                                        <div class="erp-metric">
-                                            <div class="erp-metric-label">Tổng công việc đang mở</div>
-                                            <div class="erp-metric-value"><field name="tong_cong_viec_active" readonly="1" nolabel="1"/></div>
-                                        </div>
-                                        <div class="erp-metric">
-                                            <div class="erp-metric-label">Task đang bị chặn</div>
-                                            <div class="erp-metric-value"><field name="tong_cong_viec_bi_chan" readonly="1" nolabel="1"/></div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="erp-panel">
-                                    <div class="erp-panel-header orange">Blocked Ratio</div>
-                                    <div class="erp-panel-body one-col">
-                                        <div class="erp-metric">
-                                            <div class="erp-metric-label">Tỷ lệ blocked trên task đang mở</div>
-                                            <div class="erp-metric-value"><field name="blocked_task_ratio" readonly="1" nolabel="1" widget="percentage"/></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+              <!-- KPI CARDS -->
+              <div class="erp-kpi-row erp-kpi-row-3">
+                <div class="erp-kpi-card erp-kpi-c1">
+                  <div class="erp-kpi-icon"><i class="fa fa-tasks fa-lg"/></div>
+                  <div class="erp-kpi-label">Công việc đang mở</div>
+                  <div class="erp-kpi-val"><field name="tong_cong_viec_active" readonly="1" nolabel="1"/></div>
+                  <span class="erp-kpi-tag">Đang xử lý</span>
+                </div>
+                <div class="erp-kpi-card erp-kpi-c4">
+                  <div class="erp-kpi-icon"><i class="fa fa-clock-o fa-lg"/></div>
+                  <div class="erp-kpi-label">Công việc quá hạn</div>
+                  <div class="erp-kpi-val"><field name="tong_cong_viec_qua_han" readonly="1" nolabel="1"/></div>
+                  <span class="erp-kpi-tag">Cần xử lý gấp</span>
+                </div>
+                <div class="erp-kpi-card erp-kpi-c3">
+                  <div class="erp-kpi-icon"><i class="fa fa-check-circle fa-lg"/></div>
+                  <div class="erp-kpi-label">Công việc hoàn thành</div>
+                  <div class="erp-kpi-val"><field name="tong_cong_viec_hoan_thanh" readonly="1" nolabel="1"/></div>
+                  <span class="erp-kpi-tag">Đã xong</span>
+                </div>
+              </div>
 
-                            <div class="erp-action-row">
-                                <button type="object" name="action_xem_cong_viec_bi_chan" class="btn btn-primary" icon="fa-ban" string="Xem công việc bị chặn"/>
-                            </div>
-                        </div>
-                    </sheet>
-                </form>
-            </field>
-        </record>
+              <!-- STAT PANELS -->
+              <div class="erp-stat-row">
+                <div class="erp-stat-box">
+                  <div class="erp-stat-head"><i class="fa fa-heartbeat"/> Sức khỏe Task</div>
+                  <div class="erp-stat-body">
+                    <div class="erp-stat-item">
+                      <div class="erp-stat-item-label">Tổng công việc đang mở</div>
+                      <div class="erp-stat-item-val"><field name="tong_cong_viec_active" readonly="1" nolabel="1"/></div>
+                    </div>
+                    <div class="erp-stat-item">
+                      <div class="erp-stat-item-label">Công việc quá hạn</div>
+                      <div class="erp-stat-item-val"><field name="tong_cong_viec_qua_han" readonly="1" nolabel="1"/></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="erp-stat-box">
+                  <div class="erp-stat-head"><i class="fa fa-exclamation-triangle"/> Tỷ lệ quá hạn</div>
+                  <div class="erp-stat-body">
+                    <div class="erp-stat-item">
+                      <div class="erp-stat-item-label">Tỷ lệ task quá hạn / tổng mở</div>
+                      <div class="erp-stat-item-val"><field name="blocked_task_ratio" readonly="1" nolabel="1" widget="percentage"/></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
 
-        <record id="action_cong_viec_dashboard" model="ir.actions.act_window">
-            <field name="name">Dashboard KPI</field>
-            <field name="res_model">cong_viec_dashboard</field>
-            <field name="view_mode">form</field>
-            <field name="res_id" ref="cong_viec_dashboard_main"/>
-        </record>
+            </div>
+          </sheet>
+        </form>
+      </field>
+    </record>
 
-        <menuitem id="menu_cong_viec_dashboard" name="Dashboard KPI" parent="menu_quan_ly_cong_viec_root" action="action_cong_viec_dashboard" sequence="0"/>
-    </data>
+    <record id="action_cong_viec_dashboard" model="ir.actions.act_window">
+      <field name="name">Dashboard KPI Công việc</field>
+      <field name="res_model">cong_viec_dashboard</field>
+      <field name="view_mode">form</field>
+      <field name="res_id" ref="cong_viec_dashboard_main"/>
+    </record>
+
+    <menuitem id="menu_cong_viec_dashboard" name="Dashboard KPI"
+      parent="menu_quan_ly_cong_viec_root"
+      action="action_cong_viec_dashboard" sequence="0"/>
+  </data>
 </odoo>

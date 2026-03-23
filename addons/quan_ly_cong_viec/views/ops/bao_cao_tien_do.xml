@@ -69,7 +69,7 @@
                 <filter string="Báo cáo hôm nay" name="today" domain="[('ngay_bao_cao', '=', context_today())]"/>
                 <filter string="Báo cáo trong tuần" name="this_week" domain="[('ngay_bao_cao', '&gt;=', (context_today() - datetime.timedelta(days=context_today().weekday())).strftime('%Y-%m-%d')), ('ngay_bao_cao', '&lt;=', (context_today() + datetime.timedelta(days=6-context_today().weekday())).strftime('%Y-%m-%d'))]"/>
                 <filter string="Vấn đề phát sinh" name="co_van_de" domain="[('van_de_phat_sinh', '!=', False)]"/>
-                <group expand="0" string="Group By">
+                <group expand="0" string="Nhóm theo">
                     <filter string="Dự án" name="group_by_du_an" context="{'group_by': 'du_an_id'}"/>
                     <filter string="Công việc" name="group_by_cong_viec" context="{'group_by': 'cong_viec_id'}"/>
                     <filter string="Nhân viên" name="group_by_nhan_vien" context="{'group_by': 'nhan_vien_id'}"/>

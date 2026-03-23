@@ -1,15 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_res_partner_form_mix_cong_viec_cham_soc" model="ir.ui.view">
-        <field name="name">res.partner.form.mix.cong_viec_cham_soc</field>
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base.view_partner_form"/>
-        <field name="arch" type="xml">
-            <xpath expr="//div[@name='button_box']" position="inside">
-                <button type="object" name="action_xem_cong_viec_cham_soc" class="oe_stat_button" icon="fa-tasks">
-                    <field name="cong_viec_cham_soc_count" string="Cong viec" widget="statinfo"/>
-                </button>
-            </xpath>
-        </field>
-    </record>
+  <!-- ── Form res.partner: Smart Button + trường rank ── -->
+  <record id="view_res_partner_form_mix_cong_viec_cham_soc" model="ir.ui.view">
+    <field name="name">res.partner.form.mix.cong_viec_cham_soc</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_form"/>
+    <field name="arch" type="xml">
+
+      <!-- Smart Button "Công việc" -->
+      <xpath expr="//div[@name='button_box']" position="inside">
+        <button type="object" name="action_xem_cong_viec_cham_soc"
+                class="oe_stat_button" icon="fa-tasks">
+          <field name="cong_viec_cham_soc_count" string="Công việc" widget="statinfo"/>
+        </button>
+      </xpath>
+
+      <!-- Trường phân hạng KH trên form -->
+      <xpath expr="//field[@name='phone']" position="after">
+        <field name="rank" widget="priority"
+               options="{'values': [['dong','Đồng'],['bac','Bạc'],['vang','Vàng']]}"/>
+      </xpath>
+
+    </field>
+  </record>
 </odoo>

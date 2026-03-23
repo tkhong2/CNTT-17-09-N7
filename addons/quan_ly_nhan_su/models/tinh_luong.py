@@ -65,8 +65,28 @@ class TinhLuong(models.Model):
 
     def _inverse_month_dates(self):
         """Cho phép người dùng chỉnh tay kỳ lương trên form khi cần ngoại lệ."""
-        # Stored compute field cần inverse để editable trong UI.
         return
+
+    @api.onchange('thang_nam')
+    def _onchange_thang_nam(self):
+        """Tự động convert các format phổ biến về YYYY-MM"""
+        if not self.thang_nam:
+            return
+        val = self.thang_nam.strip()
+        # MM/YYYY hoặc MM-YYYY → YYYY-MM
+        for sep in ('/', '-'):
+            if sep in val:
+                parts = val.split(sep)
+                if len(parts) == 2:
+                    a, b = parts[0].strip(), parts[1].strip()
+                    if len(b) == 4 and b.isdigit() and len(a) <= 2 and a.isdigit():
+                        # dạng MM/YYYY
+                        self.thang_nam = f"{b}-{int(a):02d}"
+                        return
+                    elif len(a) == 4 and a.isdigit() and len(b) <= 2 and b.isdigit():
+                        # dạng YYYY-MM hoặc YYYY/MM — đã đúng hoặc chuẩn hóa
+                        self.thang_nam = f"{a}-{int(b):02d}"
+                        return
     
     @api.depends('chi_tiet_ids', 'chi_tiet_ids.luong_co_ban', 'chi_tiet_ids.phu_cap', 
                  'chi_tiet_ids.tien_thuong', 'chi_tiet_ids.tong_khau_tru', 'chi_tiet_ids.thue_thu_nhap', 'chi_tiet_ids.thuc_linh')

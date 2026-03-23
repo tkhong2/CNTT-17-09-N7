@@ -133,7 +133,7 @@
                 <filter string="Chưa phân công" name="unassigned" domain="[('nhan_vien_phu_trach_id', '=', False)]"/>
                 <filter string="Im lặng &gt;14 ngày" name="silent_14" domain="['|', ('lan_tuong_tac_cuoi_index', '=', False), ('lan_tuong_tac_cuoi_index', '&lt;', (context_today() - relativedelta(days=14)))]"/>
                 <filter string="Cần xử lý" name="need_attention" domain="['|', '|', ('nhan_vien_phu_trach_id', '=', False), '&amp;', ('tuong_tac_ids.trang_thai', '=', 'planned'), ('tuong_tac_ids.hen_lien_he_tiep', '&lt;', context_today()), ('lan_tuong_tac_cuoi_index', '=', False)]"/>
-                <group expand="0" string="Group By">
+                <group expand="0" string="Nhóm theo">
                     <filter string="Phụ trách" name="group_by_owner" context="{'group_by': 'nhan_vien_phu_trach_id'}"/>
                     <filter string="Trạng thái" name="group_by_status" context="{'group_by': 'trang_thai_hop_tac'}"/>
                 </group>
@@ -172,7 +172,7 @@
         <field name="search_view_id" ref="view_khach_hang_search"/>
     </record>
 
-    <menuitem id="menu_quan_ly_khach_hang_root" name="Quản lý khách hàng" sequence="1" groups="quan_ly_khach_hang.group_khach_hang_sales,quan_ly_khach_hang.group_khach_hang_manager"/>
+    <menuitem id="menu_quan_ly_khach_hang_root" name="Quản lý khách hàng" sequence="1"/>
     <menuitem id="menu_ops_khach_hang" name="Hoạt động/Bán hàng" parent="menu_quan_ly_khach_hang_root" sequence="5" groups="quan_ly_khach_hang.group_khach_hang_sales,quan_ly_khach_hang.group_khach_hang_manager"/>
     <menuitem id="menu_khach_hang" name="Khách hàng" parent="menu_quan_ly_khach_hang_root" action="action_khach_hang" sequence="1" groups="quan_ly_khach_hang.group_khach_hang_sales,quan_ly_khach_hang.group_khach_hang_manager"/>
     <menuitem id="menu_khach_hang_unassigned" name="Chưa phân công" parent="menu_quan_ly_khach_hang_root" action="action_khach_hang_unassigned" sequence="2" groups="quan_ly_khach_hang.group_khach_hang_manager"/>

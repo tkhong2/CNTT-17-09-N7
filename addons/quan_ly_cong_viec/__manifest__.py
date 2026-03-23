@@ -23,16 +23,20 @@
     # Quan trọng: Phải phụ thuộc vào module quan_ly_nhan_su
     'depends': ['base', 'mail', 'quan_ly_nhan_su'],
 
+    'assets': {
+        'web.assets_backend': [
+            'quan_ly_cong_viec/static/src/scss/dashboard.scss',
+        ],
+    },
+
     # always loaded
     'data': [
         'security/ir.model.access.csv',
         'data/sequence_data.xml',
         'data/automation_params.xml',
         'data/automation_cron.xml',
+        # Commented out demo data to fix module loading issues
         'data/demo_content.xml',
-        'data/demo_seed_all_biz.xml',
-        'data/demo_seed_massive.xml',
-        'data/demo_seed_wave2.xml',
         'views/ops/du_an.xml',
         'views/ops/cong_viec_dashboard.xml',
         'views/ops/cong_viec.xml',

@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <!-- Actions -->
         <record id="action_bangiao_timesheet" model="ir.actions.act_window">
             <field name="name">Timesheet</field>
             <field name="res_model">bangiao_timesheet</field>
             <field name="view_mode">tree,form</field>
         </record>
-        
+
         <record id="action_du_an_rui_ro" model="ir.actions.act_window">
             <field name="name">Rủi Ro Dự Án</field>
             <field name="res_model">du_an_rui_ro</field>
             <field name="view_mode">tree,form</field>
         </record>
-        
+
         <record id="action_du_an_issue" model="ir.actions.act_window">
             <field name="name">Issue Dự Án</field>
             <field name="res_model">du_an_issue</field>
@@ -25,7 +24,7 @@
             <field name="name">bangiao_timesheet.tree</field>
             <field name="model">bangiao_timesheet</field>
             <field name="arch" type="xml">
-                <tree string="Timesheet">
+                <tree string="Bảng công">
                     <field name="nhan_vien_id"/>
                     <field name="du_an_id"/>
                     <field name="cong_viec_id"/>
@@ -36,7 +35,7 @@
                 </tree>
             </field>
         </record>
-        
+
         <record id="view_bangiao_timesheet_form" model="ir.ui.view">
             <field name="name">bangiao_timesheet.form</field>
             <field name="model">bangiao_timesheet</field>
@@ -56,24 +55,23 @@
                                 <field name="ngay_lam"/>
                             </group>
                             <group>
-                                <field name="cong_viec_id"/>
-                                <field name="gio_bat_dau"/>
-                                <field name="gio_ket_thuc"/>
+                                <!-- Lọc công việc theo dự án đã chọn -->
+                                <field name="cong_viec_id"
+                                       domain="[('du_an_id', '=', du_an_id)]"
+                                       attrs="{'readonly': [('du_an_id', '=', False)]}"/>
+                                <field name="gio_bat_dau" widget="float_time"/>
+                                <field name="gio_ket_thuc" widget="float_time"/>
+                                <field name="tong_gio" readonly="1"/>
                             </group>
                         </group>
-                        
+
                         <group>
                             <group>
-                                <field name="gio_bat_dau"/>
-                                <field name="gio_ket_thuc"/>
-                                <field name="tong_gio"/>
-                            </group>
-                            <group>
                                 <field name="loai_cong_viec"/>
-                                <field name="luong_nhan" widget="monetary"/>
+                                <field name="luong_nhan" readonly="1"/>
                             </group>
                         </group>
-                        
+
                         <notebook>
                             <page string="Mô Tả Công Việc">
                                 <field name="mo_ta" colspan="2"/>
@@ -84,8 +82,8 @@
                 </form>
             </field>
         </record>
-        
-        <!-- DuAnRuiRo Views (Risk) -->
+
+        <!-- DuAnRuiRo Views -->
         <record id="view_du_an_rui_ro_tree" model="ir.ui.view">
             <field name="name">du_an_rui_ro.tree</field>
             <field name="model">du_an_rui_ro</field>
@@ -100,7 +98,7 @@
                 </tree>
             </field>
         </record>
-        
+
         <record id="view_du_an_rui_ro_form" model="ir.ui.view">
             <field name="name">du_an_rui_ro.form</field>
             <field name="model">du_an_rui_ro</field>
@@ -114,11 +112,11 @@
                     </header>
                     <sheet>
                         <div class="oe_button_box" name="button_box">
-                            <button name="action_resolve" type="object" class="oe_stat_button" icon="fa-check">
+                            <button name="action_resolve" type="object"
+                                    class="oe_stat_button" icon="fa-check">
                                 <span>Giải quyết</span>
                             </button>
                         </div>
-                        
                         <group>
                             <group>
                                 <field name="ten_rui_ro"/>
@@ -130,14 +128,12 @@
                                 <field name="diem_rui_ro" widget="float"/>
                             </group>
                         </group>
-                        
                         <group string="Đánh Giá Rủi Ro">
                             <group>
                                 <field name="kha_nang_xay_ra"/>
                                 <field name="muc_anh_huong"/>
                             </group>
                         </group>
-                        
                         <notebook>
                             <page string="Mô Tả">
                                 <field name="mo_ta" colspan="2"/>
@@ -150,7 +146,7 @@
                 </form>
             </field>
         </record>
-        
+
         <!-- DuAnIssue Views -->
         <record id="view_du_an_issue_kanban" model="ir.ui.view">
             <field name="name">du_an_issue.kanban</field>
@@ -179,7 +175,7 @@
                 </kanban>
             </field>
         </record>
-        
+
         <record id="view_du_an_issue_tree" model="ir.ui.view">
             <field name="name">du_an_issue.tree</field>
             <field name="model">du_an_issue</field>
@@ -193,7 +189,7 @@
                 </tree>
             </field>
         </record>
-        
+
         <record id="view_du_an_issue_form" model="ir.ui.view">
             <field name="name">du_an_issue.form</field>
             <field name="model">du_an_issue</field>
@@ -206,7 +202,6 @@
                         <field name="trang_thai" widget="statusbar"/>
                     </header>
                     <sheet>
-                        
                         <group>
                             <group>
                                 <field name="du_an_id"/>
@@ -218,16 +213,13 @@
                                 <field name="rui_ro_id"/>
                             </group>
                         </group>
-                        
                         <group string="Chi Tiết">
                             <field name="tieu_de" colspan="2"/>
                             <field name="mo_ta" colspan="2"/>
                         </group>
-                        
                         <group string="Công Việc Bị Ảnh Hưởng">
                             <field name="cong_viec_bi_ảnh_huong_ids" nolabel="1" colspan="2"/>
                         </group>
-                        
                         <notebook>
                             <page string="Thời Gian">
                                 <group>

@@ -230,4 +230,10 @@ class NghiPhep(models.Model):
         for vals in vals_list:
             if vals.get('ma_nghi_phep', _('New')) == _('New'):
                 vals['ma_nghi_phep'] = self.env['ir.sequence'].next_by_code('nghi_phep') or _('New')
-        return super().create(vals_list)
+        records = super().create(vals_list)
+        try:
+            for rec in records:
+                self.env['telegram.config'].notify_nghi_phep_moi(rec)
+        except Exception:
+            pass
+        return records

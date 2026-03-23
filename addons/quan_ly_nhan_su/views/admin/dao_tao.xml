@@ -68,7 +68,7 @@
                 <filter string="Đào tạo nội bộ" name="noi_bo" domain="[('loai_dao_tao', '=', 'noi_bo')]"/>
                 <filter string="Đào tạo bên ngoài" name="ben_ngoai" domain="[('loai_dao_tao', '=', 'ben_ngoai')]"/>
                 <filter string="Tự học" name="tu_hoc" domain="[('loai_dao_tao', '=', 'tu_hoc')]"/>
-                <group expand="0" string="Group By">
+                <group expand="0" string="Nhóm theo">
                     <filter string="Nhân viên" name="nhan_vien" context="{'group_by': 'nhan_vien_id'}"/>
                     <filter string="Loại đào tạo" name="loai_dao_tao" context="{'group_by': 'loai_dao_tao'}"/>
                     <filter string="Kết quả" name="ket_qua" context="{'group_by': 'ket_qua'}"/>

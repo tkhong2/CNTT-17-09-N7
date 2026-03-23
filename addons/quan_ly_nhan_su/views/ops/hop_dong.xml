@@ -78,7 +78,7 @@
                 <filter string="Đang hiệu lực" name="active" domain="[('trang_thai', '=', 'active')]"/>
                 <filter string="Hết hiệu lực" name="expired" domain="[('trang_thai', '=', 'expired')]"/>
                 <filter string="Đã chấm dứt" name="terminated" domain="[('trang_thai', '=', 'terminated')]"/>
-                <group expand="0" string="Group By">
+                <group expand="0" string="Nhóm theo">
                     <filter string="Nhân viên" name="nhan_vien" context="{'group_by': 'nhan_vien_id'}"/>
                     <filter string="Loại hợp đồng" name="loai_hop_dong" context="{'group_by': 'loai_hop_dong'}"/>
                     <filter string="Trạng thái" name="trang_thai" context="{'group_by': 'trang_thai'}"/>

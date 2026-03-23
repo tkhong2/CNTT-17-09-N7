@@ -33,14 +33,6 @@
             <field name="company_id" eval="False"/>
         </record>
         
-        <record id="seq_don_hang" model="ir.sequence">
-            <field name="name">Mã đơn hàng</field>
-            <field name="code">don_hang</field>
-            <field name="prefix">DH</field>
-            <field name="padding">6</field>
-            <field name="company_id" eval="False"/>
-        </record>
-        
         <record id="seq_hop_dong_khach_hang" model="ir.sequence">
             <field name="name">Mã hợp đồng khách hàng</field>
             <field name="code">hop_dong_khach_hang</field>

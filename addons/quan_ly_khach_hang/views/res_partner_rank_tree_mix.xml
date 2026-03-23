@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="view_res_partner_tree_rank_mix_quan_ly_khach_hang" model="ir.ui.view">
-        <field name="name">res.partner.tree.rank.mix.quan_ly_khach_hang</field>
-        <field name="model">res.partner</field>
-        <field name="inherit_id" ref="base.view_partner_tree"/>
-        <field name="arch" type="xml">
-            <xpath expr="//tree" position="attributes">
-                <attribute name="decoration-warning">rank == 'vang'</attribute>
-                <attribute name="decoration-muted">rank == 'dong'</attribute>
-            </xpath>
-            <xpath expr="//field[@name='email']" position="after">
-                <field name="rank" optional="show"/>
-            </xpath>
-        </field>
-    </record>
+  <!-- ── Tree res.partner: màu theo phân hạng ── -->
+  <record id="view_res_partner_tree_rank_mix_quan_ly_khach_hang" model="ir.ui.view">
+    <field name="name">res.partner.tree.rank.mix.quan_ly_khach_hang</field>
+    <field name="model">res.partner</field>
+    <field name="inherit_id" ref="base.view_partner_tree"/>
+    <field name="arch" type="xml">
+      <!-- Màu sắc:
+           Vàng   → decoration-warning  (màu cam/vàng)
+           Bạc    → decoration-info     (màu xanh nhạt)
+           Đồng   → decoration-muted    (màu xám)
+      -->
+      <xpath expr="//tree" position="attributes">
+        <attribute name="decoration-warning">rank == 'vang'</attribute>
+        <attribute name="decoration-info">rank == 'bac'</attribute>
+        <attribute name="decoration-muted">rank == 'dong'</attribute>
+      </xpath>
+      <xpath expr="//field[@name='email']" position="after">
+        <field name="rank" optional="show"/>
+        <field name="cong_viec_cham_soc_count" string="Công việc" optional="show"/>
+      </xpath>
+    </field>
+  </record>
 </odoo>

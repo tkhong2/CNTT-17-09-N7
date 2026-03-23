@@ -16,14 +16,6 @@
             action="action_bao_gia"
             groups="quan_ly_khach_hang.group_khach_hang_sales,quan_ly_khach_hang.group_khach_hang_manager"/>
 
-        <menuitem 
-            id="menu_don_hang" 
-            name="Đơn Hàng" 
-            parent="menu_crm_sales_pipeline" 
-            sequence="2"
-            action="action_don_hang"
-            groups="quan_ly_khach_hang.group_khach_hang_sales,quan_ly_khach_hang.group_khach_hang_manager"/>
-
         <!-- Menu cho Support & Contract -->
         <menuitem 
             id="menu_crm_support" 

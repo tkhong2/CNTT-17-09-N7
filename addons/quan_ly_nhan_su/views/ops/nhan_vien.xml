@@ -178,7 +178,7 @@
                 <filter string="Thử việc" name="probation" domain="[('trang_thai', '=', 'probation')]"/>
                 <filter string="Đã nghỉ việc" name="leave" domain="[('trang_thai', '=', 'leave')]"/>
                 <filter string="Tạm ngừng" name="suspended" domain="[('trang_thai', '=', 'suspended')]"/>
-                <group expand="0" string="Group By">
+                <group expand="0" string="Nhóm theo">
                     <filter string="Phòng ban" name="phong_ban" context="{'group_by': 'phong_ban_id'}"/>
                     <filter string="Chức vụ" name="chuc_vu" context="{'group_by': 'chuc_vu_id'}"/>
                     <filter string="Trạng thái" name="trang_thai" context="{'group_by': 'trang_thai'}"/>

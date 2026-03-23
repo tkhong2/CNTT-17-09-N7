@@ -15,3 +15,5 @@ from . import nghi_phep
 from . import tinh_luong
 from . import tuyen_dung
 from . import nhan_su_dashboard
+
+from . import telegram_notify

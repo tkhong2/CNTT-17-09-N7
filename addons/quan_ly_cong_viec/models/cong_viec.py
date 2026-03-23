@@ -50,11 +50,12 @@ class CongViec(models.Model):
     ], string="Độ ưu tiên", default='trung_binh')
     
     trang_thai = fields.Selection([
-        ('moi', 'Mới'),
-        ('dang_thuc_hien', 'Đang thực hiện'),
-        ('tam_dung', 'Tạm dừng'),
-        ('hoan_thanh', 'Hoàn thành'),
-        ('huy_bo', 'Hủy bỏ')
+        ('moi',           'Mới'),
+        ('cho_xu_ly',     'Chờ xử lý'),
+        ('dang_thuc_hien','Đang thực hiện'),
+        ('tam_dung',      'Tạm dừng'),
+        ('hoan_thanh',    'Hoàn thành'),
+        ('huy_bo',        'Hủy bỏ'),
     ], string="Trạng thái", default='moi', tracking=True)
 
     cong_viec_phu_thuoc_ids = fields.Many2many(
@@ -150,27 +151,41 @@ class CongViec(models.Model):
 
     @api.onchange('partner_id')
     def _onchange_partner_id(self):
+        """
+        Khi chọn Khách hàng:
+        1. Tự động điền SĐT & Email vào mô tả (Bước 3 - Mức 1)
+        2. Nếu KH Vàng → ưu tiên Cao (Gợi ý 1 - Nâng cao)
+        3. Reset contact_person nếu không thuộc KH đã chọn (Gợi ý 2)
+        """
         for record in self:
             if not record.partner_id:
+                record.contact_person_id = False
                 continue
 
-            if record.partner_id.rank == 'vang':
+            # Gợi ý 1: KH Vàng → priority cao tự động
+            if hasattr(record.partner_id, 'rank') and record.partner_id.rank == 'vang':
                 record.do_uu_tien = 'cao'
 
-            if record.contact_person_id and record.contact_person_id.parent_id != record.partner_id:
+            # Gợi ý 2: reset người liên hệ nếu không thuộc công ty đã chọn
+            if (record.contact_person_id
+                    and record.contact_person_id.parent_id != record.partner_id):
                 record.contact_person_id = False
 
+            # Bước 3 Mức 1: tự động điền SĐT & Email vào mô tả
             lines = [
-                _("Thông tin chăm sóc khách hàng:"),
-                _("- Khách hàng: %s") % (record.partner_id.name or ''),
-                _("- Điện thoại: %s") % (record.partner_id.phone or ''),
-                _("- Email: %s") % (record.partner_id.email or ''),
+                '--- Thông tin chăm sóc khách hàng ---',
+                '- Khách hàng : %s' % (record.partner_id.name  or 'N/A'),
+                '- Điện thoại : %s' % (record.partner_id.phone or 'N/A'),
+                '- Email      : %s' % (record.partner_id.email or 'N/A'),
+                '- Phân hạng  : %s' % (dict(record.partner_id._fields['rank'].selection).get(
+                    record.partner_id.rank, '') if hasattr(record.partner_id, 'rank') else 'N/A'),
+                '-------------------------------------',
             ]
             contact_block = '\n'.join(lines)
 
             if record.mo_ta:
-                if _("Thông tin chăm sóc khách hàng:") not in record.mo_ta:
-                    record.mo_ta = '%s\n\n%s' % (contact_block, record.mo_ta)
+                if '--- Thông tin chăm sóc khách hàng ---' not in record.mo_ta:
+                    record.mo_ta = contact_block + '\n\n' + record.mo_ta
             else:
                 record.mo_ta = contact_block
 
@@ -265,11 +280,21 @@ class CongViec(models.Model):
         return records
 
     def write(self, vals):
+        # Lưu trạng thái bi_chan trước khi write
+        bi_chan_before = {r.id: r.bi_chan for r in self}
         result = super().write(vals)
         if not self.env.context.get('skip_executor_sync') and {'nguoi_phu_trach_id', 'user_ids'} & set(vals):
             self._sync_executor_bidirectional(
                 triggered_by_user_ids=('user_ids' in vals and 'nguoi_phu_trach_id' not in vals)
             )
+        # Gửi Telegram khi task chuyển sang bị chặn
+        if 'bi_chan' in vals or 'cong_viec_bi_chan_ids' in vals:
+            try:
+                for task in self:
+                    if task.bi_chan and not bi_chan_before.get(task.id):
+                        self.env['telegram.config'].notify_task_bi_chan(task)
+            except Exception:
+                pass
         return result
 
     @api.model

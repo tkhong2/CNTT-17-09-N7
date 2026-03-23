@@ -32,22 +32,25 @@
 
     'assets': {
         'web.assets_backend': [
+            'quan_ly_nhan_su/static/src/css/dashboard.css',
             'quan_ly_nhan_su/static/src/scss/modern_backend.scss',
+            'quan_ly_nhan_su/static/src/js/dashboard_charts.js',
+            'quan_ly_nhan_su/static/src/js/page_header.js',
         ],
     },
 
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'data/demo_content.xml',
         'data/sequence_data.xml',
         'data/actions.xml',
         'views/ops/menu.xml',
         'data/automation_params.xml',
         'data/automation_cron.xml',
-        'data/demo_content.xml',
-        'data/demo_seed_all_biz.xml',
-        'data/demo_seed_massive.xml',
-        'data/demo_seed_wave2.xml',
+
+
+
         'views/ops/nhan_vien.xml',
         'views/inherit/hr_employee_mix_views.xml',
         'views/admin/phong_ban.xml',
@@ -60,6 +63,8 @@
         'views/ops/nghi_phep.xml',
         'views/ops/tinh_luong.xml',
         'views/ops/tuyen_dung.xml',
+        'views/admin/telegram_config.xml',
+        'data/telegram_cron.xml',
     ],
     'license': 'LGPL-3',
 }

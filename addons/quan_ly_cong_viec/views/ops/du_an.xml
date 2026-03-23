@@ -101,7 +101,7 @@
                 <filter string="Đang thực hiện" name="dang_thuc_hien" domain="[('trang_thai', '=', 'dang_thuc_hien')]"/>
                 <filter string="Hoàn thành" name="hoan_thanh" domain="[('trang_thai', '=', 'hoan_thanh')]"/>
                 <filter string="Tạm dừng" name="tam_dung" domain="[('trang_thai', '=', 'tam_dung')]"/>
-                <group expand="0" string="Group By">
+                <group expand="0" string="Nhóm theo">
                     <filter string="Trạng thái" name="group_by_trang_thai" context="{'group_by': 'trang_thai'}"/>
                     <filter string="Người quản lý" name="group_by_nguoi_quan_ly" context="{'group_by': 'nguoi_quan_ly_id'}"/>
                 </group>

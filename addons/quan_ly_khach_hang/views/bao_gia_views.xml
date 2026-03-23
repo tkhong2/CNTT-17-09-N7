@@ -38,11 +38,6 @@
                         <field name="trang_thai" widget="statusbar"/>
                     </header>
                     <sheet>
-                        <div class="oe_button_box" name="button_box">
-                            <button name="action_view_order" type="object" class="oe_stat_button" icon="fa-shopping-cart">
-                                <field name="don_hang_id" widget="statinfo"/>
-                            </button>
-                        </div>
                         
                         <div class="oe_title">
                             <h1>
@@ -67,18 +62,18 @@
                             <page string="Chi Tiết Báo Giá">
                                 <field name="chi_tiet_ids" nolabel="1" colspan="2">
                                     <tree string="Chi Tiết" editable="bottom">
-                                        <field name="san_pham"/>
-                                        <field name="don_vi_tinh"/>
+                                        <field name="ten_san_pham"/>
+                                        <field name="don_vi"/>
                                         <field name="so_luong"/>
-                                        <field name="gia_ban"/>
+                                        <field name="don_gia"/>
                                         <field name="thanh_tien"/>
                                     </tree>
                                     <form string="Chi Tiết Báo Giá">
                                         <group>
-                                            <field name="san_pham"/>
-                                            <field name="don_vi_tinh"/>
+                                            <field name="ten_san_pham"/>
+                                            <field name="don_vi"/>
                                             <field name="so_luong"/>
-                                            <field name="gia_ban"/>
+                                            <field name="don_gia"/>
                                             <field name="thanh_tien" readonly="1"/>
                                         </group>
                                         <group>

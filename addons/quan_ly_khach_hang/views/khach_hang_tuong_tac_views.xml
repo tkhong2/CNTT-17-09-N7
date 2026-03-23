@@ -4,7 +4,7 @@
         <field name="name">khach_hang_tuong_tac.tree</field>
         <field name="model">khach_hang_tuong_tac</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree decoration-warning="qua_han == True" decoration-success="trang_thai == 'done'">
                 <field name="ngay_lien_he"/>
                 <field name="khach_hang_id"/>
                 <field name="tieu_de"/>
@@ -12,8 +12,9 @@
                 <field name="nhan_vien_id"/>
                 <field name="ket_qua"/>
                 <field name="hen_lien_he_tiep"/>
+                <field name="cong_viec_id" string="Task liên quan" optional="show"/>
                 <field name="trang_thai"/>
-                <field name="qua_han"/>
+                <field name="qua_han" invisible="1"/>
             </tree>
         </field>
     </record>
@@ -46,6 +47,22 @@
                     <group>
                         <field name="noi_dung"/>
                     </group>
+                    <group string="Liên kết Công việc">
+                        <group>
+                            <field name="tu_dong_tao_task"/>
+                            <field name="cong_viec_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <button name="action_xem_task" type="object"
+                                string="Xem Task liên quan"
+                                class="btn btn-secondary"
+                                attrs="{'invisible': [('cong_viec_id', '=', False)]}"/>
+                            <button name="action_tao_task_thu_cong" type="object"
+                                string="Tạo Task thủ công"
+                                class="btn btn-primary"
+                                attrs="{'invisible': [('cong_viec_id', '!=', False)]}"/>
+                        </group>
+                    </group>
                 </sheet>
             </form>
         </field>
@@ -66,7 +83,7 @@
                 <filter string="7 ngày gần đây" name="last_7_days" domain="[('ngay_lien_he', '&gt;=', (context_today() - relativedelta(days=7)))]"/>
                 <filter string="Đã chốt hợp đồng" name="won" domain="[('ket_qua','=','chot_hop_dong')]"/>
                 <filter string="Cần xử lý ngay" name="need_now" domain="[('trang_thai','=','planned'),('hen_lien_he_tiep','&lt;',context_today())]"/>
-                <group expand="0" string="Group By">
+                <group expand="0" string="Nhóm theo">
                     <filter string="Khách hàng" name="group_khach_hang" context="{'group_by':'khach_hang_id'}"/>
                     <filter string="Nhân viên" name="group_nhan_vien" context="{'group_by':'nhan_vien_id'}"/>
                     <filter string="Loại tương tác" name="group_loai" context="{'group_by':'loai_tuong_tac'}"/>

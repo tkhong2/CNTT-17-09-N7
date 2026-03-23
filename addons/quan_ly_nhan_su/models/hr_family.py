@@ -1,35 +1,59 @@
 # -*- coding: utf-8 -*-
 
 from datetime import date
-
-from odoo import api, fields, models
+from odoo import api, fields, models, _
+from odoo.exceptions import ValidationError
 
 
 class HrFamily(models.Model):
-    _name = 'hr.family'
-    _description = 'Than nhan nhan vien'
-    _order = 'birth_date desc, id desc'
+    """
+    Thân nhân nhân viên — One2many từ hr.employee.
+    Tự động tính tuổi và đánh dấu người phụ thuộc (con < 18 tuổi).
+    """
+    _name        = 'hr.family'
+    _description = 'Thân nhân nhân viên'
+    _order       = 'birth_date desc, id desc'
 
-    name = fields.Char(string='Ten than nhan', required=True)
+    name = fields.Char(string='Họ tên thân nhân', required=True)
+
     relationship = fields.Selection([
-        ('vo', 'Vo'),
-        ('chong', 'Chong'),
-        ('con', 'Con'),
-        ('bo', 'Bo'),
-        ('me', 'Me'),
-        ('khac', 'Khac'),
-    ], string='Moi quan he', required=True)
-    birth_date = fields.Date(string='Ngay sinh')
-    age = fields.Integer(string='Tuoi', compute='_compute_age_and_dependent', store=True)
-    is_dependent = fields.Boolean(string='Nguoi phu thuoc', compute='_compute_age_and_dependent', store=True)
-    employee_id = fields.Many2one('hr.employee', string='Nhan vien', required=True, ondelete='cascade')
+        ('vo',    'Vợ'),
+        ('chong', 'Chồng'),
+        ('con',   'Con'),
+        ('bo',    'Bố'),
+        ('me',    'Mẹ'),
+        ('anh_chi_em', 'Anh/Chị/Em'),
+        ('khac',  'Khác'),
+    ], string='Mối quan hệ', required=True)
 
+    birth_date    = fields.Date(string='Ngày sinh')
+    age           = fields.Integer(string='Tuổi', compute='_compute_age_and_dependent', store=True)
+    is_dependent  = fields.Boolean(
+        string='Người phụ thuộc',
+        compute='_compute_age_and_dependent',
+        store=True,
+        help='Tự động tick nếu là Con và dưới 18 tuổi'
+    )
+    employee_id   = fields.Many2one(
+        'hr.employee', string='Nhân viên',
+        required=True, ondelete='cascade'
+    )
+
+    # ── Logic: tự động tính tuổi & is_dependent ──────────────
     @api.depends('birth_date', 'relationship')
     def _compute_age_and_dependent(self):
         today = date.today()
-        for record in self:
+        for rec in self:
             age = 0
-            if record.birth_date:
-                age = today.year - record.birth_date.year - ((today.month, today.day) < (record.birth_date.month, record.birth_date.day))
-            record.age = age
-            record.is_dependent = bool(record.relationship == 'con' and age < 18)
+            if rec.birth_date:
+                age = (today.year - rec.birth_date.year
+                       - ((today.month, today.day) < (rec.birth_date.month, rec.birth_date.day)))
+            rec.age          = age
+            # Con dưới 18 → tự động người phụ thuộc
+            rec.is_dependent = bool(rec.relationship == 'con' and age < 18)
+
+    @api.constrains('birth_date')
+    def _check_birth_date(self):
+        for rec in self:
+            if rec.birth_date and rec.birth_date > date.today():
+                raise ValidationError(_('Ngày sinh thân nhân không được lớn hơn ngày hiện tại!'))
