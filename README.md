@@ -49,7 +49,14 @@ Hệ thống Quản lý Khách hàng + Công việc là một phân hệ ERP đ�
 
 # 3. Giao diện
 
+### Quản lý Nhân viên
+![Giao diện Quản lý Nhân viên](docs/images/giao_dien_nhan_vien.png)
 
+### Quản lý Dự án
+![Giao diện Quản lý Dự án](docs/images/giao_dien_du_an.png)
+
+### Quản lý Khách hàng
+![Giao diện Quản lý Khách hàng](docs/images/giao_dien_khach_hang.png)
 
 
 # 4. Cài đặt công cụ, môi trường và các thư viện cần thiết
@@ -117,4 +124,3 @@ python3 odoo-bin.py -c odoo.conf -u all
 Người sử dụng truy cập theo đường dẫn _http://localhost:8069/_ để đăng nhập vào hệ thống.
 
 Hoàn tất
-    
