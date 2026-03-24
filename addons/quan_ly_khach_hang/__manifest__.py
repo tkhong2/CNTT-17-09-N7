@@ -1,37 +1,61 @@
 {
 	'name': 'quan_ly_khach_hang',
-	'summary': 'Quản lý khách hàng liên thông nhân sự và công việc',
+	'summary': 'Quản lý khách hàng, lead, cơ hội bán hàng liên thông nhân sự và công việc',
 	'description': """
 		Mô đun quản lý khách hàng:
 		- Quản lý hồ sơ khách hàng
+		- Quản lý lead bán hàng
+		- Quản lý cơ hội bán hàng (sales pipeline)
 		- Liên kết tự động với dự án/công việc
 		- Liên thông nhân sự phụ trách
-		- Dashboard KPI theo dõi hiệu quả chăm sóc
-		- Tương tác: gọi điện, lịch hẹn, báo giá
-		- Phát hiện và gộp khách hàng trùng
+		- Lịch sử tương tác khách hàng
 	""",
 	'author': 'My Company',
 	'website': 'http://www.yourcompany.com',
 	'category': 'Sales',
 	'version': '15.0.2.0.0',
-	'depends': ['base', 'mail', 'quan_ly_nhan_su', 'quan_ly_cong_viec'],
+	'depends': ['base', 'mail', 'crm', 'quan_ly_nhan_su', 'quan_ly_cong_viec'],
+
+	'assets': {
+		'web.assets_backend': [
+			'quan_ly_khach_hang/static/src/scss/dashboard.scss',
+		],
+	},
 	'data': [
-		'security/khach_hang_nhom_quyen.xml',
-		'security/khach_hang_quy_tac_truy_cap.xml',
+		'security/khach_hang_groups.xml',
+		'security/khach_hang_rules.xml',
 		'security/ir.model.access.csv',
-		'data/sequence.xml',
+		'data/sequence_data.xml',
+		'data/dashboard_data.xml',
+		'data/followup_cron_data.xml',
+		'data/auto_assign_cron_data.xml',
+		'data/manager_automation_cron_data.xml',
+		'data/auto_heal_cron_data.xml',
+		'data/transfer_template_data.xml',
+		# Commented out demo data to fix module loading issues
+		'data/demo_content.xml',
 		'views/khach_hang_views.xml',
+		'views/res_partner_mix_views.xml',
+		'views/res_partner_rank_tree_mix.xml',
+		'views/khach_hang_dashboard_views.xml',
+		'views/khach_hang_merge_suggestion_views.xml',
+		'views/khach_hang_assign_owner_wizard_views.xml',
+		'views/khach_hang_transfer_template_views.xml',
+		'views/khach_hang_transfer_owner_wizard_views.xml',
+		'views/khach_hang_merge_wizard_views.xml',
 		'views/khach_hang_tuong_tac_views.xml',
-		'views/cong_viec_mo_rong_views.xml',
-		'views/du_an_mo_rong_views.xml',
-		'views/nhan_vien_mo_rong_views.xml',
-		'views/khach_hang_bang_dieu_views.xml',
-		'views/khach_hang_de_xuat_gop_views.xml',
-		'views/khach_hang_phan_cong_chu_tro_ly_views.xml',
-		'views/khach_hang_gop_tro_ly_views.xml',
-		'views/khach_hang_chuyen_chu_tro_ly_views.xml',
-		'views/khach_hang_chuyen_mau_views.xml',
-        'views/menu.xml',
+		'views/du_an_inherit_views.xml',
+		'views/cong_viec_inherit_views.xml',
+		'views/nhan_vien_inherit_views.xml',
+		'views/lead_views.xml',
+		'views/crm_lead_mix_views.xml',
+		'views/crm_lead_search_mix_views.xml',
+		'views/co_hoi_ban_hang_views.xml',
+		'views/bao_gia_views.xml',
+		'views/hop_dong_khach_hang_views.xml',
+		'views/yeu_cau_ho_tro_views.xml',
+		'views/hoat_dong_sales_views.xml',
+		'views/crm_menu.xml',
 	],
 	'installable': True,
 	'application': True,

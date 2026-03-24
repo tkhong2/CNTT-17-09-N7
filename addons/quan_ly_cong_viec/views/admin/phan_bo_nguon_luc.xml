@@ -76,7 +76,7 @@
                 <filter string="Đang sử dụng" name="dang_su_dung" domain="[('trang_thai', '=', 'dang_su_dung')]"/>
                 <filter string="Nhân lực" name="nhan_luc" domain="[('loai_nguon_luc', '=', 'nhan_luc')]"/>
                 <filter string="Tài chính" name="tai_chinh" domain="[('loai_nguon_luc', '=', 'tai_chinh')]"/>
-                <group expand="0" string="Group By">
+                <group expand="0" string="Nhóm theo">
                     <filter string="Dự án" name="group_by_du_an" context="{'group_by': 'du_an_id'}"/>
                     <filter string="Công việc" name="group_by_cong_viec" context="{'group_by': 'cong_viec_id'}"/>
                     <filter string="Loại nguồn lực" name="group_by_loai_nguon_luc" context="{'group_by': 'loai_nguon_luc'}"/>

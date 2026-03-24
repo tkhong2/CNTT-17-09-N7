@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
     <!-- Form View -->
     <record id="view_danh_gia_form" model="ir.ui.view">
         <field name="name">danh.gia.form</field>
@@ -70,7 +71,7 @@
                 <filter string="Đánh giá định kỳ" name="dinh_ky" domain="[('loai_danh_gia', '=', 'dinh_ky')]"/>
                 <filter string="Đánh giá tăng lương" name="tang_luong" domain="[('loai_danh_gia', '=', 'tang_luong')]"/>
                 <filter string="Đánh giá thử việc" name="thu_viec" domain="[('loai_danh_gia', '=', 'thu_viec')]"/>
-                <group expand="0" string="Group By">
+                <group expand="0" string="Nhóm theo">
                     <filter string="Nhân viên" name="nhan_vien" context="{'group_by': 'nhan_vien_id'}"/>
                     <filter string="Loại đánh giá" name="loai_danh_gia" context="{'group_by': 'loai_danh_gia'}"/>
                     <filter string="Kết luận" name="ket_luan" context="{'group_by': 'ket_luan'}"/>

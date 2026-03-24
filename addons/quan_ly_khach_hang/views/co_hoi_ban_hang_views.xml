@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Co Hoi Ban Hang - Sales Opportunity -->
+        
+        <!-- Opportunity Tree View -->
+        <record id="co_hoi_ban_hang_tree" model="ir.ui.view">
+            <field name="name">co_hoi_ban_hang.tree</field>
+            <field name="model">co_hoi_ban_hang</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="ma_co_hoi"/>
+                    <field name="ten_co_hoi"/>
+                    <field name="khach_hang_id"/>
+                    <field name="nhan_vien_phu_trach_id"/>
+                    <field name="gia_tri_co_hoi" sum="Tổng giá trị"/>
+                    <field name="xac_suat_thang"/>
+                    <field name="doanh_thu_du_bao" sum="Tổng dự báo"/>
+                    <field name="giai_doan"/>
+                    <field name="han_chot"/>
+                </tree>
+            </field>
+        </record>
+        
+        <!-- Opportunity Form View -->
+        <record id="co_hoi_ban_hang_form" model="ir.ui.view">
+            <field name="name">co_hoi_ban_hang.form</field>
+            <field name="model">co_hoi_ban_hang</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_move_discovery" string="→ Khám phá" type="object" class="oe_highlight"/>
+                        <button name="action_move_development" string="→ Phát triển" type="object" class="oe_highlight"/>
+                        <button name="action_move_proposal" string="→ Đề xuất" type="object" class="oe_highlight"/>
+                        <button name="action_move_negotiation" string="→ Thương lượng" type="object" class="oe_highlight"/>
+                        <button name="action_move_closing" string="→ Sắp đóng" type="object" class="oe_highlight"/>
+                        <button name="action_mark_won" string="Thắng" type="object" class="oe_highlight"/>
+                        <button name="action_mark_lost" string="Thua" type="object"/>
+                        <field name="giai_doan" widget="statusbar" options="{'clickable': False}"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="ma_co_hoi" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="ten_co_hoi"/>
+                                <field name="lead_id"/>
+                                <field name="khach_hang_id"/>
+                                <field name="du_an_id"/>
+                            </group>
+                            <group>
+                                <field name="nhan_vien_phu_trach_id"/>
+                                <field name="nhom_ban_hang_id"/>
+                                <field name="ngay_tao" readonly="1"/>
+                                <field name="trang_thai_khac"/>
+                            </group>
+                        </group>
+                        <group string="Tài chính">
+                            <group>
+                                <field name="gia_tri_co_hoi"/>
+                                <field name="xac_suat_thang" widget="float"/>
+                            </group>
+                            <group>
+                                <field name="doanh_thu_du_bao" readonly="1" widget="monetary"/>
+                                <field name="han_chot"/>
+                            </group>
+                        </group>
+                        <field name="mo_ta"/>
+                        <field name="ghi_chu_tai_chinh"/>
+                        <group string="Timeline">
+                            <group>
+                                <field name="ngay_lien_he_cuoi" readonly="1"/>
+                                <field name="ngay_dong_thang" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="so_lan_lien_he" readonly="1"/>
+                                <field name="thoi_gian_kinh_doanh" readonly="1"/>
+                            </group>
+                        </group>
+                        <group attrs="{'invisible': [('giai_doan', '!=', 'thua')]}">
+                            <field name="nguyen_nhan_thua"/>
+                            <field name="loi_quay_lai"/>
+                        </group>
+                        <separator string="Hoạt động"/>
+                        <field name="hoat_dong_ids">
+                            <tree>
+                                <field name="loai"/>
+                                <field name="ngay_gio"/>
+                                <field name="nguoi_thuc_hien_id"/>
+                                <field name="mo_ta"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <!-- Opportunity Kanban View (Sales Pipeline) -->
+        <record id="co_hoi_ban_hang_kanban" model="ir.ui.view">
+            <field name="name">co_hoi_ban_hang.kanban</field>
+            <field name="model">co_hoi_ban_hang</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="giai_doan">
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click">
+                                <div class="oe_kanban_details">
+                                    <strong><field name="ten_co_hoi"/></strong>
+                                    <p><field name="khach_hang_id"/></p>
+                                    <p>
+                                        <strong>Giá trị: </strong>
+                                        <field name="gia_tri_co_hoi" widget="monetary"/>
+                                    </p>
+                                    <p>
+                                        <strong>Dự báo: </strong>
+                                        <field name="doanh_thu_du_bao" widget="monetary"/>
+                                    </p>
+                                    <small><field name="nhan_vien_phu_trach_id"/></small>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        
+        <!-- Opportunity Action -->
+        <record id="co_hoi_ban_hang_action" model="ir.actions.act_window">
+            <field name="name">Cơ hội bán hàng</field>
+            <field name="res_model">co_hoi_ban_hang</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+        
+        <!-- Menu -->
+        <menuitem id="lead_menu" parent="menu_ops_khach_hang" name="Lead" action="lead_action"/>
+        <menuitem id="co_hoi_menu" parent="menu_ops_khach_hang" name="Cơ hội bán hàng" action="co_hoi_ban_hang_action"/>
+    </data>
+</odoo>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_khach_hang_transfer_owner_wizard_form" model="ir.ui.view">
+        <field name="name">khach_hang_transfer_owner_wizard.form</field>
+        <field name="model">khach_hang_transfer_owner_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Chuyển giao khách hàng">
+                <group>
+                    <group string="Mẫu thao tác">
+                        <field name="transfer_template_id" options="{'no_create_edit': False}"/>
+                        <field name="save_template_name" placeholder="Ví dụ: Quá hạn + Im lặng 14 ngày"/>
+                        <button name="action_save_as_template" type="object" string="Lưu/Cập nhật mẫu" class="oe_link"/>
+                    </group>
+                    <group string="Nguồn / Đích">
+                        <field name="selected_count"/>
+                        <field name="source_nhan_vien_id"/>
+                        <field name="target_nhan_vien_id"/>
+                    </group>
+                    <group string="Bộ lọc">
+                        <field name="trang_thai_hop_tac"/>
+                        <field name="only_overdue"/>
+                        <field name="only_silent"/>
+                        <field name="silent_days" attrs="{'invisible': [('only_silent', '=', False)], 'required': [('only_silent', '=', True)]}"/>
+                        <field name="preview_count"/>
+                    </group>
+                </group>
+                <footer>
+                    <button name="action_transfer" type="object" string="Chuyển giao" class="oe_highlight"/>
+                    <button string="Hủy" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_khach_hang_transfer_owner_wizard" model="ir.actions.act_window">
+        <field name="name">Chuyển giao khách hàng (A → B)</field>
+        <field name="res_model">khach_hang_transfer_owner_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="groups_id" eval="[(4, ref('quan_ly_khach_hang.group_khach_hang_manager'))]"/>
+        <field name="binding_model_id" ref="model_khach_hang"/>
+        <field name="binding_view_types">list</field>
+    </record>
+</odoo>

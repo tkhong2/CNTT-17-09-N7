@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="ir_cron_khach_hang_overdue_followup" model="ir.cron">
+            <field name="name">Khách hàng - tạo nhắc follow-up quá hạn</field>
+            <field name="model_id" ref="model_khach_hang_tuong_tac"/>
+            <field name="state">code</field>
+            <field name="code">model._cron_create_overdue_followup_activities()</field>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">15</field>
+            <field name="interval_type">minutes</field>
+            <field name="numbercall">-1</field>
+            <field name="active">True</field>
+        </record>
+    </data>
+</odoo>

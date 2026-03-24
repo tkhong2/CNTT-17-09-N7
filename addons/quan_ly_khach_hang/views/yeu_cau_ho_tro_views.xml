@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Actions -->
+        <record id="action_yeu_cau_ho_tro" model="ir.actions.act_window">
+            <field name="name">Yêu Cầu Hỗ Trợ</field>
+            <field name="res_model">yeu_cau_ho_tro</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+
+        <!-- Support Request (Yêu Cầu Hỗ Trợ) Views -->
+        <record id="view_yeu_cau_ho_tro_tree" model="ir.ui.view">
+            <field name="name">yeu_cau_ho_tro.tree</field>
+            <field name="model">yeu_cau_ho_tro</field>
+            <field name="arch" type="xml">
+                <tree string="Yêu Cầu Hỗ Trợ">
+                    <field name="ma_yeu_cau"/>
+                    <field name="khach_hang_id"/>
+                    <field name="tieu_de"/>
+                    <field name="loai_yeu_cau"/>
+                    <field name="uu_tien"/>
+                    <field name="han_sla"/>
+                    <field name="qua_han_sla"/>
+                    <field name="nhan_vien_phu_trach_id"/>
+                    <field name="trang_thai"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="view_yeu_cau_ho_tro_form" model="ir.ui.view">
+            <field name="name">yeu_cau_ho_tro.form</field>
+            <field name="model">yeu_cau_ho_tro</field>
+            <field name="arch" type="xml">
+                <form string="Yêu Cầu Hỗ Trợ">
+                    <header>
+                        <button name="action_assign" string="Gán" type="object" class="btn-primary"/>
+                        <button name="action_start_process" string="Xử Lý" type="object"/>
+                        <button name="action_wait_customer" string="Chờ Khách" type="object"/>
+                        <button name="action_resolve" string="Giải Quyết" type="object" class="btn-primary"/>
+                        <button name="action_close" string="Đóng" type="object"/>
+                        <field name="trang_thai" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="ma_yeu_cau" readonly="1"/>
+                                <field name="tieu_de" class="oe_inline" placeholder="Tiêu đề yêu cầu"/>
+                            </h1>
+                        </div>
+                        
+                        <group>
+                            <group>
+                                <field name="khach_hang_id"/>
+                                <field name="hop_dong_id"/>
+                                <field name="loai_yeu_cau"/>
+                            </group>
+                            <group>
+                                <field name="uu_tien"/>
+                                <field name="sla_gio"/>
+                                <field name="han_sla" readonly="1"/>
+                                <field name="nhan_vien_phu_trach_id"/>
+                                <field name="ngay_hen_tra_loi"/>
+                            </group>
+                        </group>
+                        
+                        <group string="Thông Tin Liên Hệ">
+                            <group>
+                                <field name="nguoi_dal_yeu_cau"/>
+                                <field name="dien_thoai_lien_he"/>
+                            </group>
+                            <group>
+                                <field name="email_lien_he"/>
+                            </group>
+                        </group>
+                        
+                        <notebook>
+                            <page string="Chi Tiết Yêu Cầu">
+                                <field name="mo_ta_chi_tiet" colspan="2"/>
+                            </page>
+                            
+                            <page string="Xử Lý">
+                                <group>
+                                    <field name="ngay_tra_loi"/>
+                                    <field name="ngay_giai_quyet"/>
+                                    <field name="thoi_gian_xu_ly_gio" readonly="1"/>
+                                    <field name="qua_han_sla" readonly="1"/>
+                                </group>
+                                <field name="ghi_chu_ho_tro" colspan="2"/>
+                                <field name="ket_qua_giai_quyet" colspan="2"/>
+                            </page>
+                            
+                            <page string="Thỏa Mãn Khách">
+                                <group>
+                                    <field name="danh_gia_kham_pha"/>
+                                    <field name="phan_hoi_them" colspan="2"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_ids" widget="mail_thread"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_yeu_cau_ho_tro_kanban" model="ir.ui.view">
+            <field name="name">yeu_cau_ho_tro.kanban</field>
+            <field name="model">yeu_cau_ho_tro</field>
+            <field name="arch" type="xml">
+                <kanban string="Yêu Cầu Hỗ Trợ" default_group_by="trang_thai">
+                    <field name="trang_thai"/>
+                    <field name="ma_yeu_cau"/>
+                    <field name="tieu_de"/>
+                    <field name="khach_hang_id"/>
+                    <field name="uu_tien"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_card">
+                                <div class="oe_kanban_card_header">
+                                    <span class="oe_kanban_card_header_title">
+                                        <strong><t t-esc="record.ma_yeu_cau and record.ma_yeu_cau.value or ''"/></strong>
+                                    </span>
+                                </div>
+                                <div class="oe_kanban_card_body">
+                                    <p><strong><t t-esc="record.tieu_de and record.tieu_de.value or ''"/></strong></p>
+                                    <p><strong><t t-esc="record.khach_hang_id and record.khach_hang_id.value or ''"/></strong></p>
+                                    <p><span class="badge"><t t-esc="record.uu_tien and record.uu_tien.value or ''"/></span></p>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        
+        <record id="view_yeu_cau_ho_tro_search" model="ir.ui.view">
+            <field name="name">yeu_cau_ho_tro.search</field>
+            <field name="model">yeu_cau_ho_tro</field>
+            <field name="arch" type="xml">
+                <search string="Yêu Cầu Hỗ Trợ">
+                    <field name="ma_yeu_cau"/>
+                    <field name="tieu_de"/>
+                    <field name="khach_hang_id"/>
+                    <separator/>
+                    <filter string="Không Gán" name="unassigned" domain="[('nhan_vien_phu_trach_id', '=', False)]"/>
+                    <filter string="Khẩn Cấp" name="urgent" domain="[('uu_tien', '=', 'khan_cap')]"/>
+                    <filter string="Quá Hạn SLA" name="sla_overdue" domain="[('qua_han_sla', '=', True)]"/>
+                    <filter string="Chờ Xử Lý" name="open" domain="[('trang_thai', '!=', 'closed')]"/>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

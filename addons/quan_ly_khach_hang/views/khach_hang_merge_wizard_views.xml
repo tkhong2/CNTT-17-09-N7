@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_khach_hang_merge_wizard_form" model="ir.ui.view">
+        <field name="name">khach_hang_merge_wizard.form</field>
+        <field name="model">khach_hang_merge_wizard</field>
+        <field name="arch" type="xml">
+            <form string="Gộp khách hàng">
+                <group>
+                    <field name="primary_khach_hang_id" domain="[('id', 'in', context.get('active_ids', [])), ('active', '=', True)]"/>
+                    <field name="duplicate_khach_hang_ids" widget="many2many_tags" domain="[('id', 'in', context.get('active_ids', [])), ('id', '!=', primary_khach_hang_id), ('active', '=', True)]"/>
+                </group>
+                <footer>
+                    <button name="action_merge" type="object" string="Gộp" class="oe_highlight"/>
+                    <button string="Hủy" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_khach_hang_merge_wizard" model="ir.actions.act_window">
+        <field name="name">Gộp khách hàng đã chọn</field>
+        <field name="res_model">khach_hang_merge_wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="groups_id" eval="[(4, ref('quan_ly_khach_hang.group_khach_hang_manager'))]"/>
+        <field name="binding_model_id" ref="model_khach_hang"/>
+        <field name="binding_view_types">list</field>
+        <field name="context">{'default_primary_khach_hang_id': active_id}</field>
+    </record>
+</odoo>

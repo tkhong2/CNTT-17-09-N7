@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="cong_viec_dashboard_main" model="cong_viec_dashboard">
+      <field name="ten_bang">Dashboard KPI Công việc</field>
+    </record>
+
+    <record id="view_cong_viec_dashboard_form" model="ir.ui.view">
+      <field name="name">cong_viec_dashboard.form</field>
+      <field name="model">cong_viec_dashboard</field>
+      <field name="arch" type="xml">
+        <form create="0" edit="0" delete="0">
+          <sheet>
+            <div class="cv-dash">
+
+              <!-- HEADER -->
+              <div class="cv-dash-header">
+                <div class="cv-dash-header-left">
+                  <div class="cv-dash-icon"><i class="fa fa-tasks"/></div>
+                  <div>
+                    <h1 class="cv-dash-title">Dashboard Công việc</h1>
+                    <p class="cv-dash-sub">Tổng quan tiến độ công việc &amp; dự án</p>
+                  </div>
+                </div>
+                <div class="cv-dash-actions">
+                  <button type="object" name="action_xem_cong_viec_qua_han"
+                    class="cv-btn cv-btn-danger" string="⚠ Công việc quá hạn"/>
+                </div>
+              </div>
+
+              <!-- KPI ROW — 4 cards -->
+              <div class="cv-kpi-row">
+                <div class="cv-kpi cv-kpi-teal">
+                  <div class="cv-kpi-accent"/>
+                  <div class="cv-kpi-body">
+                    <div class="cv-kpi-icon-wrap"><i class="fa fa-tasks"/></div>
+                    <div class="cv-kpi-num"><field name="tong_cong_viec_active" readonly="1" nolabel="1"/></div>
+                    <div class="cv-kpi-label">Đang xử lý</div>
+                  </div>
+                  <span class="cv-kpi-tag">Mở</span>
+                </div>
+                <div class="cv-kpi cv-kpi-red">
+                  <div class="cv-kpi-accent"/>
+                  <div class="cv-kpi-body">
+                    <div class="cv-kpi-icon-wrap"><i class="fa fa-clock-o"/></div>
+                    <div class="cv-kpi-num"><field name="tong_cong_viec_qua_han" readonly="1" nolabel="1"/></div>
+                    <div class="cv-kpi-label">Quá hạn</div>
+                  </div>
+                  <span class="cv-kpi-tag cv-tag-red">Khẩn</span>
+                </div>
+                <div class="cv-kpi cv-kpi-green">
+                  <div class="cv-kpi-accent"/>
+                  <div class="cv-kpi-body">
+                    <div class="cv-kpi-icon-wrap"><i class="fa fa-check-circle"/></div>
+                    <div class="cv-kpi-num"><field name="tong_cong_viec_hoan_thanh" readonly="1" nolabel="1"/></div>
+                    <div class="cv-kpi-label">Hoàn thành</div>
+                  </div>
+                  <span class="cv-kpi-tag cv-tag-green">Done</span>
+                </div>
+                <div class="cv-kpi cv-kpi-orange">
+                  <div class="cv-kpi-accent"/>
+                  <div class="cv-kpi-body">
+                    <div class="cv-kpi-icon-wrap"><i class="fa fa-percent"/></div>
+                    <div class="cv-kpi-num cv-kpi-num-sm">
+                      <field name="blocked_task_ratio" readonly="1" nolabel="1" digits="[1,1]"/>%
+                    </div>
+                    <div class="cv-kpi-label">Tỷ lệ quá hạn</div>
+                  </div>
+                  <span class="cv-kpi-tag cv-tag-orange">%</span>
+                </div>
+              </div>
+
+              <!-- HEALTH PANEL -->
+              <div class="cv-health-panel">
+                <div class="cv-health-head">
+                  <i class="fa fa-heartbeat"/> Sức khỏe dự án
+                </div>
+                <div class="cv-health-body">
+
+                  <div class="cv-health-item">
+                    <div class="cv-health-item-left">
+                      <div class="cv-health-dot cv-dot-green"/>
+                      <span class="cv-health-lbl">Công việc đang mở</span>
+                    </div>
+                    <div class="cv-health-bar-wrap">
+                      <div class="cv-health-bar cv-bar-teal"/>
+                    </div>
+                    <div class="cv-health-val">
+                      <field name="tong_cong_viec_active" readonly="1" nolabel="1"/>
+                    </div>
+                  </div>
+
+                  <div class="cv-health-item">
+                    <div class="cv-health-item-left">
+                      <div class="cv-health-dot cv-dot-red"/>
+                      <span class="cv-health-lbl">Công việc quá hạn</span>
+                    </div>
+                    <div class="cv-health-bar-wrap">
+                      <div class="cv-health-bar cv-bar-red"/>
+                    </div>
+                    <div class="cv-health-val">
+                      <field name="tong_cong_viec_qua_han" readonly="1" nolabel="1"/>
+                    </div>
+                  </div>
+
+                  <div class="cv-health-item">
+                    <div class="cv-health-item-left">
+                      <div class="cv-health-dot cv-dot-green"/>
+                      <span class="cv-health-lbl">Đã hoàn thành</span>
+                    </div>
+                    <div class="cv-health-bar-wrap">
+                      <div class="cv-health-bar cv-bar-green"/>
+                    </div>
+                    <div class="cv-health-val">
+                      <field name="tong_cong_viec_hoan_thanh" readonly="1" nolabel="1"/>
+                    </div>
+                  </div>
+
+                  <div class="cv-health-item">
+                    <div class="cv-health-item-left">
+                      <div class="cv-health-dot cv-dot-orange"/>
+                      <span class="cv-health-lbl">Tỷ lệ quá hạn / tổng mở</span>
+                    </div>
+                    <div class="cv-health-bar-wrap">
+                      <div class="cv-health-bar cv-bar-orange"/>
+                    </div>
+                    <div class="cv-health-val">
+                      <field name="blocked_task_ratio" readonly="1" nolabel="1" digits="[1,1]"/>%
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="action_cong_viec_dashboard" model="ir.actions.act_window">
+      <field name="name">Dashboard KPI Công việc</field>
+      <field name="res_model">cong_viec_dashboard</field>
+      <field name="view_mode">form</field>
+      <field name="res_id" ref="cong_viec_dashboard_main"/>
+    </record>
+
+    <menuitem id="menu_cong_viec_dashboard" name="Dashboard KPI"
+      parent="menu_quan_ly_cong_viec_root"
+      action="action_cong_viec_dashboard" sequence="0"/>
+  </data>
+</odoo>

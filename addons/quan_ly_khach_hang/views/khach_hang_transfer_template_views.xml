@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_khach_hang_transfer_template_tree" model="ir.ui.view">
+        <field name="name">khach_hang_transfer_template.tree</field>
+        <field name="model">khach_hang_transfer_template</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="trang_thai_hop_tac"/>
+                <field name="only_overdue"/>
+                <field name="only_silent"/>
+                <field name="silent_days"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_khach_hang_transfer_template_form" model="ir.ui.view">
+        <field name="name">khach_hang_transfer_template.form</field>
+        <field name="model">khach_hang_transfer_template</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="active"/>
+                    </group>
+                    <group string="Điều kiện lọc">
+                        <field name="trang_thai_hop_tac"/>
+                        <field name="only_overdue"/>
+                        <field name="only_silent"/>
+                        <field name="silent_days" attrs="{'invisible': [('only_silent', '=', False)], 'required': [('only_silent', '=', True)]}"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_khach_hang_transfer_template" model="ir.actions.act_window">
+        <field name="name">Mẫu chuyển giao</field>
+        <field name="res_model">khach_hang_transfer_template</field>
+        <field name="view_mode">tree,form</field>
+        <field name="groups_id" eval="[(4, ref('quan_ly_khach_hang.group_khach_hang_manager'))]"/>
+    </record>
+
+    <menuitem id="menu_khach_hang_transfer_template"
+              name="Mẫu chuyển giao"
+              parent="menu_quan_ly_khach_hang_root"
+              action="action_khach_hang_transfer_template"
+              sequence="99"
+              groups="quan_ly_khach_hang.group_khach_hang_manager"/>
+</odoo>

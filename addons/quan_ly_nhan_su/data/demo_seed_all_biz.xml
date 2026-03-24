@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+    <record id="phong_ban_allbiz_ops" model="phong_ban">
+        <field name="ma_phong_ban">PB-ALLBIZ-OPS</field>
+        <field name="ten_phong_ban">Phòng Vận hành AllBiz</field>
+        <field name="mo_ta">Phòng ban demo tổng hợp cho toàn bộ nghiệp vụ.</field>
+    </record>
+
+    <record id="phong_ban_allbiz_sales" model="phong_ban">
+        <field name="ma_phong_ban">PB-ALLBIZ-SALES</field>
+        <field name="ten_phong_ban">Phòng Kinh doanh AllBiz</field>
+    </record>
+
+    <record id="chuc_vu_allbiz_manager" model="chuc_vu">
+        <field name="ma_chuc_vu">CV-ALLBIZ-MGR</field>
+        <field name="ten_chuc_vu">Quản lý vận hành AllBiz</field>
+        <field name="muc_luong_co_ban">32000000</field>
+    </record>
+
+    <record id="chuc_vu_allbiz_specialist" model="chuc_vu">
+        <field name="ma_chuc_vu">CV-ALLBIZ-SPE</field>
+        <field name="ten_chuc_vu">Chuyên viên nghiệp vụ AllBiz</field>
+        <field name="muc_luong_co_ban">21000000</field>
+    </record>
+
+    <record id="chuc_vu_allbiz_sales" model="chuc_vu">
+        <field name="ma_chuc_vu">CV-ALLBIZ-SALES</field>
+        <field name="ten_chuc_vu">Sales Executive AllBiz</field>
+        <field name="muc_luong_co_ban">19000000</field>
+    </record>
+
+    <record id="nhan_vien_allbiz_manager" model="nhan_vien">
+        <field name="ma_nhan_vien">NV-ALLBIZ-001</field>
+        <field name="ho_va_ten">Luu Van Quan</field>
+        <field name="ngay_sinh">1990-03-14</field>
+        <field name="email">luu.quan.allbiz@example.com</field>
+        <field name="dien_thoai">0918001001</field>
+        <field name="phong_ban_id" ref="quan_ly_nhan_su.phong_ban_allbiz_ops"/>
+        <field name="chuc_vu_id" ref="quan_ly_nhan_su.chuc_vu_allbiz_manager"/>
+        <field name="ngay_vao_lam">2028-05-01</field>
+        <field name="trang_thai">active</field>
+    </record>
+
+    <record id="nhan_vien_allbiz_specialist" model="nhan_vien">
+        <field name="ma_nhan_vien">NV-ALLBIZ-002</field>
+        <field name="ho_va_ten">Tran Minh Anh</field>
+        <field name="ngay_sinh">1994-09-20</field>
+        <field name="email">tran.minhanh.allbiz@example.com</field>
+        <field name="dien_thoai">0918001002</field>
+        <field name="phong_ban_id" ref="quan_ly_nhan_su.phong_ban_allbiz_ops"/>
+        <field name="chuc_vu_id" ref="quan_ly_nhan_su.chuc_vu_allbiz_specialist"/>
+        <field name="quan_ly_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_manager"/>
+        <field name="ngay_vao_lam">2030-01-10</field>
+        <field name="trang_thai">active</field>
+    </record>
+
+    <record id="nhan_vien_allbiz_sales" model="nhan_vien">
+        <field name="ma_nhan_vien">NV-ALLBIZ-003</field>
+        <field name="ho_va_ten">Nguyen Hoang Linh</field>
+        <field name="ngay_sinh">1996-07-02</field>
+        <field name="email">nguyen.linh.allbiz@example.com</field>
+        <field name="dien_thoai">0918001003</field>
+        <field name="phong_ban_id" ref="quan_ly_nhan_su.phong_ban_allbiz_sales"/>
+        <field name="chuc_vu_id" ref="quan_ly_nhan_su.chuc_vu_allbiz_sales"/>
+        <field name="quan_ly_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_manager"/>
+        <field name="ngay_vao_lam">2031-02-15</field>
+        <field name="trang_thai">active</field>
+    </record>
+
+    <record id="hop_dong_allbiz_manager" model="hop_dong">
+        <field name="ma_hop_dong">HD-ALLBIZ-001</field>
+        <field name="ten_hop_dong">Hop dong quan ly van hanh</field>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_manager"/>
+        <field name="loai_hop_dong">khong_xac_dinh_thoi_han</field>
+        <field name="ngay_bat_dau">2028-05-01</field>
+        <field name="luong_co_ban">32000000</field>
+        <field name="phu_cap">5000000</field>
+        <field name="trang_thai">active</field>
+    </record>
+
+    <record id="hop_dong_allbiz_specialist" model="hop_dong">
+        <field name="ma_hop_dong">HD-ALLBIZ-002</field>
+        <field name="ten_hop_dong">Hop dong chuyen vien nghiep vu</field>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_specialist"/>
+        <field name="loai_hop_dong">xac_dinh_thoi_han</field>
+        <field name="ngay_bat_dau">2030-01-10</field>
+        <field name="ngay_ket_thuc">2036-01-09</field>
+        <field name="luong_co_ban">21000000</field>
+        <field name="phu_cap">2500000</field>
+        <field name="trang_thai">active</field>
+    </record>
+
+    <record id="hop_dong_allbiz_sales" model="hop_dong">
+        <field name="ma_hop_dong">HD-ALLBIZ-003</field>
+        <field name="ten_hop_dong">Hop dong sales executive</field>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_sales"/>
+        <field name="loai_hop_dong">xac_dinh_thoi_han</field>
+        <field name="ngay_bat_dau">2031-02-15</field>
+        <field name="ngay_ket_thuc">2036-02-14</field>
+        <field name="luong_co_ban">19000000</field>
+        <field name="phu_cap">2000000</field>
+        <field name="trang_thai">active</field>
+    </record>
+
+    <record id="cham_cong_allbiz_01" model="cham_cong">
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_specialist"/>
+        <field name="ngay_cham_cong">2035-01-06</field>
+        <field name="thoi_gian_vao">2035-01-06 08:15:00</field>
+        <field name="thoi_gian_ra">2035-01-06 17:30:00</field>
+        <field name="trang_thai">di_lam</field>
+    </record>
+
+    <record id="cham_cong_allbiz_02" model="cham_cong">
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_specialist"/>
+        <field name="ngay_cham_cong">2035-01-07</field>
+        <field name="thoi_gian_vao">2035-01-07 08:10:00</field>
+        <field name="thoi_gian_ra">2035-01-07 17:20:00</field>
+        <field name="trang_thai">di_lam</field>
+    </record>
+
+    <record id="cham_cong_allbiz_03" model="cham_cong">
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_specialist"/>
+        <field name="ngay_cham_cong">2035-01-08</field>
+        <field name="trang_thai">cong_tac</field>
+        <field name="ghi_chu">Cong tac gap khach hang du an.</field>
+    </record>
+
+    <record id="nghi_phep_allbiz_01" model="nghi_phep">
+        <field name="ma_nghi_phep">NP-ALLBIZ-001</field>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_specialist"/>
+        <field name="loai_nghi_phep">phep_nam</field>
+        <field name="ngay_bat_dau">2035-02-17</field>
+        <field name="ngay_ket_thuc">2035-02-18</field>
+        <field name="ly_do">Nghi phep ca nhan da duoc thong bao truoc.</field>
+        <field name="trang_thai">cho_duyet</field>
+    </record>
+
+    <record id="danh_gia_allbiz_01" model="danh_gia">
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_specialist"/>
+        <field name="nguoi_danh_gia_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_manager"/>
+        <field name="loai_danh_gia">dinh_ky</field>
+        <field name="thoi_gian">2035-01-31</field>
+        <field name="ky_nang_chuyen_mon">4</field>
+        <field name="tinh_than_lam_viec">5</field>
+        <field name="kha_nang_giao_tiep">4</field>
+        <field name="kha_nang_lam_viec_nhom">4</field>
+        <field name="ket_luan">dat</field>
+        <field name="nhan_xet">Dat muc tieu KPI va thuc hien hop tac tot.</field>
+    </record>
+
+    <record id="dao_tao_allbiz_01" model="dao_tao">
+        <field name="ten_khoa_hoc">Dao tao van hanh quy trinh lien phong ban</field>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_specialist"/>
+        <field name="loai_dao_tao">noi_bo</field>
+        <field name="don_vi_dao_tao">Trung tam dao tao noi bo</field>
+        <field name="ngay_bat_dau">2034-12-10</field>
+        <field name="ngay_ket_thuc">2034-12-12</field>
+        <field name="so_gio">18</field>
+        <field name="chi_phi">1500000</field>
+        <field name="ket_qua">dat</field>
+    </record>
+
+    <record id="vi_tri_tuyen_dung_allbiz_01" model="vi_tri_tuyen_dung">
+        <field name="ten_vi_tri">Chuyen vien dieu phoi nghiep vu lien phong ban</field>
+        <field name="phong_ban_id" ref="quan_ly_nhan_su.phong_ban_allbiz_ops"/>
+        <field name="cap_do">junior</field>
+        <field name="so_luong_tuyen">1</field>
+        <field name="luong_du_kien">18000000</field>
+        <field name="trang_thai">open</field>
+        <field name="ngay_bat_dau">2035-01-02</field>
+    </record>
+
+    <record id="ung_vien_allbiz_01" model="ung_vien">
+        <field name="ho_ten">Pham Gia Huy</field>
+        <field name="email">pham.giahuy.candidate@example.com</field>
+        <field name="so_dien_thoai">0918112233</field>
+        <field name="vi_tri_id" ref="quan_ly_nhan_su.vi_tri_tuyen_dung_allbiz_01"/>
+        <field name="nguon">linkedin</field>
+        <field name="trang_thai">qualified</field>
+        <field name="ngay_nop_don">2035-01-05</field>
+        <field name="diem_cv">8.5</field>
+        <field name="luong_thoa_thuan">17500000</field>
+    </record>
+
+    <record id="phong_van_allbiz_01" model="phong_van">
+        <field name="ung_vien_id" ref="quan_ly_nhan_su.ung_vien_allbiz_01"/>
+        <field name="ngay_phong_van">2035-01-10 09:30:00</field>
+        <field name="dia_diem">Phong hop A - Tang 5</field>
+        <field name="loai_phong_van">technical</field>
+        <field name="trang_thai">done</field>
+        <field name="diem">8.0</field>
+    </record>
+
+    <record id="onboarding_allbiz_01" model="onboarding_offboarding">
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_specialist"/>
+        <field name="loai">onboarding</field>
+        <field name="trang_thai">in_progress</field>
+        <field name="ngay_start">2035-01-03</field>
+        <field name="ngay_ket_thuc_du_kinh">2035-01-17</field>
+    </record>
+
+    <record id="onboarding_task_allbiz_01" model="onboarding_task">
+        <field name="checklist_id" ref="quan_ly_nhan_su.onboarding_allbiz_01"/>
+        <field name="thu_tu">1</field>
+        <field name="tieu_de">Cap tai khoan he thong va email cong ty</field>
+        <field name="phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_manager"/>
+        <field name="da_hoan_thanh">1</field>
+        <field name="ngay_hoan_thanh">2035-01-04</field>
+    </record>
+
+    <record id="onboarding_task_allbiz_02" model="onboarding_task">
+        <field name="checklist_id" ref="quan_ly_nhan_su.onboarding_allbiz_01"/>
+        <field name="thu_tu">2</field>
+        <field name="tieu_de">Dao tao quy trinh van hanh co ban</field>
+        <field name="phu_trach_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_manager"/>
+        <field name="da_hoan_thanh">0</field>
+    </record>
+
+    <record id="tinh_luong_allbiz_01" model="tinh_luong">
+        <field name="thang_nam">2035-01</field>
+        <field name="trang_thai">nhap</field>
+        <field name="ngan_hang">VCB</field>
+        <field name="ghi_chu">Bang luong demo cho nghiep vu tong hop.</field>
+    </record>
+
+    <record id="tinh_luong_ct_allbiz_01" model="tinh_luong_chi_tiet">
+        <field name="tinh_luong_id" ref="quan_ly_nhan_su.tinh_luong_allbiz_01"/>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_specialist"/>
+        <field name="luong_co_ban">21000000</field>
+        <field name="phu_cap">2500000</field>
+        <field name="tien_thuong">1000000</field>
+    </record>
+
+    <record id="tinh_luong_ct_allbiz_02" model="tinh_luong_chi_tiet">
+        <field name="tinh_luong_id" ref="quan_ly_nhan_su.tinh_luong_allbiz_01"/>
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_sales"/>
+        <field name="luong_co_ban">19000000</field>
+        <field name="phu_cap">2000000</field>
+        <field name="tien_thuong">1500000</field>
+    </record>
+
+    <record id="tinh_luong_khoan_tam_allbiz_01" model="tinh_luong_khoan_tam">
+        <field name="nhan_vien_id" ref="quan_ly_nhan_su.nhan_vien_allbiz_sales"/>
+        <field name="so_tien">3000000</field>
+        <field name="ngay_cho_vay">2035-01-12</field>
+        <field name="trang_thai">dang_cho</field>
+        <field name="ghi_chu">Tam ung cong tac tinh trong ky luong thang 01.</field>
+    </record>
+
+</odoo>

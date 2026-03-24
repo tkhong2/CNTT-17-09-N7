@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <!-- ── Form: thêm fields + tabs vào hr.employee ── -->
+  <record id="view_hr_employee_form_mix_quan_ly_nhan_su" model="ir.ui.view">
+    <field name="name">hr.employee.form.mix.quan_ly_nhan_su</field>
+    <field name="model">hr.employee</field>
+    <field name="inherit_id" ref="hr.view_employee_form"/>
+    <field name="arch" type="xml">
+
+      <!-- Smart button: Hồ sơ nội bộ -->
+      <xpath expr="//div[@name='button_box']" position="inside">
+        <button type="object" name="action_open_nhan_vien_custom"
+                class="oe_stat_button" icon="fa-id-card-o">
+          <field name="nhan_vien_custom_count" string="Hồ sơ nội bộ" widget="statinfo"/>
+        </button>
+      </xpath>
+
+      <!-- Thêm trường CCCD vào tab Private Information -->
+      <xpath expr="//field[@name='certificate']" position="before">
+        <field name="so_cccd"/>
+        <field name="ngay_cap"/>
+        <field name="noi_cap"/>
+        <field name="que_quan"/>
+      </xpath>
+
+      <!-- Tabs mới: Gia đình + Quá trình công tác + Liên kết nội bộ -->
+      <xpath expr="//notebook" position="inside">
+
+        <page string="Gia đình &amp; Thân nhân" name="gia_dinh">
+          <field name="family_ids" context="{'default_employee_id': active_id}">
+            <tree editable="bottom">
+              <field name="name"/>
+              <field name="relationship"/>
+              <field name="birth_date"/>
+              <field name="age" readonly="1"/>
+              <field name="is_dependent" readonly="1"/>
+            </tree>
+          </field>
+        </page>
+
+        <page string="Quá trình công tác" name="cong_tac">
+          <field name="work_history_ids" context="{'default_employee_id': active_id}">
+            <tree editable="bottom">
+              <field name="company_name"/>
+              <field name="position"/>
+              <field name="date_start"/>
+              <field name="date_end"/>
+              <field name="mo_ta"/>
+            </tree>
+          </field>
+        </page>
+
+        <page string="Liên kết Nhân sự nội bộ" name="lien_ket_ns">
+          <group>
+            <field name="nhan_vien_custom_id" readonly="1" options="{'no_open': False}"/>
+          </group>
+        </page>
+
+      </xpath>
+    </field>
+  </record>
+
+  <!-- ── Tree: hiển thị thêm cột ── -->
+  <record id="view_hr_employee_tree_mix_quan_ly_nhan_su" model="ir.ui.view">
+    <field name="name">hr.employee.tree.mix.quan_ly_nhan_su</field>
+    <field name="model">hr.employee</field>
+    <field name="inherit_id" ref="hr.view_employee_tree"/>
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='department_id']" position="after">
+        <field name="so_cccd" optional="show"/>
+        <field name="nhan_vien_custom_id" optional="show"/>
+      </xpath>
+    </field>
+  </record>
+</odoo>

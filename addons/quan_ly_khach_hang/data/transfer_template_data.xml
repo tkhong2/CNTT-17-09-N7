@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="transfer_template_overdue_silent_14" model="khach_hang_transfer_template">
+            <field name="name">Quá hạn + Im lặng 14 ngày</field>
+            <field name="only_overdue">True</field>
+            <field name="only_silent">True</field>
+            <field name="silent_days">14</field>
+        </record>
+
+        <record id="transfer_template_overdue_only" model="khach_hang_transfer_template">
+            <field name="name">Chỉ khách hàng quá hạn</field>
+            <field name="only_overdue">True</field>
+            <field name="only_silent">False</field>
+            <field name="silent_days">14</field>
+        </record>
+    </data>
+</odoo>

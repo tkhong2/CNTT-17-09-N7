@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_nhan_vien_form_inherit_khach_hang" model="ir.ui.view">
+        <field name="name">nhan_vien.form.inherit.khach_hang</field>
+        <field name="model">nhan_vien</field>
+        <field name="inherit_id" ref="quan_ly_nhan_su.view_nhan_vien_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='quan_ly_id']" position="after">
+                <field name="user_id" options="{'no_create': True}"/>
+            </xpath>
+            <xpath expr="//sheet" position="inside">
+                <div class="oe_button_box" name="button_box_khach_hang">
+                    <button type="object" name="action_xem_khach_hang_phu_trach" class="oe_stat_button" icon="fa-users">
+                        <field name="so_khach_hang_phu_trach" string="Khách hàng" widget="statinfo"/>
+                    </button>
+                    <button type="object" name="action_xem_du_an_quan_ly" class="oe_stat_button" icon="fa-folder-open">
+                        <field name="so_du_an_quan_ly" string="Dự án" widget="statinfo"/>
+                    </button>
+                </div>
+            </xpath>
+            <xpath expr="//notebook" position="inside">
+                <page string="Khách hàng phụ trách">
+                    <field name="khach_hang_phu_trach_ids" readonly="1">
+                        <tree>
+                            <field name="ma_khach_hang"/>
+                            <field name="ten_khach_hang"/>
+                            <field name="trang_thai_hop_tac"/>
+                            <field name="so_du_an"/>
+                        </tree>
+                    </field>
+                </page>
+                <page string="Dự án quản lý">
+                    <field name="du_an_quan_ly_ids" readonly="1">
+                        <tree>
+                            <field name="ma_du_an"/>
+                            <field name="ten_du_an"/>
+                            <field name="khach_hang_id"/>
+                            <field name="trang_thai"/>
+                            <field name="ti_le_hoan_thanh" widget="progressbar"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>

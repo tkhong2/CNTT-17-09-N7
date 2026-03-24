@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo noupdate="1">
+
+  <!-- Khách hàng mẫu -->
+  <record id="kh_001" model="khach_hang">
+    <field name="ma_khach_hang">KH-001</field>
+    <field name="ten_khach_hang">Công ty TNHH ABC Technology</field>
+    <field name="nguoi_lien_he">Nguyễn Thanh Hùng</field>
+    <field name="email">hung@abc-tech.vn</field>
+    <field name="dien_thoai">0281234001</field>
+    <field name="dia_chi">123 Nguyễn Huệ, Q.1, TP.HCM</field>
+    <field name="trang_thai_hop_tac">dang_hop_tac</field>
+  </record>
+  <record id="kh_002" model="khach_hang">
+    <field name="ma_khach_hang">KH-002</field>
+    <field name="ten_khach_hang">Tập đoàn XYZ Group</field>
+    <field name="nguoi_lien_he">Trần Minh Khoa</field>
+    <field name="email">khoa@xyz-group.vn</field>
+    <field name="dien_thoai">0241234002</field>
+    <field name="dia_chi">456 Bà Triệu, Hai Bà Trưng, Hà Nội</field>
+    <field name="trang_thai_hop_tac">dang_hop_tac</field>
+  </record>
+  <record id="kh_003" model="khach_hang">
+    <field name="ma_khach_hang">KH-003</field>
+    <field name="ten_khach_hang">Cty CP Thương mại DEF</field>
+    <field name="nguoi_lien_he">Lê Thị Mai</field>
+    <field name="email">mai@def-trade.vn</field>
+    <field name="dien_thoai">0511234003</field>
+    <field name="dia_chi">789 Trần Phú, Hải Châu, Đà Nẵng</field>
+    <field name="trang_thai_hop_tac">tiem_nang</field>
+  </record>
+  <record id="kh_004" model="khach_hang">
+    <field name="ma_khach_hang">KH-004</field>
+    <field name="ten_khach_hang">Startup GHI Solutions</field>
+    <field name="nguoi_lien_he">Phạm Văn Long</field>
+    <field name="email">long@ghi-solutions.vn</field>
+    <field name="dien_thoai">0761234004</field>
+    <field name="dia_chi">321 Võ Văn Tần, Q.3, TP.HCM</field>
+    <field name="trang_thai_hop_tac">tiem_nang</field>
+  </record>
+  <record id="kh_005" model="khach_hang">
+    <field name="ma_khach_hang">KH-005</field>
+    <field name="ten_khach_hang">Doanh nghiệp JKL Manufacturing</field>
+    <field name="nguoi_lien_he">Nguyễn Thị Hoa</field>
+    <field name="email">hoa@jkl-mfg.vn</field>
+    <field name="dien_thoai">0251234005</field>
+    <field name="dia_chi">654 Lê Lợi, Ninh Kiều, Cần Thơ</field>
+    <field name="trang_thai_hop_tac">dang_hop_tac</field>
+  </record>
+
+</odoo>

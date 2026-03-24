@@ -1,0 +1,604 @@
+/* ============================================================
+   ERP SYSTEM — Màu chủ đạo Teal (#00A09D) — Odoo 15 Style
+   ============================================================ */
+
+:root {
+    --erp-primary:      #00A09D;
+    --erp-primary-dark: #007B78;
+    --erp-primary-lite: #E0F5F5;
+    --erp-primary-mid:  rgba(0,160,157,0.15);
+    --erp-accent1:      #00A09D;   /* teal  */
+    --erp-accent2:      #28A745;   /* green */
+    --erp-accent3:      #F0A500;   /* amber */
+    --erp-accent4:      #DC3545;   /* red   */
+    --erp-ink:          #1C2B33;
+    --erp-muted:        #6B7A85;
+    --erp-surface:      #FFFFFF;
+    --erp-bg:           #F4F7F9;
+    --erp-line:         #DDE5EA;
+    --erp-shadow:       0 2px 16px rgba(0,160,157,.10);
+    --erp-shadow-md:    0 6px 28px rgba(0,160,157,.14);
+    --erp-radius:       12px;
+    --erp-radius-sm:    8px;
+}
+
+/* ── Nền trang ── */
+.o_action_manager { background: #F4F7F9; }
+
+.o_control_panel {
+    background: transparent;
+    border-bottom: none;
+    margin-bottom: 4px;
+}
+
+.o_control_panel .breadcrumb {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    box-shadow: none;
+    font-weight: 600;
+    color: var(--erp-primary-dark);
+}
+
+/* ── Control panel buttons — fix gap giữa Tạo và Xuất Excel ── */
+.o_control_panel .o_cp_buttons {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+.o_control_panel .o_cp_buttons .btn {
+    margin-right: 0 !important;
+}
+
+/* ── Form sheet ── */
+.o_form_view .o_form_sheet_bg {
+    background: transparent;
+    padding: 16px 20px;
+}
+.o_form_view .o_form_sheet {
+    border: 1px solid var(--erp-line);
+    border-radius: var(--erp-radius);
+    box-shadow: var(--erp-shadow);
+    background: #fff;
+    max-width: none !important;
+    width: 100% !important;
+}
+
+/* ── Buttons — ĐỒNG NHẤT màu teal ── */
+.btn-primary,
+.o_form_button_save,
+.o_cp_buttons .btn-primary {
+    background: var(--erp-primary) !important;
+    border-color: var(--erp-primary) !important;
+    border-radius: var(--erp-radius-sm) !important;
+    font-weight: 600 !important;
+    color: #fff !important;
+}
+.btn-primary:hover,
+.o_form_button_save:hover,
+.o_cp_buttons .btn-primary:hover {
+    background: var(--erp-primary-dark) !important;
+    border-color: var(--erp-primary-dark) !important;
+}
+
+/* Nút secondary */
+.btn-secondary {
+    background: #fff !important;
+    border: 1px solid var(--erp-primary) !important;
+    color: var(--erp-primary) !important;
+    border-radius: var(--erp-radius-sm) !important;
+    font-weight: 600 !important;
+}
+.btn-secondary:hover {
+    background: var(--erp-primary-lite) !important;
+}
+
+/* ── Inputs ── */
+.o_form_view .o_input,
+.o_form_view textarea {
+    border: 1px solid var(--erp-line);
+    border-radius: var(--erp-radius-sm);
+    transition: border-color .15s, box-shadow .15s;
+}
+.o_form_view .o_input:focus,
+.o_form_view textarea:focus {
+    border-color: var(--erp-primary);
+    box-shadow: 0 0 0 3px rgba(0,160,157,.14);
+    outline: none;
+}
+
+/* ── Status bar ── */
+.o_statusbar_status { border-radius: 999px; font-weight: 600; }
+.o_statusbar_status.o_arrow_button_current {
+    background: var(--erp-primary) !important;
+    border-color: transparent !important;
+    color: #fff !important;
+}
+
+/* ── List view ── */
+.o_list_view {
+    border: 1px solid var(--erp-line);
+    border-radius: var(--erp-radius-sm);
+    overflow: hidden;
+    box-shadow: var(--erp-shadow);
+}
+.o_list_view thead { background: #E8F5F5; }
+.o_list_view thead th {
+    color: var(--erp-primary-dark);
+    font-weight: 700;
+    border-bottom: 2px solid var(--erp-line);
+}
+.o_list_view tbody tr:hover { background: #F0FAFA; }
+
+/* ── Kanban ── */
+.o_kanban_view { background: transparent; }
+.o_kanban_view .o_kanban_record {
+    border: 1px solid var(--erp-line);
+    border-radius: var(--erp-radius-sm);
+    box-shadow: var(--erp-shadow);
+    transition: transform .14s, box-shadow .14s;
+}
+.o_kanban_view .o_kanban_record:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--erp-shadow-md);
+}
+
+/* ============================================================
+   DASHBOARD LAYOUT — dùng chung 3 modules
+   ============================================================ */
+
+.erp-dashboard-page {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 2px 0 8px;
+}
+
+/* Header */
+.erp-dash-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--erp-primary-lite);
+}
+
+.erp-dash-header-left h1 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 800;
+    color: var(--erp-primary-dark);
+    letter-spacing: -.2px;
+}
+
+.erp-dash-header-left p {
+    margin: 3px 0 0;
+    font-size: 13px;
+    color: var(--erp-muted);
+}
+
+/* ── KPI CARDS ── */
+.erp-kpi-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+}
+.erp-kpi-row-6 { grid-template-columns: repeat(6, 1fr); }
+.erp-kpi-row-3 { grid-template-columns: repeat(3, 1fr); }
+
+.erp-kpi-card {
+    background: #fff;
+    border: 1px solid var(--erp-line);
+    border-radius: var(--erp-radius);
+    box-shadow: var(--erp-shadow);
+    padding: 18px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    position: relative;
+    overflow: hidden;
+    transition: transform .15s, box-shadow .15s;
+}
+.erp-kpi-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--erp-shadow-md);
+}
+.erp-kpi-card::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 4px;
+    border-radius: 12px 0 0 12px;
+}
+
+/* Màu accent bar — teal chủ đạo */
+.erp-kpi-c1::before { background: var(--erp-accent1); }
+.erp-kpi-c2::before { background: var(--erp-accent2); }
+.erp-kpi-c3::before { background: var(--erp-accent3); }
+.erp-kpi-c4::before { background: var(--erp-accent4); }
+
+.erp-kpi-icon {
+    font-size: 20px;
+    line-height: 1;
+    margin-bottom: 2px;
+    margin-top: 2px;
+}
+.erp-kpi-c1 .erp-kpi-icon { color: var(--erp-accent1); }
+.erp-kpi-c2 .erp-kpi-icon { color: var(--erp-accent2); }
+.erp-kpi-c3 .erp-kpi-icon { color: var(--erp-accent3); }
+.erp-kpi-c4 .erp-kpi-icon { color: var(--erp-accent4); }
+
+.erp-kpi-label {
+    font-size: 10.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    color: var(--erp-muted);
+}
+
+.erp-kpi-val .o_field_widget,
+.erp-kpi-val .o_field_integer,
+.erp-kpi-val .o_field_float {
+    font-size: 28px !important;
+    font-weight: 800 !important;
+    color: var(--erp-ink) !important;
+}
+
+.erp-kpi-tag {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    border-radius: 999px;
+    padding: 2px 9px;
+    margin-top: 4px;
+    width: fit-content;
+}
+.erp-kpi-c1 .erp-kpi-tag { background: var(--erp-primary-lite); color: var(--erp-primary-dark); }
+.erp-kpi-c2 .erp-kpi-tag { background: #E8F8EE; color: #1A7A3B; }
+.erp-kpi-c3 .erp-kpi-tag { background: #FEF5E0; color: #8A5C00; }
+.erp-kpi-c4 .erp-kpi-tag { background: #FDECEA; color: #A42020; }
+
+/* ── CHARTS ── */
+.erp-chart-row {
+    display: grid;
+    grid-template-columns: 1fr 400px;
+    gap: 14px;
+}
+.erp-chart-box {
+    background: #fff;
+    border: 1px solid var(--erp-line);
+    border-radius: var(--erp-radius);
+    box-shadow: var(--erp-shadow);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+}
+.erp-chart-head {
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--erp-line);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #FAFCFC;
+}
+.erp-chart-head-icon {
+    width: 28px; height: 28px;
+    background: var(--erp-primary-lite);
+    border-radius: 7px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--erp-primary);
+    font-size: 13px;
+}
+.erp-chart-head-title {
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--erp-ink);
+}
+.erp-chart-body {
+    padding: 14px;
+    flex: 1;
+    min-height: 240px;
+    position: relative;
+}
+.erp-chart-body canvas {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+/* ── STAT PANELS ── */
+.erp-stat-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+.erp-stat-box {
+    background: #fff;
+    border: 1px solid var(--erp-line);
+    border-radius: var(--erp-radius);
+    box-shadow: var(--erp-shadow);
+    overflow: hidden;
+}
+.erp-stat-head {
+    padding: 10px 14px;
+    background: var(--erp-primary);
+    color: #fff;
+    font-size: 12.5px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 7px;
+}
+.erp-stat-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+}
+.erp-stat-item {
+    padding: 12px 14px;
+    border-right: 1px solid var(--erp-line);
+    border-bottom: 1px solid var(--erp-line);
+}
+.erp-stat-item:nth-child(2n) { border-right: none; }
+.erp-stat-item:nth-last-child(-n+2) { border-bottom: none; }
+
+.erp-stat-item-label {
+    font-size: 11px;
+    color: var(--erp-muted);
+    font-weight: 600;
+    margin-bottom: 3px;
+}
+.erp-stat-item-val .o_field_widget,
+.erp-stat-item-val .o_field_float,
+.erp-stat-item-val .o_field_integer {
+    font-size: 19px !important;
+    font-weight: 800 !important;
+    color: var(--erp-primary-dark) !important;
+}
+
+.erp-action-row {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* ── Employee form ── */
+.erp-employee-form .erp-employee-hero {
+    display: grid;
+    grid-template-columns: 1fr 240px;
+    gap: 16px;
+    align-items: start;
+}
+.erp-employee-form .erp-employee-avatar-wrap {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 200px;
+    border: 1px solid var(--erp-line);
+    border-radius: var(--erp-radius-sm);
+    background: var(--erp-primary-lite);
+}
+.erp-employee-form .erp-employee-avatar .o_field_image img {
+    width: 180px !important; height: 180px !important;
+    border-radius: 10px; object-fit: cover;
+}
+
+/* ── Responsive ── */
+@media (max-width: 1300px) {
+    .erp-kpi-row      { grid-template-columns: repeat(2, 1fr); }
+    .erp-kpi-row-6    { grid-template-columns: repeat(3, 1fr); }
+    .erp-chart-row    { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+    .erp-kpi-row, .erp-kpi-row-3, .erp-kpi-row-6,
+    .erp-stat-row { grid-template-columns: 1fr; }
+    .erp-dash-header { flex-direction: column; align-items: flex-start; }
+}
+
+/* ── Khách hàng tree badge ── */
+.o_list_view .badge { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }
+
+/* ── Sidebar filter panel style (dùng cho search filter tags) ── */
+.o_search_panel .o_search_panel_section_header {
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #6B7A85;
+}
+.o_search_panel_category_value:hover,
+.o_search_panel_filter_value:hover {
+    background: #f0f8f8;
+    color: #00A09D;
+}
+.o_search_panel_category_value.active > .o_search_panel_label,
+.o_search_panel_filter_value .o_search_panel_label_counter {
+    color: #00A09D;
+    font-weight: 600;
+}
+
+/* ============================================================
+   DASHBOARD KHÁCH HÀNG — Redesign
+   ============================================================ */
+
+.kh-dash { display: flex; flex-direction: column; gap: 20px; padding: 4px 0 12px; }
+
+/* ── Header ── */
+.kh-dash-header {
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 12px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--erp-primary-lite);
+}
+.kh-dash-header-left { display: flex; align-items: center; gap: 14px; }
+.kh-dash-icon {
+    width: 52px; height: 52px;
+    background: linear-gradient(135deg, var(--erp-primary), var(--erp-primary-dark));
+    border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    color: #fff; font-size: 22px;
+    box-shadow: 0 4px 14px rgba(0,160,157,.3);
+    flex-shrink: 0;
+}
+.kh-dash-title { margin: 0; font-size: 22px; font-weight: 800; color: var(--erp-ink); }
+.kh-dash-sub   { margin: 2px 0 0; font-size: 12.5px; color: var(--erp-muted); }
+.kh-dash-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+
+/* Buttons header */
+.kh-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    padding: 7px 16px; border-radius: 8px;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+    border: none; transition: all .15s;
+}
+.kh-btn-primary { background: var(--erp-primary); color: #fff; box-shadow: 0 2px 8px rgba(0,160,157,.25); }
+.kh-btn-primary:hover { background: var(--erp-primary-dark); transform: translateY(-1px); }
+.kh-btn-outline { background: #fff; color: var(--erp-primary); border: 1.5px solid var(--erp-primary); }
+.kh-btn-outline:hover { background: var(--erp-primary-lite); }
+.kh-btn-danger { background: #fff; color: #C62828; border: 1.5px solid #FFCDD2; }
+.kh-btn-danger:hover { background: #FFEBEE; }
+
+/* ── KPI Row ── */
+.kh-kpi-row {
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 12px;
+}
+.kh-kpi {
+    background: #fff; border: 1px solid var(--erp-line);
+    border-radius: 12px; box-shadow: var(--erp-shadow);
+    padding: 16px 14px 12px;
+    position: relative; overflow: hidden;
+    transition: transform .15s, box-shadow .15s;
+    display: flex; flex-direction: column; gap: 3px;
+}
+.kh-kpi:hover { transform: translateY(-2px); box-shadow: var(--erp-shadow-md); }
+.kh-kpi::after {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+}
+.kh-kpi-teal::after   { background: var(--erp-primary); }
+.kh-kpi-green::after  { background: #2E7D32; }
+.kh-kpi-blue::after   { background: #1565C0; }
+.kh-kpi-orange::after { background: #EF6C00; }
+.kh-kpi-red::after    { background: #C62828; }
+.kh-kpi-purple::after { background: #6A1B9A; }
+
+.kh-kpi-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+.kh-kpi-icon { font-size: 18px; }
+.kh-kpi-teal .kh-kpi-icon   { color: var(--erp-primary); }
+.kh-kpi-green .kh-kpi-icon  { color: #2E7D32; }
+.kh-kpi-blue .kh-kpi-icon   { color: #1565C0; }
+.kh-kpi-orange .kh-kpi-icon { color: #EF6C00; }
+.kh-kpi-red .kh-kpi-icon    { color: #C62828; }
+.kh-kpi-purple .kh-kpi-icon { color: #6A1B9A; }
+
+.kh-kpi-badge {
+    font-size: 10px; font-weight: 700; padding: 2px 7px;
+    border-radius: 20px; background: var(--erp-primary-lite); color: var(--erp-primary-dark);
+}
+.kh-badge-warn    { background: #FFF3E0; color: #E65100; }
+.kh-badge-danger  { background: #FFEBEE; color: #C62828; }
+
+.kh-kpi-num .o_field_widget,
+.kh-kpi-num .o_field_integer {
+    font-size: 28px !important; font-weight: 900 !important; color: var(--erp-ink) !important; line-height: 1.1;
+}
+.kh-kpi-num-sm .o_field_widget,
+.kh-kpi-num-sm .o_field_float {
+    font-size: 22px !important; font-weight: 900 !important;
+}
+.kh-kpi-label { font-size: 11px; font-weight: 600; color: var(--erp-muted); text-transform: uppercase; letter-spacing: .4px; }
+
+/* ── Main Grid ── */
+.kh-main-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.kh-panel {
+    background: #fff; border: 1px solid var(--erp-line);
+    border-radius: 12px; box-shadow: var(--erp-shadow); overflow: hidden;
+}
+.kh-panel-head {
+    padding: 12px 16px; font-size: 13px; font-weight: 700;
+    display: flex; align-items: center; gap: 8px;
+    border-bottom: 1px solid var(--erp-line);
+}
+.kh-head-teal { background: var(--erp-primary-lite); color: var(--erp-primary-dark); }
+.kh-head-blue { background: #E3F2FD; color: #1565C0; }
+.kh-panel-body { padding: 16px; }
+
+/* Metric grid 2x3 */
+.kh-metric-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.kh-metric {
+    background: var(--erp-bg); border-radius: 10px; padding: 12px;
+    display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center;
+    transition: background .15s;
+}
+.kh-metric:hover { background: var(--erp-primary-lite); }
+.kh-metric-icon {
+    width: 34px; height: 34px; border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; color: #fff; margin-bottom: 4px;
+}
+.kh-m-teal   { background: var(--erp-primary); }
+.kh-m-green  { background: #2E7D32; }
+.kh-m-orange { background: #EF6C00; }
+.kh-m-red    { background: #C62828; }
+.kh-m-purple { background: #6A1B9A; }
+.kh-m-blue   { background: #1565C0; }
+.kh-metric-val .o_field_widget,
+.kh-metric-val .o_field_integer { font-size: 22px !important; font-weight: 800 !important; color: var(--erp-ink) !important; }
+.kh-metric-lbl { font-size: 10.5px; font-weight: 600; color: var(--erp-muted); text-transform: uppercase; letter-spacing: .3px; }
+
+/* Ticket cards */
+.kh-ticket-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+.kh-ticket-card {
+    border-radius: 10px; padding: 14px 12px; text-align: center;
+    display: flex; flex-direction: column; align-items: center; gap: 4px;
+}
+.kh-tc-blue { background: #E3F2FD; }
+.kh-tc-red  { background: #FFEBEE; }
+.kh-tc-icon { font-size: 20px; margin-bottom: 4px; }
+.kh-tc-blue .kh-tc-icon { color: #1565C0; }
+.kh-tc-red .kh-tc-icon  { color: #C62828; }
+.kh-tc-val .o_field_widget,
+.kh-tc-val .o_field_integer { font-size: 26px !important; font-weight: 900 !important; }
+.kh-tc-blue .kh-tc-val .o_field_widget { color: #1565C0 !important; }
+.kh-tc-red .kh-tc-val .o_field_widget  { color: #C62828 !important; }
+.kh-tc-lbl { font-size: 11px; font-weight: 600; color: var(--erp-muted); }
+
+/* SLA bar */
+.kh-sla-bar-wrap { margin-bottom: 6px; }
+.kh-sla-bar-label {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; color: var(--erp-muted); margin-bottom: 5px; font-weight: 600;
+}
+.kh-sla-bar-label strong .o_field_widget,
+.kh-sla-bar-label strong .o_field_float { font-size: 13px !important; font-weight: 700 !important; color: var(--erp-ink) !important; }
+.kh-sla-bar-track {
+    height: 8px; background: #FFEBEE; border-radius: 99px; overflow: hidden;
+}
+.kh-track-green { background: #E8F5E9; }
+.kh-sla-bar-fill {
+    height: 100%; width: 30%; background: #C62828; border-radius: 99px;
+    transition: width .6s ease;
+}
+.kh-fill-green { background: var(--erp-primary); width: 65%; }
+
+/* Panel actions */
+.kh-panel-actions { display: flex; gap: 8px; margin-top: 16px; flex-wrap: wrap; }
+.kh-action-btn {
+    flex: 1; padding: 8px 12px; border-radius: 8px;
+    font-size: 12.5px; font-weight: 600; cursor: pointer; border: none;
+    background: var(--erp-bg); color: var(--erp-ink);
+    border: 1px solid var(--erp-line); transition: all .15s; text-align: center;
+}
+.kh-action-btn:hover { background: var(--erp-primary-lite); color: var(--erp-primary); border-color: var(--erp-primary); }
+.kh-action-btn-primary { background: var(--erp-primary); color: #fff; border-color: var(--erp-primary); }
+.kh-action-btn-primary:hover { background: var(--erp-primary-dark); color: #fff; }
+
+/* Responsive */
+@media (max-width: 1300px) {
+    .kh-kpi-row { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 900px) {
+    .kh-kpi-row { grid-template-columns: repeat(2, 1fr); }
+    .kh-main-grid { grid-template-columns: 1fr; }
+}

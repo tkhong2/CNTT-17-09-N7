@@ -16,7 +16,7 @@
                         </group>
                         <group>
                             <field name="ngay_bao_cao"/>
-                            <field name="tien_do"/>
+                            <field name="trang_thai" widget="badge" decoration-success="trang_thai == 'da_bao_cao'" decoration-warning="trang_thai == 'dang_xu_ly'" decoration-info="trang_thai == 'chua_bao_cao'"/>
                             <field name="so_gio"/>
                             <field name="file_dinh_kem" filename="ten_file"/>
                             <field name="ten_file" invisible="1"/>
@@ -50,7 +50,7 @@
                 <field name="cong_viec_id"/>
                 <field name="du_an_id"/>
                 <field name="nhan_vien_id"/>
-                <field name="tien_do" widget="progressbar"/>
+                <field name="trang_thai" widget="badge" decoration-success="trang_thai == 'da_bao_cao'" decoration-warning="trang_thai == 'dang_xu_ly'" decoration-info="trang_thai == 'chua_bao_cao'"/>
                 <field name="so_gio" sum="Tổng giờ"/>
                 <field name="van_de_phat_sinh"/>
             </tree>
@@ -69,7 +69,7 @@
                 <filter string="Báo cáo hôm nay" name="today" domain="[('ngay_bao_cao', '=', context_today())]"/>
                 <filter string="Báo cáo trong tuần" name="this_week" domain="[('ngay_bao_cao', '&gt;=', (context_today() - datetime.timedelta(days=context_today().weekday())).strftime('%Y-%m-%d')), ('ngay_bao_cao', '&lt;=', (context_today() + datetime.timedelta(days=6-context_today().weekday())).strftime('%Y-%m-%d'))]"/>
                 <filter string="Vấn đề phát sinh" name="co_van_de" domain="[('van_de_phat_sinh', '!=', False)]"/>
-                <group expand="0" string="Group By">
+                <group expand="0" string="Nhóm theo">
                     <filter string="Dự án" name="group_by_du_an" context="{'group_by': 'du_an_id'}"/>
                     <filter string="Công việc" name="group_by_cong_viec" context="{'group_by': 'cong_viec_id'}"/>
                     <filter string="Nhân viên" name="group_by_nhan_vien" context="{'group_by': 'nhan_vien_id'}"/>
@@ -79,38 +79,24 @@
         </field>
     </record>
 
-    <!-- Graph View (biểu đồ cột) -->
+    <!-- Graph View -->
     <record id="view_bao_cao_tien_do_graph" model="ir.ui.view">
         <field name="name">bao_cao_tien_do.graph</field>
         <field name="model">bao_cao_tien_do</field>
         <field name="arch" type="xml">
-            <graph string="Phân tích tiến độ" type="bar">
-                <field name="du_an_id" type="row"/>
+            <graph string="Phân tích tiến độ">
+                <field name="cong_viec_id"/>
                 <field name="tien_do" type="measure"/>
                 <field name="so_gio" type="measure"/>
             </graph>
         </field>
     </record>
 
-    <!-- ===================== PIVOT VIEW ===================== -->
-    <record id="view_bao_cao_tien_do_pivot" model="ir.ui.view">
-        <field name="name">bao_cao_tien_do.pivot</field>
-        <field name="model">bao_cao_tien_do</field>
-        <field name="arch" type="xml">
-            <pivot string="Tổng hợp tiến độ">
-                <field name="du_an_id" type="row"/>
-                <field name="nhan_vien_id" type="col"/>
-                <field name="tien_do" type="measure"/>
-                <field name="so_gio" type="measure"/>
-            </pivot>
-        </field>
-    </record>
-
-    <!-- Action: thêm pivot vào view_mode -->
+    <!-- Action -->
     <record id="action_bao_cao_tien_do" model="ir.actions.act_window">
         <field name="name">Báo cáo tiến độ</field>
         <field name="res_model">bao_cao_tien_do</field>
-        <field name="view_mode">tree,form,graph,pivot</field>
+        <field name="view_mode">tree,form,graph</field>
         <field name="search_view_id" ref="view_bao_cao_tien_do_search"/>
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">

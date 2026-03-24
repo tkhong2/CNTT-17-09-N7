@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <record id="view_telegram_config_form" model="ir.ui.view">
+    <field name="name">telegram.config.form</field>
+    <field name="model">telegram.config</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <div style="display:flex;align-items:center;gap:12px;padding-bottom:16px;border-bottom:1px solid #DDE5EA;margin-bottom:16px;">
+            <div style="width:42px;height:42px;background:#0088cc;border-radius:9px;display:flex;align-items:center;justify-content:center;">
+              <i class="fa fa-telegram" style="color:#fff;font-size:20px;"/>
+            </div>
+            <div>
+              <div style="font-size:18px;font-weight:700;color:#1C2B33;">Cấu hình Telegram Bot</div>
+              <div style="font-size:12px;color:#6B7A85;">Nhận thông báo tự động từ hệ thống ERP</div>
+            </div>
+          </div>
+          <group>
+            <group string="Thông tin Bot">
+              <field name="name"/>
+              <field name="bot_token" password="True"
+                     help="Lấy từ @BotFather: /newbot → copy token"/>
+              <field name="chat_id"
+                     help="Gửi tin nhắn cho bot, rồi mở: api.telegram.org/bot{TOKEN}/getUpdates để lấy chat_id"/>
+              <field name="active"/>
+            </group>
+            <group string="Loại thông báo">
+              <field name="notify_hop_dong"/>
+              <field name="hop_dong_days" attrs="{'invisible': [('notify_hop_dong','=',False)]}"/>
+              <field name="notify_nghi_phep"/>
+              <field name="notify_task_block"/>
+              <field name="notify_daily"/>
+            </group>
+          </group>
+          <div style="margin-top:16px;">
+            <button name="action_test" type="object" string="📨 Gửi tin nhắn thử"
+                    class="btn btn-primary"/>
+          </div>
+          <div style="margin-top:16px;padding:12px;background:#F0F9F9;border-radius:8px;border:1px solid #B2D8D6;">
+            <div style="font-weight:600;color:#007B78;margin-bottom:6px;">
+              <i class="fa fa-info-circle"/> Hướng dẫn cài đặt:
+            </div>
+            <ol style="font-size:13px;color:#1C2B33;margin:0;padding-left:16px;line-height:1.8;">
+              <li>Mở Telegram, tìm <strong>@BotFather</strong></li>
+              <li>Gửi lệnh <code>/newbot</code>, đặt tên bot</li>
+              <li>Copy <strong>token</strong> và dán vào trường Bot Token</li>
+              <li>Tìm bot của bạn, gửi 1 tin nhắn bất kỳ</li>
+              <li>Mở <code>api.telegram.org/bot{TOKEN}/getUpdates</code> để lấy <strong>chat_id</strong></li>
+            </ol>
+          </div>
+        </sheet>
+      </form>
+    </field>
+  </record>
+
+  <record id="view_telegram_config_tree" model="ir.ui.view">
+    <field name="name">telegram.config.tree</field>
+    <field name="model">telegram.config</field>
+    <field name="arch" type="xml">
+      <tree>
+        <field name="name"/>
+        <field name="chat_id"/>
+        <field name="notify_hop_dong"/>
+        <field name="notify_nghi_phep"/>
+        <field name="notify_task_block"/>
+        <field name="notify_daily"/>
+        <field name="active"/>
+      </tree>
+    </field>
+  </record>
+
+  <record id="action_telegram_config" model="ir.actions.act_window">
+    <field name="name">Cấu hình Telegram</field>
+    <field name="res_model">telegram.config</field>
+    <field name="view_mode">tree,form</field>
+  </record>
+
+  <menuitem id="menu_telegram_config" name="Telegram Bot"
+    parent="menu_hr_admin_config" action="action_telegram_config" sequence="99"/>
+</odoo>

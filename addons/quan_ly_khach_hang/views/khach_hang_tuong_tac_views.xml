@@ -4,7 +4,7 @@
         <field name="name">khach_hang_tuong_tac.tree</field>
         <field name="model">khach_hang_tuong_tac</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree decoration-warning="qua_han == True" decoration-success="trang_thai == 'done'">
                 <field name="ngay_lien_he"/>
                 <field name="khach_hang_id"/>
                 <field name="tieu_de"/>
@@ -12,8 +12,9 @@
                 <field name="nhan_vien_id"/>
                 <field name="ket_qua"/>
                 <field name="hen_lien_he_tiep"/>
+                <field name="cong_viec_id" string="Task liên quan" optional="show"/>
                 <field name="trang_thai"/>
-                <field name="qua_han"/>
+                <field name="qua_han" invisible="1"/>
             </tree>
         </field>
     </record>
@@ -24,9 +25,9 @@
         <field name="arch" type="xml">
             <form>
                 <header>
+                    <field name="trang_thai" widget="statusbar" options="{'clickable':'1'}" statusbar_visible="planned,done,cancel"/>
                     <button name="action_mark_done" type="object" string="Đánh dấu hoàn thành" class="oe_highlight" attrs="{'invisible': [('trang_thai','!=','planned')]}"/>
                     <button name="action_mark_cancel" type="object" string="Hủy theo dõi" attrs="{'invisible': [('trang_thai','!=','planned')]}"/>
-                    <field name="trang_thai" widget="statusbar" options="{'clickable':'1'}" statusbar_visible="planned,done,cancel"/>
                 </header>
                 <sheet>
                     <group>
@@ -46,32 +47,24 @@
                     <group>
                         <field name="noi_dung"/>
                     </group>
+                    <group string="Liên kết Công việc">
+                        <group>
+                            <field name="tu_dong_tao_task"/>
+                            <field name="cong_viec_id" readonly="1"/>
+                        </group>
+                        <group>
+                            <button name="action_xem_task" type="object"
+                                string="Xem Task liên quan"
+                                class="btn btn-secondary"
+                                attrs="{'invisible': [('cong_viec_id', '=', False)]}"/>
+                            <button name="action_tao_task_thu_cong" type="object"
+                                string="Tạo Task thủ công"
+                                class="btn btn-primary"
+                                attrs="{'invisible': [('cong_viec_id', '!=', False)]}"/>
+                        </group>
+                    </group>
                 </sheet>
             </form>
-        </field>
-    </record>
-
-    <!-- ===================== GRAPH VIEW ===================== -->
-    <record id="view_tuong_tac_graph" model="ir.ui.view">
-        <field name="name">khach_hang_tuong_tac.graph</field>
-        <field name="model">khach_hang_tuong_tac</field>
-        <field name="arch" type="xml">
-            <graph string="Tương tác theo loại" type="bar">
-                <field name="loai_tuong_tac" type="row"/>
-                <field name="ket_qua" type="col"/>
-            </graph>
-        </field>
-    </record>
-
-    <!-- ===================== PIVOT VIEW ===================== -->
-    <record id="view_tuong_tac_pivot" model="ir.ui.view">
-        <field name="name">khach_hang_tuong_tac.pivot</field>
-        <field name="model">khach_hang_tuong_tac</field>
-        <field name="arch" type="xml">
-            <pivot string="Phân tích tương tác">
-                <field name="nhan_vien_id" type="row"/>
-                <field name="loai_tuong_tac" type="col"/>
-            </pivot>
         </field>
     </record>
 
@@ -90,7 +83,7 @@
                 <filter string="7 ngày gần đây" name="last_7_days" domain="[('ngay_lien_he', '&gt;=', (context_today() - relativedelta(days=7)))]"/>
                 <filter string="Đã chốt hợp đồng" name="won" domain="[('ket_qua','=','chot_hop_dong')]"/>
                 <filter string="Cần xử lý ngay" name="need_now" domain="[('trang_thai','=','planned'),('hen_lien_he_tiep','&lt;',context_today())]"/>
-                <group expand="0" string="Group By">
+                <group expand="0" string="Nhóm theo">
                     <filter string="Khách hàng" name="group_khach_hang" context="{'group_by':'khach_hang_id'}"/>
                     <filter string="Nhân viên" name="group_nhan_vien" context="{'group_by':'nhan_vien_id'}"/>
                     <filter string="Loại tương tác" name="group_loai" context="{'group_by':'loai_tuong_tac'}"/>
@@ -101,11 +94,10 @@
         </field>
     </record>
 
-    <!-- action: thêm graph,pivot vào view_mode -->
     <record id="action_khach_hang_tuong_tac" model="ir.actions.act_window">
         <field name="name">Tương tác khách hàng</field>
         <field name="res_model">khach_hang_tuong_tac</field>
-        <field name="view_mode">tree,form,graph,pivot</field>
+        <field name="view_mode">tree,form</field>
         <field name="search_view_id" ref="view_khach_hang_tuong_tac_search"/>
     </record>
 
@@ -129,7 +121,7 @@
         <field name="groups_id" eval="[(4, ref('quan_ly_khach_hang.group_khach_hang_manager'))]"/>
     </record>
 
-    <menuitem id="menu_khach_hang_tuong_tac" name="Tương tác" parent="menu_quan_ly_khach_hang_root" action="action_khach_hang_tuong_tac" sequence="2"/>
+    <menuitem id="menu_khach_hang_tuong_tac" name="Tương tác" parent="menu_quan_ly_khach_hang_root" action="action_khach_hang_tuong_tac" sequence="2" groups="quan_ly_khach_hang.group_khach_hang_sales,quan_ly_khach_hang.group_khach_hang_manager"/>
 
     <record id="action_khach_hang_tuong_tac_overdue" model="ir.actions.act_window">
         <field name="name">Tương tác quá hạn</field>
@@ -139,5 +131,5 @@
         <field name="search_view_id" ref="view_khach_hang_tuong_tac_search"/>
     </record>
 
-    <menuitem id="menu_khach_hang_tuong_tac_overdue" name="Follow-up quá hạn" parent="menu_quan_ly_khach_hang_root" action="action_khach_hang_tuong_tac_overdue" sequence="3"/>
+    <menuitem id="menu_khach_hang_tuong_tac_overdue" name="Follow-up quá hạn" parent="menu_quan_ly_khach_hang_root" action="action_khach_hang_tuong_tac_overdue" sequence="3" groups="quan_ly_khach_hang.group_khach_hang_sales,quan_ly_khach_hang.group_khach_hang_manager"/>
 </odoo>

@@ -6,4 +6,17 @@ access_dao_tao,dao_tao.dao_tao,model_dao_tao,base.group_user,1,1,1,1
 access_hop_dong,hop_dong.hop_dong,model_hop_dong,base.group_user,1,1,1,1
 access_nhan_vien,nhan_vien.nhan_vien,model_nhan_vien,base.group_user,1,1,1,1
 access_phong_ban,phong_ban.phong_ban,model_phong_ban,base.group_user,1,1,1,1
+access_nghi_phep,nghi_phep.nghi_phep,model_nghi_phep,base.group_user,1,1,1,1
+access_tinh_luong,tinh_luong.tinh_luong,model_tinh_luong,base.group_user,1,1,1,1
+access_tinh_luong_chi_tiet,tinh_luong_chi_tiet.tinh_luong_chi_tiet,model_tinh_luong_chi_tiet,base.group_user,1,1,1,1
+access_tinh_luong_khoan_tam,tinh_luong_khoan_tam.tinh_luong_khoan_tam,model_tinh_luong_khoan_tam,base.group_user,1,1,1,1
+access_vi_tri_tuyen_dung,vi_tri_tuyen_dung.vi_tri_tuyen_dung,model_vi_tri_tuyen_dung,base.group_user,1,1,1,1
+access_ung_vien,ung_vien.ung_vien,model_ung_vien,base.group_user,1,1,1,1
+access_phong_van,phong_van.phong_van,model_phong_van,base.group_user,1,1,1,1
+access_onboarding_offboarding,onboarding_offboarding.onboarding_offboarding,model_onboarding_offboarding,base.group_user,1,1,1,1
+access_onboarding_task,onboarding_task.onboarding_task,model_onboarding_task,base.group_user,1,1,1,1
+access_nhan_su_dashboard,nhan_su_dashboard.nhan_su_dashboard,model_nhan_su_dashboard,base.group_user,1,0,0,0
+access_hr_family,hr.family,model_hr_family,base.group_user,1,1,1,1
+access_hr_work_history,hr.work.history,model_hr_work_history,base.group_user,1,1,1,1
 
+access_telegram_config,telegram.config,model_telegram_config,base.group_user,1,1,1,1

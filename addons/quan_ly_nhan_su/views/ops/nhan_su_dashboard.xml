@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+  <data>
+    <record id="nhan_su_dashboard_main" model="nhan_su_dashboard">
+      <field name="ten_bang">Dashboard KPI Nhân sự</field>
+    </record>
+
+    <record id="view_nhan_su_dashboard_form" model="ir.ui.view">
+      <field name="name">nhan_su_dashboard.form</field>
+      <field name="model">nhan_su_dashboard</field>
+      <field name="arch" type="xml">
+        <form create="0" edit="0" delete="0">
+          <sheet>
+            <div style="display:flex;flex-direction:column;gap:16px;padding:4px 0 12px;">
+
+              <!-- HEADER -->
+              <div style="display:flex;align-items:center;justify-content:space-between;
+                          padding-bottom:14px;border-bottom:1px solid #DDE5EA;flex-wrap:wrap;gap:10px;">
+                <div style="display:flex;align-items:center;gap:12px;">
+                  <div style="width:42px;height:42px;background:#00A09D;border-radius:10px;
+                              display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+                    <i class="fa fa-tachometer" style="color:#fff;font-size:18px;"/>
+                  </div>
+                  <div>
+                    <div style="font-size:19px;font-weight:700;color:#1C2B33;">
+                      <field name="ten_bang" readonly="1" nolabel="1"/>
+                    </div>
+                    <div style="font-size:12px;color:#6B7A85;margin-top:2px;">
+                      Tổng quan hoạt động nhân sự &amp; lương thưởng
+                    </div>
+                  </div>
+                </div>
+                <button type="object" name="action_xem_bang_luong_da_duyet"
+                  class="btn btn-primary"
+                  style="background:#00A09D!important;border-color:#00A09D!important;
+                         border-radius:7px;font-weight:600;font-size:13px;"
+                  string="Xem bảng lương đã duyệt"/>
+              </div>
+
+              <!-- KPI CARDS -->
+              <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;">
+
+                <div style="background:#fff;border:1px solid #DDE5EA;border-radius:8px;
+                            padding:14px 16px;border-left:3px solid #00A09D;">
+                  <div style="font-size:11px;font-weight:700;text-transform:uppercase;
+                              letter-spacing:.5px;color:#6B7A85;margin-bottom:6px;">Nhân viên đang làm việc</div>
+                  <div style="font-size:26px;font-weight:700;color:#1C2B33;">
+                    <field name="tong_nhan_vien_active" readonly="1" nolabel="1"/>
+                  </div>
+                  <div style="font-size:11px;color:#9BADB8;margin-top:4px;">
+                    <i class="fa fa-users"/> Đang hoạt động
+                  </div>
+                </div>
+
+                <div style="background:#fff;border:1px solid #DDE5EA;border-radius:8px;
+                            padding:14px 16px;border-left:3px solid #28A745;">
+                  <div style="font-size:11px;font-weight:700;text-transform:uppercase;
+                              letter-spacing:.5px;color:#6B7A85;margin-bottom:6px;">Bảng lương đã duyệt</div>
+                  <div style="font-size:26px;font-weight:700;color:#1C2B33;">
+                    <field name="tong_bang_luong_da_duyet" readonly="1" nolabel="1"/>
+                  </div>
+                  <div style="font-size:11px;color:#9BADB8;margin-top:4px;">
+                    <i class="fa fa-check-circle"/> Đã phê duyệt
+                  </div>
+                </div>
+
+                <div style="background:#fff;border:1px solid #DDE5EA;border-radius:8px;
+                            padding:14px 16px;border-left:3px solid #F0A500;">
+                  <div style="font-size:11px;font-weight:700;text-transform:uppercase;
+                              letter-spacing:.5px;color:#6B7A85;margin-bottom:6px;">Lương tháng hiện tại</div>
+                  <div style="font-size:17px;font-weight:700;color:#1C2B33;">
+                    <field name="luong_thang_hien_tai" readonly="1" nolabel="1"/>
+                  </div>
+                  <div style="font-size:11px;color:#9BADB8;margin-top:4px;">
+                    <i class="fa fa-money"/> VNĐ
+                  </div>
+                </div>
+
+                <div style="background:#fff;border:1px solid #DDE5EA;border-radius:8px;
+                            padding:14px 16px;border-left:3px solid #DC3545;">
+                  <div style="font-size:11px;font-weight:700;text-transform:uppercase;
+                              letter-spacing:.5px;color:#6B7A85;margin-bottom:6px;">Tỷ lệ biến động lương</div>
+                  <div style="font-size:26px;font-weight:700;color:#1C2B33;">
+                    <field name="payroll_variance_rate" readonly="1" nolabel="1" widget="percentage"/>
+                  </div>
+                  <div style="font-size:11px;color:#9BADB8;margin-top:4px;">
+                    <i class="fa fa-line-chart"/> So tháng trước
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- CHARTS + STATS -->
+              <div style="display:grid;grid-template-columns:1fr 280px;gap:12px;align-items:start;">
+
+                <!-- Charts col -->
+                <div style="display:flex;flex-direction:column;gap:12px;">
+
+                  <!-- Bar chart -->
+                  <div style="background:#fff;border:1px solid #DDE5EA;border-radius:8px;overflow:hidden;">
+                    <div style="padding:9px 14px;border-bottom:1px solid #DDE5EA;background:#F8FAFB;
+                                font-size:12px;font-weight:700;color:#1C2B33;display:flex;align-items:center;gap:6px;">
+                      <i class="fa fa-bar-chart" style="color:#00A09D;"/>
+                      Lương thực lĩnh theo tháng (triệu VNĐ)
+                    </div>
+                    <div style="padding:12px 14px;">
+                      <canvas id="ns_bar_chart" style="display:block;"/>
+                      <span id="ns_bar_chart_labels" style="display:none;">
+                        <field name="chart_luong_labels" readonly="1" nolabel="1"/>
+                      </span>
+                      <span id="ns_bar_chart_values" style="display:none;">
+                        <field name="chart_luong_data" readonly="1" nolabel="1"/>
+                      </span>
+                    </div>
+                  </div>
+
+                  <!-- Pie chart -->
+                  <div style="background:#fff;border:1px solid #DDE5EA;border-radius:8px;overflow:hidden;">
+                    <div style="padding:9px 14px;border-bottom:1px solid #DDE5EA;background:#F8FAFB;
+                                font-size:12px;font-weight:700;color:#1C2B33;display:flex;align-items:center;gap:6px;">
+                      <i class="fa fa-pie-chart" style="color:#00A09D;"/>
+                      Cơ cấu nhân viên theo phòng ban
+                    </div>
+                    <div style="padding:12px 14px;">
+                      <canvas id="ns_pie_chart" style="display:block;"/>
+                      <span id="ns_pie_chart_labels" style="display:none;">
+                        <field name="chart_pb_labels" readonly="1" nolabel="1"/>
+                      </span>
+                      <span id="ns_pie_chart_values" style="display:none;">
+                        <field name="chart_pb_data" readonly="1" nolabel="1"/>
+                      </span>
+                    </div>
+                  </div>
+
+                </div>
+
+                <!-- Stats col -->
+                <div style="background:#fff;border:1px solid #DDE5EA;border-radius:8px;overflow:hidden;">
+                  <div style="padding:9px 14px;border-bottom:1px solid #DDE5EA;background:#F8FAFB;
+                              font-size:12px;font-weight:700;color:#1C2B33;display:flex;align-items:center;gap:6px;">
+                    <i class="fa fa-table" style="color:#00A09D;"/>
+                    Thống kê lương
+                  </div>
+                  <div style="display:grid;grid-template-columns:1fr 1fr;">
+                    <div style="padding:12px 14px;border-right:1px solid #DDE5EA;border-bottom:1px solid #DDE5EA;">
+                      <div style="font-size:10px;color:#6B7A85;font-weight:600;text-transform:uppercase;
+                                  letter-spacing:.3px;margin-bottom:4px;">Tháng hiện tại</div>
+                      <div style="font-size:13px;font-weight:700;color:#1C2B33;">
+                        <field name="luong_thang_hien_tai" readonly="1" nolabel="1"/>
+                      </div>
+                    </div>
+                    <div style="padding:12px 14px;border-bottom:1px solid #DDE5EA;">
+                      <div style="font-size:10px;color:#6B7A85;font-weight:600;text-transform:uppercase;
+                                  letter-spacing:.3px;margin-bottom:4px;">Tháng trước</div>
+                      <div style="font-size:13px;font-weight:700;color:#1C2B33;">
+                        <field name="luong_thang_truoc" readonly="1" nolabel="1"/>
+                      </div>
+                    </div>
+                    <div style="padding:12px 14px;border-right:1px solid #DDE5EA;">
+                      <div style="font-size:10px;color:#6B7A85;font-weight:600;text-transform:uppercase;
+                                  letter-spacing:.3px;margin-bottom:4px;">Chênh lệch</div>
+                      <div style="font-size:13px;font-weight:700;color:#1C2B33;">
+                        <field name="payroll_variance" readonly="1" nolabel="1"/>
+                      </div>
+                    </div>
+                    <div style="padding:12px 14px;">
+                      <div style="font-size:10px;color:#6B7A85;font-weight:600;text-transform:uppercase;
+                                  letter-spacing:.3px;margin-bottom:4px;">Tỷ lệ thay đổi</div>
+                      <div style="font-size:13px;font-weight:700;color:#1C2B33;">
+                        <field name="payroll_variance_rate" readonly="1" nolabel="1" widget="percentage"/>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Hidden data -->
+              <div style="display:none;">
+                <field name="chart_luong_labels" readonly="1"/>
+                <field name="chart_luong_data"   readonly="1"/>
+                <field name="chart_pb_labels"    readonly="1"/>
+                <field name="chart_pb_data"      readonly="1"/>
+              </div>
+
+            </div>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="action_nhan_su_dashboard" model="ir.actions.act_window">
+      <field name="name">Dashboard KPI Nhân sự</field>
+      <field name="res_model">nhan_su_dashboard</field>
+      <field name="view_mode">form</field>
+      <field name="res_id" ref="nhan_su_dashboard_main"/>
+    </record>
+
+    <menuitem id="menu_nhan_su_dashboard" name="Dashboard KPI"
+      parent="menu_root" action="action_nhan_su_dashboard" sequence="0"/>
+  </data>
+</odoo>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Actions -->
+        <record id="action_don_hang" model="ir.actions.act_window">
+            <field name="name">Đơn Hàng</field>
+            <field name="res_model">don_hang</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- Sales Order (Đơn Hàng) Views -->
+        <record id="view_don_hang_tree" model="ir.ui.view">
+            <field name="name">don_hang.tree</field>
+            <field name="model">don_hang</field>
+            <field name="arch" type="xml">
+                <tree string="Đơn Hàng">
+                    <field name="ma_don_hang"/>
+                    <field name="khach_hang_id"/>
+                    <field name="nhan_vien_phu_trach_id"/>
+                    <field name="ngay_dat"/>
+                    <field name="tong_tien" sum="Tổng"/>
+                    <field name="trang_thai"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="view_don_hang_form" model="ir.ui.view">
+            <field name="name">don_hang.form</field>
+            <field name="model">don_hang</field>
+            <field name="arch" type="xml">
+                <form string="Đơn Hàng">
+                    <header>
+                        <button name="action_confirm" string="Xác Nhận" type="object" class="btn-primary"/>
+                        <button name="action_deliver" string="Giao Hàng" type="object"/>
+                        <button name="action_mark_delivered" string="Đã Giao" type="object"/>
+                        <button name="action_invoice" string="Phát Hóa Đơn" type="object"/>
+                        <button name="action_mark_paid" string="Đã Thanh Toán" type="object" class="btn-success"/>
+                        <field name="trang_thai" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="ma_don_hang" readonly="1"/>
+                            </h1>
+                        </div>
+                        
+                        <group>
+                            <group>
+                                <field name="khach_hang_id"/>
+                                <field name="bao_gia_id" readonly="1"/>
+                                <field name="nhan_vien_phu_trach_id"/>
+                            </group>
+                            <group>
+                                <field name="ngay_dat"/>
+                                <field name="ngay_giao_du_kinh"/>
+                                <field name="ngay_giao_thuc_te"/>
+                            </group>
+                        </group>
+                        
+                        <notebook>
+                            <page string="Chi Tiết Đơn Hàng">
+                                <field name="chi_tiet_ids" nolabel="1" colspan="2">
+                                    <tree string="Chi Tiết" editable="bottom">
+                                        <field name="san_pham"/>
+                                        <field name="don_vi_tinh"/>
+                                        <field name="so_luong"/>
+                                        <field name="gia_ban"/>
+                                        <field name="thanh_tien"/>
+                                    </tree>
+                                    <form string="Chi Tiết Đơn Hàng">
+                                        <group>
+                                            <field name="san_pham"/>
+                                            <field name="don_vi_tinh"/>
+                                            <field name="so_luong"/>
+                                            <field name="gia_ban"/>
+                                            <field name="thanh_tien" readonly="1"/>
+                                        </group>
+                                        <group>
+                                            <field name="mo_ta" colspan="2"/>
+                                        </group>
+                                    </form>
+                                </field>
+                            </page>
+                            
+                            <page string="Tính Toán">
+                                <group>
+                                    <group>
+                                        <field name="tong_tien_hang" readonly="1"/>
+                                        <field name="chiet_khau_phan_tram"/>
+                                        <field name="chiet_khau_tien" readonly="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="tien_sau_chiet_khau" readonly="1"/>
+                                        <field name="thue_vat"/>
+                                        <field name="tien_thue_vat" readonly="1"/>
+                                    </group>
+                                </group>
+                                <group>
+                                    <field name="tong_tien" readonly="1" widget="monetary"/>
+                                    <field name="so_tien_coc" readonly="1"/>
+                                    <field name="so_tien_con_no" readonly="1" widget="monetary"/>
+                                </group>
+                            </page>
+                            
+                            <page string="Thanh Toán">
+                                <group>
+                                    <field name="hinh_thuc_thanh_toan"/>
+                                </group>
+                            </page>
+                            
+                            <page string="Ghi Chú">
+                                <field name="ghi_chu" colspan="2"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_ids" widget="mail_thread"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_don_hang_search" model="ir.ui.view">
+            <field name="name">don_hang.search</field>
+            <field name="model">don_hang</field>
+            <field name="arch" type="xml">
+                <search string="Đơn Hàng">
+                    <field name="ma_don_hang"/>
+                    <field name="khach_hang_id"/>
+                    <field name="nhan_vien_phu_trach_id"/>
+                    <separator/>
+                    <filter string="Nháp" name="draft" domain="[('trang_thai', '=', 'draft')]"/>
+                    <filter string="Xác Nhận" name="confirmed" domain="[('trang_thai', '=', 'confirmed')]"/>
+                    <filter string="Đã Giao" name="delivered" domain="[('trang_thai', '=', 'delivered')]"/>
+                    <filter string="Đã Thanh Toán" name="paid" domain="[('trang_thai', '=', 'paid')]"/>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

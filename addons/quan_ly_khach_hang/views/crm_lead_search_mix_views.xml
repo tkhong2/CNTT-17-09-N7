@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_crm_case_opportunities_filter_mix_cong_viec_cham_soc" model="ir.ui.view">
+        <field name="name">crm.lead.search.opportunity.mix.cong_viec_cham_soc</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.view_crm_case_opportunities_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='open_opportunities']" position="after">
+                <filter string="Cong viec cham soc" name="care_tasks" domain="[('has_cong_viec_cham_soc', '=', True)]"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_crm_case_leads_filter_mix_cong_viec_cham_soc" model="ir.ui.view">
+        <field name="name">crm.lead.search.lead.mix.cong_viec_cham_soc</field>
+        <field name="model">crm.lead</field>
+        <field name="inherit_id" ref="crm.view_crm_case_leads_filter"/>
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='unassigned_leads']" position="after">
+                <filter string="Cong viec cham soc" name="care_tasks_lead" domain="[('has_cong_viec_cham_soc', '=', True)]"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

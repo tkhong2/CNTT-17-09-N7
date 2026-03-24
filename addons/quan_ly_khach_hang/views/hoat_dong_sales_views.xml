@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Actions -->
+        <record id="action_hoat_dong_sales" model="ir.actions.act_window">
+            <field name="name">Hoạt Động Sales</field>
+            <field name="res_model">hoat_dong_sales</field>
+            <field name="view_mode">kanban,tree,form,calendar</field>
+        </record>
+
+        <!-- Sales Activities (Hoạt Động Sales) Views -->
+        <record id="view_hoat_dong_sales_tree" model="ir.ui.view">
+            <field name="name">hoat_dong_sales.tree</field>
+            <field name="model">hoat_dong_sales</field>
+            <field name="arch" type="xml">
+                <tree string="Hoạt Động Sales">
+                    <field name="tieu_de"/>
+                    <field name="khach_hang_id"/>
+                    <field name="loai_hoat_dong"/>
+                    <field name="nhan_vien_thuc_hien_id"/>
+                    <field name="ngay_tao"/>
+                    <field name="trang_thai"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="view_hoat_dong_sales_form" model="ir.ui.view">
+            <field name="name">hoat_dong_sales.form</field>
+            <field name="model">hoat_dong_sales</field>
+            <field name="arch" type="xml">
+                <form string="Hoạt Động Sales">
+                    <header>
+                        <button name="action_complete" string="Hoàn Thành" type="object" class="btn-primary"/>
+                        <button name="action_reschedule" string="Lập Lịch Lại" type="object"/>
+                        <button name="action_cancel" string="Hủy" type="object"/>
+                        <field name="trang_thai" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="tieu_de" class="oe_inline" placeholder="Tiêu đề hoạt động..."/>
+                            </h1>
+                        </div>
+                        
+                        <group>
+                            <group>
+                                <field name="khach_hang_id"/>
+                                <field name="co_hoi_id"/>
+                                <field name="bao_gia_id"/>
+                            </group>
+                            <group>
+                                <field name="nhan_vien_thuc_hien_id"/>
+                            </group>
+                        </group>
+                        
+                        <group string="Chi Tiết Hoạt Động">
+                            <group>
+                                <field name="loai_hoat_dong"/>
+                                <field name="muc_do_quan_tro_ng"/>
+                            </group>
+                            <group>
+                                <field name="ngay_tao" readonly="1"/>
+                                <field name="gio_tao" readonly="1"/>
+                            </group>
+                        </group>
+                        
+                        <group string="Lịch Hẹn">
+                            <field name="ngay_hop_len"/>
+                        </group>
+                        
+                        <notebook>
+                            <page string="Mô Tả Hoạt Động">
+                                <field name="mo_ta_hoat_dong" colspan="2"/>
+                            </page>
+                            
+                            <page string="Đầu Vào/Đầu Ra">
+                                <group>
+                                    <field name="dau_vao" colspan="2"/>
+                                </group>
+                                <group>
+                                    <field name="dau_ra" colspan="2"/>
+                                </group>
+                            </page>
+                            
+                            <page string="Kết Quả">
+                                <group>
+                                    <field name="danh_gia_khach"/>
+                                </group>
+                                <field name="ket_qua" colspan="2"/>
+                            </page>
+                            
+                            <page string="Ghi Chú">
+                                <field name="ghi_chu" colspan="2"/>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_ids" widget="mail_thread"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_hoat_dong_sales_calendar" model="ir.ui.view">
+            <field name="name">hoat_dong_sales.calendar</field>
+            <field name="model">hoat_dong_sales</field>
+            <field name="arch" type="xml">
+                <calendar string="Lịch Hoạt Động" date_start="ngay_tao" color="nhan_vien_thuc_hien_id">
+                    <field name="tieu_de"/>
+                    <field name="loai_hoat_dong"/>
+                    <field name="nhan_vien_thuc_hien_id"/>
+                </calendar>
+            </field>
+        </record>
+        
+        <record id="view_hoat_dong_sales_kanban" model="ir.ui.view">
+            <field name="name">hoat_dong_sales.kanban</field>
+            <field name="model">hoat_dong_sales</field>
+            <field name="arch" type="xml">
+                <kanban string="Hoạt Động Sales" default_group_by="nhan_vien_thuc_hien_id">
+                    <field name="trang_thai"/>
+                    <field name="tieu_de"/>
+                    <field name="khach_hang_id"/>
+                    <field name="loai_hoat_dong"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_card">
+                                <div class="oe_kanban_card_header">
+                                    <span class="oe_kanban_card_header_title">
+                                        <strong><t t-esc="record.tieu_de and record.tieu_de.value or ''"/></strong>
+                                    </span>
+                                </div>
+                                <div class="oe_kanban_card_body">
+                                    <p><strong><t t-esc="record.khach_hang_id and record.khach_hang_id.value or ''"/></strong></p>
+                                    <p><span class="badge"><t t-esc="record.loai_hoat_dong and record.loai_hoat_dong.value or ''"/></span></p>
+                                </div>
+                                <div class="oe_kanban_card_footer">
+                                    <span class="badge"><t t-esc="record.trang_thai and record.trang_thai.value or ''"/></span>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+        
+        <record id="view_hoat_dong_sales_search" model="ir.ui.view">
+            <field name="name">hoat_dong_sales.search</field>
+            <field name="model">hoat_dong_sales</field>
+            <field name="arch" type="xml">
+                <search string="Hoạt Động Sales">
+                    <field name="tieu_de"/>
+                    <field name="khach_hang_id"/>
+                    <field name="nhan_vien_thuc_hien_id"/>
+                    <separator/>
+                    <filter string="Gọi Điện" name="phone" domain="[('loai_hoat_dong', '=', 'goi_dien')]"/>
+                    <filter string="Gặp Trực Tiếp" name="inperson" domain="[('loai_hoat_dong', '=', 'gap_truc_tiep')]"/>
+                    <filter string="Email" name="email" domain="[('loai_hoat_dong', '=', 'email')]"/>
+                    <separator/>
+                    <filter string="Chưa Hoàn Thành" name="open" domain="[('trang_thai', '!=', 'completed')]"/>
+                    <filter string="Mức Độ Cao" name="high" domain="[('muc_do_quan_tro_ng', '=', 'cao')]"/>
+                </search>
+            </field>
+        </record>
+    </data>
+</odoo>

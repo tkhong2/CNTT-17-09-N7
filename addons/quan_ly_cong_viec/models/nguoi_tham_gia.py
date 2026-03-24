@@ -18,6 +18,13 @@ class NguoiThamGia(models.Model):
         ('khac', 'Khác')
     ], string="Vai trò", default='thuc_hien', required=True)
     
+    # Trạng thái báo cáo
+    trang_thai = fields.Selection([
+        ('chua_bao_cao', '⭕ Chưa báo cáo'),
+        ('dang_xu_ly', '🟡 Đang xử lý'),
+        ('da_bao_cao', '✅ Đã báo cáo'),
+    ], string="Trạng thái báo cáo", default='chua_bao_cao', required=True)
+    
     ngay_bat_dau = fields.Date(string="Ngày bắt đầu", required=True)
     ngay_ket_thuc = fields.Date(string="Ngày kết thúc")
     so_gio_du_kien = fields.Float(string="Số giờ dự kiến")

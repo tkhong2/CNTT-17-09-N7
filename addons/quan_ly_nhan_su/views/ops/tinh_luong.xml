@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Tính Lương - Payroll -->
+        
+        <!-- Payroll Tree View -->
+        <record id="tinh_luong_tree" model="ir.ui.view">
+            <field name="name">tinh_luong.tree</field>
+            <field name="model">tinh_luong</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="ma_bang_luong"/>
+                    <field name="thang_nam" placeholder="VD: 2026-03 hoặc 03/2026"/>
+                    <field name="ngay_bat_dau"/>
+                    <field name="ngay_ket_thuc"/>
+                    <field name="so_nhan_vien"/>
+                    <field name="tong_thuc_linh"/>
+                    <field name="trang_thai"/>
+                </tree>
+            </field>
+        </record>
+        
+        <!-- Payroll Form View -->
+        <record id="tinh_luong_form" model="ir.ui.view">
+            <field name="name">tinh_luong.form</field>
+            <field name="model">tinh_luong</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button name="action_load_employees" string="Tải danh sách NV" type="object"/>
+                        <button name="action_calculate_payroll" string="Tính lương" type="object" class="oe_highlight"/>
+                        <button name="action_submit" string="Nộp duyệt" type="object" class="oe_highlight"/>
+                        <button name="action_approve" string="Phê duyệt" type="object" class="oe_highlight"/>
+                        <button name="action_mark_paid" string="Đánh dấu đã thanh toán" type="object"/>
+                        <field name="trang_thai" widget="statusbar" options="{'clickable': False}"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="ma_bang_luong" readonly="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="thang_nam"/>
+                                <field name="ngay_bat_dau"/>
+                                <field name="ngay_ket_thuc"/>
+                                <field name="so_nhan_vien" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="ngan_hang"/>
+                                <field name="ngay_thanh_toan"/>
+                                <field name="nguoi_duyet_id" readonly="1"/>
+                                <field name="ngay_duyet" readonly="1"/>
+                            </group>
+                        </group>
+                        <group string="Tổng hợp">
+                            <group>
+                                <field name="tong_co_ban" readonly="1"/>
+                                <field name="tong_phu_cap" readonly="1"/>
+                                <field name="tong_thuong" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="tong_khaу_tru" readonly="1"/>
+                                <field name="tong_thue" readonly="1"/>
+                                <field name="tong_thuc_linh" readonly="1" widget="monetary"/>
+                            </group>
+                        </group>
+                        <field name="ghi_chu"/>
+                        <separator string="Chi tiết người lao động"/>
+                        <field name="chi_tiet_ids">
+                            <tree editable="bottom">
+                                <field name="nhan_vien_id"/>
+                                <field name="luong_co_ban"/>
+                                <field name="phu_cap"/>
+                                <field name="tien_thuong"/>
+                                <field name="thuong_tu_dong"/>
+                                <field name="so_ngay_lam_viec"/>
+                                <field name="so_ngay_vang_khong_luong"/>
+                                <field name="bao_hiem_xa_hoi"/>
+                                <field name="bao_hiem_y_te"/>
+                                <field name="bao_hiem_that_nghiep"/>
+                                <field name="ung_luong"/>
+                                <field name="khoan_khac"/>
+                                <field name="thue_thu_nhap"/>
+                                <field name="thuc_linh" readonly="1"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <!-- Payroll Chi Tiet Form -->
+        <record id="tinh_luong_chi_tiet_form" model="ir.ui.view">
+            <field name="name">tinh_luong_chi_tiet.form</field>
+            <field name="model">tinh_luong_chi_tiet</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="nhan_vien_id" readonly="1"/>
+                                <field name="ma_nhan_vien" readonly="1"/>
+                                <field name="ten_nhan_vien" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="so_ngay_lam_viec"/>
+                                <field name="so_ngay_vang_khong_luong"/>
+                            </group>
+                        </group>
+                        <group string="Thành phần lương">
+                            <group>
+                                <field name="luong_co_ban"/>
+                                <field name="phu_cap"/>
+                                <field name="tien_thuong"/>
+                            </group>
+                            <group>
+                                <field name="tong_luong_truoc_khau_tru" readonly="1"/>
+                            </group>
+                        </group>
+                        <group string="Khấu trừ">
+                            <group>
+                                <field name="bao_hiem_xa_hoi"/>
+                                <field name="bao_hiem_y_te"/>
+                                <field name="bao_hiem_that_nghiep"/>
+                            </group>
+                            <group>
+                                <field name="ung_luong"/>
+                                <field name="khoan_khac"/>
+                                <field name="tong_khau_tru" readonly="1"/>
+                            </group>
+                        </group>
+                        <group string="Thuế">
+                            <group>
+                                <field name="thue_thu_nhap"/>
+                                <field name="ghi_chu_thue"/>
+                            </group>
+                            <group>
+                                <field name="thuc_linh" readonly="1" widget="monetary"/>
+                            </group>
+                        </group>
+                        <field name="ghi_chu"/>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+        
+        <!-- Action -->
+        <record id="tinh_luong_action" model="ir.actions.act_window">
+            <field name="name">Tính lương tháng</field>
+            <field name="res_model">tinh_luong</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <!-- Menu -->
+        <menuitem id="tinh_luong_menu" parent="menu_ops_nhan_su" name="Tính lương" action="tinh_luong_action"/>
+    </data>
+</odoo>

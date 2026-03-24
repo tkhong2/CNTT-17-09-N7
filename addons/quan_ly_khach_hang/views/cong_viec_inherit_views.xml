@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_cong_viec_form_inherit_khach_hang" model="ir.ui.view">
+        <field name="name">cong_viec.form.inherit.khach_hang</field>
+        <field name="model">cong_viec</field>
+        <field name="inherit_id" ref="quan_ly_cong_viec.view_cong_viec_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='du_an_id']" position="after">
+                <field name="khach_hang_id" readonly="1"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_cong_viec_tree_inherit_khach_hang" model="ir.ui.view">
+        <field name="name">cong_viec.tree.inherit.khach_hang</field>
+        <field name="model">cong_viec</field>
+        <field name="inherit_id" ref="quan_ly_cong_viec.view_cong_viec_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='du_an_id']" position="after">
+                <field name="khach_hang_id"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

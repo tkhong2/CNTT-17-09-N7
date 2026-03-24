@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Actions (MUST BE DEFINED FIRST) -->
+        <record id="action_vi_tri_tuyen_dung" model="ir.actions.act_window">
+            <field name="name">Vị Trí Tuyển Dụng</field>
+            <field name="res_model">vi_tri_tuyen_dung</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <record id="action_ung_vien" model="ir.actions.act_window">
+            <field name="name">Ứng Viên</field>
+            <field name="res_model">ung_vien</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <record id="action_onboarding_offboarding" model="ir.actions.act_window">
+            <field name="name">Checklist Onboarding/Offboarding</field>
+            <field name="res_model">onboarding_offboarding</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <!-- ViTriTuyenDung Views -->
+        <record id="view_vi_tri_tuyen_dung_tree" model="ir.ui.view">
+            <field name="name">vi_tri_tuyen_dung.tree</field>
+            <field name="model">vi_tri_tuyen_dung</field>
+            <field name="arch" type="xml">
+                <tree string="Vị Trí Tuyển Dụng">
+                    <field name="ten_vi_tri"/>
+                    <field name="phong_ban_id"/>
+                    <field name="cap_do"/>
+                    <field name="so_luong_tuyen"/>
+                    <field name="so_ung_vien"/>
+                    <field name="trang_thai"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="view_vi_tri_tuyen_dung_form" model="ir.ui.view">
+            <field name="name">vi_tri_tuyen_dung.form</field>
+            <field name="model">vi_tri_tuyen_dung</field>
+            <field name="arch" type="xml">
+                <form string="Vị Trí Tuyển Dụng">
+                    <header>
+                        <button name="action_open" string="Mở Tuyển" type="object" class="btn-primary"/>
+                        <button name="action_close" string="Đóng Tuyển" type="object"/>
+                        <field name="trang_thai" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="action" name="%(action_ung_vien)d" class="oe_stat_button" icon="fa-users">
+                                <field name="so_ung_vien" widget="statinfo"/>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="ten_vi_tri" class="oe_inline" placeholder="Tên vị trí..."/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <field name="phong_ban_id"/>
+                                <field name="cap_do"/>
+                                <field name="so_luong_tuyen"/>
+                            </group>
+                            <group>
+                                <field name="luong_du_kien"/>
+                                <field name="rang_buoc_luong"/>
+                                <field name="created_by" readonly="1"/>
+                            </group>
+                        </group>
+                        
+                        <group>
+                            <group>
+                                <field name="ngay_bat_dau"/>
+                                <field name="ngay_ket_thuc"/>
+                            </group>
+                            <group>
+                                <field name="ngay_tao" readonly="1"/>
+                            </group>
+                        </group>
+                        
+                        <notebook>
+                            <page string="Mô Tả Công Việc">
+                                <field name="mo_ta_cong_viec"/>
+                            </page>
+                            <page string="Yêu Cầu">
+                                <field name="yeu_cau"/>
+                            </page>
+                            <page string="Phúc Lợi">
+                                <field name="phuc_loi"/>
+                            </page>
+                            <page string="Ứng Viên">
+                                <field name="ung_vien_ids" readonly="1">
+                                    <tree>
+                                        <field name="ho_ten"/>
+                                        <field name="email"/>
+                                        <field name="so_dien_thoai"/>
+                                        <field name="trang_thai"/>
+                                        <field name="diem_cv"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_ids" widget="mail_thread"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_vi_tri_tuyen_dung_search" model="ir.ui.view">
+            <field name="name">vi_tri_tuyen_dung.search</field>
+            <field name="model">vi_tri_tuyen_dung</field>
+            <field name="arch" type="xml">
+                <search string="Vị Trí Tuyển Dụng">
+                    <field name="ten_vi_tri"/>
+                    <field name="phong_ban_id"/>
+                    <separator/>
+                    <filter name="filter_dang_tuyen" string="Đang Tuyển" domain="[('trang_thai', '=', 'open')]"/>
+                    <filter name="filter_het_han" string="Đã Đóng" domain="[('trang_thai', '=', 'closed')]"/>
+                    <filter name="filter_draft" string="Nháp" domain="[('trang_thai', '=', 'draft')]"/>
+                </search>
+            </field>
+        </record>
+        
+        <!-- UngVien Views -->
+        <record id="view_ung_vien_tree" model="ir.ui.view">
+            <field name="name">ung_vien.tree</field>
+            <field name="model">ung_vien</field>
+            <field name="arch" type="xml">
+                <tree string="Ứng Viên">
+                    <field name="ho_ten"/>
+                    <field name="vi_tri_id"/>
+                    <field name="email"/>
+                    <field name="so_dien_thoai"/>
+                    <field name="diem_cv"/>
+                    <field name="trang_thai"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="view_ung_vien_form" model="ir.ui.view">
+            <field name="name">ung_vien.form</field>
+            <field name="model">ung_vien</field>
+            <field name="arch" type="xml">
+                <form string="Ứng Viên">
+                    <sheet>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="ho_ten" class="oe_inline" placeholder="Họ tên..."/>
+                            </h1>
+                        </div>
+                        
+                        <group>
+                            <group>
+                                <field name="email"/>
+                                <field name="so_dien_thoai"/>
+                                <field name="dia_chi"/>
+                            </group>
+                            <group>
+                                <field name="vi_tri_id"/>
+                                <field name="phong_ban_id" readonly="1"/>
+                                <field name="nguon"/>
+                            </group>
+                        </group>
+                        
+                        <group string="Thông Tin Học Vấn">
+                            <group>
+                                <field name="bang_cap"/>
+                                <field name="truong_hoc"/>
+                                <field name="chuyen_nganh"/>
+                            </group>
+                            <group>
+                                <field name="so_nam_kinh_nghiem"/>
+                            </group>
+                        </group>
+                        
+                        <group string="Đánh Giá">
+                            <group>
+                                <field name="diem_cv"/>
+                                <field name="diem_phong_van"/>
+                            </group>
+                            <group>
+                                <field name="luong_thoa_thuan"/>
+                                <field name="nguoi_tuyen_dung_id"/>
+                            </group>
+                        </group>
+                        
+                        <group>
+                            <field name="nhan_xet" colspan="2"/>
+                            <field name="ly_do_tu_choi" colspan="2"/>
+                        </group>
+                        
+                        <notebook>
+                            <page string="Thông Tin Phỏng Vấn">
+                                <group>
+                                    <group>
+                                        <field name="ngay_nop_don"/>
+                                        <field name="ngay_phong_van"/>
+                                        <field name="ngay_offer"/>
+                                        <field name="ngay_accept"/>
+                                    </group>
+                                    <group>
+                                        <field name="nguoi_phong_van_id"/>
+                                    </group>
+                                </group>
+                            </page>
+                            <page string="File CV">
+                                <group>
+                                    <field name="file_cv" widget="binary"/>
+                                    <field name="file_cv_name"/>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_ids" widget="mail_thread"/>
+                        <field name="activity_ids" widget="mail_activity"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+        
+        <record id="view_ung_vien_search" model="ir.ui.view">
+            <field name="name">ung_vien.search</field>
+            <field name="model">ung_vien</field>
+            <field name="arch" type="xml">
+                <search string="Ứng Viên">
+                    <field name="ho_ten"/>
+                    <field name="vi_tri_id"/>
+                    <field name="email"/>
+                    <separator/>
+                    <filter name="filter_new" string="Mới" domain="[('trang_thai', '=', 'new')]"/>
+                    <filter name="filter_screening" string="Sàng Lọc" domain="[('trang_thai', '=', 'screening')]"/>
+                    <filter name="filter_qualified" string="Đạt Tiêu Chuẩn" domain="[('trang_thai', '=', 'qualified')]"/>
+                </search>
+            </field>
+        </record>
+        
+        <!-- OnboardingOffboarding Views -->
+        <record id="view_onboarding_offboarding_tree" model="ir.ui.view">
+            <field name="name">onboarding_offboarding.tree</field>
+            <field name="model">onboarding_offboarding</field>
+            <field name="arch" type="xml">
+                <tree string="Checklist Onboarding/Offboarding">
+                    <field name="nhan_vien_id"/>
+                    <field name="loai"/>
+                    <field name="ngay_start"/>
+                    <field name="trang_thai"/>
+                </tree>
+            </field>
+        </record>
+        
+        <record id="view_onboarding_offboarding_form" model="ir.ui.view">
+            <field name="name">onboarding_offboarding.form</field>
+            <field name="model">onboarding_offboarding</field>
+            <field name="arch" type="xml">
+                <form string="Checklist Onboarding/Offboarding">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="nhan_vien_id"/>
+                                <field name="loai"/>
+                                <field name="ngay_start"/>
+                            </group>
+                            <group>
+                                <field name="ngay_ket_thuc_du_kinh"/>
+                                <field name="trang_thai"/>
+                                <field name="ti_le_hoan_thanh" widget="progressbar"/>
+                            </group>
+                        </group>
+                        
+                        <group>
+                            <field name="ghi_chu" colspan="2"/>
+                        </group>
+                        
+                        <field name="cong_viec_ids" colspan="2" nolabel="1">
+                            <tree string="Công Việc Onboarding">
+                                <field name="tieu_de"/>
+                                <field name="da_hoan_thanh"/>
+                            </tree>
+                        </field>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

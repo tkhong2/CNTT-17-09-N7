@@ -63,7 +63,7 @@
                 <filter string="Phụ trách" name="phu_trach" domain="[('vai_tro', '=', 'phu_trach')]"/>
                 <filter string="Thực hiện" name="thuc_hien" domain="[('vai_tro', '=', 'thuc_hien')]"/>
                 <filter string="Hỗ trợ" name="ho_tro" domain="[('vai_tro', '=', 'ho_tro')]"/>
-                <group expand="0" string="Group By">
+                <group expand="0" string="Nhóm theo">
                     <filter string="Dự án" name="group_by_du_an" context="{'group_by': 'du_an_id'}"/>
                     <filter string="Công việc" name="group_by_cong_viec" context="{'group_by': 'cong_viec_id'}"/>
                     <filter string="Nhân viên" name="group_by_nhan_vien" context="{'group_by': 'nhan_vien_id'}"/>

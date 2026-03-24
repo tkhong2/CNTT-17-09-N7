@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_du_an_form_inherit_khach_hang" model="ir.ui.view">
+        <field name="name">du_an.form.inherit.khach_hang</field>
+        <field name="model">du_an</field>
+        <field name="inherit_id" ref="quan_ly_cong_viec.view_du_an_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='nguoi_quan_ly_id']" position="after">
+                <field name="khach_hang_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_du_an_tree_inherit_khach_hang" model="ir.ui.view">
+        <field name="name">du_an.tree.inherit.khach_hang</field>
+        <field name="model">du_an</field>
+        <field name="inherit_id" ref="quan_ly_cong_viec.view_du_an_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='ten_du_an']" position="after">
+                <field name="khach_hang_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_du_an_search_inherit_khach_hang" model="ir.ui.view">
+        <field name="name">du_an.search.inherit.khach_hang</field>
+        <field name="model">du_an</field>
+        <field name="inherit_id" ref="quan_ly_cong_viec.view_du_an_search"/>
+        <field name="arch" type="xml">
+            <xpath expr="//search/field[@name='ten_du_an']" position="after">
+                <field name="khach_hang_id"/>
+            </xpath>
+            <xpath expr="//search/group" position="inside">
+                <filter string="Khách hàng" name="group_by_khach_hang" context="{'group_by': 'khach_hang_id'}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

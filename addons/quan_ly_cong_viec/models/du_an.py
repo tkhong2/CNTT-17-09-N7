@@ -13,6 +13,8 @@ class DuAn(models.Model):
     ma_du_an = fields.Char(string="Mã dự án", required=True, index=True)
     ten_du_an = fields.Char(string="Tên dự án", required=True)
     mo_ta = fields.Text(string="Mô tả")
+    muc_tieu = fields.Text(string="Mục tiêu dự án")
+    deliverables = fields.Text(string="Deliverables")
     
     # Thời gian
     ngay_bat_dau = fields.Date(string="Ngày bắt đầu", required=True)
@@ -33,6 +35,7 @@ class DuAn(models.Model):
     # Thông tin tài chính
     ngan_sach = fields.Float(string="Ngân sách (VND)", tracking=True)
     chi_phi_thuc_te = fields.Float(string="Chi phí thực tế", compute="_compute_chi_phi_thuc_te", store=True)
+    vuot_ngan_sach = fields.Boolean(string="Vượt ngân sách", compute="_compute_vuot_ngan_sach", store=True)
     
     # Thống kê
     so_luong_cong_viec = fields.Integer(string="Số lượng công việc", compute="_compute_so_luong_cong_viec", store=True)
@@ -61,10 +64,25 @@ class DuAn(models.Model):
             else:
                 record.ti_le_hoan_thanh = 0
     
-    @api.depends('nguon_luc_ids', 'nguon_luc_ids.chi_phi')
+    @api.depends('nguon_luc_ids', 'nguon_luc_ids.chi_phi', 'cong_viec_ids', 'cong_viec_ids.thuc_te_gio', 'cong_viec_ids.nguoi_phu_trach_id')
     def _compute_chi_phi_thuc_te(self):
         for record in self:
-            record.chi_phi_thuc_te = sum(record.nguon_luc_ids.mapped('chi_phi'))
+            chi_phi_nguon_luc = sum(record.nguon_luc_ids.mapped('chi_phi'))
+
+            chi_phi_timesheet = 0.0
+            if 'bangiao_timesheet' in self.env:
+                timesheets = self.env['bangiao_timesheet'].search([
+                    ('du_an_id', '=', record.id),
+                    ('trang_thai', '=', 'approved'),
+                ])
+                chi_phi_timesheet = sum(timesheets.mapped('luong_nhan'))
+
+            record.chi_phi_thuc_te = chi_phi_nguon_luc + chi_phi_timesheet
+
+    @api.depends('ngan_sach', 'chi_phi_thuc_te')
+    def _compute_vuot_ngan_sach(self):
+        for record in self:
+            record.vuot_ngan_sach = bool(record.ngan_sach and record.chi_phi_thuc_te > record.ngan_sach)
     
     @api.constrains('ngay_bat_dau', 'ngay_ket_thuc')
     def _check_dates(self):

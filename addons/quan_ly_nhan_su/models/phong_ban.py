@@ -31,3 +31,16 @@ class PhongBan(models.Model):
     def _compute_so_luong_nhan_vien(self):
         for record in self:
             record.so_luong_nhan_vien = len(record.nhan_vien_ids)
+
+    def action_xem_nhan_su(self):
+        self.ensure_one()
+        return {
+            'name': _('Nhân sự phòng ban'),
+            'type': 'ir.actions.act_window',
+            'res_model': 'nhan_vien',
+            'view_mode': 'tree,form',
+            'domain': [('phong_ban_id', '=', self.id)],
+            'context': {
+                'default_phong_ban_id': self.id,
+            },
+        }
