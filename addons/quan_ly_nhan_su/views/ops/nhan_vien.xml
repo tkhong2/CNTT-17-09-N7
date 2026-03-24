@@ -7,18 +7,15 @@
         <field name="arch" type="xml">
             <form class="erp-employee-form">
                 <header>
-                    <field name="trang_thai" widget="statusbar" options="{'clickable': '1'}" 
+                    <field name="trang_thai" widget="statusbar" options="{'clickable': '1'}"
                            statusbar_visible="active,probation,leave,suspended"/>
                 </header>
                 <sheet>
+                    <div class="oe_button_box" name="button_box"/>
                     <div class="erp-employee-hero">
                         <div class="oe_title">
-                            <h1>
-                                <field name="ma_nhan_vien" placeholder="Mã nhân viên"/>
-                            </h1>
-                            <h2>
-                                <field name="ho_va_ten" placeholder="Họ và tên"/>
-                            </h2>
+                            <h1><field name="ma_nhan_vien" placeholder="Mã nhân viên"/></h1>
+                            <h2><field name="ho_va_ten" placeholder="Họ và tên"/></h2>
                         </div>
                         <div class="erp-employee-avatar-wrap">
                             <field name="hinh_anh" widget="image" class="oe_avatar erp-employee-avatar"/>
@@ -140,13 +137,13 @@
             </form>
         </field>
     </record>
-    
-    <!-- Tree View -->
+
+    <!-- Tree View with decoration -->
     <record id="view_nhan_vien_tree" model="ir.ui.view">
         <field name="name">nhan.vien.tree</field>
         <field name="model">nhan_vien</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree decoration-muted="trang_thai == 'leave'" decoration-warning="trang_thai == 'suspended'" decoration-info="trang_thai == 'probation'">
                 <field name="ma_nhan_vien"/>
                 <field name="ho_va_ten"/>
                 <field name="phong_ban_id"/>
@@ -154,11 +151,15 @@
                 <field name="ngay_vao_lam"/>
                 <field name="dien_thoai"/>
                 <field name="email"/>
-                <field name="trang_thai"/>
+                <field name="trang_thai" widget="badge"
+                    decoration-success="trang_thai == 'active'"
+                    decoration-warning="trang_thai == 'probation'"
+                    decoration-danger="trang_thai == 'suspended'"
+                    decoration-muted="trang_thai == 'leave'"/>
             </tree>
         </field>
     </record>
-    
+
     <!-- Search View -->
     <record id="view_nhan_vien_search" model="ir.ui.view">
         <field name="name">nhan.vien.search</field>
@@ -183,7 +184,47 @@
                     <filter string="Chức vụ" name="chuc_vu" context="{'group_by': 'chuc_vu_id'}"/>
                     <filter string="Trạng thái" name="trang_thai" context="{'group_by': 'trang_thai'}"/>
                 </group>
+                <searchpanel>
+                    <field name="phong_ban_id" string="Phòng ban" icon="fa-building" expand="1"/>
+                    <field name="trang_thai" string="Trạng thái" select="multi" icon="fa-circle" expand="1"/>
+                    <field name="chuc_vu_id" string="Chức vụ" icon="fa-briefcase" expand="0"/>
+                </searchpanel>
             </search>
+        </field>
+    </record>
+
+    <!-- Kanban View -->
+    <record id="view_nhan_vien_kanban" model="ir.ui.view">
+        <field name="name">nhan.vien.kanban</field>
+        <field name="model">nhan_vien</field>
+        <field name="arch" type="xml">
+            <kanban class="o_kanban_mobile">
+                <field name="id"/>
+                <field name="ma_nhan_vien"/>
+                <field name="ho_va_ten"/>
+                <field name="phong_ban_id"/>
+                <field name="chuc_vu_id"/>
+                <field name="trang_thai"/>
+                <field name="hinh_anh"/>
+                <field name="email"/>
+                <field name="dien_thoai"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div class="oe_kanban_global_click nv-kanban-card">
+                            <div class="nv-kanban-avatar">
+                                <img t-att-src="kanban_image('nhan_vien', 'hinh_anh', record.id.raw_value)"
+                                     class="o_image_40_cover rounded-circle" alt="Avatar"/>
+                            </div>
+                            <div class="nv-kanban-info">
+                                <strong><t t-esc="record.ho_va_ten.value"/></strong>
+                                <div class="text-muted small"><t t-esc="record.ma_nhan_vien.value"/></div>
+                                <div class="small"><i class="fa fa-building-o mr-1"/><t t-esc="record.phong_ban_id.value"/></div>
+                                <div class="small"><i class="fa fa-briefcase mr-1"/><t t-esc="record.chuc_vu_id.value"/></div>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
         </field>
     </record>
 </odoo>

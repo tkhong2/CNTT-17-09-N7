@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from datetime import timedelta
+import uuid
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
@@ -125,8 +126,14 @@ class BaoGia(models.Model):
                 'nguoi_quan_ly_id': nv.id if nv else False,
             })
 
+        # Tạo mã công việc unique
+        ma_cong_viec = self.env['ir.sequence'].next_by_code('cong_viec')
+        if not ma_cong_viec:
+            # Nếu sequence không hoạt động, tạo mã unique bằng UUID
+            ma_cong_viec = f"CV-{uuid.uuid4().hex[:8].upper()}"
+
         task = CongViec.create({
-            'ma_cong_viec':       self.env['ir.sequence'].next_by_code('cong_viec') or 'CV-NEW',
+            'ma_cong_viec':       ma_cong_viec,
             'ten_cong_viec':      f'[Theo dõi HĐ] Báo giá {self.ma_bao_gia} — {kh.ten_khach_hang}',
             'mo_ta':              f'Báo giá {self.ma_bao_gia} đã được chấp nhận. '
                                   f'Tổng giá trị: {self.tong_tien:,.0f} VNĐ. '

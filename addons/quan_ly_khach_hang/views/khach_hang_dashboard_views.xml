@@ -6,125 +6,159 @@
     <field name="arch" type="xml">
       <form create="0" delete="0" edit="0">
         <sheet>
-          <div class="erp-dashboard-page">
+          <div class="kh-dash">
 
             <!-- HEADER -->
-            <div class="erp-dash-header">
-              <div class="erp-dash-header-left">
-                <h1><field name="ten_bang" readonly="1" nolabel="1"/></h1>
-                <p>Tổng quan chăm sóc &amp; phát triển khách hàng</p>
+            <div class="kh-dash-header">
+              <div class="kh-dash-header-left">
+                <div class="kh-dash-icon"><i class="fa fa-users"/></div>
+                <div>
+                  <h1 class="kh-dash-title">Dashboard Khách hàng</h1>
+                  <p class="kh-dash-sub">Tổng quan chăm sóc &amp; phát triển khách hàng</p>
+                </div>
               </div>
-              <div class="erp-action-row">
-                <button type="object" name="action_chay_nhanh_theo_mau"
-                  class="oe_highlight" string="Chạy nhanh theo mẫu"
+              <div class="kh-dash-actions">
+                <button type="object" name="action_xem_followup_qua_han"
+                  class="kh-btn kh-btn-danger" string="⚠ Follow-up quá hạn"/>
+                <button type="object" name="action_xem_khach_hang_chua_phan_cong"
+                  class="kh-btn kh-btn-outline" string="Chưa phân công"
                   groups="quan_ly_khach_hang.group_khach_hang_manager"/>
                 <button type="object" name="action_tu_dong_phan_cong"
-                   string="Tự động phân công"
+                  class="kh-btn kh-btn-primary" string="✦ Tự động phân công"
                   groups="quan_ly_khach_hang.group_khach_hang_manager"/>
               </div>
             </div>
 
-            <!-- KPI ROW 1: 3 cột -->
-            <div class="erp-kpi-row erp-kpi-row-3">
-              <div class="erp-kpi-card erp-kpi-c1">
-                <div class="erp-kpi-icon"><i class="fa fa-users fa-lg"/></div>
-                <div class="erp-kpi-label">Tổng khách hàng</div>
-                <div class="erp-kpi-val"><field name="tong_khach_hang" readonly="1" nolabel="1"/></div>
-                <span class="erp-kpi-tag">Tất cả</span>
+            <!-- KPI ROW — 6 cards -->
+            <div class="kh-kpi-row">
+              <div class="kh-kpi kh-kpi-teal">
+                <div class="kh-kpi-top"><span class="kh-kpi-icon"><i class="fa fa-users"/></span><span class="kh-kpi-badge">Tổng</span></div>
+                <div class="kh-kpi-num"><field name="tong_khach_hang" readonly="1" nolabel="1"/></div>
+                <div class="kh-kpi-label">Tổng khách hàng</div>
               </div>
-              <div class="erp-kpi-card erp-kpi-c2">
-                <div class="erp-kpi-icon"><i class="fa fa-user-plus fa-lg"/></div>
-                <div class="erp-kpi-label">Khách mới 7 ngày</div>
-                <div class="erp-kpi-val"><field name="khach_hang_moi_7_ngay" readonly="1" nolabel="1"/></div>
-                <span class="erp-kpi-tag">Tuần này</span>
+              <div class="kh-kpi kh-kpi-green">
+                <div class="kh-kpi-top"><span class="kh-kpi-icon"><i class="fa fa-handshake-o"/></span><span class="kh-kpi-badge">Active</span></div>
+                <div class="kh-kpi-num"><field name="khach_hang_dang_hop_tac" readonly="1" nolabel="1"/></div>
+                <div class="kh-kpi-label">Đang hợp tác</div>
               </div>
-              <div class="erp-kpi-card erp-kpi-c2">
-                <div class="erp-kpi-icon"><i class="fa fa-handshake-o fa-lg"/></div>
-                <div class="erp-kpi-label">Đang hợp tác</div>
-                <div class="erp-kpi-val"><field name="khach_hang_dang_hop_tac" readonly="1" nolabel="1"/></div>
-                <span class="erp-kpi-tag">Active</span>
+              <div class="kh-kpi kh-kpi-blue">
+                <div class="kh-kpi-top"><span class="kh-kpi-icon"><i class="fa fa-user-plus"/></span><span class="kh-kpi-badge">7 ngày</span></div>
+                <div class="kh-kpi-num"><field name="khach_hang_moi_7_ngay" readonly="1" nolabel="1"/></div>
+                <div class="kh-kpi-label">Khách hàng mới</div>
               </div>
-            </div>
-
-            <!-- KPI ROW 2: 3 cột -->
-            <div class="erp-kpi-row erp-kpi-row-3">
-              <div class="erp-kpi-card erp-kpi-c3">
-                <div class="erp-kpi-icon"><i class="fa fa-clock-o fa-lg"/></div>
-                <div class="erp-kpi-label">Follow-up quá hạn</div>
-                <div class="erp-kpi-val"><field name="followup_qua_han" readonly="1" nolabel="1"/></div>
-                <span class="erp-kpi-tag">Cần xử lý</span>
+              <div class="kh-kpi kh-kpi-orange">
+                <div class="kh-kpi-top"><span class="kh-kpi-icon"><i class="fa fa-clock-o"/></span><span class="kh-kpi-badge kh-badge-warn">Gấp!</span></div>
+                <div class="kh-kpi-num"><field name="followup_qua_han" readonly="1" nolabel="1"/></div>
+                <div class="kh-kpi-label">Follow-up quá hạn</div>
               </div>
-              <div class="erp-kpi-card erp-kpi-c4">
-                <div class="erp-kpi-icon"><i class="fa fa-ticket fa-lg"/></div>
-                <div class="erp-kpi-label">Ticket quá hạn SLA</div>
-                <div class="erp-kpi-val"><field name="ticket_qua_han_sla" readonly="1" nolabel="1"/></div>
-                <span class="erp-kpi-tag">Vi phạm SLA</span>
+              <div class="kh-kpi kh-kpi-red">
+                <div class="kh-kpi-top"><span class="kh-kpi-icon"><i class="fa fa-ticket"/></span><span class="kh-kpi-badge kh-badge-danger">SLA</span></div>
+                <div class="kh-kpi-num"><field name="ticket_qua_han_sla" readonly="1" nolabel="1"/></div>
+                <div class="kh-kpi-label">Ticket quá hạn SLA</div>
               </div>
-              <div class="erp-kpi-card erp-kpi-c4">
-                <div class="erp-kpi-icon"><i class="fa fa-line-chart fa-lg"/></div>
-                <div class="erp-kpi-label">Tỷ lệ SLA Breach</div>
-                <div class="erp-kpi-val"><field name="sla_breach_rate" readonly="1" nolabel="1" widget="percentage"/></div>
-                <span class="erp-kpi-tag">SLA</span>
+              <div class="kh-kpi kh-kpi-purple">
+                <div class="kh-kpi-top"><span class="kh-kpi-icon"><i class="fa fa-line-chart"/></span><span class="kh-kpi-badge">Hiệu quả</span></div>
+                <div class="kh-kpi-num kh-kpi-num-sm"><field name="ty_le_chot" readonly="1" nolabel="1" widget="percentage" digits="[1,1]"/></div>
+                <div class="kh-kpi-label">Tỷ lệ chốt HĐ</div>
               </div>
             </div>
 
-            <!-- STAT PANELS -->
-            <div class="erp-stat-row">
-              <div class="erp-stat-box">
-                <div class="erp-stat-head"><i class="fa fa-users"/> Tổng quan khách hàng</div>
-                <div class="erp-stat-body">
-                  <div class="erp-stat-item">
-                    <div class="erp-stat-item-label">Chưa phân công</div>
-                    <div class="erp-stat-item-val"><field name="khach_hang_chua_phan_cong" readonly="1" nolabel="1"/></div>
-                  </div>
-                  <div class="erp-stat-item">
-                    <div class="erp-stat-item-label">Im lặng &gt;14 ngày</div>
-                    <div class="erp-stat-item-val"><field name="khach_hang_im_lang_14_ngay" readonly="1" nolabel="1"/></div>
-                  </div>
-                  <div class="erp-stat-item">
-                    <div class="erp-stat-item-label">Trùng liên hệ</div>
-                    <div class="erp-stat-item-val"><field name="khach_hang_trung_lien_he" readonly="1" nolabel="1"/></div>
-                  </div>
-                  <div class="erp-stat-item">
-                    <div class="erp-stat-item-label">Đề xuất gộp chờ duyệt</div>
-                    <div class="erp-stat-item-val"><field name="de_xuat_gop_cho_duyet" readonly="1" nolabel="1"/></div>
+            <!-- MAIN GRID: 2 cột -->
+            <div class="kh-main-grid">
+
+              <!-- Panel trái: Vận hành -->
+              <div class="kh-panel">
+                <div class="kh-panel-head kh-head-teal">
+                  <i class="fa fa-bar-chart"/> Tổng quan vận hành
+                </div>
+                <div class="kh-panel-body">
+                  <div class="kh-metric-grid">
+                    <div class="kh-metric">
+                      <div class="kh-metric-icon kh-m-teal"><i class="fa fa-comments"/></div>
+                      <div class="kh-metric-val"><field name="tong_tuong_tac" readonly="1" nolabel="1"/></div>
+                      <div class="kh-metric-lbl">Tổng tương tác</div>
+                    </div>
+                    <div class="kh-metric">
+                      <div class="kh-metric-icon kh-m-green"><i class="fa fa-check-circle"/></div>
+                      <div class="kh-metric-val"><field name="tuong_tac_chot_hop_dong" readonly="1" nolabel="1"/></div>
+                      <div class="kh-metric-lbl">Chốt hợp đồng</div>
+                    </div>
+                    <div class="kh-metric">
+                      <div class="kh-metric-icon kh-m-orange"><i class="fa fa-user-times"/></div>
+                      <div class="kh-metric-val"><field name="khach_hang_chua_phan_cong" readonly="1" nolabel="1"/></div>
+                      <div class="kh-metric-lbl">Chưa phân công</div>
+                    </div>
+                    <div class="kh-metric">
+                      <div class="kh-metric-icon kh-m-red"><i class="fa fa-moon-o"/></div>
+                      <div class="kh-metric-val"><field name="khach_hang_im_lang_14_ngay" readonly="1" nolabel="1"/></div>
+                      <div class="kh-metric-lbl">Im lặng &gt;14 ngày</div>
+                    </div>
+                    <div class="kh-metric">
+                      <div class="kh-metric-icon kh-m-purple"><i class="fa fa-clone"/></div>
+                      <div class="kh-metric-val"><field name="khach_hang_trung_lien_he" readonly="1" nolabel="1"/></div>
+                      <div class="kh-metric-lbl">Trùng liên hệ</div>
+                    </div>
+                    <div class="kh-metric">
+                      <div class="kh-metric-icon kh-m-blue"><i class="fa fa-code-fork"/></div>
+                      <div class="kh-metric-val"><field name="de_xuat_gop_cho_duyet" readonly="1" nolabel="1"/></div>
+                      <div class="kh-metric-lbl">Đề xuất gộp</div>
+                    </div>
                   </div>
                 </div>
               </div>
-              <div class="erp-stat-box">
-                <div class="erp-stat-head"><i class="fa fa-line-chart"/> Hiệu quả chăm sóc</div>
-                <div class="erp-stat-body">
-                  <div class="erp-stat-item">
-                    <div class="erp-stat-item-label">Tổng tương tác</div>
-                    <div class="erp-stat-item-val"><field name="tong_tuong_tac" readonly="1" nolabel="1"/></div>
+
+              <!-- Panel phải: Hỗ trợ -->
+              <div class="kh-panel">
+                <div class="kh-panel-head kh-head-blue">
+                  <i class="fa fa-life-ring"/> Hỗ trợ &amp; SLA
+                </div>
+                <div class="kh-panel-body">
+                  <div class="kh-ticket-cards">
+                    <div class="kh-ticket-card kh-tc-blue">
+                      <div class="kh-tc-icon"><i class="fa fa-inbox"/></div>
+                      <div class="kh-tc-val"><field name="tong_ticket_ho_tro" readonly="1" nolabel="1"/></div>
+                      <div class="kh-tc-lbl">Ticket đang mở</div>
+                    </div>
+                    <div class="kh-ticket-card kh-tc-red">
+                      <div class="kh-tc-icon"><i class="fa fa-exclamation-circle"/></div>
+                      <div class="kh-tc-val"><field name="ticket_qua_han_sla" readonly="1" nolabel="1"/></div>
+                      <div class="kh-tc-lbl">Quá hạn SLA</div>
+                    </div>
                   </div>
-                  <div class="erp-stat-item">
-                    <div class="erp-stat-item-label">Tương tác chốt HĐ</div>
-                    <div class="erp-stat-item-val"><field name="tuong_tac_chot_hop_dong" readonly="1" nolabel="1"/></div>
+
+                  <div class="kh-sla-bar-wrap">
+                    <div class="kh-sla-bar-label">
+                      <span>Tỷ lệ vi phạm SLA</span>
+                      <strong><field name="sla_breach_rate" readonly="1" nolabel="1" widget="percentage" digits="[1,1]"/></strong>
+                    </div>
+                    <div class="kh-sla-bar-track">
+                      <div class="kh-sla-bar-fill"/>
+                    </div>
                   </div>
-                  <div class="erp-stat-item">
-                    <div class="erp-stat-item-label">Tỷ lệ chốt</div>
-                    <div class="erp-stat-item-val"><field name="ty_le_chot" readonly="1" nolabel="1" widget="percentage"/></div>
+
+                  <div class="kh-sla-bar-wrap" style="margin-top:12px">
+                    <div class="kh-sla-bar-label">
+                      <span>Tỷ lệ chốt hợp đồng</span>
+                      <strong><field name="ty_le_chot" readonly="1" nolabel="1" widget="percentage" digits="[1,1]"/></strong>
+                    </div>
+                    <div class="kh-sla-bar-track kh-track-green">
+                      <div class="kh-sla-bar-fill kh-fill-green"/>
+                    </div>
                   </div>
-                  <div class="erp-stat-item">
-                    <div class="erp-stat-item-label">Ticket đang mở</div>
-                    <div class="erp-stat-item-val"><field name="tong_ticket_ho_tro" readonly="1" nolabel="1"/></div>
+
+                  <div class="kh-panel-actions">
+                    <button type="object" name="action_xem_ticket_qua_han_sla"
+                      class="kh-action-btn"
+                      groups="quan_ly_khach_hang.group_khach_hang_sales,quan_ly_khach_hang.group_khach_hang_manager"
+                      string="Xem ticket quá hạn"/>
+                    <button type="object" name="action_gui_bao_cao_ngay"
+                      class="kh-action-btn kh-action-btn-primary"
+                      groups="quan_ly_khach_hang.group_khach_hang_manager"
+                      string="Gửi báo cáo ngày"/>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <!-- ACTIONS -->
-            <div class="erp-action-row">
-              <button type="object" name="action_gui_bao_cao_ngay" 
-                string="Gửi báo cáo ngày"
-                groups="quan_ly_khach_hang.group_khach_hang_manager"/>
-              <button type="object" name="action_xem_khach_hang_chua_phan_cong" 
-                string="KH chưa phân công"
-                groups="quan_ly_khach_hang.group_khach_hang_manager"/>
-              <button type="object" name="action_xem_ticket_qua_han_sla" 
-                string="Ticket quá hạn SLA"
-                groups="quan_ly_khach_hang.group_khach_hang_sales,quan_ly_khach_hang.group_khach_hang_manager"/>
             </div>
 
           </div>

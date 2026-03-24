@@ -44,7 +44,7 @@
                         <div class="oe_title">
                             <h1>
                                 <field name="ma_yeu_cau" readonly="1"/>
-                                <field name="tieu_de" class="oe_inline" placeholder="Tiêu đề yêu cầu..."/>
+                                <field name="tieu_de" class="oe_inline" placeholder="Tiêu đề yêu cầu"/>
                             </h1>
                         </div>
                         

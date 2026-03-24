@@ -16,7 +16,7 @@
                         </group>
                         <group>
                             <field name="ngay_bao_cao"/>
-                            <field name="tien_do" widget="percentpie"/>
+                            <field name="trang_thai" widget="badge" decoration-success="trang_thai == 'da_bao_cao'" decoration-warning="trang_thai == 'dang_xu_ly'" decoration-info="trang_thai == 'chua_bao_cao'"/>
                             <field name="so_gio"/>
                             <field name="file_dinh_kem" filename="ten_file"/>
                             <field name="ten_file" invisible="1"/>
@@ -50,7 +50,7 @@
                 <field name="cong_viec_id"/>
                 <field name="du_an_id"/>
                 <field name="nhan_vien_id"/>
-                <field name="tien_do" widget="progressbar"/>
+                <field name="trang_thai" widget="badge" decoration-success="trang_thai == 'da_bao_cao'" decoration-warning="trang_thai == 'dang_xu_ly'" decoration-info="trang_thai == 'chua_bao_cao'"/>
                 <field name="so_gio" sum="Tổng giờ"/>
                 <field name="van_de_phat_sinh"/>
             </tree>

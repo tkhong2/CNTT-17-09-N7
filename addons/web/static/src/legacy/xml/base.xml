@@ -588,7 +588,7 @@
             Discard
         </button>
         <t t-if="widget.is_action_enabled('create')">
-            <button type="button" class="btn btn-primary o_list_button_add" title="Create record" accesskey="c">
+            <button type="button" class="btn btn-primary o_list_button_add pr-2" title="Create record" accesskey="c">
                 Create
             </button>
         </t>

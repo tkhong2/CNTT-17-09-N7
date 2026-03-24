@@ -138,15 +138,13 @@
 .erp-panel-body { padding: 14px 16px; }
 .erp-panel-body canvas {
     width: 100% !important;
-    max-height: 300px !important;
-    height: auto !important;
     display: block;
-    min-height: 260px;
 }
 
 /* === STATS GRID === */
 .erp-stats-grid {
-    display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding: 0 !important;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    padding: 0 !important; /* override erp-panel-body padding */
 }
 .erp-stat-item {
     padding: 14px 16px;
@@ -178,3 +176,41 @@
     .erp-dash-header { flex-direction: column; align-items: flex-start; }
     .erp-stats-grid { grid-template-columns: 1fr 1fr; }
 }
+/* ── Nhân viên Kanban ── */
+.nv-kanban-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid #e5eaef;
+    transition: box-shadow 0.15s, transform 0.1s;
+    cursor: pointer;
+}
+.nv-kanban-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.10);
+    transform: translateY(-1px);
+}
+.nv-kanban-avatar img {
+    width: 42px; height: 42px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #e5eaef;
+    flex-shrink: 0;
+}
+.nv-kanban-info { flex: 1; min-width: 0; }
+.nv-kanban-info strong {
+    font-size: 13.5px;
+    font-weight: 600;
+    color: #1c2b33;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.nv-kanban-info .text-muted { font-size: 11px; }
+.nv-kanban-info .small { font-size: 11.5px; color: #7a8fa0; }
+
+/* ── Tree badge ── */
+.o_list_view .badge { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 20px; }

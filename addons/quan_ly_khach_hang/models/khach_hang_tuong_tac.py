@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from datetime import timedelta
+import uuid
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
@@ -135,8 +136,14 @@ class KhachHangTuongTac(models.Model):
 
         deadline = self.hen_lien_he_tiep.date() if self.hen_lien_he_tiep else fields.Date.today() + timedelta(days=3)
 
+        # Tạo mã công việc unique
+        ma_cong_viec = self.env['ir.sequence'].next_by_code('cong_viec')
+        if not ma_cong_viec:
+            # Nếu sequence không hoạt động, tạo mã unique bằng UUID
+            ma_cong_viec = f"CV-{uuid.uuid4().hex[:8].upper()}"
+
         task = CongViec.create({
-            'ma_cong_viec':      self.env['ir.sequence'].next_by_code('cong_viec') or 'CV-NEW',
+            'ma_cong_viec':      ma_cong_viec,
             'ten_cong_viec':     f'[{prefix}] {self.tieu_de} — {kh.ten_khach_hang}',
             'mo_ta':             (self.noi_dung or '') + f'\n\n📌 Tạo tự động từ tương tác KH ngày {fields.Date.today()}',
             'du_an_id':          du_an.id,

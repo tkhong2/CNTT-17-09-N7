@@ -125,11 +125,17 @@
                     <filter string="Trạng thái" name="group_by_trang_thai" context="{'group_by': 'trang_thai'}"/>
                     <filter string="Độ ưu tiên" name="group_by_do_uu_tien" context="{'group_by': 'do_uu_tien'}"/>
                 </group>
+                <searchpanel>
+                    <field name="trang_thai" string="Trạng thái" select="multi" icon="fa-circle" expand="1"/>
+                    <field name="du_an_id" string="Dự án" icon="fa-folder" expand="1"/>
+                    <field name="do_uu_tien" string="Độ ưu tiên" select="multi" icon="fa-flag" expand="1"/>
+                </searchpanel>
             </search>
         </field>
     </record>
 
     <!-- Kanban View -->
+    <!-- Kanban View - enhanced -->
     <record id="view_cong_viec_kanban" model="ir.ui.view">
         <field name="name">cong_viec.kanban</field>
         <field name="model">cong_viec</field>
@@ -143,27 +149,48 @@
                 <field name="trang_thai"/>
                 <field name="do_uu_tien"/>
                 <field name="tien_do"/>
+                <field name="ngay_ket_thuc"/>
+                <field name="bi_chan"/>
                 <templates>
                     <t t-name="kanban-box">
-                        <div t-attf-class="oe_kanban_global_click">
-                            <div class="oe_kanban_details">
-                                <strong class="o_kanban_record_title">
-                                    <field name="ten_cong_viec"/>
-                                </strong>
-                                <div class="o_kanban_record_subtitle">
-                                    <field name="ma_cong_viec"/>
+                        <div class="oe_kanban_global_click cv-kanban-card">
+                            <div class="cv-kanban-top d-flex justify-content-between align-items-start">
+                                <span class="cv-kanban-code badge badge-pill badge-light small">
+                                    <t t-esc="record.ma_cong_viec.value"/>
+                                </span>
+                                <span t-if="record.do_uu_tien.raw_value == 'rat_cao'"
+                                      class="badge badge-danger small">🔴 Rất cao</span>
+                                <span t-elif="record.do_uu_tien.raw_value == 'cao'"
+                                      class="badge badge-warning small">🟡 Cao</span>
+                                <span t-elif="record.do_uu_tien.raw_value == 'trung_binh'"
+                                      class="badge badge-info small">🔵 TB</span>
+                                <span t-else="" class="badge badge-light small">⚪ Thấp</span>
+                            </div>
+                            <div class="cv-kanban-title mt-1">
+                                <strong><t t-esc="record.ten_cong_viec.value"/></strong>
+                            </div>
+                            <div class="cv-kanban-project text-muted small mt-1">
+                                <i class="fa fa-folder-o mr-1"/>
+                                <t t-esc="record.du_an_id.value"/>
+                            </div>
+                            <div class="cv-kanban-assignee text-muted small">
+                                <i class="fa fa-user-o mr-1"/>
+                                <t t-esc="record.nguoi_phu_trach_id.value"/>
+                            </div>
+                            <div t-if="record.ngay_ket_thuc.value" class="cv-kanban-deadline text-muted small">
+                                <i class="fa fa-clock-o mr-1"/>
+                                <t t-esc="record.ngay_ket_thuc.value"/>
+                            </div>
+                            <div t-if="record.bi_chan.raw_value" class="cv-blocked-badge small mt-1">
+                                <span class="badge badge-danger"><i class="fa fa-ban mr-1"/>Bị chặn</span>
+                            </div>
+                            <div class="cv-kanban-progress mt-2">
+                                <div class="progress" style="height:5px;border-radius:3px;">
+                                    <div class="progress-bar"
+                                         t-attf-style="width: #{record.tien_do.raw_value}%; background:#00A09D;"/>
                                 </div>
-                                <div>
-                                    <strong>Dự án:</strong> <field name="du_an_id"/>
-                                </div>
-                                <div>
-                                    <strong>Phụ trách:</strong> <field name="nguoi_phu_trach_id"/>
-                                </div>
-                                <div>
-                                    <strong>Độ ưu tiên:</strong> <field name="do_uu_tien"/>
-                                </div>
-                                <div class="oe_kanban_bottom_left">
-                                    <field name="tien_do" widget="progressbar"/>
+                                <div class="d-flex justify-content-end">
+                                    <small class="text-muted"><t t-esc="record.tien_do.raw_value"/>%</small>
                                 </div>
                             </div>
                         </div>
@@ -173,17 +200,23 @@
         </field>
     </record>
 
-    <!-- Action -->
+    <!-- Actions -->
     <record id="action_cong_viec" model="ir.actions.act_window">
         <field name="name">Công việc</field>
         <field name="res_model">cong_viec</field>
         <field name="view_mode">kanban,tree,form</field>
         <field name="search_view_id" ref="view_cong_viec_search"/>
         <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">
-                Tạo công việc mới
-            </p>
+            <p class="o_view_nocontent_smiling_face">Tạo công việc mới</p>
         </field>
+    </record>
+
+    <record id="action_cong_viec_need_attention" model="ir.actions.act_window">
+        <field name="name">Công việc cần xử lý</field>
+        <field name="res_model">cong_viec</field>
+        <field name="view_mode">kanban,tree,form</field>
+        <field name="domain">[('trang_thai', 'not in', ['hoan_thanh', 'huy_bo'])]</field>
+        <field name="search_view_id" ref="view_cong_viec_search"/>
     </record>
 
     <record id="action_cong_viec_need_attention" model="ir.actions.act_window">

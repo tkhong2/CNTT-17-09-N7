@@ -98,11 +98,12 @@
         </field>
     </record>
 
+    <!-- Tree View - enhanced with badge + decoration -->
     <record id="view_khach_hang_tree" model="ir.ui.view">
         <field name="name">khach_hang.tree</field>
         <field name="model">khach_hang</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree decoration-warning="trang_thai_hop_tac == 'tam_ngung'" decoration-muted="trang_thai_hop_tac == 'ngung_hop_tac'" decoration-info="trang_thai_hop_tac == 'tiem_nang'">
                 <field name="ma_khach_hang"/>
                 <field name="ten_khach_hang"/>
                 <field name="nhan_vien_phu_trach_id"/>
@@ -111,11 +112,16 @@
                 <field name="so_lan_tuong_tac"/>
                 <field name="so_tuong_tac_qua_han"/>
                 <field name="tong_ngan_sach"/>
-                <field name="trang_thai_hop_tac"/>
+                <field name="trang_thai_hop_tac" widget="badge"
+                    decoration-success="trang_thai_hop_tac == 'dang_hop_tac'"
+                    decoration-info="trang_thai_hop_tac == 'tiem_nang'"
+                    decoration-warning="trang_thai_hop_tac == 'tam_ngung'"
+                    decoration-danger="trang_thai_hop_tac == 'ngung_hop_tac'"/>
             </tree>
         </field>
     </record>
 
+    <!-- Search View -->
     <record id="view_khach_hang_search" model="ir.ui.view">
         <field name="name">khach_hang.search</field>
         <field name="model">khach_hang</field>
@@ -137,6 +143,10 @@
                     <filter string="Phụ trách" name="group_by_owner" context="{'group_by': 'nhan_vien_phu_trach_id'}"/>
                     <filter string="Trạng thái" name="group_by_status" context="{'group_by': 'trang_thai_hop_tac'}"/>
                 </group>
+                <searchpanel>
+                    <field name="trang_thai_hop_tac" string="Trạng thái" select="multi" icon="fa-circle" expand="1"/>
+                    <field name="nhan_vien_phu_trach_id" string="Phụ trách" icon="fa-user" expand="1"/>
+                </searchpanel>
             </search>
         </field>
     </record>
@@ -148,19 +158,19 @@
         <field name="search_view_id" ref="view_khach_hang_search"/>
     </record>
 
+    <record id="action_khach_hang_unassigned" model="ir.actions.act_window">
+        <field name="name">Chưa phân công</field>
+        <field name="res_model">khach_hang</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[('nhan_vien_phu_trach_id', '=', False)]</field>
+        <field name="search_view_id" ref="view_khach_hang_search"/>
+    </record>
+
     <record id="action_khach_hang_new_7_days" model="ir.actions.act_window">
         <field name="name">Khách hàng mới 7 ngày</field>
         <field name="res_model">khach_hang</field>
         <field name="view_mode">tree,form</field>
         <field name="domain">[('create_date', '&gt;=', (context_today() - relativedelta(days=7)))]</field>
-        <field name="search_view_id" ref="view_khach_hang_search"/>
-    </record>
-
-    <record id="action_khach_hang_unassigned" model="ir.actions.act_window">
-        <field name="name">Khách hàng chưa phân công</field>
-        <field name="res_model">khach_hang</field>
-        <field name="view_mode">tree,form</field>
-        <field name="domain">[('nhan_vien_phu_trach_id', '=', False)]</field>
         <field name="search_view_id" ref="view_khach_hang_search"/>
     </record>
 

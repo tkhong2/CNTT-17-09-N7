@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import uuid
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 from datetime import datetime, timedelta
@@ -189,8 +190,14 @@ class HopDongKhachHang(models.Model):
                 })
 
             days_left = (hd.ngay_ket_thuc - today).days
+            # Tạo mã công việc unique
+            ma_cong_viec = self.env['ir.sequence'].next_by_code('cong_viec')
+            if not ma_cong_viec:
+                # Nếu sequence không hoạt động, tạo mã unique bằng UUID
+                ma_cong_viec = f"CV-{uuid.uuid4().hex[:8].upper()}"
+
             CongViec.create({
-                'ma_cong_viec':       self.env['ir.sequence'].next_by_code('cong_viec') or 'CV-NEW',
+                'ma_cong_viec':       ma_cong_viec,
                 'ten_cong_viec':      f'[Gia hạn HĐ] {hd.ma_hop_dong} — {kh.ten_khach_hang} (còn {days_left} ngày)',
                 'mo_ta':              f'Hợp đồng <b>{hd.ma_hop_dong}</b> — {hd.tieu_de}<br/>'
                                       f'Khách hàng: {kh.ten_khach_hang}<br/>'

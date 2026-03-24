@@ -86,13 +86,15 @@ class CongViec(models.Model):
         for record in self:
             record.thuc_te_gio = sum(record.bao_cao_tien_do_ids.mapped('so_gio'))
     
-    @api.depends('bao_cao_tien_do_ids', 'bao_cao_tien_do_ids.tien_do')
+    @api.depends('nguoi_tham_gia_ids', 'nguoi_tham_gia_ids.trang_thai')
     def _compute_tien_do(self):
         for record in self:
-            if record.bao_cao_tien_do_ids:
-                # Lấy báo cáo tiến độ mới nhất
-                bao_cao_moi_nhat = record.bao_cao_tien_do_ids.sorted(key=lambda r: r.ngay_bao_cao, reverse=True)[0]
-                record.tien_do = bao_cao_moi_nhat.tien_do
+            if record.nguoi_tham_gia_ids:
+                # Đếm số người đã báo cáo
+                so_da_bao_cao = len(record.nguoi_tham_gia_ids.filtered(lambda x: x.trang_thai == 'da_bao_cao'))
+                tong_tham_gia = len(record.nguoi_tham_gia_ids)
+                # Tính phần trăm: (số đã báo cáo / tổng tham gia) × 100
+                record.tien_do = (so_da_bao_cao / tong_tham_gia) * 100 if tong_tham_gia > 0 else 0
             else:
                 record.tien_do = 0
 
