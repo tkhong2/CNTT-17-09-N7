@@ -49,11 +49,11 @@ Hệ thống Quản lý Khách hàng + Công việc là một phân hệ ERP đ�
 
 # 3. Giao diện
 
-### Quản lý Nhân viên
-![Giao diện Quản lý Nhân viên](docs/images/giao_dien_nhan_vien.png)
+### Quản lý Nhân sự
+![Giao diện Quản lý Nhân viên](docs/images/giao_dien_nhan_su.png)
 
-### Quản lý Dự án
-![Giao diện Quản lý Dự án](docs/images/giao_dien_du_an.png)
+### Quản lý Công việc
+![Giao diện Quản lý Dự án](docs/images/giao_dien_cong_viec.png)
 
 ### Quản lý Khách hàng
 ![Giao diện Quản lý Khách hàng](docs/images/giao_dien_khach_hang.png)
